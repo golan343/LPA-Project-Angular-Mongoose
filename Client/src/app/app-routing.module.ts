@@ -19,9 +19,8 @@ const routes: Routes = [
   { path: 'how-its-work', component: HowItsWorkComponent },
   { path: 'auctions/:_id', component: AuctionComponent },
   { path: 'add-auction', component: InsertComponent, canActivate: [AdminGuard] },
-  // { path: 'dashboard', component: DashboardComponent, canActivate: [AccountGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AccountGuard] },
   { path: 'register', component: RegisterComponent },
-  { path: 'dashboard', loadChildren: () => import('./components/dashboard/dashboard.module').then(d => d.DashboardModule)},
   // { path: 'login', component: LoginComponent },
   { path: 'live', component: LiveAuctionsComponent, canActivate: [AccountGuard]  },
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // pathMath - exact empty string.
