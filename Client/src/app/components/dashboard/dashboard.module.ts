@@ -4,13 +4,17 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { from } from 'rxjs';
 import { MyAccountComponent } from './my-account/my-account.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
-  { path: 'my-account', component: MyAccountComponent, canActivate: [AccountGuard] }
+  { path: 'admin', component: AdminComponent, children: [
+    { path: 'my-account', component: MyAccountComponent }
+  ] }
 ];
 
 @NgModule({
-  declarations: [ MyAccountComponent],
+  declarations: [ MyAccountComponent, DashboardComponent, AdminComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes)
