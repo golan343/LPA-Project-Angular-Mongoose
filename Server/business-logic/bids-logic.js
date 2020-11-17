@@ -36,5 +36,6 @@ module.exports = {
     getOneBidAsync,
     addBidAsync,
     updateBidAsync,
-    deleteBidAsync
+    deleteBidAsync,
+    getAllBidsIncludingSpecificAuctionAsync
 }

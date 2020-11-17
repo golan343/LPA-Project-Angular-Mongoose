@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
         response => {
           console.log(response);
           this.dialogRef.close();
-          this.router.navigateByUrl('/live');
+          this.router.navigateByUrl('/home');
         },
         err => {
           alert(err.message);
