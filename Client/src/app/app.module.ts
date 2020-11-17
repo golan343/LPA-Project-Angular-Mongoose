@@ -41,7 +41,6 @@ import { LiveAuctionsComponent } from './components/live-auctions/live-auctions.
 import { HeaderComponent } from './components/header/header.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -55,8 +54,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     LiveAuctionsComponent,
     HeaderComponent,
     RegisterComponent,
-    LoginComponent,
-    DashboardComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,
