@@ -1,0 +1,59 @@
+.container{
+    width: 100%;
+    background: #0E1119;
+    height: 100%;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-rows: 4% 93% 3%;
+    grid-template-columns: repeat(12, 1fr);
+
+}
+
+.homeImg {
+    position: relative;
+    top: 10px;
+    left: 30px;
+    width: 57px;
+    height: 53px;
+}
+
+
+
+
+header, footer { 
+    text-align: center;
+    grid-column: span 12;
+    color: white;
+}
+
+mat-sidenav-container{
+    background: #0E1119;
+    grid-column: span 12;
+}
+
+mat-sidenav {
+    background: #0E1119 ;
+}
+mat-sidenav-content > div{
+    margin-top: 10px;
+    overflow-y: visible;
+    overflow-x: hidden; 
+}
+.mat-nav-list > a {
+    color: white;
+}
+
+
+p {
+    margin: 0%;
+}
+
+footer {
+    margin-left: 10%;
+    text-align: center;
+    background: #0E1119;
+}
+
+footer > div > a {
+    color: white;
+}

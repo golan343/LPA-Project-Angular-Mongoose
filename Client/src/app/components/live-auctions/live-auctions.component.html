@@ -1,0 +1,16 @@
+<img class="loader" *ngIf="!auctions" src="/assets/images/loader.gif" alt="">
+<div *ngIf="auctions" class="live">
+    <h1>Live auctions</h1>
+    <h4>place your bid and get a chance to win in one of our cars</h4>
+    <div class="auctions">
+        <div *ngFor="let auction of auctions;" class="auction" style="background-image: url({{BaseUrl}}uploads/{{auction.imageFileName}});">
+            <br>
+            <p>{{ auction.name }}</p>
+            <hr>
+            <p>Status: {{ auction.status ? 'Open' : 'Closed' }}</p>
+            <p>Value: {{ auction.price }}</p>
+            <button *ngIf="auction.status" mat-raised-button (click)="showAuction(auction._id)">Place my bid</button>
+            <button *ngIf="!auction.status" mat-raised-button (click)="showAuction(auction._id)">Show the auction</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<div>
+    <button mat-icon-button>
+        <mat-icon [matMenuTriggerFor]="settings">settings</mat-icon>
+    </button>
+    <mat-menu #settings="matMenu">
+        <button *ngIf="accountService.isUserLoggedIn()" mat-menu-item (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>
+            Sign out
+        </button>            
+        <button *ngIf="accountService.isUserLoggedIn()" mat-menu-item (click)="goToDashboard()">
+            <mat-icon>perm_identity</mat-icon>
+            Dashboard
+        </button>            
+        <button *ngIf="!accountService.isUserLoggedIn()" mat-menu-item (click)="login()">
+            <mat-icon>login</mat-icon>
+            Login
+        </button>            
+    </mat-menu>
+</div>

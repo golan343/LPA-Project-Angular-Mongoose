@@ -1,0 +1,573 @@
+
+/* desktop resolution */
+@media (min-width: 1281px) {
+    .home {
+        height: 350vh;
+        box-sizing: border-box;
+        display: grid;
+        grid-template-rows: 35% 15% 10% 35% 9%;
+        grid-template-columns: repeat(12, 1fr);
+    }
+
+    .firstSection {
+        grid-column: span 12;
+        background: #0E1119;
+    }
+    
+    .firstSection {
+        font-style: normal;
+        font-weight: normal;
+        text-align: center;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    
+    .firstSection  > .secondHeader {
+        position: relative;
+        margin: auto;
+        width: 600px;
+        height: 150px;
+        margin-bottom: 25px;
+    }
+    .firstSection  > .secondHeader > h2 {
+        color: white;
+        margin-top: 0;
+        padding-top: 100px;
+        padding-left: 50px;
+        font-size: 48px;
+        position: absolute;
+        z-index:100;
+        line-height: 56px;
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+    .firstSection > .secondHeader > h1 {
+        color: rgba(255, 255, 255, 0.18);
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        margin-left: 120px;
+        margin-top: 0px;
+        font-size: 113px;
+        position: absolute;
+    }
+    .firstSection  > .lastAuction {
+        background-repeat: no-repeat;
+        background-size: 100%;
+        margin: auto;
+        width: 900px;
+        height: 600px;
+    }
+    
+    .firstSection > .lastAuction > * {
+        color: white;
+        
+    }
+    .firstSection > .lastAuction > hr {
+        width: 85%;
+        height: 2px;
+        background: white;
+        
+    }
+    .firstSection > .lastAuction > .status {
+        font-size: 30px;
+        text-align: left;
+        padding-left: 60px;
+        
+    }
+    
+    
+    .firstSection  > .lastAuction > .auctionBtn {
+        color: black;
+    }
+    .firstSection  > .lastAuction > .dates {
+        color: white;
+        position: relative;
+        top: 350px;
+        display: inline-flex;
+    }
+    
+    .firstSection > .lastAuction > .dates > p {
+        margin-right: 50px;
+        font-size: 20px;
+        text-shadow: 2px 2px 2px black;
+    }
+    
+    
+    
+    .fwh-slide.section-how-its-work {
+        grid-column: span 12;
+        position: relative;
+        background: #2A2F33;
+        color: white;
+        height: 60vh;
+        box-sizing: border-box;
+        margin: 0px;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+    
+    .fwh-slide.section-how-its-work > .mainContent {
+        margin: 0px;
+        position: relative;
+        font-style: normal;
+        font-weight: normal;
+        text-align: center;
+    }
+    .fwh-slide.section-how-its-work > .how-its-work {
+        margin: 0px;
+    }
+    
+    .fwh-slide.section-how-its-work > .mainContent > .how-its-work > h1 {
+        opacity: 0.18;
+        margin: 0;
+        font-size: 147px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    
+    .fwh-slide.section-how-its-work > .mainContent > .how-its-work > .how-its-work-details  {
+        text-align: center;
+        position: absolute;
+        left: 13%;
+        top: 30%;
+        width: 100%;
+        display: inline-flex;
+        z-index: 100;
+        overflow: visible;
+        align-items: center;
+    }
+
+    .circle {
+        width: 90px;
+        height: 90px;
+        background: #D4F1F4;
+        -moz-border-radius: 70px; 
+        -webkit-border-radius: 70px; 
+        border-radius: 70px;
+        display: inline;
+    }
+    
+    .circle > span{
+        position: relative;
+        top: 25%;
+        font-size: 40px;
+        text-align: center;
+        color: black;
+    }
+    
+    
+    .arrow {
+        font-size: 80px;
+        height: 50px;
+        width: 320px;
+        text-align: center;
+        padding-left: 10px;
+    }
+    .arrow:nth-of-type(1) {
+        width: 260px;
+    }
+    
+    .fwh-slide.section-how-its-work > .mainContent > .how-its-work > .paragraph > p {
+        font-size: 35px;
+        line-height: 37px;
+        text-align: center;
+        letter-spacing: 0.04em;
+        font-style: normal;
+        width: 221px;
+        height: 185px;
+        margin-right: 12%;
+        
+    }
+    .fwh-slide.section-how-its-work > .mainContent > .how-its-work > .paragraph {
+        display: inline-flex;
+        width: 100%;
+        padding-left: 20%;
+        margin-bottom: 0;
+    }
+    
+    .rulesBtn {
+        background: #D4F1F4;
+        width: 20%;
+        border-radius: 70px;
+        filter: drop-shadow(5px 7px 4px rgba(0, 0, 0, 0.5));
+        margin: 0px;
+    
+    }
+    
+    
+    
+    .fwh-slide.section-about-new-auction {
+        grid-column: span 12;
+        background: #A4B5C5;
+        text-align: center;
+        margin: 0;
+        margin-top: 10px;
+        padding-top: 20px;
+    }
+    
+    .fwh-slide.section-about-new-auction > .mainContent > h2 {
+        font-size: 36px;
+        line-height: 42px;
+        color: #000000;
+        padding-top: 20px;
+    }
+    .fwh-slide.section-about-new-auction > .mainContent > h4 {
+        font-weight: 500;
+        font-size: 21px;
+        line-height: 25px;
+    }
+    .fwh-slide.section-about-new-auction > .mainContent > mat-form-field {
+        margin-top: 10px;
+        background: white;
+        width: 661px;
+        height: 55px;
+        border: 1px solid rgba(0, 0, 0, 0.35);
+        box-sizing: border-box;
+        border-radius: 50px;
+    }
+    
+    .sendBtn {
+        float: right;
+        bottom: 30px;
+        right: 15px;
+        background: #D4F1F4;
+        border-radius: 33px;
+    }
+    
+    
+    
+    .fwh-slide.section-white {
+        grid-column: span 12;
+        padding-top: 40px;
+        background: white;
+        color: black;
+    }
+    
+    agm-map {
+        position: absolute;
+        left: 500px;
+        border: 1px solid black;
+        width: 800px;
+        height: 400px;
+      }
+    
+    
+    
+    .fwh-slide.section-place-my-bid {
+        grid-column: span 12;
+        padding-top: 40px;  
+        background: #0E1119;
+        text-align: center;
+        
+    }
+    .fwh-slide.section-place-my-bid > button {
+       color: black;
+       background: #D4F1F4;
+       border-radius: 70px;
+       width: 30%;
+       height: 40%;
+       font-size: 30px;
+    }
+    
+    .fwh-slide.section-place-my-bid > p {
+       color: white;
+    } 
+
+
+}
+
+/* laptop resolution */
+@media (min-device-width: 1024px) 
+  and (max-device-width: 1280px) { 
+
+    .home {
+        width: 100%;
+        height: 350vh;
+        box-sizing: border-box;
+        display: grid;
+        grid-template-rows: 35% 15% 10% 35% 7%;
+        grid-template-columns: repeat(12, 1fr);
+    }
+    section {
+        width: 100%;
+    }
+
+    .firstSection {
+        grid-column: span 12;
+        background: #0E1119;
+    }
+    
+    .firstSection {
+        font-style: normal;
+        font-weight: normal;
+        text-align: center;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    
+    .firstSection  > .secondHeader {
+        position: relative;
+        margin: auto;
+        width: 600px;
+        height: 150px;
+        margin-bottom: 25px;
+    }
+    .firstSection  > .secondHeader > h2 {
+        color: white;
+        margin-top: 0;
+        padding-top: 100px;
+        padding-left: 50px;
+        font-size: 48px;
+        position: absolute;
+        z-index:100;
+        line-height: 56px;
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+    .firstSection > .secondHeader > h1 {
+        color: rgba(255, 255, 255, 0.18);
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        margin-left: 120px;
+        margin-top: 0px;
+        font-size: 113px;
+        position: absolute;
+    }
+    div.lastAuction {
+        background-repeat: no-repeat;
+        background-size: 100%;
+        margin: auto;
+        width: 800px;
+        height: 600px;
+    }
+    
+    .firstSection > .lastAuction > * {
+        color: white;
+        
+    }
+    .firstSection > .lastAuction > hr {
+        width: 85%;
+        height: 2px;
+        background: white;
+        
+    }
+    .firstSection > .lastAuction > .status {
+        font-size: 30px;
+        text-align: left;
+        padding-left: 60px;
+        
+    }
+    
+    
+    .firstSection  > .lastAuction > .auctionBtn {
+        color: black;
+    }
+    .firstSection  > .lastAuction > .dates {
+        
+        color: white;
+        position: relative;
+        top: 300px;
+        display: inline-flex;
+    }
+    
+    .firstSection > .lastAuction > .dates > p {
+        margin-right: 50px;
+        font-size: 20px;
+        text-shadow: 2px 2px 2px black;
+    }
+    
+    
+    
+    .fwh-slide.section-how-its-work {
+        grid-column: span 12;
+        position: relative;
+        background: #2A2F33;
+        color: white;
+        height: 60vh;
+        box-sizing: border-box;
+        margin: 0px;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+    
+    .fwh-slide.section-how-its-work > .mainContent {
+        margin: 0px;
+        position: relative;
+        font-style: normal;
+        font-weight: normal;
+        text-align: center;
+    }
+    .fwh-slide.section-how-its-work > .how-its-work {
+        margin: 0px;
+    }
+    
+    .fwh-slide.section-how-its-work > .mainContent > .how-its-work > h1 {
+        opacity: 0.18;
+        margin: 0;
+        font-size: 100px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    
+    .fwh-slide.section-how-its-work > .mainContent > .how-its-work > .how-its-work-details  {
+        text-align: center;
+        position: absolute;
+        padding-left: 15%;
+        top: 21%;
+        width: 100%;
+        display: inline-flex;
+    }
+
+    .circle {
+        width: 80px;
+        height: 80px;
+        background: #D4F1F4;
+        -moz-border-radius: 70px; 
+        -webkit-border-radius: 70px; 
+        border-radius: 70px;
+        display: inline;
+    }
+
+    .circle > span{
+        position: relative;
+        top: 25%;
+        font-size: 40px;
+        text-align: center;
+        color: black;
+    }
+    
+    
+    .arrow {
+        font-size: 80px;
+        height: 50px;
+        width: 210px;
+        text-align: center;
+        padding-bottom: 4%;
+    }
+
+    
+    .fwh-slide.section-how-its-work > .mainContent > .how-its-work > .paragraph > p { 
+        font-size: 35px;
+        line-height: 37px;
+        text-align: center;
+        letter-spacing: 0.04em;
+        font-style: normal;
+        width: 221px;
+        height: 185px;
+        margin-right: 9%;
+        
+    }
+    .fwh-slide.section-how-its-work > .mainContent > .how-its-work > .paragraph {
+        position: relative;
+        display: inline-flex;
+        width: 100%;
+        margin-top: 10px;
+        padding-left: 8%;
+        margin-bottom: 0;
+    }
+    
+    .rulesBtn {
+        background: #D4F1F4;
+        width: 20%;
+        border-radius: 70px;
+        filter: drop-shadow(5px 7px 4px rgba(0, 0, 0, 0.5));
+        margin: 0px;
+    
+    }
+    
+    
+    
+    .fwh-slide.section-about-new-auction {
+        grid-column: span 12;
+        background: #A4B5C5;
+        text-align: center;
+        margin: 0;
+        margin-top: 10px;
+        padding-top: 20px;
+    }
+    
+    .fwh-slide.section-about-new-auction > .mainContent > h2 {
+        font-size: 36px;
+        line-height: 42px;
+        color: #000000;
+        padding-top: 20px;
+    }
+    .fwh-slide.section-about-new-auction > .mainContent > h4 {
+        font-weight: 500;
+        font-size: 21px;
+        line-height: 25px;
+    }
+    .fwh-slide.section-about-new-auction > .mainContent > mat-form-field {
+        margin-top: 10px;
+        background: white;
+        width: 661px;
+        height: 55px;
+        border: 1px solid rgba(0, 0, 0, 0.35);
+        box-sizing: border-box;
+        border-radius: 50px;
+    }
+    
+    .sendBtn {
+        float: right;
+        bottom: 30px;
+        right: 15px;
+        background: #D4F1F4;
+        border-radius: 33px;
+    }
+    
+    
+    
+    .fwh-slide.section-white {
+        grid-column: span 12;
+        padding-top: 40px;
+        background: white;
+        color: black;
+    }
+    
+    agm-map {
+        position: absolute;
+        left: 10%;
+        border: 1px solid black;
+        width: 700px;
+        height: 400px;
+      }
+    
+    
+    
+    .fwh-slide.section-place-my-bid {
+        grid-column: span 12;
+        padding-top: 40px;  
+        background: #0E1119;
+        text-align: center;
+        
+    }
+    .fwh-slide.section-place-my-bid > button {
+       color: black;
+       background: #D4F1F4;
+       border-radius: 70px;
+       width: 50%;
+       height: 40%;
+       font-size: 30px;
+    }
+    
+    .fwh-slide.section-place-my-bid > p {
+       color: white;
+    } 
+
+}
+
+/* Tablet resolution */
+@media (min-width: 768px) 
+and (max-width: 1023px)
+and (orientation: landscape) {
+
+}
+
+/* 
+low resolution tablets, mobiles */
+@media (min-width: 481px) 
+and (max-width: 767px) {
+
+}
+
+/* mobile resolutions */
+@media (min-width: 320px) 
+and (max-width: 480px) {
+
+}
+ 
+ 
+
+

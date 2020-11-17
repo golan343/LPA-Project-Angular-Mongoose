@@ -1,0 +1,131 @@
+<mat-horizontal-stepper #stepper linear>
+    <mat-step [stepControl]="regForm" editable="false">
+      <form #formInfo="ngForm" [formGroup]="regForm">
+        <ng-template matStepLabel><b>Fill out your login details</b></ng-template>
+        <p>
+          <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput 
+          formControlName="emailControl"
+          type="email"
+          name="email"
+          autocomplete="email"
+          placeholder="example@example.com"
+          required pattern="^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$">
+          <mat-error>please enter valid email</mat-error>
+        </mat-form-field>
+        </p>
+        <p>
+        <mat-form-field hideRequireMarker>
+          <mat-label>Password</mat-label>
+          <input matInput 
+          formControlName="passwordControl"
+          type="password"
+          name="password"
+          autocomplete="current-password"
+          placeholder="Example123"
+          required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$">
+          <mat-error>Password must contain at least 8 characters one uppercase letter and one lowercase letter</mat-error>
+        </mat-form-field>
+        
+        </p>
+        <div>
+          <br><br>
+          <button mat-button matStepperNext [disabled]="formInfo.form.invalid">Next</button>
+          <button mat-button (click)='router.navigateByUrl("/home");'>Home</button>
+        </div>
+      </form>
+    </mat-step>
+  
+    <mat-step [stepControl]="personalDetails" editable="false">
+
+      <ng-template matStepLabel><b>Fill out your personal details</b></ng-template>
+
+      <form [formGroup]="personalDetails">
+        <p class="input">
+        <mat-form-field>
+          <mat-label>First Name</mat-label>
+          <input matInput 
+          formControlName="firstNameControl" 
+          type="text"
+          name="firstName"
+          placeholder="First Name"
+          autocomplete="name"
+          required pattern="^[A-Z].*$">
+          <mat-error>First Name must start with capital letter</mat-error>
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field>
+          <mat-label>Last Name</mat-label>
+          <input matInput 
+          type="text"
+          name="lastName"
+          autocomplete="family-name"
+          formControlName="lastNameControl" 
+          placeholder="Last Name"
+          required pattern="^[A-Z].*$">
+          <mat-error>Last Name must start with capital letter</mat-error>
+        </mat-form-field>
+        </p>
+        <p class="input"> 
+          <mat-form-field class="country">
+            <mat-label>Country</mat-label>
+            <mat-select required formControlName="countryControl">
+                <mat-option value="ecuador">Ecuador</mat-option>
+                <mat-option value="colombia">Colombia</mat-option>
+                <mat-option value="mexico">Mexico</mat-option>
+            </mat-select>
+            <mat-error>Missing Country</mat-error>
+          </mat-form-field>
+        </p>
+        <p class="input">
+        <mat-form-field>
+          <mat-label>City</mat-label>
+          <input matInput 
+          formControlName="cityControl" 
+          placeholder="City"
+          type="text"
+          required>
+          <mat-error>Missing City</mat-error>
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field>
+          <mat-label>Street</mat-label>
+          <input matInput 
+          formControlName="streetControl" 
+          placeholder="Street"
+          type="text"
+          required>
+          <mat-error>Missing Street</mat-error>
+        </mat-form-field>
+        </p>
+        <p class="input">
+        <mat-form-field>
+            <mat-label>Postcode</mat-label>
+            <input matInput 
+            formControlName="postcodeControl" 
+            placeholder="Postcode"
+            type="number"
+            required>
+            <mat-error>Missing Postcode</mat-error>
+        </mat-form-field>
+        </p>
+        <p class="input">
+            <mat-form-field >
+                <mat-label>Choose your Birth date</mat-label>
+                <input matInput 
+                [matDatepicker]="picker"
+                formControlName="birthDateControl">
+                <mat-datepicker-toggle matSuffix [for]="picker">
+                  <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </p>
+        <div>
+          <button mat-button (click)="register()">Register</button>
+          <button mat-button (click)='router.navigateByUrl("/home");'>Home</button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>

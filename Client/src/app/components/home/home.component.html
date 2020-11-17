@@ -1,0 +1,68 @@
+<div class="home">
+    
+<section class="firstSection" >
+    
+        <div class="secondHeader" >
+            <h1>We are</h1>
+            <h2>LOW PRICE AUCTION</h2>
+        </div>
+        <img class="loader" *ngIf="!auctions" src="/assets/images/loader.gif" alt="">
+        <div *ngIf="auctions" class="lastAuction" style="background-image: url({{BaseUrl}}uploads/{{auctions[0].imageFileName}});">
+            <h2>{{auctions[0].name}}</h2>
+            <hr>
+            <p class="status">Status: {{auctions[0].status}}</p>
+            <button mat-raised-button class="auctionBtn" (click)="showAuction(auctions[0]._id)">Show the auction</button>
+            <div class="dates">
+                <p>Start Date: {{auctions[0].startDate.replace('T', ' ')}}</p>
+                <p>End Date: {{auctions[0].endDate.replace('T', ' ')}}</p>
+            </div>
+        </div>
+    
+
+</section>
+<section class="fwh-slide fwh-slide section-how-its-work">
+    <div class="mainContent">
+        <div class="how-its-work">
+            <h1>How does it work?</h1>
+            <div class="how-its-work-details">
+                <div class="circle"><span>1</span></div>
+                <div class="arrow">&rarr;</div>
+                <div class="circle"><span>2</span></div>
+                <div class="arrow">&rarr;</div>
+                <div class="circle"><span>3</span></div>
+            </div>
+            <div class="paragraph">
+                <p>Register in a few quick steps, so you can bid</p>
+                <p>Choose auction and Place your bid. yes it’s that easy</p>
+                <p>If your bid is <u>unique</u> and the <u>lowest</u> of them all, <u>you win the auction!</u></p>
+            </div>
+
+            <button mat-raised-button class="rulesBtn" (click)="goToRules()" > View auction rules </button>
+        </div>
+    </div>
+</section>
+
+    <section class="fwh-slide section-about-new-auction" >
+        <div class="mainContent">
+            <h2>Get to know about a new auction opening</h2>
+            <h3>Your Email here:</h3>
+            <mat-form-field appearance="none">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" name="email" required>
+                <button mat-raised-button class="sendBtn" (click)="sendEmail()" > Send </button>
+            </mat-form-field>
+            
+        </div>
+    </section>
+
+    <section class="fwh-slide section-white" >
+        <agm-map [latitude]="lat" [longitude]="lng">
+            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+        </agm-map>
+    </section>
+
+    <section class="fwh-slide section-place-my-bid" >
+        <button *ngIf="!accountService.isUserLoggedIn()" mat-raised-button (click)="loginDialog()" > i want place a bid!</button>
+        <button *ngIf="accountService.isUserLoggedIn()" mat-raised-button (click)="router.navigateByUrl('/live')" > i want place a bid!</button>
+    </section>
+</div>

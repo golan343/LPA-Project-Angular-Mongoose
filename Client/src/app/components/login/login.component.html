@@ -1,0 +1,36 @@
+<div class="loginPage" *ngIf="!accountService.isUserLoggedIn()">
+    <form #formInfo="ngForm" action="">
+
+        <mat-form-field appearance="fill" hideRequireMarker>
+            <mat-label>Email</mat-label>
+            <input matInput
+            type="email"
+            name="email"
+            autocomplete="email"
+            [(ngModel)]="user.email"
+            required pattern="^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$"
+            #emailInfo="ngModel">
+            <mat-error *ngIf="emailInfo.errors?.required && emailInfo.touched">Missing Email</mat-error>
+            <mat-error *ngIf="emailInfo.errors?.pattern && emailInfo.touched">Email must be valid example@example.com</mat-error>
+        </mat-form-field>
+        <br>
+    
+        <mat-form-field appearance="fill" hideRequireMarker>
+            <mat-label>Password</mat-label>
+            <input matInput
+            type="password"
+            name="password"
+            autocomplete="current-password"
+            [(ngModel)]="user.password"
+            required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
+            #passwordInfo="ngModel">
+            <mat-error *ngIf="passwordInfo.errors?.required && passwordInfo.touched">Missing Password</mat-error>
+            <mat-error *ngIf="passwordInfo.errors?.pattern && passwordInfo.touched">password must contain at least 8 characters one uppercase letter and one lowercase letter</mat-error>
+        </mat-form-field>
+        <p>
+        <button mat-button [disabled]="formInfo.form.invalid" (click)="login()">Sign In</button>
+        </p>
+        <button mat-button (click)="routeToRegisterPage()">Register</button>
+    
+    </form>
+</div>

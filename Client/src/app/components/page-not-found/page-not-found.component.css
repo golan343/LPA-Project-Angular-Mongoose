@@ -1,0 +1,10 @@
+.pageNotFound {
+    height: 100vh;
+    background: #0E1119;
+    text-align: center;
+}
+
+h1 {
+    color: white;
+    margin: 0;
+}

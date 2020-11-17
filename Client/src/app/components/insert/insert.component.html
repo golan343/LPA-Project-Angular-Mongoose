@@ -1,0 +1,96 @@
+<form action="" #formInfo="ngForm">
+
+    <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input 
+        matInput 
+        type="text" 
+        name="name"
+        [(ngModel)]="auction.name"
+        required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Price of product</mat-label>
+        <input 
+        matInput 
+        type="text" 
+        name="price"
+        [(ngModel)]="auction.price"
+        required>
+    </mat-form-field>
+    <p></p>
+    <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <input 
+        matInput 
+        type="text" 
+        name="description"
+        [(ngModel)]="auction.description"
+        required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Start Date</mat-label>
+        <input 
+        matInput 
+        type="datetime-local"
+        name="startDate"
+        [(ngModel)]="auction.startDate"
+        required>
+    </mat-form-field>
+    
+    <p></p>
+
+    <mat-form-field appearance="fill">
+        <mat-label>End Date</mat-label>
+        <input 
+        matInput 
+        type="datetime-local"
+        name="endDate" 
+        [(ngModel)]="auction.endDate"
+        required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Bid Price</mat-label>
+        <input 
+        matInput 
+        type="text" 
+        name="bidPrice" 
+        [(ngModel)]="auction.bidPrice"
+        required>
+    </mat-form-field>
+    
+    <p></p>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Min Offer</mat-label>
+        <input 
+        matInput 
+        type="number"
+        name="minOffer" 
+        [(ngModel)]="auction.minOffer"
+        required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Max Offer</mat-label>
+        <input 
+        matInput 
+        type="number" 
+        name="maxOffer" 
+        [(ngModel)]="auction.maxOffer"
+        >
+    </mat-form-field>
+
+    <p></p>
+    <mat-label>Upload Image</mat-label>
+    <p></p>
+    <input type="file" (change)="onFileSelected($event)" />
+
+    <p></p>
+    <br>
+    <button [disabled]="formInfo.form.invalid" mat-raised-button (click)="addAuction()">Add Auction</button>
+
+</form>

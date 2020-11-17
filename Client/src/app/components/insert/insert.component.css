@@ -1,0 +1,21 @@
+body{
+    text-align: center;
+    font-size: x-large;
+    background: #ECECEC;
+}
+form {
+    margin-top: 20px;
+    text-align: center;
+}
+
+mat-form-field {
+    text-align: left;
+    margin-right: 15px;
+    width: 200px;
+    display: inline-block;
+}
+
+p{
+    margin: 0;
+    padding: 0;
+}
