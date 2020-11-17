@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserModel } from 'src/app/models/user-model';
 import { AccountService } from 'src/app/services/account.service';
 import { MatDialogRef } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -13,8 +14,9 @@ export class LoginComponent implements OnInit {
 
   public user = new UserModel();
 
+
   constructor(private router: Router, public accountService: AccountService,
-              public dialogRef: MatDialogRef<LoginComponent>
+              public dialogRef: MatDialogRef<LoginComponent>,
               ) { }
 
   ngOnInit(): void {
@@ -24,7 +26,7 @@ export class LoginComponent implements OnInit {
     await this.accountService.login(this.user)
       .subscribe(
         response => {
-          console.log(response);
+          Swal.fire('You are logged in', '', 'success');
           this.dialogRef.close();
           this.router.navigateByUrl('/home');
         },

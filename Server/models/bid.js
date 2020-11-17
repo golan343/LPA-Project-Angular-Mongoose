@@ -10,9 +10,6 @@ const BidSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Action"
     },
-    bidCount: {
-        type: String
-    },
     offer: {
         type: String
     },

@@ -1,18 +1,13 @@
 const express = require('express');
-// const Auth = require('../models/auth');
 const jwt = require('jsonwebtoken');
 const authLogic = require('../business-logic/auth-logic');
 const errorHandler = require("../helpers/error-handler");
 const User = require('../models/user');
-// const reCaptcha = require('express-recaptcha');
+
 
 
 const router = express.Router();
 
-// router.get("/captcha", (request, response) => {
-//     const captcha = reCaptcha;
-
-// });
 
 router.post("/register", async (request, response) => {
     try{

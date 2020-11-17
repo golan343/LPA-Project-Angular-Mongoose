@@ -9,7 +9,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatStepperModule } from '@angular/material/stepper';
-import { AlertModule } from 'ngx-alerts';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -31,6 +30,7 @@ import {MatMenuModule} from '@angular/material/menu';
 
 
 
+
 import { LayoutComponent } from './components/layout/layout.component';
 import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
@@ -41,7 +41,6 @@ import { LiveAuctionsComponent } from './components/live-auctions/live-auctions.
 import { HeaderComponent } from './components/header/header.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -55,8 +54,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     LiveAuctionsComponent,
     HeaderComponent,
     RegisterComponent,
-    LoginComponent,
-    DashboardComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -85,6 +83,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     MatGridListModule,
     FlexLayoutModule,
     MatDatepickerModule,
+  
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyA2wURHwwXpa8qENVlEumlR87zxya7Xy00'
     }),

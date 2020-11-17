@@ -1,3 +1,4 @@
+import { BidModel } from './../../models/bid-model';
 import { BaseUrl } from './../../../environments/environment';
 import { store } from './../../redux/store';
 import { Component, OnInit } from '@angular/core';
@@ -15,6 +16,8 @@ export class AuctionComponent implements OnInit {
   public auction: AuctionModel;
   public unsubscribe: Unsubscribe;
   public BaseUrl = BaseUrl;
+  public bidValue;
+  public bid = new BidModel();
 
 
   constructor( private activatedRoute: ActivatedRoute ) { }
@@ -29,6 +32,14 @@ export class AuctionComponent implements OnInit {
       alert(err.message);
     }
 
+  }
+
+  public setAmount(event): void {
+    this.bidValue = event;
+  }
+
+  public addBid(): void {
+    console.log(this.bidValue);
   }
 
 }

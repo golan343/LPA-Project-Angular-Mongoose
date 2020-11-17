@@ -12,6 +12,7 @@ const cors = require('cors');
 const path = require('path');
 const authController = require('./controllers/auth-controller');
 const auctionController = require('./controllers/auction-controller');
+const bidsController = require('./controllers/bids-controller');
 const uploadImageController = require('./controllers/uploads-image-controller');
 require("./data-access-layer/dal");
 const sanitize = require('./middleware/sanitize');
@@ -42,6 +43,7 @@ server.use(express.static(path.join(__dirname, "./_front-end")));
 server.use("/api/", uploadImageController);
 server.use("/api/auth", authController);
 server.use("/api/auctions", auctionController);
+server.use("/api/bids", bidsController);
 
 
 
