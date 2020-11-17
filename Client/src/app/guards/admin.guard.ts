@@ -15,7 +15,7 @@ export class AdminGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       if (this.accountService.isUserLoggedIn()) {
-        const role = JSON.parse(this.cookieService.get('user')).user.role;
+        const role = JSON.parse(this.cookieService.get('user')).user.roleId;
         if (role === '5f58ba8855eac12930d7b405' || role === '5f58ba9a55eac12930d7b40c' || role === '5f58badd55eac12930d7b427'){
           return true;
         }

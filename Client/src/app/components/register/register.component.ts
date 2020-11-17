@@ -39,7 +39,7 @@ export class RegisterComponent implements OnInit {
       this.user.street = this.personalDetails.value.streetControl;
       this.user.postcode = this.personalDetails.value.postcodeControl;
       this.user.birthDate = this.personalDetails.value.birthDateControl;
-      this.user.role = '5f58ba6355eac12930d7b3ef';
+      this.user.roleId = '5f58ba6355eac12930d7b3ef';
       console.log(this.user);
       await this.accountService.addUser(this.user);
       this.router.navigateByUrl('/home');

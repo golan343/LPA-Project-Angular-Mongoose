@@ -11,7 +11,7 @@ export class UserModel {
     public street?: string,
     public postcode?: string,
     public birthDate?: string,
-    public role?: string,
+    public roleId?: string,
     public token?: string
     ) { }
 }

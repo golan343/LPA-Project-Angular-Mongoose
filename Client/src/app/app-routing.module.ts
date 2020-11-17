@@ -1,3 +1,4 @@
+import { AdminGuard } from './guards/admin.guard';
 import { AccountGuard } from './guards/account.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -17,7 +18,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'how-its-work', component: HowItsWorkComponent },
   { path: 'auctions/:_id', component: AuctionComponent },
-  { path: 'add-auction', component: InsertComponent, canActivate: [AccountGuard] },
+  { path: 'add-auction', component: InsertComponent, canActivate: [AdminGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AccountGuard] },
   { path: 'register', component: RegisterComponent },
   // { path: 'login', component: LoginComponent },
