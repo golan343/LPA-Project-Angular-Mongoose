@@ -12,6 +12,8 @@ export function reducer(currentState: AppState, action: Action): AppState {
 
     switch (action.type) {
 
+        // -----------Auctions--------------
+
         case ActionType.GetAllAuctions:
             newState.auctions = action.payload; // payload = all
             break;
@@ -35,6 +37,15 @@ export function reducer(currentState: AppState, action: Action): AppState {
             newState.auctions.splice(index, 1);
             break;
         }
+
+        // ---------Bids--------------
+        case ActionType.GetBidsIncludingSpecificAuction: 
+            newState.bids = action.payload;
+            break;
+
+        case ActionType.AddBid:
+            newState.bids.push(action.payload);
+            break;
     }
 
     return newState;

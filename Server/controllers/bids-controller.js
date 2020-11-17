@@ -117,15 +117,20 @@ router.delete('/:id', async(request,response) => {
     }
 })
 
-router.get('/join/bids-in-auction', async (request, response) => {  
+router.get('/join/bids-in-auction/:auctionId', async (request, response) => {  
     try{
-        const bids = await bidsLogic.getAllBidsIncludingSpecificAuctionAsync();
+        const auctionId = request.params.auctionId;
+        const bids = await bidsLogic.getAllBidsIncludingSpecificAuctionAsync(auctionId);
+        if(!bids){
+            response.sendStatus(404);
+            return;
+        }
         response.json(bids);
     }
     catch(err){
         response.status(500).send(err.message);
     }
 
-})
+});
 
 module.exports = router;

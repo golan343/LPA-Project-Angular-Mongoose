@@ -29,6 +29,7 @@
     "ngx-cookie-service": "^10.1.1",
     "redux": "^4.0.5",
     "rxjs": "~6.5.5",
+    "sweetalert2": "^10.10.1",
     "tslib": "^2.0.0",
     "uuid": "^8.3.1",
     "zone.js": "~0.10.3"
