@@ -38,6 +38,7 @@ export class AuctionComponent implements OnInit {
       alert(err.message);
     }
 
+    
   }
 
   public setAmount(event): void {
