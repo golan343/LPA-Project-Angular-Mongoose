@@ -14,15 +14,15 @@ export class BidsService {
   constructor(private http: HttpClient) { }
 
   public getAllBidsIncludingAuction(auctionId): void {
-    this.http.get<BidModel[]>(`${BaseUrl}/api/bids/join/bids-in-auction/${auctionId}`)
+    this.http.get<BidModel[]>(`${BaseUrl}api/bids/join/bids-in-auction/${auctionId}`)
     .subscribe(bids => {
       const action: Action = { type: ActionType.GetBidsIncludingSpecificAuction, payload: bids };
       store.dispatch(action);
     });
   }
 
-  public addBid(bid: BidModel) {
-    this.http.post<BidModel>(`${BaseUrl}/api/bids`, bid)
+  public addBid(bid: BidModel): void {
+    this.http.post<BidModel>(`${BaseUrl}api/bids`, bid)
       .subscribe(addedBid => {
         const action: Action = { type: ActionType.AddBid, payload: addedBid };
         store.dispatch(action);

@@ -37,8 +37,8 @@ router.post('/', async (request, response) => {
     try{
         const bid = new Bid(request.body);
         
-        //validate auction
-        const error = bid.validateAsync();
+        //validate bid
+        const error = await bid.validate();
         if(error) {
             response.status(400).send(error.message);
             return;
