@@ -21,12 +21,9 @@
 
         </div>
         <div class="bids" *ngIf="!auction.status">
-
             <button mat-raised-button (click)="showBids()">Show the bids</button>
             <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-            <!-- <div *ngFor="let b of bids; let i = index">
-                <p>{{b.offer}}</p>
-            </div> -->
         </div>
+        <button class="updateBtn" *ngIf="accountService.isAdmin()" mat-raised-button (click)="updateStatusDialog()">Update Status</button>
     </div>
 </div>    

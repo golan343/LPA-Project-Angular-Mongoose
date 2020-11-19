@@ -35,6 +35,20 @@ export class AccountService {
     return JSON.parse(this.cookieService.get('user'));
   }
 
+  public isAdmin(): boolean {
+    if (this.isUserLoggedIn()) {
+      const role = JSON.parse(this.cookieService.get('user')).user.roleId;
+      if (role === '5f58ba8855eac12930d7b405' || role === '5f58ba9a55eac12930d7b40c' || role === '5f58badd55eac12930d7b427'){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+    return false;
+
+  }
+
   // tslint:disable-next-line: typedef
   public login(user: UserModel) {
     return this.http.post<UserModel>(`${BaseUrl}api/auth/login`, user)

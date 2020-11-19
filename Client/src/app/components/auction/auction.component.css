@@ -78,3 +78,10 @@ button {
     text-align: center;
     color: white;
 }
+
+.updateBtn {
+    position: absolute;
+    top: 100px;
+    width: 200px;
+
+}

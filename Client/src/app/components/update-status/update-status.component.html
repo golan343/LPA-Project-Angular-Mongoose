@@ -1,0 +1,18 @@
+<div class="updatePage">
+    <form #formInfo="ngForm" [formGroup]="regForm">
+
+        <mat-form-field >
+            <mat-select required  formControlName="statusControl" placeholder="Status">
+                <mat-option value="true">Opened</mat-option>
+                <mat-option value="false">Closed</mat-option>
+            </mat-select>
+            <mat-error>Missing Status</mat-error>
+          </mat-form-field>
+        <br>
+        <p>
+        <button mat-button (click)="updateAuction()">Update</button>
+        </p>
+        <button mat-button (click)="close()">close</button>
+    
+    </form>
+</div>

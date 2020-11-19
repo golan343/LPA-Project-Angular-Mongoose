@@ -8,6 +8,9 @@ import { AuctionModel } from 'src/app/models/auction-model';
 import { Unsubscribe } from 'redux';
 import { CookieService } from 'ngx-cookie-service';
 import * as CanvasJS from '../../../assets/canvasjs.min';
+import { AccountService } from 'src/app/services/account.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { UpdateStatusComponent } from '../update-status/update-status.component';
 
 
 @Component({
@@ -23,7 +26,12 @@ export class AuctionComponent implements OnInit {
   public bids: BidModel[];
 
 
-  constructor( private activatedRoute: ActivatedRoute, private cookieService: CookieService, private bidService: BidsService  ) { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private cookieService: CookieService,
+    private bidService: BidsService,
+    private accountService: AccountService,
+    private dialog: MatDialog  ) { }
 
   // tslint:disable-next-line: typedef
   async ngOnInit() {
@@ -53,7 +61,8 @@ export class AuctionComponent implements OnInit {
   }
 
   public showBids(): void {
-    let chart = new CanvasJS.Chart('chartContainer', {
+    console.log(this.bids);
+    const chart = new CanvasJS.Chart('chartContainer', {
       animationEnabled: true,
       exportEnabled: false,
       title: {
@@ -62,21 +71,33 @@ export class AuctionComponent implements OnInit {
       data: [{
         type: 'bar',
         dataPoints: [
-          { y: 0.1, label: "Apple" },
-          { y: 0.2, label: "Mango" },
-          { y: 0.3, label: "Orange" },
-          { y: 0.4, label: "Banana" },
-          { y: 0.5, label: "Pineapple" },
-          { y: 1, label: "Pears" },
-          { y: 1.2, label: "Grapes" },
-          { y: 3.1, label: "Lychee" },
-          { y: 100, label: "Lychee" },
-          { y: 4.5, label: "Jackfruit" }
+          { y: +this.bids[0].offer, label: 'Apple' },
+          { y: +this.bids[1].offer, label: 'Apple' },
+          { y: +this.bids[2].offer, label: 'Apple' },
+          { y: +this.bids[3].offer, label: 'Apple' },
+          { y: +this.bids[4].offer, label: 'Apple' },
+          { y: +this.bids[5].offer, label: 'Apple' },
+          { y: +this.bids[6].offer, label: 'Apple' },
+          { y: +this.bids[7].offer, label: 'Apple' }
         ]
       }]
     });
     chart.render();
 
+  }
+  
+
+  public updateStatusDialog(): void {
+    const dialogRef = this.dialog.open(UpdateStatusComponent, {
+      panelClass: 'custom-dialog-container',
+      width: '450px',
+      height: '300px',
+      data: this.auction
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
 }

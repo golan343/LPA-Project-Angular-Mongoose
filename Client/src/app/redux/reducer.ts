@@ -45,7 +45,7 @@ export function reducer(currentState: AppState, action: Action): AppState {
         }
 
         // ---------Bids--------------
-        case ActionType.GetBidsIncludingSpecificAuction: 
+        case ActionType.GetBidsIncludingSpecificAuction:
             newState.bids = action.payload;
             break;
 

@@ -71,4 +71,12 @@ export class AuctionsService {
       console.log(err.message);
     });
   }
+
+  public async updateAuction(auction: AuctionModel){
+    await this.http.patch<AuctionModel>(`${BaseUrl}api/auctions/${auction._id}`, auction)
+    .subscribe(updatedAuction => {
+      const action: Action = { type: ActionType.UpdateAuction, payload: updatedAuction };
+      store.dispatch(action);
+    });
+  }
 }

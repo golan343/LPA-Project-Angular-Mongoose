@@ -42,6 +42,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { ClosedComponent } from './components/closed/closed.component';
+import { UpdateStatusComponent } from './components/update-status/update-status.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 
 @NgModule({
@@ -56,7 +58,9 @@ import { ClosedComponent } from './components/closed/closed.component';
     HeaderComponent,
     RegisterComponent,
     LoginComponent,
-    ClosedComponent
+    ClosedComponent,
+    UpdateStatusComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +89,6 @@ import { ClosedComponent } from './components/closed/closed.component';
     MatGridListModule,
     FlexLayoutModule,
     MatDatepickerModule,
-  
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyA2wURHwwXpa8qENVlEumlR87zxya7Xy00'
     }),
@@ -93,6 +96,7 @@ import { ClosedComponent } from './components/closed/closed.component';
   providers: [ CookieService ,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
   ],
+  entryComponents: [ConfirmDialogComponent],
   bootstrap: [LayoutComponent]
 })
 export class AppModule { }
