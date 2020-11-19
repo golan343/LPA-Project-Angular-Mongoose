@@ -9,6 +9,7 @@ import { InsertComponent } from './components/insert/insert.component';
 import { LiveAuctionsComponent } from './components/live-auctions/live-auctions.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ClosedComponent } from './components/closed/closed.component';
 
 
 
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'dashboard', loadChildren: () => import('./components/dashboard/dashboard.module').then(d => d.DashboardModule) },
   { path: 'register', component: RegisterComponent },
   { path: 'live', component: LiveAuctionsComponent, canActivate: [AccountGuard]  },
+  { path: 'closed', component: ClosedComponent, canActivate: [AccountGuard]  },
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // pathMath - exact empty string.
   { path: '**', component: PageNotFoundComponent } // Must be the last route!!
 ];

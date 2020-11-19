@@ -18,12 +18,15 @@
             placeholder="0.01$">
             <br><br>
             <button mat-raised-button (click)="addBid()"> Place my bid </button>
+
         </div>
         <div class="bids" *ngIf="!auction.status">
-            <div *ngFor="let b of bids; let i = index">
-                <p>{{b.offer}}</p>
 
-            </div>
+            <button mat-raised-button (click)="showBids()">Show the bids</button>
+            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+            <!-- <div *ngFor="let b of bids; let i = index">
+                <p>{{b.offer}}</p>
+            </div> -->
         </div>
     </div>
 </div>    

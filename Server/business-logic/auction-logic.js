@@ -4,6 +4,14 @@ const Auction = require('../models/auction');
 function getAllAuctionsAsync() {
     return Auction.find().exec();
 }
+// get all closed auctions
+function getAllClosedAuctionsAsync() {
+    return Auction.find({status: false}).exec();
+}
+// get all opened auctions
+function getAllOpenedAuctionsAsync() {
+    return Auction.find({status: true}).exec();
+}
 
 // get one auction by id
 function getOneAuctionAsync(_id) {
@@ -34,5 +42,7 @@ module.exports = {
     getOneAuctionAsync,
     addAuctionAsync,
     updateAuctionAsync,
-    deleteAuctionAsync
+    deleteAuctionAsync,
+    getAllClosedAuctionsAsync,
+    getAllOpenedAuctionsAsync
 }

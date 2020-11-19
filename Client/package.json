@@ -25,6 +25,7 @@
     "@angular/router": "~10.0.0",
     "@auth0/angular-jwt": "^5.0.1",
     "@types/google-maps": "^3.2.2",
+    "canvasjs": "^1.8.3",
     "ngx-alerts": "^10.1.1",
     "ngx-cookie-service": "^10.1.1",
     "redux": "^4.0.5",

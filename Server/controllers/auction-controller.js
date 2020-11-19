@@ -16,6 +16,29 @@ router.get('/', async (request, response) => {
         response.status(500).send(errorHandler.getError(err));
     }
 });
+// get all closed auction 
+router.get('/get/closed', async (request, response) => {
+    try{
+        const auctions = await auctionLogic.getAllClosedAuctionsAsync();
+        response.json(auctions);
+    }
+    catch(err){
+        
+        response.status(500).send(errorHandler.getError(err));
+    }
+});
+
+// get all opened auction 
+router.get('/get/opened', async (request, response) => {
+    try{
+        const auctions = await auctionLogic.getAllOpenedAuctionsAsync();
+        response.json(auctions);
+    }
+    catch(err){
+        
+        response.status(500).send(errorHandler.getError(err));
+    }
+});
 
 //get one auction by id - /api/auctions/id
 router.get('/:_id', async (request, response) => {

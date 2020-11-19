@@ -12,7 +12,7 @@ export class AuctionModel {
         public imageFileName?: string,
         public price?: string,
         public description?: string,
-        public status?: string,
+        public status?: boolean,
         public createdDate?: string,
         public minOffer?: string,
         public maxOffer?: string,

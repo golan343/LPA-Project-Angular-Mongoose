@@ -1,33 +1,33 @@
-import { BaseUrl } from './../../../environments/environment';
-import { store } from './../../redux/store';
-import { AuctionModel } from './../../models/auction-model';
-import { AuctionsService } from './../../services/auctions.service';
 import { Component, OnInit } from '@angular/core';
-import { Unsubscribe } from 'redux';
 import { Router } from '@angular/router';
+import { Unsubscribe } from 'redux';
+import { AuctionModel } from 'src/app/models/auction-model';
+import { store } from 'src/app/redux/store';
+import { AuctionsService } from 'src/app/services/auctions.service';
+import { BaseUrl } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-live-auctions',
-  templateUrl: './live-auctions.component.html',
-  styleUrls: ['./live-auctions.component.css']
+  selector: 'app-closed',
+  templateUrl: './closed.component.html',
+  styleUrls: ['./closed.component.css']
 })
-
-export class LiveAuctionsComponent implements OnInit {
+export class ClosedComponent implements OnInit {
   public auctions: AuctionModel[];
   private unsubscribe: Unsubscribe;
   public BaseUrl = BaseUrl;
+
+
 
   constructor(private auctionsService: AuctionsService, private router: Router) { }
 
   // tslint:disable-next-line: typedef
   async ngOnInit() {
     this.unsubscribe = store.subscribe(() => {
-      this.auctions = store.getState().auctions.filter(a => a.status === true);
-
-
+      this.auctions = store.getState().auctions.filter(a => a.status === false);
     });
     if (store.getState().auctions.length > 0) {
-      this.auctions = store.getState().auctions.filter(a => a.status === true);
+      this.auctions = store.getState().auctions.filter(a => a.status === false);
+
     }
     else {
       try {
@@ -44,6 +44,5 @@ export class LiveAuctionsComponent implements OnInit {
     this.router.navigateByUrl('/auctions/' + _id);
 
   }
-
 
 }

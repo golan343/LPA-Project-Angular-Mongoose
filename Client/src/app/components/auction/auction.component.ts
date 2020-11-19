@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuctionModel } from 'src/app/models/auction-model';
 import { Unsubscribe } from 'redux';
 import { CookieService } from 'ngx-cookie-service';
+import * as CanvasJS from '../../../assets/canvasjs.min';
 
 
 @Component({
@@ -38,7 +39,6 @@ export class AuctionComponent implements OnInit {
       alert(err.message);
     }
 
-    
   }
 
   public setAmount(event): void {
@@ -50,6 +50,33 @@ export class AuctionComponent implements OnInit {
     this.bid.date = new Date();
     console.log(this.bid);
     await this.bidService.addBid(this.bid);
+  }
+
+  public showBids(): void {
+    let chart = new CanvasJS.Chart('chartContainer', {
+      animationEnabled: true,
+      exportEnabled: false,
+      title: {
+        text: 'Bids in our auction'
+      },
+      data: [{
+        type: 'bar',
+        dataPoints: [
+          { y: 0.1, label: "Apple" },
+          { y: 0.2, label: "Mango" },
+          { y: 0.3, label: "Orange" },
+          { y: 0.4, label: "Banana" },
+          { y: 0.5, label: "Pineapple" },
+          { y: 1, label: "Pears" },
+          { y: 1.2, label: "Grapes" },
+          { y: 3.1, label: "Lychee" },
+          { y: 100, label: "Lychee" },
+          { y: 4.5, label: "Jackfruit" }
+        ]
+      }]
+    });
+    chart.render();
+
   }
 
 }

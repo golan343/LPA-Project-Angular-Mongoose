@@ -38,6 +38,26 @@ export class AuctionsService {
         console.log(err.message);
     });
   }
+  public getAllOpenedAuctions(): void {
+    this.http
+    .get<AuctionModel[]>(BaseUrl + 'api/auctions/get/opened')
+    .subscribe(res => {
+      const action: Action = { type: ActionType.GetAllOpenedAuctions, payload: res };
+      store.dispatch(action);
+    }, err => {
+        console.log(err.message);
+    });
+  }
+  public async getAllClosedAuctions(): Promise<any> {
+    await this.http
+    .get<AuctionModel[]>(BaseUrl + 'api/auctions/get/closed')
+    .subscribe(res => {
+      const action: Action = { type: ActionType.GetAllClosedAuctions, payload: res };
+      store.dispatch(action);
+    }, err => {
+        console.log(err.message);
+    });
+  }
 
 
   // tslint:disable-next-line: variable-name
