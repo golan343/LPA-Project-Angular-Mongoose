@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/85eb3e46-17fe-4eda-aa9d-83ffd94a3ee1/resourceGroups/LPA-app-group/providers/Microsoft.Web/sites/lpa-app-demo",
+    "appService.deploySubpath": "Server"
+}

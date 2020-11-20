@@ -72,7 +72,7 @@ export class AuctionsService {
     });
   }
 
-  public async updateAuction(auction: AuctionModel){
+  public async updateAuction(auction: AuctionModel): Promise<any>{
     await this.http.patch<AuctionModel>(`${BaseUrl}api/auctions/${auction._id}`, auction)
     .subscribe(updatedAuction => {
       const action: Action = { type: ActionType.UpdateAuction, payload: updatedAuction };
