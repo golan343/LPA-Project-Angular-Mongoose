@@ -30,6 +30,9 @@ export class RegisterComponent implements OnInit {
   // tslint:disable-next-line: typedef
   public async register() {
     try{
+      if (this.personalDetails.invalid){
+        return;
+      }
       this.user.email = this.regForm.value.emailControl;
       this.user.password = this.regForm.value.passwordControl;
       this.user.firstName = this.personalDetails.value.firstNameControl;
@@ -49,6 +52,10 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  public resolved(captchaResponse: string) {
+    console.log(`Resolved captcha with response: ${captchaResponse}`);
+  }
+
   ngOnInit(): void {
     if (this.accountService.isUserLoggedIn()) {
       this.router.navigateByUrl('/home');
@@ -64,7 +71,8 @@ export class RegisterComponent implements OnInit {
       countryControl: ['', Validators.required],
       cityControl: ['', Validators.required],
       birthDateControl: ['', Validators.required],
-      streetControl: ['', Validators.required]
+      streetControl: ['', Validators.required],
+      captchaControl: ['', Validators.required]
     });
   }
 }

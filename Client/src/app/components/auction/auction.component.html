@@ -1,5 +1,6 @@
 <img class="loader" *ngIf="!auction" src="/assets/images/loader.gif" alt="">
 <div *ngIf="auction" class="auctionPage">
+    <h1>Auction Page</h1>
     <div class="bg">
         <div  class="auction" style="background-image: url({{BaseUrl}}uploads/{{auction.imageFileName}});">
             <p>{{ auction.name }}</p>

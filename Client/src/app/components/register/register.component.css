@@ -8,3 +8,10 @@ mat-horizontal-stepper {
     text-align: left;
     padding-left: 30%;
 }
+
+
+.g-recaptcha {
+
+    display: inline-block;
+
+   }

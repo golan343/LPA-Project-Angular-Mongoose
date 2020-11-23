@@ -26,8 +26,8 @@ async function updateBidAsync(bid) {
 async function deleteBidAsync(_id) {
     return Bid.deleteOne({ _id }).exec();
 }
-function getAllBidsIncludingSpecificAuctionAsync() {
-    return Bid.find().populate('auctions').exec();
+function getAllBidsIncludingSpecificAuctionAsync(auctionId) {
+    return Bid.find({ auctionId }).exec();
 }
 
 

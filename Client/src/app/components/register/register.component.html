@@ -122,6 +122,14 @@
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
         </p>
+        <re-captcha
+          (resolved)="resolved($event)"
+          formControlName="captchaControl"
+          class="g-recaptcha"
+          name="captcha"
+          required
+          siteKey="6LcOuyYTAAAAAHTjFuqhA52fmfJ_j5iFk5PsfXaU">
+        </re-captcha>
         <div>
           <button mat-button (click)="register()">Register</button>
           <button mat-button (click)='router.navigateByUrl("/home");'>Home</button>

@@ -24,6 +24,7 @@ export class AuctionComponent implements OnInit {
   public BaseUrl = BaseUrl;
   public bid = new BidModel();
   public bids: BidModel[];
+  public setDataPoints = [];
 
 
   constructor(
@@ -40,8 +41,8 @@ export class AuctionComponent implements OnInit {
       this.auction = store.getState().auctions.find(a => a._id === _id);
       this.bid.auctionId = _id;
       // -----------------
-      this.bids = store.getState().bids;
       await this.bidService.getAllBidsIncludingAuction(_id);
+      this.unsubscribe = store.subscribe(() => this.bids = store.getState().bids);
     }
     catch (err) {
       alert(err.message);
@@ -61,8 +62,25 @@ export class AuctionComponent implements OnInit {
   }
 
   public showBids(): void {
-    console.log(this.bids);
+    this.setDataPoints = [];
+    for (let i = 1; i <= 100; i++) {
+      const bidOffer = i / 100;
+      const obj = {
+        label: `Bid: ` + bidOffer,
+        y: this.bids.filter(b => b.offer === bidOffer.toLocaleString()).length
+      };
+      if (obj.y > 0){
+        this.setDataPoints.push(obj);
+      }
+
+    }
+
     const chart = new CanvasJS.Chart('chartContainer', {
+      axisY: {
+        // valueFormatString:"####",
+			labelAutoFit: true,   // change it to false
+			prefix: 'Bidders: '
+      },
       animationEnabled: true,
       exportEnabled: false,
       title: {
@@ -70,16 +88,9 @@ export class AuctionComponent implements OnInit {
       },
       data: [{
         type: 'bar',
-        dataPoints: [
-          { y: +this.bids[0].offer, label: 'Apple' },
-          { y: +this.bids[1].offer, label: 'Apple' },
-          { y: +this.bids[2].offer, label: 'Apple' },
-          { y: +this.bids[3].offer, label: 'Apple' },
-          { y: +this.bids[4].offer, label: 'Apple' },
-          { y: +this.bids[5].offer, label: 'Apple' },
-          { y: +this.bids[6].offer, label: 'Apple' },
-          { y: +this.bids[7].offer, label: 'Apple' }
-        ]
+        // yValueFormatString:"count ####",
+        // axisYType: 'secondary',
+        dataPoints: this.setDataPoints
       }]
     });
     chart.render();
