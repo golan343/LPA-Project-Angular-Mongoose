@@ -23,6 +23,7 @@
         </div>
         <div class="bids" *ngIf="!auction.status">
             <button mat-raised-button (click)="showBids()">Show the bids</button>
+            <br><br>
             <div id="chartContainer" style="height: 370px; width: 100%;"></div>
         </div>
         <button class="updateBtn" *ngIf="accountService.isAdmin()" mat-raised-button (click)="updateStatusDialog()">Update Status</button>
