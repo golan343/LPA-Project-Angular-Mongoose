@@ -52,6 +52,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  // tslint:disable-next-line: typedef
   public resolved(captchaResponse: string) {
     console.log(`Resolved captcha with response: ${captchaResponse}`);
   }
