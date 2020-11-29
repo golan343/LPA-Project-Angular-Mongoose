@@ -20,6 +20,10 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public moveToHome(): void {
+    this.router.navigateByUrl('/home');
+  }
+
   public goToDashboard(): void {
     let route = '/user-panel';
     if (this.accountService.isAdmin()){

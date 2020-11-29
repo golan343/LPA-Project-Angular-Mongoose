@@ -1,7 +1,31 @@
 mat-icon{
     color: white;
 }
-
-div{
+button{
     float: right;
+}
+mat-toolbar{
+    position: sticky;
+    color: white;
+    background: #0E1119;
+}
+
+.homeImg {
+    width: 57px;
+    height: 53px;
+}
+mat-toolbar-row {
+    /* margin-left: 50px; */
+    /* border: 1px solid white; */
+}
+.settingsDiv {
+    margin-left: 150px;
+}
+.flag-icon{
+    background-size: contain;
+    background-position: 50%;
+    background-repeat: no-repeat;
+}
+flag-icon{
+    width: 50px;
 }

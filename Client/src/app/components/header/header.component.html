@@ -1,19 +1,43 @@
-<div>
-    <button mat-icon-button>
-        <mat-icon [matMenuTriggerFor]="settings">settings</mat-icon>
-    </button>
-    <mat-menu #settings="matMenu">
-        <button *ngIf="accountService.isUserLoggedIn()" mat-menu-item (click)="logout()">
-            <mat-icon>exit_to_app</mat-icon>
-            Sign out
-        </button>            
-        <button *ngIf="accountService.isUserLoggedIn()" mat-menu-item (click)="goToDashboard()">
-            <mat-icon>perm_identity</mat-icon>
-            Dashboard
-        </button>            
-        <button *ngIf="!accountService.isUserLoggedIn()" mat-menu-item (click)="login()">
-            <mat-icon>login</mat-icon>
-            Login
-        </button>            
-    </mat-menu>
-</div>
+<mat-toolbar>
+    <mat-toolbar-row>
+        <!-- <button mat-icon-button>
+          <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+        </button> -->
+        <img class="homeImg" (click)="moveToHome()" src="assets/images/homeNavLogo.png" alt="">
+        <span class="menu-spacer"></span>
+        <div>
+            <a mat-button routerLink="/live"> Live </a>
+            <a mat-button routerLink="/rules"> Auction rules </a>
+            <a mat-button routerLink="/closed">Closed auction </a>
+            <a mat-button routerLink="/locations">Locations </a>
+            <a mat-button routerLink="/how-its-work">How it works </a>
+            <a mat-button routerLink="/about">About us </a>
+            <a mat-button routerLink="/contact">Contact us </a>
+    
+        </div>
+        <flag-icon country="us"></flag-icon>
+        &nbsp;
+        <flag-icon country="es"></flag-icon>
+        <div class="settingsDiv">
+        <button mat-icon-button>
+            <mat-icon [matMenuTriggerFor]="settings">settings</mat-icon>
+        </button>
+        <mat-menu #settings="matMenu">
+            <button *ngIf="accountService.isUserLoggedIn()" mat-menu-item (click)="logout()">
+                <mat-icon>exit_to_app</mat-icon>
+                Sign out
+            </button>            
+            <button *ngIf="accountService.isUserLoggedIn()" mat-menu-item (click)="goToDashboard()">
+                <mat-icon>perm_identity</mat-icon>
+                Dashboard
+            </button>            
+            <button *ngIf="!accountService.isUserLoggedIn()" mat-menu-item (click)="login()">
+                <mat-icon>login</mat-icon>
+                Login
+            </button>            
+        </mat-menu>
+        </div>
+    </mat-toolbar-row>
+    
+
+</mat-toolbar>

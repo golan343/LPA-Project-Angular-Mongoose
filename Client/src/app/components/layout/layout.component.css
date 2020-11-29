@@ -4,7 +4,7 @@
     height: 100%;
     box-sizing: border-box;
     display: grid;
-    grid-template-rows: 4% 93% 3%;
+    grid-template-rows: 8% 93% 3%;
     grid-template-columns: repeat(12, 1fr);
 
 }
@@ -16,10 +16,9 @@
     width: 57px;
     height: 53px;
 }
-
-
-
-
+header {
+    position: sticky;
+  }
 header, footer { 
     text-align: center;
     grid-column: span 12;
@@ -49,7 +48,6 @@ p {
 }
 
 footer {
-    margin-left: 10%;
     text-align: center;
     background: #0E1119;
 }

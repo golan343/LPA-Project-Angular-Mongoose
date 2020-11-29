@@ -27,6 +27,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatMenuModule} from '@angular/material/menu';
 import { RecaptchaModule, RecaptchaSettings, RECAPTCHA_SETTINGS, RecaptchaFormsModule } from 'ng-recaptcha';
+import { NgxFlagIconCssModule } from 'ngx-flag-icon-css';
 
 
 
@@ -45,6 +46,8 @@ import { LoginComponent } from './components/login/login.component';
 import { ClosedComponent } from './components/closed/closed.component';
 import { UpdateStatusComponent } from './components/update-status/update-status.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { I18nModule } from './i18n/i18n.module';
+import { SelectLanguageComponent } from './select-language/select-language.component';
 
 
 const globalSettings: RecaptchaSettings = { siteKey: '6LeFTeoZAAAAAOm4L0qfozbCzOYa3kzs_3zeCgUY'}
@@ -64,7 +67,8 @@ const globalSettings: RecaptchaSettings = { siteKey: '6LeFTeoZAAAAAOm4L0qfozbCzO
     LoginComponent,
     ClosedComponent,
     UpdateStatusComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    SelectLanguageComponent
   ],
   imports: [
     BrowserModule,
@@ -98,6 +102,8 @@ const globalSettings: RecaptchaSettings = { siteKey: '6LeFTeoZAAAAAOm4L0qfozbCzO
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyA2wURHwwXpa8qENVlEumlR87zxya7Xy00'
     }),
+    I18nModule,
+    NgxFlagIconCssModule
   ],
   providers: [ CookieService ,
     // { provide: RECAPTCHA_SETTINGS, useValue: globalSettings },
