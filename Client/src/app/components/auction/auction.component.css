@@ -3,12 +3,12 @@
 @media (min-device-width: 1024px) and (max-device-width: 1280px) {
 
     .valueAuction{
-        font-size: 50px !important;
+        color: rgba(214, 255, 126, 1) !important;
+        font-size: 30px !important;
         position: relative;
-        top: 290px;
+        top: 260px;
         float: right;
-        right: 200px;
-        border: 1px solid white;
+        right: 10px;
     }
 
     img.loader {
@@ -219,8 +219,6 @@
 
 
 /* Tablet resolution */
-
-@media (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {}
 
 @media (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
     img.loader {

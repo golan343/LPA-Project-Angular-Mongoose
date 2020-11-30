@@ -5,8 +5,7 @@
         <div  class="auction" style="background-image: url({{BaseUrl}}uploads/{{auction.imageFileName}});">
             <p>{{ auction.name }}</p>
             <hr>
-            <!-- <p>Status: {{ auction.status ? 'Open' : 'Closed'}}</p> -->
-            <p class="valueAuction">Value: $ {{auction.price}} </p>
+            <p *ngIf="auction.status" class="valueAuction">Value: $ {{auction.price}} </p>
         </div>
         <br><br>
         <div class="placeBid" *ngIf="auction.status">
@@ -23,9 +22,15 @@
 
         </div>
         <div class="bids" *ngIf="!auction.status">
-            <button mat-raised-button (click)="showBids()">Show the bids</button>
-            <br><br>
-            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+            <div class="closedDate">Closed Date</div>
+            <div class="winner">Winner</div>
+            <div class="bidsInfo">Most common & Most highest</div>
+            <div class="offerLogs">
+                <button mat-raised-button (click)="showBids()">Show the bids</button>
+                <br><br>
+                <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+            </div>
+            
         </div>
         <button class="updateBtn" *ngIf="accountService.isAdmin()" mat-raised-button (click)="updateStatusDialog()">Update Status</button>
     </div>

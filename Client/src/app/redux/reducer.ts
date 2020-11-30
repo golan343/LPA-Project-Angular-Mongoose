@@ -48,6 +48,9 @@ export function reducer(currentState: AppState, action: Action): AppState {
         case ActionType.GetBidsIncludingSpecificAuction:
             newState.bids = action.payload;
             break;
+        case ActionType.GetAllBids:
+            newState.bids = action.payload;
+            break;
 
         case ActionType.AddBid:
             newState.bids.push(action.payload);
