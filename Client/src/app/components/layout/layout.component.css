@@ -1,3 +1,10 @@
+@media (max-device-width: 959px) {
+    mat-toolbar-row {
+        display: none;
+    }
+}
+
+
 .container{
     width: 100%;
     background: #0E1119;

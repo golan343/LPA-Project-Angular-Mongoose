@@ -1,6 +1,6 @@
-<div class="container">
+<!-- <div class="container">
     <header><app-header></app-header></header>
-    <mat-sidenav-container class="example-container">
+    <mat-sidenav-container class="example-container"> -->
         <!-- <mat-sidenav mode="side" opened [fixedInViewport]="true" [fixedTopGap]="32" [fixedBottomGap]="24">
             <mat-nav-list>
             <img class="homeImg" (click)="moveToHome()" src="assets/images/homeNavLogo.png" alt="">
@@ -13,7 +13,7 @@
             <a mat-list-item routerLink="/contact">Contact us</a>
             </mat-nav-list>
         </mat-sidenav> -->
-        <mat-sidenav-content>
+        <!-- <mat-sidenav-content>
             <div><router-outlet></router-outlet></div>
         </mat-sidenav-content>
     </mat-sidenav-container>
@@ -24,4 +24,60 @@
                 <a href="#">Cookies policy</a> 
             </div>
     </footer>
-  </div>
+  </div> -->
+  <div style="height: 100vh;">
+    <mat-toolbar color="primary">
+        <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
+            <mat-icon>menu</mat-icon>
+          </button>
+        <mat-toolbar-row>
+      <div fxShow="true"  fxHide.xl="true">
+       
+        <a routerLink="/live" mat-button>
+          <mat-icon>live_tv</mat-icon>
+          Live
+        </a>
+        <a href="#" mat-button>
+          <mat-icon>message</mat-icon>
+          Messages
+        </a>
+        <a href="#" mat-button>
+          <mat-icon>account_box</mat-icon>
+          My Account
+        </a>
+      </div>
+    </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-sidenav-container fxFlexFill>
+        <mat-sidenav #sidenav>
+          <mat-nav-list>
+            <a href="#" mat-list-item>
+              <mat-icon>notifications</mat-icon>
+              Notifications
+            </a>
+            <a href="#" mat-list-item>
+              <mat-icon>message</mat-icon>
+              Messages</a>
+            <a href="#" mat-list-item>
+              <mat-icon>account_box</mat-icon>
+              My Account
+            </a>
+            <a href="#" mat-list-item>
+              <mat-icon>lock</mat-icon>
+              My Account
+            </a>
+            <a (click)="sidenav.toggle()" mat-list-item>
+              <mat-icon>close</mat-icon> Close
+            </a>
+          </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content fxFlexFill><div><router-outlet></router-outlet></div></mat-sidenav-content>
+      </mat-sidenav-container>
+    <footer>
+        <div>
+            <a href="#">Privacy policy</a> &nbsp; 
+            <a href="#">Terms & Conditions</a> &nbsp; 
+            <a href="#">Cookies policy</a> 
+        </div>
+    </footer>
+</div>

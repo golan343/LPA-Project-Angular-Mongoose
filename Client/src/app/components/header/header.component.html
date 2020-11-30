@@ -3,7 +3,7 @@
         <!-- <button mat-icon-button>
           <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
         </button> -->
-        <img class="homeImg" (click)="moveToHome()" src="assets/images/homeNavLogo.png" alt="">
+        <img  class="homeImg" (click)="moveToHome()" src="assets/images/homeNavLogo.png" alt="">
         <span class="menu-spacer"></span>
         <div>
             <a mat-button routerLink="/live"> Live </a>
@@ -15,9 +15,6 @@
             <a mat-button routerLink="/contact">Contact us </a>
     
         </div>
-        <flag-icon country="us"></flag-icon>
-        &nbsp;
-        <flag-icon country="es"></flag-icon>
         <div class="settingsDiv">
         <button mat-icon-button>
             <mat-icon [matMenuTriggerFor]="settings">settings</mat-icon>

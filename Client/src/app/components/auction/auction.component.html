@@ -5,7 +5,8 @@
         <div  class="auction" style="background-image: url({{BaseUrl}}uploads/{{auction.imageFileName}});">
             <p>{{ auction.name }}</p>
             <hr>
-            <p>Status: {{ auction.status ? 'Open' : 'Closed'}}</p>
+            <!-- <p>Status: {{ auction.status ? 'Open' : 'Closed'}}</p> -->
+            <p class="valueAuction">Value: $ {{auction.price}} </p>
         </div>
         <br><br>
         <div class="placeBid" *ngIf="auction.status">
