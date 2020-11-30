@@ -1,15 +1,27 @@
 /* laptop resolution */
 
 @media (min-device-width: 1024px) and (max-device-width: 1280px) {
+
+    .valueAuction{
+        font-size: 50px !important;
+        position: relative;
+        top: 290px;
+        float: right;
+        right: 200px;
+        border: 1px solid white;
+    }
+
     img.loader {
         margin-left: 200px;
     }
+
     .auctionPage {
         height: 120vh;
         width: 768px;
         text-align: center;
         background: #0E1119;
     }
+
     .bg {
         display: inline-block;
         background: rgba(255, 255, 255, 0.34);
@@ -19,6 +31,7 @@
         width: 800px;
         height: 600px;
     }
+
     .auction {
         margin-top: 25px;
         display: inline-block;
@@ -30,6 +43,7 @@
         width: 750px;
         height: 400px;
     }
+    
     input {
         font-weight: bolder;
         text-align: center;
@@ -205,6 +219,8 @@
 
 
 /* Tablet resolution */
+
+@media (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {}
 
 @media (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
     img.loader {
@@ -422,4 +438,4 @@ low resolution tablets, mobiles */
 
 /* TODO mobile resolutions */
 
-@media (min-width: 320px) and (max-width: 480px) {}
+@media (min-width: 320px) and (max-width: 480px) {} 
