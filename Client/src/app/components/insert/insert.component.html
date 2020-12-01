@@ -1,14 +1,15 @@
 <div class="insert">
 
-<form action="" #formInfo="ngForm">
+<form action="" #formInfo="ngForm" [formGroup]="newAuction">
 
     <mat-form-field appearance="fill">
         <mat-label>Name</mat-label>
         <input 
         matInput 
+        formControlName="nameControl"
         type="text" 
         name="name"
-        [(ngModel)]="auction.name"
+        minlength="4"
         required>
     </mat-form-field>
 
@@ -16,9 +17,9 @@
         <mat-label>Price of product</mat-label>
         <input 
         matInput 
+        formControlName="priceControl"
         type="text" 
         name="price"
-        [(ngModel)]="auction.price"
         required>
     </mat-form-field>
     <p></p>
@@ -28,7 +29,7 @@
         matInput 
         type="text" 
         name="description"
-        [(ngModel)]="auction.description"
+        formControlName="descriptionControl"
         required>
     </mat-form-field>
 
@@ -38,7 +39,7 @@
         matInput 
         type="datetime-local"
         name="startDate"
-        [(ngModel)]="auction.startDate"
+        formControlName="startDateControl"
         required>
     </mat-form-field>
     
@@ -50,7 +51,7 @@
         matInput 
         type="datetime-local"
         name="endDate" 
-        [(ngModel)]="auction.endDate"
+        formControlName="endDateControl"
         required>
     </mat-form-field>
 
@@ -60,7 +61,7 @@
         matInput 
         type="text" 
         name="bidPrice" 
-        [(ngModel)]="auction.bidPrice"
+        formControlName="bidPriceControl"
         required>
     </mat-form-field>
     
@@ -72,7 +73,7 @@
         matInput 
         type="number"
         name="minOffer" 
-        [(ngModel)]="auction.minOffer"
+        formControlName="minOfferControl"
         required>
     </mat-form-field>
 
@@ -82,18 +83,18 @@
         matInput 
         type="number" 
         name="maxOffer" 
-        [(ngModel)]="auction.maxOffer"
+        formControlName="maxOfferControl"
         >
     </mat-form-field>
 
     <p></p>
     <mat-label>Upload Image</mat-label>
     <p></p>
-    <input type="file" (change)="onFileSelected($event)" />
+    <input type="file" formControlName="imageInputControl" (change)="onFileSelected($event)" />
 
     <p></p>
     <br>
-    <button [disabled]="formInfo.form.invalid" mat-raised-button (click)="addAuction()">Add Auction</button>
+    <button  mat-raised-button (click)="addAuction()">Add Auction</button>
 
 </form>
 

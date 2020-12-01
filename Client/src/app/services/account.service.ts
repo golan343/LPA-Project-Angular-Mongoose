@@ -22,7 +22,10 @@ export class AccountService {
   public get currentUserValue(): UserModel {
     return this.currentUserSubject.value;
   }
-
+  public getUserId(): string {
+    const _id = JSON.parse(this.cookieService.get('user')).user._id;
+    return _id;
+  }
   public isUserLoggedIn(): any {
     const token = this.cookieService.get('token');
     return !this.helper.isTokenExpired(token);

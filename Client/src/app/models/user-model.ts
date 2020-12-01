@@ -1,4 +1,5 @@
 export class UserModel {
+    user: any;
     public constructor(
     // tslint:disable-next-line: variable-name
     public _id?: string,

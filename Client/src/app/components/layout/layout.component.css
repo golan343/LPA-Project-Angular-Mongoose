@@ -1,9 +1,19 @@
 @media (max-device-width: 959px) {
-    mat-toolbar-row {
+    /* .links {
         display: none;
     }
+    .homeImg{
+        display: none;
+    } */
+}
+mat-toolbar{
+    background: #0E1119;
+    color: white;
 }
 
+mat-sidenav-content > div {
+    overflow: hidden;
+}
 
 .container{
     width: 100%;
@@ -18,14 +28,14 @@
 
 .homeImg {
     position: relative;
-    top: 10px;
-    left: 30px;
     width: 57px;
     height: 53px;
 }
+
 header {
     position: sticky;
-  }
+}
+
 header, footer { 
     text-align: center;
     grid-column: span 12;

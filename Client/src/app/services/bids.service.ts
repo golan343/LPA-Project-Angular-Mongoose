@@ -32,7 +32,7 @@ export class BidsService {
       });
   }
 
-  public getAllbids(): void {
+  public getAllBids(): void {
     this.http.get<BidModel[]>(`${BaseUrl}api/bids`)
     .subscribe(bids => {
       const action: Action = { type: ActionType.GetAllBids, payload: bids };

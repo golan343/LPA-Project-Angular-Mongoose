@@ -25,53 +25,58 @@
             </div>
     </footer>
   </div> -->
+
+
   <div style="height: 100vh;">
-    <mat-toolbar color="primary">
-        <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
+    <mat-toolbar>
+      <mat-toolbar-row>
+        <img class="homeImg" (click)="moveToHome()" src="assets/images/homeNavLogo.png" alt="" fxShow="true">
+        <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.md="true" fxHide.lg="true">
             <mat-icon>menu</mat-icon>
           </button>
-        <mat-toolbar-row>
-      <div fxShow="true"  fxHide.xl="true">
-       
-        <a routerLink="/live" mat-button>
-          <mat-icon>live_tv</mat-icon>
-          Live
-        </a>
-        <a href="#" mat-button>
-          <mat-icon>message</mat-icon>
-          Messages
-        </a>
-        <a href="#" mat-button>
-          <mat-icon>account_box</mat-icon>
-          My Account
-        </a>
+      <div class="links" fxShow="true" fxHide.sm="true" fxHide.xs="true">
+        <a routerLink="/live" mat-button> Live auctions </a>
+        <a routerLink="/rules" mat-button> Auction rules </a>
+        <a routerLink="/closed" mat-button> Closed auction </a>
+        <a routerLink="/locations" mat-button> Locations </a>
+        <a routerLink="/how-its-work" mat-button> How it works </a>
+        <a routerLink="/about" mat-button> About us </a>
+        <a routerLink="/contact" mat-button> Contact us </a>
+        <a mat-button> <mat-icon [matMenuTriggerFor]="settings">account_box</mat-icon></a>
       </div>
     </mat-toolbar-row>
     </mat-toolbar>
     <mat-sidenav-container fxFlexFill>
         <mat-sidenav #sidenav>
           <mat-nav-list>
-            <a href="#" mat-list-item>
-              <mat-icon>notifications</mat-icon>
-              Notifications
-            </a>
-            <a href="#" mat-list-item>
-              <mat-icon>message</mat-icon>
-              Messages</a>
-            <a href="#" mat-list-item>
-              <mat-icon>account_box</mat-icon>
-              My Account
-            </a>
-            <a href="#" mat-list-item>
-              <mat-icon>lock</mat-icon>
-              My Account
-            </a>
-            <a (click)="sidenav.toggle()" mat-list-item>
-              <mat-icon>close</mat-icon> Close
-            </a>
+            <a routerLink="/live" mat-list-item> Live auctions </a>
+            <a routerLink="/rules" mat-list-item> Auction rules </a>
+            <a routerLink="/closed" mat-list-item> Closed auction </a>
+            <a routerLink="/locations" mat-list-item> Locations </a>
+            <a routerLink="/how-its-work" mat-list-item> How it works </a>
+            <a routerLink="/about" mat-list-item> About us </a>
+            <a routerLink="/contact" mat-list-item> Contact us </a>
+              <a  mat-list-item>
+                  <mat-icon [matMenuTriggerFor]="settings">account_box</mat-icon>
+                  Account
+              </a>
+              <mat-menu #settings="matMenu">
+                  <a *ngIf="accountService.isUserLoggedIn()" mat-menu-item (click)="logout()">
+                      <mat-icon>exit_to_app</mat-icon>
+                      Sign out
+                  </a>            
+                  <button *ngIf="accountService.isUserLoggedIn()" mat-menu-item (click)="goToDashboard()">
+                      <mat-icon>perm_identity</mat-icon>
+                      Dashboard
+                  </button>            
+                  <button *ngIf="!accountService.isUserLoggedIn()" mat-menu-item (click)="login()">
+                      <mat-icon>login</mat-icon>
+                      Sign in
+                  </button>            
+              </mat-menu>
           </mat-nav-list>
         </mat-sidenav>
-        <mat-sidenav-content fxFlexFill><div><router-outlet></router-outlet></div></mat-sidenav-content>
+        <mat-sidenav-content fxFlexFill><router-outlet></router-outlet></mat-sidenav-content>
       </mat-sidenav-container>
     <footer>
         <div>

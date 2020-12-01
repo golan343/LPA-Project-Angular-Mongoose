@@ -1,9 +1,10 @@
-.pageNotFound {
-    height: 100vh;
-    background: #0E1119;
+div {
+    margin-top: 50px;
     text-align: center;
+    margin: 0;
+    background: #0E1119;
+    height: 95vh;
 }
-
 
 h1{
     color: white;

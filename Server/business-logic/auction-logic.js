@@ -8,12 +8,21 @@ function getAllAuctionsAsync() {
 function getAllClosedAuctionsAsync() {
     return Auction.find({status: false}).exec();
 }
+// get all closed auctions
+function getAllClosedAuctionsAsync() {
+    return Auction.find({status: false}).exec();
+}
 // get all opened auctions
 function getAllOpenedAuctionsAsync() {
     return Auction.find({status: true}).exec();
 }
 
 // get one auction by id
+function getLastAuctionAsync() {
+    return Auction.findOne({ _id }).exec();
+}
+
+// get last auction
 function getOneAuctionAsync(_id) {
     return Auction.findOne({ _id }).exec();
 }
