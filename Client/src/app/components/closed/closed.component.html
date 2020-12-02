@@ -1,8 +1,9 @@
 <img class="loader" *ngIf="!auctions" src="/assets/images/loader.gif" alt="">
 <div *ngIf="auctions" class="live">
-    <h1>Live auctions</h1>
-    <h4>place your bid and get a chance to win in one of our cars</h4>
-    <div class="auctions" >
+    <h1>Closed auctions</h1>
+    <h4>you have placed your bids these cars</h4>
+    <div class="auctions">
+        <!-- these are the auctions that are already closed -->
         <div *ngFor="let auction of auctions;" class="auction" style="background-image: url({{BaseUrl}}uploads/{{auction.imageFileName}});">
             <br>
             <p>{{ auction.name }}</p>
