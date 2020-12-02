@@ -33,9 +33,8 @@ const AuctionSchema = mongoose.Schema({
     status: {
         type: Boolean
     },
-    date: {
-        type: String
-
+    createdDate: {
+        type: Date
     },
     minOffer: {
         type: Number

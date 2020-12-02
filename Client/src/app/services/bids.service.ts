@@ -32,5 +32,13 @@ export class BidsService {
       });
   }
 
+  public getAllBids(): void {
+    this.http.get<BidModel[]>(`${BaseUrl}api/bids`)
+    .subscribe(bids => {
+      const action: Action = { type: ActionType.GetAllBids, payload: bids };
+      store.dispatch(action);
+    });
+  }
+
 
 }

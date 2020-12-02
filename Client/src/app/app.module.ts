@@ -48,6 +48,9 @@ import { UpdateStatusComponent } from './components/update-status/update-status.
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { I18nModule } from './i18n/i18n.module';
 import { SelectLanguageComponent } from './select-language/select-language.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { ContactUsComponent } from './components/contact-us/contact-us.component';
+import { LocationsComponent } from './components/locations/locations.component';
 
 
 const globalSettings: RecaptchaSettings = { siteKey: '6LeFTeoZAAAAAOm4L0qfozbCzOYa3kzs_3zeCgUY'}
@@ -68,7 +71,10 @@ const globalSettings: RecaptchaSettings = { siteKey: '6LeFTeoZAAAAAOm4L0qfozbCzO
     ClosedComponent,
     UpdateStatusComponent,
     ConfirmDialogComponent,
-    SelectLanguageComponent
+    SelectLanguageComponent,
+    AboutUsComponent,
+    ContactUsComponent,
+    LocationsComponent
   ],
   imports: [
     BrowserModule,

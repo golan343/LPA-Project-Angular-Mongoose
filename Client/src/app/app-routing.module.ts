@@ -1,3 +1,6 @@
+import { LocationsComponent } from './components/locations/locations.component';
+import { ContactUsComponent } from './components/contact-us/contact-us.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 import { AdminGuard } from './guards/admin.guard';
 import { AccountGuard } from './guards/account.guard';
 import { NgModule } from '@angular/core';
@@ -16,6 +19,9 @@ import { ClosedComponent } from './components/closed/closed.component';
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'how-its-work', component: HowItsWorkComponent },
+  { path: 'about', component: AboutUsComponent },
+  { path: 'contact', component: ContactUsComponent },
+  { path: 'locations', component: LocationsComponent },
   { path: 'auctions/:_id', component: AuctionComponent },
   { path: 'add-auction', component: InsertComponent, canActivate: [AdminGuard] },
   { path: 'dashboard', loadChildren: () => import('./components/dashboard/dashboard.module').then(d => d.DashboardModule) },
