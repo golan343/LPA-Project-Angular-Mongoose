@@ -1,9 +1,4 @@
-    /* 
-laptop resolution
-*/
-
-
-    
+ /* laptop resolution*/
     @media (min-device-width: 1024px) and (max-device-width: 1280px) {
         .live {
             background: #0E1119;
@@ -79,8 +74,8 @@ laptop resolution
         .live {
             background: #0E1119;
             height: 100%;
-            width: 100%;
             /*! ↓⇩ */
+            width: 100%;
             background-size: cover;
         }
         h1 {
@@ -285,12 +280,12 @@ low resolution tablets, mobiles */
             border: 1px solid black;
             background: #D4F1F4;
             position: relative;
-            opacity: 0.9;
-            border-radius: 20px;
             /*! ↓⇩ */
             /* top: 130px; */
             top: 7px;
             right: 235px;
+            opacity: 0.9;
+            border-radius: 20px;
             line-height: 29px;
         }
         .footer {

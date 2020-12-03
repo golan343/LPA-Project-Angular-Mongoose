@@ -1,26 +1,255 @@
-@media (min-device-width: 1024px) 
-and (max-device-width: 1280px) {
-    .live{
-        background: #0E1119;
+/* laptop resolution*/
+
+@media (min-device-width: 1024px) and (max-device-width: 1280px) {
+  .live {
+    background: #0e1119;
+    height: 100%;
+  }
+  h1 {
+    font-size: 100px;
+    text-align: center;
+    color: white;
+    margin: 0;
+  }
+  h4 {
+    color: white;
+    text-align: center;
+    font-size: large;
+    margin: 0;
+  }
+  .auctions {
+    margin-top: 20px;
+    text-align: center;
+  }
+  .auction {
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    display: inline-block;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border: 1px solid black;
+    border-radius: 20px;
+    /*! ↓⇩ */
+    width: 900px;
+    height: 400px;
+  }
+  .auction > p {
+    text-align: left;
+    font-size: small;
+    margin: 0;
+    margin-left: 10px;
+    color: black;
+    font-weight: bolder;
+    text-shadow: black 0.3px 0.3px;
+  }
+  .auction > hr {
+    border: 1px solid black;
+    color: black;
+    width: 95%;
+    margin-top: 0;
+  }
+  .auction > button {
+    font-weight: bolder;
+    border: 1px solid black;
+    background: #d4f1f4;
+    position: relative;
+    /*! ↓⇩ */
+    top: 7px;
+    right: 368px;
+    /* top: 130px; */
+    opacity: 0.9;
+    border-radius: 20px;
+  }
+  .footer {
+    text-align: center;
+    color: white;
+  }
+  img.loader {
+    margin-left: 200px;
+  }
+}
+
+/* desktop resolution */
+
+@media (min-device-width: 1281px) {
+  .live {
+    background: #0e1119;
+    height: 100%;
+    /*! ↓⇩ */
+    width: 100%;
+    background-size: cover;
+  }
+  h1 {
+    font-size: 100px;
+    text-align: center;
+    color: white;
+    margin: 0;
+  }
+  h4 {
+    color: white;
+    text-align: center;
+    font-size: large;
+    margin: 0;
+  }
+  .auctions {
+    margin-top: 20px;
+    text-align: center;
+  }
+  .auction {
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    display: inline-block;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border: 1px solid black;
+    border-radius: 20px;
+    /*! ↓⇩ */
+    width: 900px;
+    height: 400px;
+  }
+  .auction > p {
+    text-align: left;
+    font-size: small;
+    margin: 0;
+    margin-left: 10px;
+    color: black;
+    font-weight: bolder;
+    text-shadow: black 0.3px 0.3px;
+  }
+  .auction > hr {
+    border: 1px solid black;
+    color: black;
+    width: 95%;
+    margin-top: 0;
+  }
+  .auction > button {
+    font-weight: bolder;
+    border: 1px solid black;
+    background: #d4f1f4;
+    position: relative;
+    /*! ↓⇩ */
+    top: 7px;
+    right: 368px;
+    /* top: 130px; */
+    opacity: 0.9;
+    border-radius: 20px;
+  }
+  .footer {
+    text-align: center;
+    color: white;
+  }
+  img.loader {
+    margin-left: 200px;
+  }
+}
+
+/* Tablet resolution */
+@media (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
+  .live {
+    background: #0e1119;
+    height: 100%;
+    /*! ↓⇩ */
+    width: 100%;
+    background-size: cover;
+  }
+  h1 {
+    font-size: 100px;
+    text-align: center;
+    color: white;
+    margin: 0;
+  }
+  h4 {
+    color: white;
+    text-align: center;
+    font-size: large;
+    margin: 0;
+  }
+  .auctions {
+    text-align: center;
+    /*! ↓⇩ */
+    margin-top: 35px;
+    display: inline-block;
+  }
+  .auction {
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    display: inline-block;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border: 1px solid black;
+    border-radius: 20px;
+    /*! ↓⇩ */
+    width: 750px;
+    height: 500px;
+  }
+  .auction > p {
+    text-align: left;
+    font-size: small;
+    margin: 0;
+    margin-left: 10px;
+    color: black;
+    font-weight: bolder;
+    text-shadow: black 0.3px 0.3px;
+  }
+  .auction > hr {
+    border: 1px solid black;
+    color: black;
+    width: 95%;
+    margin-top: 0;
+  }
+  .auction > button {
+    font-weight: bolder;
+    border: 1px solid black;
+    background: #d4f1f4;
+    position: relative;
+    /*! ↓⇩ */
+    /* top: 130px; */
+    top: 7px;
+    right: 268px;
+    opacity: 0.9;
+    border-radius: 20px;
+  }
+  .footer {
+    text-align: center;
+    color: white;
+  }
+  img.loader {
+    margin-left: 200px;
+  }
+}
+
+    /* low resolution tablets, mobiles */
+    
+@media (min-width: 481px) and (max-width: 767px) {
+    .live {
+        background: #0e1119;
         height: 100%;
-    }
-    h1 {
+        /*! ↓⇩ */
+        width: 100%;
+        background-size: cover;
+      }
+      h1 {
         font-size: 100px;
         text-align: center;
         color: white;
         margin: 0;
-    }
-    h4 {
+      }
+      h4 {
         color: white;
         text-align: center;
         font-size: large;
         margin: 0;
-    }
-    .auctions {
-        margin-top: 20px;
+      }
+      .auctions {
         text-align: center;
-    }
-    .auction {
+        /*! ↓⇩ */
+        margin-top: 35px;
+        display: inline-block;
+      }
+      .auction {
         background-repeat: no-repeat;
         background-size: 100%;
         background-position: center;
@@ -29,11 +258,11 @@ and (max-device-width: 1280px) {
         margin-bottom: 20px;
         border: 1px solid black;
         border-radius: 20px;
-        width: 400px;
-        height: 250px;
-    }
-
-    .auction > p {
+        /*! ↓⇩ */
+        width: 640px;
+        height: 310px;
+      }
+      .auction > p {
         text-align: left;
         font-size: small;
         margin: 0;
@@ -41,31 +270,31 @@ and (max-device-width: 1280px) {
         color: black;
         font-weight: bolder;
         text-shadow: black 0.3px 0.3px;
-    }
-    .auction > hr {
+      }
+      .auction > hr {
         border: 1px solid black;
         color: black;
         width: 95%;
         margin-top: 0;
-    }
-    .auction > button {
+      }
+      .auction > button {
         font-weight: bolder;
         border: 1px solid black;
-        background: #D4F1F4;
+        background: #d4f1f4;
         position: relative;
-        top: 130px;
+        /*! ↓⇩ */
+        /* top: 130px; */
+        top: 7px;
+        right: 235px;
         opacity: 0.9;
         border-radius: 20px;
-        
-    }
-
-    .footer {
+        line-height: 29px;
+      }
+      .footer {
         text-align: center;
         color: white;
-    }
-
-    img.loader{
+      }
+      img.loader {
         margin-left: 200px;
-    }
+      }
 }
-
