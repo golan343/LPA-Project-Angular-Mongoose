@@ -7,10 +7,12 @@
             <br>
             <p>{{ auction.name }}</p>
             <hr>
-            <p>Status: {{ auction.status ? 'Open' : 'Closed' }}</p>
-            <p>Value: {{ auction.price }}</p>
             <button *ngIf="auction.status" mat-raised-button (click)="showAuction(auction._id)">Place my bid</button>
             <button *ngIf="!auction.status" mat-raised-button (click)="showAuction(auction._id)">Show the auction</button>
+            <div class="datesDiv">
+                <p> Starts: {{auction.startDate.replace('T', ' ')}}</p>
+                 <p> Ends: {{auction.endDate.replace('T', ' ')}}</p>
+             </div>
         </div>
     </div>
 </div>

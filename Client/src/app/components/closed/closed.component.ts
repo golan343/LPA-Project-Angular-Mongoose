@@ -22,6 +22,7 @@ export class ClosedComponent implements OnInit {
 
   // tslint:disable-next-line: typedef
   async ngOnInit() {
+    console.log()
     this.unsubscribe = store.subscribe(() => {
       this.auctions = store.getState().auctions.filter(a => a.status === false);
     });

@@ -5,6 +5,25 @@ laptop resolution
 
     
     @media (min-device-width: 1024px) and (max-device-width: 1280px) {
+        .datesDiv{
+            position: relative;
+            color:rgba(0, 0, 0, 1);
+            width: 90%;
+            top: 90%;
+            left: 5%;
+            font-weight: bold;
+        }
+        .datesDiv > p:nth-of-type(1) {
+            font-size: 20px;
+            background: rgba(255, 255, 255, 0.38);
+            float: left;
+        }
+        .datesDiv > p:nth-of-type(2) {
+            font-size: 20px;
+            background: rgba(255, 255, 255, 0.38);
+            float: right;
+        }
+        
         .live {
             background: #0E1119;
             height: 100%;
@@ -30,25 +49,25 @@ laptop resolution
             background-size: 100%;
             background-position: center;
             display: inline-block;
-            margin-right: 20px;
             margin-bottom: 20px;
-            border: 1px solid black;
-            border-radius: 20px;
+            padding-bottom: 15%;
             /*! ↓⇩ */
             width: 900px;
             height: 400px;
         }
         .auction>p {
+            padding-top: 25px;
             text-align: left;
             font-size: small;
             margin: 0;
-            margin-left: 10px;
+            font-size: 35px;
+            margin-left: 3%;
             color: black;
             font-weight: bolder;
             text-shadow: black 0.3px 0.3px;
         }
         .auction>hr {
-            border: 1px solid black;
+            border: 2px solid black;
             color: black;
             width: 95%;
             margin-top: 0;
@@ -60,7 +79,7 @@ laptop resolution
             position: relative;
             /*! ↓⇩ */
             top: 7px;
-            right: 368px;
+            right: 39%;
             /* top: 130px; */
             opacity: 0.9;
             border-radius: 20px;
@@ -70,18 +89,36 @@ laptop resolution
             color: white;
         }
         img.loader {
-            margin-left: 200px;
+            margin-left: 30%;
+            margin-top: 5%;
         }
     }
     /* desktop resolution */
     
     @media (min-device-width: 1281px) {
+         .datesDiv{
+            position: relative;
+            color:rgba(0, 0, 0, 1);
+            width: 90%;
+            margin-top: 400px;
+            /* top: 90%; */
+            left: 5%;
+            font-weight: bold;
+        }
+        .datesDiv > p:nth-of-type(1) {
+            font-size: 20px;
+            background: rgba(255, 255, 255, 0.38);
+            float: left;
+        }
+        .datesDiv > p:nth-of-type(2) {
+            font-size: 20px;
+            background: rgba(255, 255, 255, 0.38);
+            float: right;
+        }
+        
         .live {
             background: #0E1119;
             height: 100%;
-            width: 100%;
-            /*! ↓⇩ */
-            background-size: cover;
         }
         h1 {
             font-size: 100px;
@@ -104,25 +141,25 @@ laptop resolution
             background-size: 100%;
             background-position: center;
             display: inline-block;
-            margin-right: 20px;
             margin-bottom: 20px;
-            border: 1px solid black;
-            border-radius: 20px;
+            padding-bottom: 15%;
             /*! ↓⇩ */
             width: 900px;
-            height: 500px;
+            height: 400px;
         }
         .auction>p {
+            padding-top: 25px;
             text-align: left;
             font-size: small;
             margin: 0;
-            margin-left: 10px;
+            font-size: 35px;
+            margin-left: 3%;
             color: black;
             font-weight: bolder;
             text-shadow: black 0.3px 0.3px;
         }
         .auction>hr {
-            border: 1px solid black;
+            border: 2px solid black;
             color: black;
             width: 95%;
             margin-top: 0;
@@ -133,9 +170,8 @@ laptop resolution
             background: #D4F1F4;
             position: relative;
             /*! ↓⇩ */
-            /* top: 130px; */
             top: 7px;
-            right: 368px;
+            right: 39%;
             opacity: 0.9;
             border-radius: 20px;
         }
@@ -144,18 +180,37 @@ laptop resolution
             color: white;
         }
         img.loader {
-            margin-left: 200px;
+            margin-left: 30%;
+            margin-top: 5%;
         }
+    
     }
     /* Tablet resolution */
     
-    @media (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
+    @media screen and (min-width: 768px) and (max-width: 1023px) {
+        .datesDiv{
+            position: relative;
+            color:rgba(0, 0, 0, 1);
+            width: 90%;
+            margin-top: 225px;
+            /* top: 90%; */
+            left: 5%;
+            font-weight: bold;
+        }
+        .datesDiv > p:nth-of-type(1) {
+            font-size: 20px;
+            background: rgba(255, 255, 255, 0.38);
+            float: left;
+        }
+        .datesDiv > p:nth-of-type(2) {
+            font-size: 20px;
+            background: rgba(255, 255, 255, 0.38);
+            float: right;
+        }
+        
         .live {
             background: #0E1119;
             height: 100%;
-            width: 100%;
-            /*! ↓⇩ */
-            background-size: cover;
         }
         h1 {
             font-size: 100px;
@@ -170,35 +225,33 @@ laptop resolution
             margin: 0;
         }
         .auctions {
+            margin-top: 20px;
             text-align: center;
-            /*! ↓⇩ */
-            margin-top: 35px;
-            display: inline-block;
         }
         .auction {
             background-repeat: no-repeat;
             background-size: 100%;
             background-position: center;
             display: inline-block;
-            margin-right: 20px;
             margin-bottom: 20px;
-            border: 1px solid black;
-            border-radius: 20px;
+            padding-bottom: 15%;
             /*! ↓⇩ */
-            width: 750px;
-            height: 500px;
+            width: 700px;
+            height: 300px;
         }
         .auction>p {
+            padding-top: 25px;
             text-align: left;
             font-size: small;
             margin: 0;
-            margin-left: 10px;
+            font-size: 35px;
+            margin-left: 3%;
             color: black;
             font-weight: bolder;
             text-shadow: black 0.3px 0.3px;
         }
         .auction>hr {
-            border: 1px solid black;
+            border: 2px solid black;
             color: black;
             width: 95%;
             margin-top: 0;
@@ -209,9 +262,8 @@ laptop resolution
             background: #D4F1F4;
             position: relative;
             /*! ↓⇩ */
-            /* top: 130px; */
             top: 7px;
-            right: 268px;
+            right: 37%;
             opacity: 0.9;
             border-radius: 20px;
         }
@@ -220,22 +272,40 @@ laptop resolution
             color: white;
         }
         img.loader {
-            margin-left: 200px;
+            margin-left: 30%;
+            margin-top: 5%;
         }
     }
     /* 
 low resolution tablets, mobiles */
     
     @media (min-width: 481px) and (max-width: 767px) {
+        .datesDiv{
+            position: relative;
+            color:rgba(0, 0, 0, 1);
+            width: 90%;
+            margin-top: 120px;
+            /* top: 90%; */
+            left: 5%;
+            font-weight: bold;
+        }
+        .datesDiv > p:nth-of-type(1) {
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.38);
+            float: left;
+        }
+        .datesDiv > p:nth-of-type(2) {
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.38);
+            float: right;
+        }
+        
         .live {
             background: #0E1119;
             height: 100%;
-            width: 100%;
-            /*! ↓⇩ */
-            background-size: cover;
         }
         h1 {
-            font-size: 100px;
+            font-size: 70px;
             text-align: center;
             color: white;
             margin: 0;
@@ -247,35 +317,33 @@ low resolution tablets, mobiles */
             margin: 0;
         }
         .auctions {
+            margin-top: 20px;
             text-align: center;
-            /*! ↓⇩ */
-            margin-top: 35px;
-            display: inline-block;
         }
         .auction {
             background-repeat: no-repeat;
             background-size: 100%;
             background-position: center;
             display: inline-block;
-            margin-right: 20px;
             margin-bottom: 20px;
-            border: 1px solid black;
-            border-radius: 20px;
+            padding-bottom: 15%;
             /*! ↓⇩ */
-            width: 640px;
-            height: 310px;
+            width: 400px;
+            height: 190px;
         }
         .auction>p {
+            padding-top: 0px;
             text-align: left;
             font-size: small;
             margin: 0;
-            margin-left: 10px;
+            font-size: 35px;
+            margin-left: 3%;
             color: black;
             font-weight: bolder;
             text-shadow: black 0.3px 0.3px;
         }
         .auction>hr {
-            border: 1px solid black;
+            border: 2px solid black;
             color: black;
             width: 95%;
             margin-top: 0;
@@ -285,19 +353,18 @@ low resolution tablets, mobiles */
             border: 1px solid black;
             background: #D4F1F4;
             position: relative;
+            /*! ↓⇩ */
+            top: 7px;
+            right: 30%;
             opacity: 0.9;
             border-radius: 20px;
-            /*! ↓⇩ */
-            /* top: 130px; */
-            top: 7px;
-            right: 235px;
-            line-height: 29px;
         }
         .footer {
             text-align: center;
             color: white;
         }
         img.loader {
-            margin-left: 200px;
+            /* margin-left: 30%; */
+            margin-top: 5%;
         }
     }
