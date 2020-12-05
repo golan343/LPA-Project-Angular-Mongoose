@@ -3,6 +3,7 @@ export enum ActionType {
     GetAllOpenedAuctions,
     GetAllClosedAuctions,
     GetOneAuction,
+    GetLastAuction,
     AddAuction,
     UpdateAuction,
     DeleteAuction,

@@ -1,0 +1,15 @@
+div {
+    margin-top: 50px;
+    text-align: center;
+    margin: 0;
+    background: #0E1119;
+    height: 95vh;
+}
+
+h1{
+    color: white;
+    margin-top: 0;
+    font-size: 50px;
+    font-weight: bolder;
+    text-shadow: 1px 1px;
+}

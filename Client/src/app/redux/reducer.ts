@@ -27,6 +27,9 @@ export function reducer(currentState: AppState, action: Action): AppState {
         case ActionType.GetOneAuction:
             newState.auctions.push(action.payload); // payload = one
             break;
+        case ActionType.GetLastAuction:
+            newState.auctions = action.payload; // payload = one
+            break;
 
         case ActionType.AddAuction:
             newState.auctions.push(action.payload); // payload =  to add

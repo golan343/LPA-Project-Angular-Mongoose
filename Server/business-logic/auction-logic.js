@@ -9,8 +9,8 @@ function getAllClosedAuctionsAsync() {
     return Auction.find({status: false}).exec();
 }
 // get all closed auctions
-function getAllClosedAuctionsAsync() {
-    return Auction.find({status: false}).exec();
+function getLastAuctionAsync() {
+    return Auction.find().sort({ '_id': -1 }).limit(1);
 }
 // get all opened auctions
 function getAllOpenedAuctionsAsync() {
@@ -18,7 +18,7 @@ function getAllOpenedAuctionsAsync() {
 }
 
 // get one auction by id
-function getLastAuctionAsync() {
+function getOneAuctionAsync() {
     return Auction.findOne({ _id }).exec();
 }
 
@@ -53,5 +53,6 @@ module.exports = {
     updateAuctionAsync,
     deleteAuctionAsync,
     getAllClosedAuctionsAsync,
-    getAllOpenedAuctionsAsync
+    getAllOpenedAuctionsAsync,
+    getLastAuctionAsync
 }

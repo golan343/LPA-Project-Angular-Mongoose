@@ -26,7 +26,7 @@ export class LiveAuctionsComponent implements OnInit {
 
 
     });
-    if (store.getState().auctions.length > 0) {
+    if (store.getState().auctions.length > 1) {
       this.auctions = store.getState().auctions.filter(a => a.status === true);
     }
     else {

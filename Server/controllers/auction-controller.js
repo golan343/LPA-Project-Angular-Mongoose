@@ -55,6 +55,15 @@ router.get('/:_id', async (request, response) => {
         response.status(500).send(errorHandler.getError(err));
     }
 });
+router.get('/get/last', async (request, response) => {
+    try{
+        const auction = await auctionLogic.getLastAuctionAsync();
+        response.json(auction);
+    }
+    catch(err){
+        response.status(500).send(errorHandler.getError(err));
+    }
+});
 
 //add one auction - /api/auctions
 router.post('/', async (request, response) => {

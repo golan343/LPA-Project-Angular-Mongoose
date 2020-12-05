@@ -10,11 +10,11 @@
         <div *ngIf="auctions" class="lastAuction" style="background-image: url({{BaseUrl}}uploads/{{auctions[0].imageFileName}});">
             <h2>{{auctions[0].name}}</h2>
             <hr>
-            <p class="status">Status: {{auctions[0].status}}</p>
+            <p>t</p>
             <button mat-raised-button class="auctionBtn" (click)="showAuction(auctions[0]._id)">Show the auction</button>
-            <div class="dates">
-                <p>Start Date: {{auctions[0].startDate.replace('T', ' ')}}</p>
-                <p>End Date: {{auctions[0].endDate.replace('T', ' ')}}</p>
+            <div class="datesDiv">
+                <p>Starts: {{auctions[0].startDate.replace('T', ' ')}}</p>
+                <p>Ends: {{auctions[0].endDate.replace('T', ' ')}}</p>
             </div>
         </div>
     
@@ -56,6 +56,11 @@
     </section>
 
     <section class="fwh-slide section-white" >
+        <h3>Last Winner: the winner moment</h3>
+        <div class="winnerVideo">
+        </div>
+        <hr>
+        <h3>On site Auction</h3>
         <agm-map [latitude]="lat" [longitude]="lng">
             <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
         </agm-map>

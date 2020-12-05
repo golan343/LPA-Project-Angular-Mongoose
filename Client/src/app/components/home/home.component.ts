@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit, OnDestroy{
   }
 
   public goToRules(): void {
-    alert('rules not available right now');
+    this.router.navigateByUrl('/rules');
   }
   public sendEmail(): void {
     alert('function not available right now');
@@ -46,13 +46,12 @@ export class HomeComponent implements OnInit, OnDestroy{
   async ngOnInit() {
     this.unsubscribe = store.subscribe(() => {
       this.auctions = store.getState().auctions;
-      // console.log(this.auctions[0].startDate.split('T'));
     });
-    if (store.getState().auctions.length > 0 ) {
+    if (store.getState().auctions.length > 1 ) {
       this.auctions = store.getState().auctions;
    }
    else{
-    await this.auctionService.getAllAuctions();
+    await this.auctionService.getLastAuction();
    }
 
   }

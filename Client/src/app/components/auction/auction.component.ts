@@ -77,7 +77,6 @@ export class AuctionComponent implements OnInit {
 
     const chart = new CanvasJS.Chart('chartContainer', {
       axisY: {
-        // valueFormatString:"####",
 			labelAutoFit: true,   // change it to false
 			prefix: 'Bidders: '
       },

@@ -1,13 +1,18 @@
 <img class="loader" *ngIf="!auction" src="/assets/images/loader.gif" alt="">
 <div *ngIf="auction" class="auctionPage">
-    <h1>Auction Page</h1>
-    <div class="bg">
+    <h1 *ngIf="!auction.status">Closed Auction</h1>
+    <h1 *ngIf="auction.status">Live Auction</h1>
+    <div *ngIf='auction.status' class="bg">
         <div  class="auction" style="background-image: url({{BaseUrl}}uploads/{{auction.imageFileName}});">
             <p>{{ auction.name }}</p>
             <hr>
             <p *ngIf="auction.status" class="valueAuction">Value: $ {{auction.price}} </p>
         </div>
         <br><br>
+        <div class="remainingOffers">
+            <h3>Remaining Offers</h3>
+            <p>2168</p>
+        </div>
         <div class="placeBid" *ngIf="auction.status">
             
             <label style="color: white; font-size: 20px;">My bid: </label> 
@@ -21,17 +26,62 @@
             <button mat-raised-button (click)="addBid()"> Place my bid </button>
 
         </div>
-        <div class="bids" *ngIf="!auction.status">
-            <div class="closedDate">Closed Date</div>
-            <div class="winner">Winner</div>
-            <div class="bidsInfo">Most common & Most highest</div>
-            <div class="offerLogs">
-                <button mat-raised-button (click)="showBids()">Show the bids</button>
-                <br><br>
-                <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-            </div>
-            
-        </div>
+        
         <button class="updateBtn" *ngIf="accountService.isAdmin()" mat-raised-button (click)="updateStatusDialog()">Update Status</button>
+    </div>
+    <div *ngIf='!auction.status' class="bgClosed">
+        <div  class="auction" style="background-image: url({{BaseUrl}}uploads/{{auction.imageFileName}});">
+            <p>{{ auction.name }}</p>
+            <hr>
+            <p *ngIf="auction.status" class="valueAuction">Value: $ {{auction.price}} </p>
+        </div>
+        
+        <button class="updateBtn" *ngIf="accountService.isAdmin()" mat-raised-button (click)="updateStatusDialog()">Update Status</button>
+    </div>
+    <div class="bids" *ngIf="!auction.status">
+        <div class="description">
+            <h3>Description</h3>
+            <p>{{auction.description}}</p>
+        </div>
+        <div class="info">
+            <div class="headerInfo"><h3>Sold For</h3><h3>Value</h3></div>
+            <div class="soldFor"></div>
+            <div class="value"></div>
+        </div>
+        <div class="closedDate">
+            <h3>Closed Date</h3>
+            <p>{{auction.endDate.replace('T', ' ')}}</p>
+        </div>
+        <div class="winner">
+            <h3>Winner</h3>
+        </div>
+        <div class="bidsInfo">
+            <div class="headerInfo"><h3>Most common bid</h3><h3>Most highest bid</h3></div>
+            <div class="common"></div>
+            <div class="highest"></div>
+        </div>
+        <div class="offerLogs">
+            <h3>Offer Logs</h3>
+            <button mat-raised-button (click)="showBids()">Show the bids</button>
+            <br><br>
+            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+        </div>
+        
+    </div>
+    <div class="liveInfo" *ngIf="auction.status">
+        <div class="liveBidInfo">
+            <div class="headerInfo"><h3>Minimum bid</h3><h3>Maximum bid</h3><h3>Maximum Offers</h3></div>
+            <div class="minBid"><p>${{auction.minOffer}}</p></div>
+            <div class="maxBid"><p>${{auction.maxOffer}}</p></div>
+            <div class="maxOffers"><p>3000</p></div>
+        </div>
+        <div class="productVideo">
+            <h3>Product's Video</h3>
+            <div class="productVideoLink"></div>
+        </div>
+        <div class="liveDescription">
+            <h3>Description</h3>
+            <p>{{auction.description}}</p>
+        </div>
     </div>
 </div>    

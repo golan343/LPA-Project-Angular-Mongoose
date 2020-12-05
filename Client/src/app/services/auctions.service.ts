@@ -71,6 +71,16 @@ export class AuctionsService {
       console.log(err.message);
     });
   }
+  public getLastAuction(): void {
+    this.http.get<AuctionModel>(BaseUrl + 'api/auctions/get/last')
+    .subscribe(res => {
+      const action: Action = { type: ActionType.GetLastAuction, payload: res };
+      store.dispatch(action);
+    },
+    err => {
+      console.log(err.message);
+    });
+  }
 
   public async updateAuction(auction: AuctionModel): Promise<any>{
     await this.http.patch<AuctionModel>(`${BaseUrl}api/auctions/${auction._id}`, auction)

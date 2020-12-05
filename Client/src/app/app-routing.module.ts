@@ -13,6 +13,7 @@ import { LiveAuctionsComponent } from './components/live-auctions/live-auctions.
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ClosedComponent } from './components/closed/closed.component';
+import { RulesComponent } from './components/rules/rules.component';
 
 
 
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'how-its-work', component: HowItsWorkComponent },
   { path: 'about', component: AboutUsComponent },
+  { path: 'rules', component: RulesComponent },
   { path: 'contact', component: ContactUsComponent },
   { path: 'locations', component: LocationsComponent },
   { path: 'auctions/:_id', component: AuctionComponent },
