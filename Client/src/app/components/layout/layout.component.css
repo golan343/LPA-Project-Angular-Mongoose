@@ -36,7 +36,7 @@ header {
     position: sticky;
 }
 
-header, footer { 
+ footer { 
     text-align: center;
     grid-column: span 12;
     color: white;
