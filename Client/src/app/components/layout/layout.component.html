@@ -1,76 +1,31 @@
-<div >
-    <!-- <mat-toolbar>
-      <mat-toolbar-row>
-        <img class="homeImg" (click)="moveToHome()" src="assets/images/homeNavLogo.png" alt="" fxShow="true">
-        <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.md="true" fxHide.lg="true">
-            <mat-icon>menu</mat-icon>
-          </button>
-      <div class="links" fxShow="true" fxHide.sm="true" fxHide.xs="true">
-        <aside><a routerLink="/live" mat-button> Live auctions </a></aside>
-        <aside><a routerLink="/rules" mat-button> Auction rules </a></aside>
-        <aside><a routerLink="/closed" mat-button> Closed auction </a></aside>
-        <aside><a routerLink="/locations" mat-button> Locations </a></aside>
-        <aside><a routerLink="/how-its-work" mat-button> How it works </a></aside>
-        <aside><a routerLink="/about" mat-button> About us </a></aside>
-        <aside><a routerLink="/contact" mat-button> Contact us </a></aside>
-        <aside><a mat-button> <mat-icon [matMenuTriggerFor]="settings">account_box</mat-icon></a></aside>
+<app-header></app-header>
+<div>
+  <div class="flex ">
+    <nav>
+      <div class="wrap flex-col fixed">
+        <div class="logo" (click)="moveToHome()"></div>
+        <ul>
+          <li><a routerLink="/live" > Live auctions </a></li>
+          <li><a routerLink="/rules" > Auction rules </a></li>
+          <li><a routerLink="/closed" > Closed auction </a></li>
+          <li><a routerLink="/locations" > Locations </a></li>
+          <li><a routerLink="/how-its-work" > How it works </a></li>
+          <li><a routerLink="/about" > About us </a></li>
+          <li><a routerLink="/contact" > Contact us </a></li>
+        </ul>
       </div>
-    </mat-toolbar-row>
-    </mat-toolbar> -->
-    <!-- <mat-sidenav-container fxFlexFill>
-        <mat-sidenav #sidenav>
-          <mat-nav-list> -->
-            <header>
-              <a *ngIf="accountService.isUserLoggedIn()"  (click)="logout()">
-                <mat-icon>exit_to_app</mat-icon>
-                Sign out
-            </a>            
-            <button *ngIf="accountService.isUserLoggedIn()"  (click)="goToDashboard()">
-                <mat-icon>perm_identity</mat-icon>
-                Dashboard
-            </button>            
-            <button *ngIf="!accountService.isUserLoggedIn()"  (click)="login()">
-                <mat-icon>login</mat-icon>
-                Sign in
-            </button>
-            </header>
-            <div class="flex">
-              <nav>
-                <ul>
-                  <li><a routerLink="/live" mat-list-item> Live auctions </a></li>
-                  <li><a routerLink="/rules" mat-list-item> Auction rules </a></li>
-                  <li><a routerLink="/closed" mat-list-item> Closed auction </a></li>
-                  <li><a routerLink="/locations" mat-list-item> Locations </a></li>
-                  <li><a routerLink="/how-its-work" mat-list-item> How it works </a></li>
-                  <li><a routerLink="/about" mat-list-item> About us </a></li>
-                  <li><a routerLink="/contact" mat-list-item> Contact us </a></li>
-                    <li><a  mat-list-item>
-                        <mat-icon>account_box</mat-icon>
-                        Account
-                    </a></li>
-                </ul>
-            
-                 
-              </nav>
-              <main>
-                <router-outlet></router-outlet>
-              </main>
-            </div>
-          
-                       
-              <!-- </mat-menu>
-          </mat-nav-list>
-        </mat-sidenav>
-        <mat-sidenav-content fxFlexFill> -->
-       
-         
-        <!-- </mat-sidenav-content>
-      </mat-sidenav-container> -->
-    <footer>
-        <div>
-            <a href="#">Privacy policy</a> &nbsp; 
-            <a href="#">Terms & Conditions</a> &nbsp; 
-            <a href="#">Cookies policy</a> 
-        </div>
-    </footer>
+        
+
+    </nav>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+  <footer>
+    <div>
+      <a href="#">Privacy policy</a> &nbsp;
+      <a href="#">Terms & Conditions</a> &nbsp;
+      <a href="#">Cookies policy</a>
+    </div>
+  </footer>
 </div>

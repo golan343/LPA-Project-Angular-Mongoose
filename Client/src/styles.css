@@ -1,5 +1,5 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 * {
   padding: 0;
   margin: 0;
@@ -15,6 +15,12 @@ html {
   font-family: "Roboto", Arial;
   background: #0e1119;
 }
+a {
+  text-decoration: none;
+}
+a:active {
+  text-decoration: none;
+}
 header {
   display: block;
   height: 50px;
@@ -23,19 +29,48 @@ header {
   display: flex;
   align-items: center;
 }
-nav {
-  position: relative;
-  width: 200px;
+.logo {
+  background-image: url(./assets/images/homeNavLogo.png);
+  width: 57px;
+  height: 53px;
+  background-repeat: no-repeat;
+  background-position: center 0px;
+  background-size: 100% 100%;
+  margin: 5% auto;
 }
-nav ul {
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.fixed {
   position: fixed;
-  top: 0px;
 }
-nav ul li {
-  padding: 2%;
-  text-align: center;
+.sticky{
+  position:sticky;
 }
-/* cyrillic-ext */
+.relative {
+  position: relative;
+}
+.js-center {
+  justify-content: center;
+}
+button {
+  background: #d4f1f4;
+  border-radius: 43px;
+  filter: drop-shadow(9px 11px 4px rgba(0, 0, 0, 0.9));
+  box-shadow: 9px 1px 4px 0px #000000;
+  padding: 4px 3rem;
+  color: #0e1119;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+:focus {
+  outline: none;
+  box-shadow: 0px 0px 2px 2px #d6d2d2;
+}
+
+  /* cyrillic-ext */
 @font-face {
   font-family: "Roboto";
   font-style: normal;
@@ -102,3 +137,28 @@ nav ul li {
     U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
     U+FEFF, U+FFFD;
 }
+
+@keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+  }
+  
+  @-moz-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+  }
+  
+  @-webkit-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+  }
+  
+  @-o-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+  }
+  
+  @-ms-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+  }

@@ -1,5 +1,8 @@
 
 /* desktop resolution */
+.firstSection{
+    animation: fadeIn 10s linear 1s 1;
+}
 @media screen and (min-width: 1281px) {
     .datesDiv{
         position: relative;

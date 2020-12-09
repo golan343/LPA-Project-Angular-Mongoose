@@ -5,6 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { AccountService } from 'src/app/services/account.service';
 import { LoginComponent } from '../login/login.component';
 
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -15,7 +16,7 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router,
               public accountService: AccountService,
               public dialog: MatDialog,
-              private cookieService: CookieService ) { }
+              private cookieService: CookieService) { }
 
   ngOnInit(): void {
   }
@@ -61,5 +62,8 @@ export class HeaderComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+  public placeBid(){
+    
   }
 }
