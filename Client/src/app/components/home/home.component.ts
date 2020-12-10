@@ -48,10 +48,8 @@ export class HomeComponent implements OnInit, OnDestroy{
       this.auctions = store.getState().auctions;
     });
     if (store.getState().auctions.length > 1 ) {
+      await this.auctionService.getLastAuction();
       this.auctions = store.getState().auctions;
-   }
-   else{
-    await this.auctionService.getLastAuction();
    }
 
   }

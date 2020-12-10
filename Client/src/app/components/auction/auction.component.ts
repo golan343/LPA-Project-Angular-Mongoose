@@ -25,6 +25,11 @@ export class AuctionComponent implements OnInit {
   public bid = new BidModel();
   public bids: BidModel[];
   public setDataPoints = [];
+  public bidOfferUnique;
+  public unique;
+  public highest;
+  public common;
+
 
 
   constructor(
@@ -43,7 +48,14 @@ export class AuctionComponent implements OnInit {
       // -----------------
       await this.bidService.getAllBidsIncludingAuction(_id);
       this.unsubscribe = store.subscribe(() => this.bids = store.getState().bids);
-    }
+      setTimeout(()=>{
+        this.checkUnique();
+        this.checkHighest();
+        this.checkCommon();
+      },500) 
+      // 
+     
+  }
     catch (err) {
       alert(err.message);
     }
@@ -60,6 +72,61 @@ export class AuctionComponent implements OnInit {
     console.log(this.bid);
     await this.bidService.addBid(this.bid);
   }
+  public checkCommon() {
+    if(this.bids.length > 0){
+      let commonValue = 0;
+      for (let i = 1; i <= 100; i++) {
+        const bidOffer = i / 100;
+        const value = this.bids.filter(b => +b.offer === bidOffer).length
+        if (value > commonValue){ 
+          commonValue = value;
+          this.common = bidOffer;
+        }
+      }
+      console.log(commonValue + ' ' + this.common);
+    }
+    return;
+    
+  }
+
+  public checkHighest() {
+    if(this.bids.length > 0){
+      let highestValue = 0;
+      for (let i = 1; i <= 100; i++) {
+        const bidOffer = i / 100;
+        const value = this.bids.filter(b => +b.offer === bidOffer).length
+        if (value > 0){ 
+          if(bidOffer > highestValue){
+            highestValue = bidOffer;
+          }
+        }
+      }
+      this.highest = this.bids.find(b => b.offer === `${highestValue}`);
+      console.log(this.highest);
+    }
+    return;
+
+  }
+  public checkUnique() {
+    if(this.bids.length > 0){
+      let uniqueValue = 1000;
+      for (let i = 1; i <= 100; i++) {
+        const bidOffer = i / 100;
+        const value = this.bids.filter(b => +b.offer === bidOffer).length
+
+        if (value > 0){ 
+          if(value < uniqueValue){
+            uniqueValue = value;
+            this.bidOfferUnique = bidOffer;
+          }
+        }
+      }
+      this.unique = this.bids.find(b => b.offer === `${this.bidOfferUnique}`);
+      console.log(this.unique);
+    }
+    return;
+    
+  }
 
   public showBids(): void {
     this.setDataPoints = [];
@@ -67,11 +134,12 @@ export class AuctionComponent implements OnInit {
       const bidOffer = i / 100;
       const obj = {
         label: `Bid: ` + bidOffer,
-        y: this.bids.filter(b => b.offer === bidOffer.toLocaleString()).length
+        y: this.bids.filter(b => +b.offer === bidOffer).length
       };
       if (obj.y > 0){
         this.setDataPoints.push(obj);
       }
+
 
     }
 
