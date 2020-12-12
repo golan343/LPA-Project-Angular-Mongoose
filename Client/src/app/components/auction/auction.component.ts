@@ -25,6 +25,11 @@ export class AuctionComponent implements OnInit {
   public bid = new BidModel();
   public bids: BidModel[];
   public setDataPoints = [];
+  public bidOfferUnique;
+  public unique;
+  public highest;
+  public common;
+
 
 
   constructor(
@@ -43,11 +48,14 @@ export class AuctionComponent implements OnInit {
       // -----------------
       await this.bidService.getAllBidsIncludingAuction(_id);
       this.unsubscribe = store.subscribe(() => this.bids = store.getState().bids);
-    }
+      setTimeout(() => {
+        this.checkUnique();
+      }, 500);
+      //
+  }
     catch (err) {
       alert(err.message);
     }
-
   }
 
   public setAmount(event): void {
@@ -57,8 +65,37 @@ export class AuctionComponent implements OnInit {
   public async addBid(): Promise<any> {
     this.bid.userId = JSON.parse(this.cookieService.get('user')).user._id;
     this.bid.date = new Date();
-    console.log(this.bid);
     await this.bidService.addBid(this.bid);
+  }
+
+  public checkUnique() {
+    if(this.bids.length > 0){
+      let uniqueValue = 1000;
+      let highestValue = 0;
+      let commonValue = 0;
+      for (let i = 1; i <= 100; i++) {
+        const bidOffer = i / 100;
+        const value = this.bids.filter(b => +b.offer === bidOffer).length;
+
+        if (value > 0){ 
+          if(value < uniqueValue){
+            uniqueValue = value;
+            this.bidOfferUnique = bidOffer;
+          }
+          if(bidOffer > highestValue){
+            highestValue = bidOffer;
+          }
+        }
+        if (value > commonValue){
+          commonValue = value;
+          this.common = bidOffer;
+        }
+      }
+      this.unique = this.bids.find(b => b.offer === `${this.bidOfferUnique}`);
+      this.highest = this.bids.find(b => b.offer === `${highestValue}`);
+      console.log(this.unique);
+    }
+    return;
   }
 
   public showBids(): void {
@@ -67,11 +104,12 @@ export class AuctionComponent implements OnInit {
       const bidOffer = i / 100;
       const obj = {
         label: `Bid: ` + bidOffer,
-        y: this.bids.filter(b => b.offer === bidOffer.toLocaleString()).length
+        y: this.bids.filter(b => +b.offer === bidOffer).length
       };
       if (obj.y > 0){
         this.setDataPoints.push(obj);
       }
+
 
     }
 

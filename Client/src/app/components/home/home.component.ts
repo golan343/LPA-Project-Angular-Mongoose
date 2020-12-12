@@ -43,6 +43,7 @@ export class HomeComponent implements OnInit, OnDestroy{
   }
   // tslint:disable-next-line: typedef
   async ngOnInit() {
+<<<<<<< HEAD
     this.unsubscribe = store.subscribe(() => {
       this.auctions = store.getState().auctions;
       console.log(this)
@@ -53,6 +54,22 @@ export class HomeComponent implements OnInit, OnDestroy{
    else{
     await this.auctionService.getLastAuction();
    }
+=======
+    try{
+      this.unsubscribe = store.subscribe(() => this.auctions = store.getState().auctions);
+      if (store.getState().auctions.length === 0 || store.getState().auctions.length > 1 ) {
+        await this.auctionService.getLastAuction();
+      }
+      else {
+        this.auctions = store.getState().auctions;
+      }
+
+    }
+    catch(err){
+      alert(err.message);
+    }
+    
+>>>>>>> master
 
   }
 

@@ -45,8 +45,8 @@
         </div>
         <div class="info">
             <div class="headerInfo"><h3>Sold For</h3><h3>Value</h3></div>
-            <div class="soldFor"></div>
-            <div class="value"></div>
+            <div class="soldFor"><p *ngIf="unique">{{unique.offer}}</p></div>
+            <div class="value"><p *ngIf="unique">{{unique.auctionId.price}}</p></div>
         </div>
         <div class="closedDate">
             <h3>Closed Date</h3>
@@ -57,8 +57,8 @@
         </div>
         <div class="bidsInfo">
             <div class="headerInfo"><h3>Most common bid</h3><h3>Most highest bid</h3></div>
-            <div class="common"></div>
-            <div class="highest"></div>
+            <div class="common"><p *ngIf="common">{{common}}</p></div>
+            <div class="highest"><p *ngIf="highest">{{highest.offer}}</p></div>
         </div>
         <div class="offerLogs">
             <h3>Offer Logs</h3>

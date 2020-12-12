@@ -8,7 +8,7 @@ const BidSchema = mongoose.Schema({
     },
     auctionId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Action"
+        ref: "Auction"
     },
     offer: {
         type: String
@@ -22,9 +22,9 @@ const BidSchema = mongoose.Schema({
     id: false
 });
 
-BidSchema.virtual("action", {
-    ref: "Action",
-    localField: "actionId",
+BidSchema.virtual("auction", {
+    ref: "Auction",
+    localField: "auctionId",
     foreignField: "_id",
     justOne: true
 });

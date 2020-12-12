@@ -2,11 +2,11 @@ const Bid = require('../models/bid');
 
 // get all bids
 function getAllBidsAsync() {
-    return Bid.find().exec();
+    return Bid.find().populate("action").exec();
 }
 // get one bids by id
 function getOneBidAsync(_id) {
-    return Bid.findOne({ _id }).exec();
+    return Bid.findOne({ _id }).populate("action").exec();
 }
 
 //add new bid 
@@ -27,7 +27,7 @@ async function deleteBidAsync(_id) {
     return Bid.deleteOne({ _id }).exec();
 }
 function getAllBidsIncludingSpecificAuctionAsync(auctionId) {
-    return Bid.find({ auctionId }).exec();
+    return Bid.find({ auctionId }).populate("auctionId").exec();
 }
 
 
