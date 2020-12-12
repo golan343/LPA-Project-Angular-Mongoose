@@ -44,15 +44,20 @@ export class HomeComponent implements OnInit, OnDestroy{
   }
   // tslint:disable-next-line: typedef
   async ngOnInit() {
-    this.unsubscribe = store.subscribe(() => {
-      this.auctions = store.getState().auctions;
-    });
-    if (store.getState().auctions.length > 1 ) {
-      this.auctions = store.getState().auctions;
-   }
-   else{
-    await this.auctionService.getLastAuction();
-   }
+    try{
+      this.unsubscribe = store.subscribe(() => this.auctions = store.getState().auctions);
+      if (store.getState().auctions.length === 0 || store.getState().auctions.length > 1 ) {
+        await this.auctionService.getLastAuction();
+      }
+      else {
+        this.auctions = store.getState().auctions;
+      }
+
+    }
+    catch(err){
+      alert(err.message);
+    }
+    
 
   }
 
