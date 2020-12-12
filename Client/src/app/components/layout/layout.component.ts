@@ -5,11 +5,12 @@ import { AccountService } from 'src/app/services/account.service';
 import { CookieService } from 'ngx-cookie-service';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
-
+import {fadeAnimation} from './../../models/animation'
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.css']
+  styleUrls: ['./layout.component.css'],
+  animations:[fadeAnimation]
 })
 export class LayoutComponent {
 
@@ -17,7 +18,9 @@ export class LayoutComponent {
                      private router: Router,
                      public accountService: AccountService,
                      public dialog: MatDialog,
-                     private cookieService: CookieService) { }
+                     private cookieService: CookieService) {
+                       console.log(this);
+                      }
 
   public goToDashboard(): void {
     let route = '/dashboard/user-panel';

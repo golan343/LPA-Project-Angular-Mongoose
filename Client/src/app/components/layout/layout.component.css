@@ -1,18 +1,19 @@
+.top-margin{margin-top: 50px;}
 nav {
-    width: 15%;
     position: relative;
   }
   nav .wrap{
     top: 20%;
     text-align: center;
     width: 15%;
+    z-index: 1;
   }
   nav .wrap:after{
       content: "";
-      height: 130%;
+      height: 100%;
       width: 1px;
       position: absolute;
-      top:-20%;
+      top:0%;
       right:0px;
       background-color: aliceblue;
   }
@@ -28,7 +29,7 @@ nav {
       height: 100%;
   }
   main{
-      width: 83%;
+    
   }
 @media (max-device-width: 959px) {
     /* .links {

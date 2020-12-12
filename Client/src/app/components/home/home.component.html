@@ -1,73 +1,85 @@
 <div class="home">
-    
-<section class="firstSection" >
-    
-        <div class="secondHeader" >
-            <h1>We are</h1>
-            <h2>LOW PRICE AUCTION</h2>
-        </div>
-         <img class="loader" *ngIf="!auctions" src="/assets/images/loader.gif" alt="">
-        <div *ngIf="auctions" class="lastAuction" style="background-image: url({{BaseUrl}}uploads/{{auctions[0].imageFileName}});">
-            <h2>{{auctions[0].name}}</h2>
-           
-            <button  class="auctionBtn" (click)="showAuction(auctions[0]._id)">Show the auction</button>
-            <div class="datesDiv">
-                <p>Starts: {{auctions[0].startDate.replace('T', ' ')}}</p>
-                <p>Ends: {{auctions[0].endDate.replace('T', ' ')}}</p>
+
+    <section class="firstSection">
+        <div class="mainContent">
+            <div class="secondHeader ">
+                <h1>We are</h1>
+                <h2>LOW PRICE AUCTION</h2>
+            </div>
+            <img class="loader" *ngIf="!auctions" src="/assets/images/loader.gif" alt="">
+            <div *ngIf="auctions" class="lastAuction l-padding relative">
+                <img [hidden]="!auctions" [class]="{fadein:auctions}"
+                    src="{{BaseUrl}}uploads/{{auctions[0].imageFileName}}" alt="{{auctions[0].name}}">
+                <div class="top border-bottom both relative">
+                    <h2 class="left">{{auctions[0].name}}</h2>
+                    <h4 class="right">{{auctions[0].description}}</h4>
+                </div>
+
+                <div class="my-bid relative">
+                    <h4><span>my Bid:</span><b>{{auctions[0].bidPrice | currency}}</b></h4>
+                    <button class="auctionBtn" (click)="showAuction(auctions[0]._id)">Place My Bid</button>
+                </div>
+
+                <div class="datesDiv relative">
+                    <p class="left"><span>Starts:</span><b>{{auctions[0].startDate.replace('T', ' ')}}</b> </p>
+                    <p class="right"><span>Ends:</span><b>{{auctions[0].endDate.replace('T', ' ')}}</b> </p>
+                </div>
             </div>
         </div>
-    
+    </section>
+    <section class="fwh-slide fwh-slide section-how-its-work">
+        <div class="mainContent">
+            <div class="how-its-work">
+                <h1>How does it work?</h1>
+                <div class="how-its-work-details">
+                    <div class="circle"><span>1</span></div>
+                    <div class="arrow">&rarr;</div>
+                    <div class="circle"><span>2</span></div>
+                    <div class="arrow">&rarr;</div>
+                    <div class="circle"><span>3</span></div>
+                </div>
+                <div class="paragraph">
+                    <p>Register in a few quick steps, so you can bid</p>
+                    <p>Choose auction and Place your bid. yes it’s that easy</p>
+                    <p>If your bid is <u>unique</u> and the <u>lowest</u> of them all, <u>you win the auction!</u></p>
+                </div>
 
-</section>
-<section class="fwh-slide fwh-slide section-how-its-work">
-    <div class="mainContent">
-        <div class="how-its-work">
-            <h1>How does it work?</h1>
-            <div class="how-its-work-details">
-                <div class="circle"><span>1</span></div>
-                <div class="arrow">&rarr;</div>
-                <div class="circle"><span>2</span></div>
-                <div class="arrow">&rarr;</div>
-                <div class="circle"><span>3</span></div>
+                <button class="rulesBtn" (click)="goToRules()"> View auction rules </button>
             </div>
-            <div class="paragraph">
-                <p>Register in a few quick steps, so you can bid</p>
-                <p>Choose auction and Place your bid. yes it’s that easy</p>
-                <p>If your bid is <u>unique</u> and the <u>lowest</u> of them all, <u>you win the auction!</u></p>
-            </div>
-
-            <button  class="rulesBtn" (click)="goToRules()" > View auction rules </button>
         </div>
-    </div>
-</section>
+    </section>
 
-    <section class="fwh-slide section-about-new-auction" >
+    <section class="fwh-slide section-about-new-auction">
         <div class="mainContent">
             <h2>Get to know about a new auction opening</h2>
             <h3>Your Email here:</h3>
             <mat-form-field appearance="none">
                 <mat-label>Email</mat-label>
                 <input matInput type="email" name="email" required>
-                <button  class="sendBtn" (click)="sendEmail()" > Send </button>
+                <button class="sendBtn" (click)="sendEmail()"> Send </button>
             </mat-form-field>
-            
+
         </div>
     </section>
 
-    <section class="fwh-slide section-white" >
-        <h3>Last Winner: the winner moment</h3>
-        <div class="winnerVideo">
+    <section class="fwh-slide section-white">
+        <div class="mainContent">
+            <h3>Last Winner: the winner moment</h3>
+            <div class="winnerVideo">
+            </div>
+            <hr>
+            <h3>On site Auction</h3>
+            <agm-map [latitude]="lat" [longitude]="lng">
+                <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+            </agm-map>
         </div>
-        <hr>
-        <h3>On site Auction</h3>
-        <agm-map [latitude]="lat" [longitude]="lng">
-            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-        </agm-map>
-    
+
+
     </section>
 
-    <section class="fwh-slide section-place-my-bid" >
-        <button *ngIf="!accountService.isUserLoggedIn()"  (click)="loginDialog()" > i want place a bid!</button>
-        <button *ngIf="accountService.isUserLoggedIn()"  (click)="router.navigateByUrl('/live')" > i want place a bid!</button>
+    <section class="fwh-slide section-place-my-bid">
+        <button *ngIf="!accountService.isUserLoggedIn()" (click)="loginDialog()"> i want place a bid!</button>
+        <button *ngIf="accountService.isUserLoggedIn()" (click)="router.navigateByUrl('/live')"> i want place a
+            bid!</button>
     </section>
 </div>

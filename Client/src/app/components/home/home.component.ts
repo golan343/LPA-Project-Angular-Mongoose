@@ -8,7 +8,6 @@ import { AuctionsService } from 'src/app/services/auctions.service';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
 import { AccountService } from 'src/app/services/account.service';
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -46,6 +45,7 @@ export class HomeComponent implements OnInit, OnDestroy{
   async ngOnInit() {
     this.unsubscribe = store.subscribe(() => {
       this.auctions = store.getState().auctions;
+      console.log(this)
     });
     if (store.getState().auctions.length > 1 ) {
       this.auctions = store.getState().auctions;
