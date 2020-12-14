@@ -1,4 +1,9 @@
-<header class="sticky">
+<header class="sticky" [class]="{show:showMobile}">
+    <div (click)="menuToggle()" class="phone_menu">
+        <span class="sep"></span>
+        <span class="sep"></span>
+        <span class="sep"></span>
+    </div>
     <div class="user" *ngIf="!accountService.isUserLoggedIn()"  (click)="login()"  ><span class="person-icon" ></span></div>
     <div class="search"><a class="search-icon"></a></div>
     <div class="languages">

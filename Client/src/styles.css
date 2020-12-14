@@ -1,10 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap'
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap');
 
-* {
+*{
     padding: 0;
     margin: 0;
     box-sizing: content-box;
     color: #fff;
+    transition: all 1s ease;
 }
 
 li,
@@ -20,6 +21,8 @@ html {
     background: #0e1119;
     font-size: 14px;
     font-style: normal;
+    padding: 0;
+    margin: 0;
 }
 
 a {
@@ -69,7 +72,10 @@ header {
 .right {
     float: right;
 }
-
+.mainContent {
+    width: 85%;
+    margin: 0 0 0 auto;
+  }
 .both::after {
     content: "";
     clear: both;
@@ -108,12 +114,37 @@ button {
     font-size: 1.3rem;
     border: none;
 }
-
+.center{text-align: center;}
 :focus {
     outline: 0;
     box-shadow: 0 0 2px 2px #d6d2d2;
 }
 
+.arrow-long-right {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(1.5);
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    box-shadow: inset 0 0 0 2px;
+    width: 224px;
+    height: 6px;
+    top:48px;
+}
+.arrow-long-right::after {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    border-top: 2px solid;
+    border-right: 2px solid;
+    transform: rotate(45deg);
+    right: 0;
+    bottom: -6px;
+}
 @font-face {
     font-family: Roboto;
     font-style: normal;
@@ -261,4 +292,76 @@ button {
 
 ::-webkit-scrollbar-corner {
     background: 0 0;
+}
+@media only screen and (max-width: 880px) {
+    .mainContent{margin: 0px;width:100%;}
+    .menu ul li::after{content: unset;}
+    .menu ul {
+        position: absolute;
+        left: -100%;
+        visibility: hidden;
+    }
+    
+    .menu.show ul {
+        left: 0;
+        background-color: rgba(191, 190, 196, 0.92);
+        width: 60%;
+        height: 100vh;
+    }
+    .show.menu ul {
+        visibility: visible;
+    }
+    .menu.show ul li {
+        display: block;
+        padding: 0% 0;
+        text-align: center;
+        border-bottom: 1px solid #888;
+    }
+    
+    .menu.show ul li:last-of-type {
+        border: none;
+    }
+    
+    .menu.show ul li:hover {
+        background-color: #fff;
+    }
+    
+    
+    
+    nav .sep {
+        background: #fff;
+    }
+    .phone_menu {
+        width: 35px;
+        height: 35px;
+        z-index: 2;
+        display: inline-block;
+        vertical-align: top;
+        cursor: pointer;
+        outline: none;
+        margin: 0.2% 0.51%;
+        perspective: 200px;
+        padding: 0%;
+    }
+    
+    .phone_menu .sep {
+        display: block;
+        width: 86%;
+        height: 4px;
+        background: #888;
+        margin: 5px auto;
+        transition: transform 1s ease;
+    }
+    
+    .show .phone_menu .sep:nth-of-type(1) {
+        transform: rotateZ(45deg) translate(3px, 15px);
+    }
+    
+    .show .phone_menu .sep:nth-of-type(2) {
+        transform: rotateZ(-45deg) translate(-9px, -4px);
+    }
+    
+    .show .phone_menu .sep:last-of-type {
+        display: none;
+    }
 }

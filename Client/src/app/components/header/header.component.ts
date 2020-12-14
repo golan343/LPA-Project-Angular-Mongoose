@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { AccountService } from 'src/app/services/account.service';
 import { LoginComponent } from '../login/login.component';
-
+import { MobileService } from 'src/app/services/mobile.service';
 
 @Component({
   selector: 'app-header',
@@ -12,15 +12,20 @@ import { LoginComponent } from '../login/login.component';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+  showMobile: boolean;
   constructor(private router: Router,
               public accountService: AccountService,
               public dialog: MatDialog,
-              private cookieService: CookieService) { }
+    private cookieService: CookieService,
+    private mobile: MobileService
+     ) { }
 
   ngOnInit(): void {
   }
-
+  menuToggle() {
+    this.showMobile = !this.showMobile;
+    this.mobile.showMenuTrigger.next(this.showMobile);
+  }
   public moveToHome(): void {
     this.router.navigateByUrl('/home');
   }

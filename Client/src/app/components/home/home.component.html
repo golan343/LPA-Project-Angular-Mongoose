@@ -36,12 +36,12 @@
                         <aside class="circle"><span>1</span></aside>
                         <p>Register in a few quick steps, so you can bid</p>
                     </div>
-                    <div class="arrow">&rarr;</div>
+                    <div class="arrow-long-right"></div>
                     <div class="col">
                         <aside class="circle"><span>2</span></aside>
                         <p>Choose auction and Place your bid. yes it’s that easy</p>
                     </div>
-                    <div class="arrow">&rarr;</div>
+                    <div class="arrow-long-right"></div>
                     <div class="col">
                         <aside class="circle"><span>3</span></aside>
                         <p>If your bid is <u>unique</u> and the <u>lowest</u> of them all, <u>you win the auction!</u>
@@ -70,11 +70,10 @@
     </section>
 
     <section class="fwh-slide section-white">
-        <div class="mainContent">
+        <div class="mainContent center">
             <h3>Last Winner: the winner moment</h3>
             <div class="winnerVideo">
             </div>
-            <hr>
             <h3>On site Auction</h3>
             <agm-map [latitude]="lat" [longitude]="lng">
                 <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
@@ -84,8 +83,10 @@
     </section>
 
     <section class="fwh-slide section-place-my-bid">
-        <button *ngIf="!accountService.isUserLoggedIn()" (click)="loginDialog()"> i want place a bid!</button>
-        <button *ngIf="accountService.isUserLoggedIn()" (click)="router.navigateByUrl('/live')"> i want place a
-            bid!</button>
+        <div class="mainContent center">
+            <button *ngIf="!accountService.isUserLoggedIn()" (click)="loginDialog()"> i want place a bid!</button>
+            <button *ngIf="accountService.isUserLoggedIn()" (click)="router.navigateByUrl('/live')"> i want place a
+                bid!</button>
+        </div>
     </section>
 </div>

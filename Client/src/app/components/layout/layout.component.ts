@@ -1,4 +1,4 @@
-import {Component, OnInit, VERSION} from '@angular/core';
+import {Component, OnDestroy, OnInit, VERSION} from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
@@ -6,21 +6,33 @@ import { CookieService } from 'ngx-cookie-service';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
 import {fadeAnimation} from './../../models/animation'
+import { MobileService } from 'src/app/services/mobile.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css'],
   animations:[fadeAnimation]
 })
-export class LayoutComponent {
-
+export class LayoutComponent implements OnInit, OnDestroy {
+  subscribeMenu: Subscription;
+  showMenu: boolean;
   public constructor(private bpo: BreakpointObserver,
                      private router: Router,
                      public accountService: AccountService,
                      public dialog: MatDialog,
-                     private cookieService: CookieService) {
+                     private cookieService: CookieService,
+                     private mobile: MobileService) {
                        console.log(this);
                       }
+  ngOnDestroy(): void {
+    this.subscribeMenu.unsubscribe();
+  }
+  ngOnInit(): void {
+    this.subscribeMenu = this.mobile.showMenuTrigger.subscribe(show => {
+      this.showMenu = show;
+    });
+  }
 
   public goToDashboard(): void {
     let route = '/dashboard/user-panel';

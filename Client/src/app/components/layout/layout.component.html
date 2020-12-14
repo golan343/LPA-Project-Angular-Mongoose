@@ -2,7 +2,7 @@
 <div class="top-margin">
   <div class="flex ">
     <nav>
-      <div class="wrap flex-col fixed">
+      <div class="wrap flex-col fixed" [class]="{show:showMenu}">
         <div class="logo" (click)="moveToHome()"></div>
         <ul>
           <li><a routerLink="/live" > Live auctions </a></li>
@@ -22,7 +22,7 @@
     </main>
   </div>
   <footer>
-    <div>
+    <div class="mainContent center">
       <a href="#">Privacy policy</a> &nbsp;
       <a href="#">Terms & Conditions</a> &nbsp;
       <a href="#">Cookies policy</a>
