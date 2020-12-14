@@ -87,7 +87,7 @@ AuctionSchema.virtual("site", {
 });
 AuctionSchema.virtual("user", {
     ref: "User",
-    localField: "userId",
+    localField: "createdBy",
     foreignField: "_id",
     justOne: true
 });

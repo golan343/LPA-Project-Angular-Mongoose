@@ -8,7 +8,7 @@ const RuleSchema = mongoose.Schema({
     },
     createdBy: {
         type: mongoose.Schema.Types.String,
-        ref: "UserName"
+        ref: "User"
     },
 }, {
     versionKey: false,
@@ -17,11 +17,12 @@ const RuleSchema = mongoose.Schema({
 });
 
 RuleSchema.virtual("user", {
-    ref: "UserName",
+    ref: "User",
     localField: "createdBy",
-    foreignField: "name",
+    foreignField: "_id",
     justOne: true
 });
+
 
 
 const Rule = mongoose.model("Rules", RuleSchema, "rules");

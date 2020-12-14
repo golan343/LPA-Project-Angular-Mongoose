@@ -69,6 +69,7 @@ export class AuctionComponent implements OnInit {
   }
 
   public checkUnique() {
+    if(!this.bids) return;
     if(this.bids.length > 0){
       let uniqueValue = 1000;
       let highestValue = 0;

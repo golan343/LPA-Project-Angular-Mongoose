@@ -13,6 +13,7 @@ const path = require('path');
 const authController = require('./controllers/auth-controller');
 const auctionController = require('./controllers/auction-controller');
 const bidsController = require('./controllers/bids-controller');
+const ruleController = require('./controllers/rule-controller');
 const uploadImageController = require('./controllers/uploads-image-controller');
 require("./data-access-layer/dal");
 const sanitize = require('./middleware/sanitize');
@@ -44,6 +45,7 @@ server.use("/api/", uploadImageController);
 server.use("/api/auth", authController);
 server.use("/api/auctions", auctionController);
 server.use("/api/bids", bidsController);
+server.use("/api/rule", ruleController);
 
 
 

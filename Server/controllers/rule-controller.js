@@ -6,10 +6,11 @@ const Rule = require('../models/rule');
 const router = express.Router();
 
 
-router.get('/', (request, response) => {
+router.get('/', async (request, response) => {
     try{
         const rules = await ruleLogic.getAllRulesAsync();
         response.json(rules);
+
 
     }
     catch(err) {
@@ -17,10 +18,13 @@ router.get('/', (request, response) => {
     }
 });
 
-router.get('/:_id', (request, response) => {
+router.get('/:_id', async (request, response) => {
     try{
         const _id = request.params._id;
         const rule = await ruleLogic.getRuleAsync(_id);
+        if(rule.createdBy.password){
+            rule.createdBy.password = '';
+        }
         if(!rule) {
             response.sendStatus(404);
             return;
