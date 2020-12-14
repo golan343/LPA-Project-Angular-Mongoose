@@ -2,7 +2,7 @@ const Auction = require('../models/auction');
 
 // get all auctions
 function getAllAuctionsAsync() {
-    return Auction.find().exec();
+    return Auction.find().populate('rule').populate('site').populate('user').exec();
 }
 // get all closed auctions
 function getAllClosedAuctionsAsync() {
