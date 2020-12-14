@@ -49,9 +49,11 @@
                     </div>
 
                 </div>
+                <div class="padding">
+                    <button (click)="goToRules()"> View auction rules </button>
+                </div>
 
 
-                <button class="rulesBtn" (click)="goToRules()"> View auction rules </button>
             </div>
         </div>
     </section>
@@ -62,7 +64,7 @@
             <h3>Your Email here:</h3>
             <div class="wrap-email">
                 <input type="email" name="email" required>
-                <button class="sendBtn" (click)="sendEmail()"> Send </button>
+                <button (click)="sendEmail()"> Send </button>
             </div>
         </div>
     </section>
@@ -78,7 +80,6 @@
                 <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
             </agm-map>
         </div>
-
 
     </section>
 

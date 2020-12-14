@@ -102,10 +102,10 @@ button {
     background: #d4f1f4;
     border-radius: 43px;
     filter: drop-shadow(0 7px 4px rgba(0, 0, 0, 0.4));
-    padding: 4px 3rem;
+    padding: 6px 3rem;
     color: #0e1119;
     font-weight: 200;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     border: none;
 }
 
