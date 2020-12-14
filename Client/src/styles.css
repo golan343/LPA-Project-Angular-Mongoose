@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap'
+
 * {
     padding: 0;
     margin: 0;
@@ -7,13 +9,17 @@
 
 li,
 ul {
+    padding: 0px;
     list-style: none;
+    margin: 0;
 }
 
 body,
 html {
-    font-family: Roboto, Arial;
+    font-family: 'Roboto', sans-serif;
     background: #0e1119;
+    font-size: 14px;
+    font-style: normal;
 }
 
 a {

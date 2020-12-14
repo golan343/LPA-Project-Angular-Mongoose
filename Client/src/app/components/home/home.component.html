@@ -32,17 +32,24 @@
             <div class="how-its-work">
                 <h1>How does it work?</h1>
                 <div class="how-its-work-details">
-                    <div class="circle"><span>1</span></div>
+                    <div class="col">
+                        <aside class="circle"><span>1</span></aside>
+                        <p>Register in a few quick steps, so you can bid</p>
+                    </div>
                     <div class="arrow">&rarr;</div>
-                    <div class="circle"><span>2</span></div>
+                    <div class="col">
+                        <aside class="circle"><span>2</span></aside>
+                        <p>Choose auction and Place your bid. yes it’s that easy</p>
+                    </div>
                     <div class="arrow">&rarr;</div>
-                    <div class="circle"><span>3</span></div>
+                    <div class="col">
+                        <aside class="circle"><span>3</span></aside>
+                        <p>If your bid is <u>unique</u> and the <u>lowest</u> of them all, <u>you win the auction!</u>
+                        </p>
+                    </div>
+
                 </div>
-                <div class="paragraph">
-                    <p>Register in a few quick steps, so you can bid</p>
-                    <p>Choose auction and Place your bid. yes it’s that easy</p>
-                    <p>If your bid is <u>unique</u> and the <u>lowest</u> of them all, <u>you win the auction!</u></p>
-                </div>
+
 
                 <button class="rulesBtn" (click)="goToRules()"> View auction rules </button>
             </div>
@@ -53,12 +60,10 @@
         <div class="mainContent">
             <h2>Get to know about a new auction opening</h2>
             <h3>Your Email here:</h3>
-            <mat-form-field appearance="none">
-                <mat-label>Email</mat-label>
-                <input matInput type="email" name="email" required>
+            <div class="wrap-email">
+                <input type="email" name="email" required>
                 <button class="sendBtn" (click)="sendEmail()"> Send </button>
-            </mat-form-field>
-
+            </div>
         </div>
     </section>
 
