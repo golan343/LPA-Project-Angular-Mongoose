@@ -69,6 +69,30 @@ router.post("/logout", (request, response) => {
     }
 });
 
+router.patch('/:_id', async (request, response) => {
+    try{
+        const user = new User(request.body);
+        user._id = request.params._id;
+
+        //validate
+        const error = user.validateSync();
+        if(error) {
+            response.status(400).send(error.message);
+            return;
+        }
+
+        const updateUser = await authLogic.updateAsync(user);
+        if(!updateUser) {
+            response.sendStatus(404);
+            return;
+        }
+        response.json(updateUser);
+    }
+    catch(err){
+        response.status(500).send(errorHandler.getError(err));
+    }
+});
+
 
 
 module.exports = router;
