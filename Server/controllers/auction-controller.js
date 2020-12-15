@@ -82,9 +82,7 @@ router.post('/', async (request, response) => {
         
     }
     catch(err){
-        console.log(err.message)
-        response.status(500).send(err.message);
-        // response.status(500).send(errorHandler.getError(err));
+        response.status(500).send(errorHandler.getError(err));
     }
 });
 
@@ -141,7 +139,7 @@ router.patch('/:_id', async (request, response) => {
 
 //delete auction - /api/auctions/id
 
-router.delete('/:id', async(request,response) => {
+router.delete('/:_id', async(request,response) => {
     try{
         const _id = request.params._id;
         await auctionLogic.deleteAuctionAsync(_id);
