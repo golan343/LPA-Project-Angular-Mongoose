@@ -1,4 +1,3 @@
-const https = require('follow-redirects').https;
 const express = require('express');
 const errorHandler = require('../helpers/error-handler');
 
