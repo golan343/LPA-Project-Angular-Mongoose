@@ -3,8 +3,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { AccountService } from 'src/app/services/account.service';
-import { LoginComponent } from '../login/login.component';
+import { LoginComponent } from '../../ui/login/login.component';
 import { MobileService } from 'src/app/services/mobile.service';
+import { DialogData } from 'src/app/ui/model/dialog-data';
+import { DialogService } from 'src/app/ui/dialog.service';
 
 @Component({
   selector: 'app-header',
@@ -17,6 +19,7 @@ export class HeaderComponent implements OnInit {
               public accountService: AccountService,
               public dialog: MatDialog,
     private cookieService: CookieService,
+    private dialogLocalsService: DialogService,
     private mobile: MobileService
      ) { }
 
@@ -58,15 +61,10 @@ export class HeaderComponent implements OnInit {
   }
 
   public login(): void {
-    const dialogRef = this.dialog.open(LoginComponent, {
-      panelClass: 'custom-dialog-container',
-      width: '450px',
-      height: '300px',
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    const dialog = new DialogData("Login");
+    dialog.title = 'User Login';
+    dialog.text = '';
+    this.dialogLocalsService.subjectType.next(dialog);
   }
   public placeBid(){
     

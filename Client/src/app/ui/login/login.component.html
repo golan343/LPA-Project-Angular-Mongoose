@@ -1,0 +1,23 @@
+<div class="loginPage">
+    <div class="mr-b input-container relative">
+        <label for="email">Email</label>
+        <input type="email" placeholder="email" [(ngModel)]="user.email" (focus)="error.clear()" name="email"
+            id="email">
+        <span *ngIf="error.email" class="error">{{error.email}}</span>
+    </div>
+    <div class="mr-b input-container relative">
+        <label for="password">Password</label>
+        <input type="password" placeholder="password" [(ngModel)]="user.password" (focus)="error.clear()"
+            name="password" id="password">
+        <span *ngIf="error.password" class="error">{{error.password}}</span>
+    </div>
+
+    <div class="btn-wrap padding">
+        <button (click)="login()">Sign In</button>
+    </div>
+    <div class="padding">
+        <a routerLink="/register">Register</a>
+    </div>
+
+
+</div>

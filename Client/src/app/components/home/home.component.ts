@@ -6,7 +6,7 @@ import { AuctionModel } from 'src/app/models/auction-model';
 import { store } from 'src/app/redux/store';
 import { AuctionsService } from 'src/app/services/auctions.service';
 import { MatDialog } from '@angular/material/dialog';
-import { LoginComponent } from '../login/login.component';
+import { LoginComponent } from '../../ui/login/login.component';
 import { AccountService } from 'src/app/services/account.service';
 @Component({
   selector: 'app-home',
