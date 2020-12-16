@@ -4,8 +4,9 @@
         <span class="sep"></span>
         <span class="sep"></span>
     </div>
-    <div class="user" *ngIf="!accountService.isUserLoggedIn()"  (click)="login()"  ><span class="person-icon" ></span></div>
-    <div class="search"><a class="search-icon"></a></div>
+    <div class="user" title="login" *ngIf="!accountService.isUserLoggedIn()" (click)="login()"><span
+            class="person-icon"></span></div>
+    <div class="search hide"><a class="search-icon"></a></div>
     <div class="languages">
         <ul>
             <li></li>

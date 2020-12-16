@@ -74,6 +74,7 @@ footer > div > a {
   color: white;
 }
 @media only screen and (max-width: 880px) {
+  .top-margin{margin-top: 3%;}
     .wrap.flex-col.fixed{
         opacity: 0;
         visibility: hidden;

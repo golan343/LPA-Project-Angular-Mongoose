@@ -4,12 +4,10 @@ import { Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
 import { CookieService } from 'ngx-cookie-service';
 import { MatDialog } from '@angular/material/dialog';
-import { LoginComponent } from '../../ui/login/login.component';
 import { fadeAnimation } from './../../models/animation'
 import { MobileService } from 'src/app/services/mobile.service';
 import { Subscription } from 'rxjs';
-import { DialogService } from 'src/app/ui/dialog.service';
-import { DialogData } from 'src/app/ui/model/dialog-data';
+
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',

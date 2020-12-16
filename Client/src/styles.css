@@ -5,7 +5,7 @@
   margin: 0;
   box-sizing: content-box;
   color: #fff;
-  transition: all 1s ease;
+  transition: all .3s ease;
 }
 
 li,
@@ -27,6 +27,7 @@ html {
 
 a {
   text-decoration: none;
+  cursor: pointer;
 }
 
 a:active {
@@ -164,6 +165,7 @@ button {
   font-weight: 200;
   font-size: 1.3rem;
   border: none;
+  cursor: pointer;
 }
 .center {
   text-align: center;
@@ -385,6 +387,7 @@ button {
 ::-webkit-scrollbar-corner {
   background: 0 0;
 }
+
 @media only screen and (max-width: 880px) {
   .mainContent {
     margin: 0px;
@@ -456,7 +459,12 @@ button {
     transform: rotateZ(-45deg) translate(-9px, -4px);
   }
 
+  
+
   .show .phone_menu .sep:last-of-type {
     display: none;
   }
+}
+@media only screen and (max-width: 580px) {
+    .left,.right{float: none;}
 }
