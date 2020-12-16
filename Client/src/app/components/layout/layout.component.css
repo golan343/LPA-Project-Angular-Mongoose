@@ -39,14 +39,6 @@ nav ul li a {
 main {
   width: 100%;
 }
-mat-toolbar {
-  background: #0e1119;
-  color: white;
-}
-
-mat-sidenav-content > div {
-  overflow: hidden;
-}
 
 .container {
   width: 100%;
@@ -68,28 +60,6 @@ header {
   position: sticky;
 }
 
-footer {
-  text-align: center;
-  grid-column: span 12;
-  color: white;
-}
-
-mat-sidenav-container {
-  background: #0e1119;
-  grid-column: span 12;
-}
-
-mat-sidenav {
-  background: #0e1119;
-}
-mat-sidenav-content > div {
-  margin-top: 10px;
-  overflow-y: visible;
-  overflow-x: hidden;
-}
-.mat-nav-list > a {
-  color: white;
-}
 
 p {
   margin: 0%;
@@ -97,7 +67,7 @@ p {
 
 footer {
   text-align: center;
-  background: #0e1119;
+  padding: 3% 0 2% 0;
 }
 
 footer > div > a {
