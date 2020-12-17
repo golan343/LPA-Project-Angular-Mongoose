@@ -1,6 +1,6 @@
 <div class="home">
 
-    <section class="firstSection first">
+    <section #first class="firstSection ">
         <div class="mainContent">
             <div class="secondHeader ">
                 <h1>We are</h1>
@@ -27,7 +27,7 @@
             </div>
         </div>
     </section>
-    <section class="fwh-slide fwh-slide section-how-its-work second">
+    <section #second class="fwh-slide fwh-slide section-how-its-work ">
         <div class="mainContent">
             <div class="how-its-work">
                 <h1>How does it work?</h1>
@@ -58,7 +58,7 @@
         </div>
     </section>
 
-    <section class="fwh-slide section-about-new-auction third">
+    <section #third class="fwh-slide section-about-new-auction ">
         <div class="mainContent">
             <h2>Get to know about a new auction opening</h2>
             <h3>Your Email here:</h3>
@@ -69,7 +69,7 @@
         </div>
     </section>
 
-    <section class="fwh-slide section-white forth">
+    <section #forth class="fwh-slide section-white ">
         <div class="mainContent center">
             <h3>Last Winner: the winner moment</h3>
             <div class="winnerVideo">
@@ -82,9 +82,9 @@
 
     </section>
 
-    <section class="fwh-slide section-place-my-bid fifth">
+    <section #fifth class="fwh-slide section-place-my-bid ">
         <div class="mainContent center">
-            <button *ngIf="!accountService.isUserLoggedIn()" (click)="loginDialog()"> i want place a bid!</button>
+            <button *ngIf="!accountService.isUserLoggedIn()" (click)="login()"> i want place a bid!</button>
             <button *ngIf="accountService.isUserLoggedIn()" (click)="router.navigateByUrl('/live')"> i want place a
                 bid!</button>
         </div>

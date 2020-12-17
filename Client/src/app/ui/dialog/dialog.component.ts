@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit, Type } from '@angular/core';
+import { Component, HostListener, Injector, OnInit, Type } from '@angular/core';
 import { DialogService } from './../dialog.service';
 @Component({
   selector: 'app-dialog',
@@ -12,13 +12,19 @@ export class DialogComponent implements OnInit {
   component: string;
   constructor(private dialogService: DialogService) {
   }
-
+  escape($event) {
+    console.log($event);
+    if ($event.keyCode === 27) {
+      this.close();
+    }
+  } 
   ngOnInit(): void {
     this.dialogService.subjectType.subscribe(arg => {
       this.component = arg.componentName;
       this.text = arg.text;
       this.title = arg.title;
       this.show = true;
+      window.addEventListener('keydown', this.escape);
     });
   }
   close() {
@@ -26,6 +32,7 @@ export class DialogComponent implements OnInit {
     this.title = '';
     this.text = '';
     this.component = '';
+    window.removeEventListener('keydown', this.escape);
   }
 
 }

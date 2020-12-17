@@ -2,8 +2,9 @@
     <div class="close" (click)="close()"></div>
 
     <div class="container">
-        <h2 class="mr-b">{{title}}</h2>
-        <p class="mr-b">{{text}}</p>
+        <div class="backtap" (click)="close()"></div>
+        <h2 *ngIf="title" class="mr-b">{{title}}</h2>
+        <p *ngIf="text" class="mr-b">{{text}}</p>
         <div [ngSwitch]="component">
             <ng-template [ngSwitchCase]="'Login'">
                 <app-login></app-login>

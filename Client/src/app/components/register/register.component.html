@@ -1,139 +1,103 @@
-<mat-horizontal-stepper #stepper linear>
-    <mat-step [stepControl]="regForm" editable="false">
-      <form #formInfo="ngForm" [formGroup]="regForm">
-        <ng-template matStepLabel><b>Fill out your login details</b></ng-template>
-        <p>
-          <mat-form-field>
-          <mat-label>Email</mat-label>
-          <input matInput 
-          formControlName="emailControl"
-          type="email"
-          name="email"
-          autocomplete="email"
-          placeholder="example@example.com"
-          required pattern="^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$">
-          <mat-error>please enter valid email</mat-error>
-        </mat-form-field>
-        </p>
-        <p>
-        <mat-form-field hideRequireMarker>
-          <mat-label>Password</mat-label>
-          <input matInput 
-          formControlName="passwordControl"
-          type="password"
-          name="password"
-          autocomplete="current-password"
-          placeholder="Example123"
-          required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$">
-          <mat-error>Password must contain at least 8 characters one uppercase letter and one lowercase letter</mat-error>
-        </mat-form-field>
-        
-        </p>
-        <div>
-          <br><br>
-          <button mat-button matStepperNext [disabled]="formInfo.form.invalid">Next</button>
-          <button mat-button (click)='router.navigateByUrl("/home");'>Home</button>
-        </div>
-      </form>
-    </mat-step>
+<div class="container mainContent">
+
+  <div class="padding register">
+    <h1 class="mr-b">LAP Registration</h1>
+    <h2 class="mr-b">personal details</h2>
+    <section class="step">
+      <div [ngSwitch]="currentStep">
+        <ng-template [ngSwitchCase]="'1'">
+          <div class="current">
+            <div class="flex center">
+              <div class="mr-b input-container relative">
+                <label for="firstName">FirstName Name*</label>
+                <input type="text" placeholder="firstName" [(ngModel)]="user.firstName" (focus)="error.clear()"
+                  name="firstName" id="firstName">
+                <span *ngIf="error.firstName" class="error">{{error.firstName}}</span>
+              </div>
+              <div class="mr-b input-container relative">
+                <label for="lastName">LastName Name*</label>
+                <input type="text" placeholder="lastName" [(ngModel)]="user.lastName" (focus)="error.clear()" name="lastName"
+                  id="lastName">
+                <span *ngIf="error.lastName" class="error">{{error.lastName}}</span>
+              </div>
+              </div>
+              <div class="flex">
+                <div class="mr-b input-container relative">
+                  <label for="password">Password</label>
+                  <input type="password" placeholder="password" [(ngModel)]="user.password" (focus)="error.clear()" name="password"
+                    id="password">
+                  <span *ngIf="error.password" class="error">{{error.password}}</span>
+                </div>
+              </div>
+              </div>
   
-    <mat-step [stepControl]="personalDetails" editable="false">
+        </ng-template>
+        <ng-template [ngSwitchCase]="'2'">
+          <div class="current">
+            <div class="flex">
+              <div class="mr-b input-container relative">
+                <label for="country">country </label>
+                <input type="text" placeholder="country" [(ngModel)]="user.country" (focus)="error.clear()" name="country"
+                  id="country">
+                <span *ngIf="error.country" class="error">{{error.country}}</span>
+              </div>
+            </div>
+            <div class="flex">
+              <div class="mr-b input-container relative">
+                <label for="city">city </label>
+                <input type="text" placeholder="city" [(ngModel)]="user.city" (focus)="error.clear()" name="city" id="city">
+                <span *ngIf="error.city" class="error">{{error.city}}</span>
+              </div>
+              <div class="mr-b input-container relative">
+                <label for="street">street</label>
+                <input type="text" placeholder="street" [(ngModel)]="user.street" (focus)="error.clear()" name="street"
+                  id="street">
+                <span *ngIf="error.street" class="error">{{error.street}}</span>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template [ngSwitchCase]="'3'">
+          <div class="current">
+            <div class="flex">
+              <div class="mr-b input-container relative">
+                <label for="email">email </label>
+                <input type="email" placeholder="email" [(ngModel)]="user.email" (focus)="error.clear()" name="email"
+                  id="email">
+                <span *ngIf="error.email" class="error">{{error.email}}</span>
+              </div>
+              <div class="mr-b input-container relative">
+                <label for="birthDate">birth Date</label>
+                <input type="date" placeholder="birthDate" [(ngModel)]="user.birthDate" dateTemplate (focus)="error.clear()"
+                  name="birthDate" id="birthDate">
+                <span *ngIf="error.birthDate" class="error">{{error.birthDate}}</span>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template [ngSwitchCase]="'4'">
+          <div class="current">
+            <re-captcha
+            (resolved)="resolved($event)"
+            class="g-recaptcha"
+            name="captcha"
+            required
+            siteKey="6LcOuyYTAAAAAHTjFuqhA52fmfJ_j5iFk5PsfXaU">
+          </re-captcha>
+          </div>
+          </ng-template>
+          <ng-template [ngSwitchCase]="'5'">
+            <div>Five</div>
+          </ng-template>
+          <ng-template ngSwitchDefault>
+            <div>This is default</div>
+          </ng-template>
+          </div>
+          <div class="btn-wrap current both">
+            <button type="button" (click)="back()" class="left">{{backBtn}}</button>
+            <button type="button" (click)="next()" class="right">{{nextBtn}}</button>
+          </div>
+          </section>
 
-      <ng-template matStepLabel><b>Fill out your personal details</b></ng-template>
-
-      <form [formGroup]="personalDetails">
-        <p class="input">
-        <mat-form-field>
-          <mat-label>First Name</mat-label>
-          <input matInput 
-          formControlName="firstNameControl" 
-          type="text"
-          name="firstName"
-          placeholder="First Name"
-          autocomplete="name"
-          required pattern="^[A-Z].*$">
-          <mat-error>First Name must start with capital letter</mat-error>
-        </mat-form-field>
-        &nbsp;
-        <mat-form-field>
-          <mat-label>Last Name</mat-label>
-          <input matInput 
-          type="text"
-          name="lastName"
-          autocomplete="family-name"
-          formControlName="lastNameControl" 
-          placeholder="Last Name"
-          required pattern="^[A-Z].*$">
-          <mat-error>Last Name must start with capital letter</mat-error>
-        </mat-form-field>
-        </p>
-        <p class="input"> 
-          <mat-form-field class="country">
-            <mat-label>Country</mat-label>
-            <mat-select required formControlName="countryControl">
-                <mat-option value="ecuador">Ecuador</mat-option>
-                <mat-option value="colombia">Colombia</mat-option>
-                <mat-option value="mexico">Mexico</mat-option>
-            </mat-select>
-            <mat-error>Missing Country</mat-error>
-          </mat-form-field>
-        </p>
-        <p class="input">
-        <mat-form-field>
-          <mat-label>City</mat-label>
-          <input matInput 
-          formControlName="cityControl" 
-          placeholder="City"
-          type="text"
-          required>
-          <mat-error>Missing City</mat-error>
-        </mat-form-field>
-        &nbsp;
-        <mat-form-field>
-          <mat-label>Street</mat-label>
-          <input matInput 
-          formControlName="streetControl" 
-          placeholder="Street"
-          type="text"
-          required>
-          <mat-error>Missing Street</mat-error>
-        </mat-form-field>
-        </p>
-        <p class="input">
-        <mat-form-field>
-            <mat-label>Postcode</mat-label>
-            <input matInput 
-            formControlName="postcodeControl" 
-            placeholder="Postcode"
-            type="number"
-            required>
-            <mat-error>Missing Postcode</mat-error>
-        </mat-form-field>
-        </p>
-        <p class="input">
-            <mat-form-field >
-                <mat-label>Choose your Birth date</mat-label>
-                <input matInput 
-                [matDatepicker]="picker"
-                formControlName="birthDateControl">
-                <mat-datepicker-toggle matSuffix [for]="picker">
-                  <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-                </mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-        </p>
-        <re-captcha
-          (resolved)="resolved($event)"
-          formControlName="captchaControl"
-          class="g-recaptcha"
-          name="captcha"
-          required
-          siteKey="6LcOuyYTAAAAAHTjFuqhA52fmfJ_j5iFk5PsfXaU">
-        </re-captcha>
-        <div>
-          <button mat-button (click)="register()">Register</button>
-          <button mat-button (click)='router.navigateByUrl("/home");'>Home</button>
-        </div>
-      </form>
-    </mat-step>
-  </mat-horizontal-stepper>
+    </div>
+    </div>

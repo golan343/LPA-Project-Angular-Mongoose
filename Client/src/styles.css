@@ -75,9 +75,7 @@ header {
 .equal-space {
   justify-content: space-around;
 }
-input[type="text"],
-input[type="email"],
-input[type="password"] {
+input {
     text-indent: 5px;
     font-size: 1.1em;
     margin: 0 0 10px;
@@ -234,6 +232,38 @@ button {
     bottom: 4px;
     left: 8px
 }
+.wrap-email {
+    width: 50%;
+    position: relative;
+    border-radius: 20px;
+    min-height: 35px;
+    overflow: hidden;
+    margin: 2% auto;
+    display: flex;
+    flex-flow: wrap row;
+    background: #fff;
+    padding: 3px;
+  }
+  .wrap-email input {
+    flex-grow: 5;
+    border: none;
+    border-radius: 20px;
+    font-size: 1.3rem;
+    color:#000000;
+  }
+  .wrap-email input:active,
+  .wrap-email input:focus,.wrap-email input:visited,
+  .wrap-email input:focus-visible {
+    outline: unset;
+    box-shadow: none;
+    text-indent: 20px;
+  }
+  .wrap-email button, .wrap-email label {
+    flex-grow: 1;
+    border-radius: 20px;
+    box-shadow: unset;
+    filter: none;
+  }
 @font-face {
   font-family: Roboto;
   font-style: normal;

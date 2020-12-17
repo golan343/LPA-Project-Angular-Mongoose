@@ -1,79 +1,63 @@
 import { AccountService } from '../../services/account.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { UserModel } from 'src/app/models/user-model';
+import { errorModel, UserModel } from 'src/app/models/user-model';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
   providers: [
-    {
-      provide:  STEPPER_GLOBAL_OPTIONS,
-      useValue: { showError: true }
-    }
+
   ]
 })
 export class RegisterComponent implements OnInit {
 
-  public regForm: FormGroup;
-  public personalDetails: FormGroup;
-  public user = new UserModel();
 
-  // tslint:disable-next-line: variable-name
+  public user = new UserModel();
+  error = new errorModel();
+  currentStep = 1;
+  steps = 3;
+  backBtn = 'Back';
+  nextBtn = 'Next Step';
   constructor(
-    private myFormBuilder: FormBuilder,
     private accountService: AccountService,
     public router: Router) { }
-  // tslint:disable-next-line: typedef
   public async register() {
-    try{
-      if (this.personalDetails.invalid){
-        return;
-      }
-      this.user.email = this.regForm.value.emailControl;
-      this.user.password = this.regForm.value.passwordControl;
-      this.user.firstName = this.personalDetails.value.firstNameControl;
-      this.user.lastName = this.personalDetails.value.lastNameControl;
-      this.user.country = this.personalDetails.value.countryControl;
-      this.user.city = this.personalDetails.value.cityControl;
-      this.user.street = this.personalDetails.value.streetControl;
-      this.user.postcode = this.personalDetails.value.postcodeControl;
-      this.user.birthDate = this.personalDetails.value.birthDateControl;
+    try {
       this.user.roleId = '5f58ba6355eac12930d7b3ef';
       console.log(this.user);
       await this.accountService.addUser(this.user);
       this.router.navigateByUrl('/home');
     }
-    catch (err){
-
+    catch (err) {
+      console.log(err)
     }
   }
 
-  // tslint:disable-next-line: typedef
   public resolved(captchaResponse: string) {
     console.log(`Resolved captcha with response: ${captchaResponse}`);
   }
-
-  ngOnInit(): void {
-    if (this.accountService.isUserLoggedIn()) {
-      this.router.navigateByUrl('/home');
+  back() {
+    if (this.currentStep == this.steps) {
+      this.nextBtn = 'Next Step';
     }
-    this.regForm = this.myFormBuilder.group({
-      emailControl: ['', Validators.required],
-      passwordControl: ['', Validators.required]
-    });
-    this.personalDetails = this.myFormBuilder.group({
-      firstNameControl: ['', Validators.required],
-      lastNameControl: ['', Validators.required],
-      postcodeControl: ['', Validators.required],
-      countryControl: ['', Validators.required],
-      cityControl: ['', Validators.required],
-      birthDateControl: ['', Validators.required],
-      streetControl: ['', Validators.required],
-      captchaControl: ['', Validators.required]
-    });
+    if (this.currentStep > 1) {
+      this.currentStep -= 1;
+    }
+
+  }
+  next() {
+    if (this.currentStep < this.steps) {
+      this.currentStep += 1;
+    }
+    if (this.currentStep == this.steps) {
+      this.nextBtn = 'Sign Me Up';
+    }
+
+  }
+  ngOnInit(): void {
+
   }
 }

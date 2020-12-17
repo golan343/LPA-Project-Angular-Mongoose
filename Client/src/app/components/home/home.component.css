@@ -268,37 +268,7 @@ section {
   margin: 0;
   padding: 3% 0px;
 }
-.wrap-email {
-  width: 50%;
-  position: relative;
-  border-radius: 20px;
-  min-height: 35px;
-  overflow: hidden;
-  margin: 2% auto;
-  display: flex;
-  flex-flow: wrap row;
-  background: #fff;
-  padding: 3px;
-}
-.wrap-email input[type="email"] {
-  flex-grow: 5;
-  border: none;
-  border-radius: 20px;
-  font-size: 1.3rem;
-  color:#000000;
-}
-.wrap-email input[type="email"]:active,
-.wrap-email input[type="email"]:focus {
-  outline: unset;
-  box-shadow: none;
-  text-indent: 20px;
-}
-.wrap-email button {
-  flex-grow: 1;
-  border-radius: 20px;
-  box-shadow: unset;
-  filter: none;
-}
+
 .fwh-slide.section-about-new-auction > .mainContent > * {
   color: #000000;
 }

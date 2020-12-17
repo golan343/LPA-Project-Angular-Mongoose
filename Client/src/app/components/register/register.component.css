@@ -1,17 +1,7 @@
-mat-horizontal-stepper {
-    background: #ECECEC;
-    height: 91.5vh;
-    text-align: center;
-}
-
-.input {
-    text-align: left;
-    padding-left: 30%;
-}
-
-
-.g-recaptcha {
-
-    display: inline-block;
-
-   }
+.register{background-color:#888;}
+.register h1, .register h2{display: block;}
+.register *{color:#000;}
+.register .flex{justify-content: space-between; align-items: center;}
+.register .input-container{width:50%;text-align: left;}
+.register .input-container label{display: block;}
+.register  .current{width: 80%;}

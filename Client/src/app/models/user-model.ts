@@ -16,7 +16,7 @@ export class UserModel {
     public token?: string
     ) { }
 }
-export class errorModel {
+export class errorModel extends UserModel {
     email: string;
     password: string;
     clear() {

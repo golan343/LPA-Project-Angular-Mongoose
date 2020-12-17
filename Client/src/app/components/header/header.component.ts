@@ -16,8 +16,7 @@ import { DialogService } from 'src/app/ui/dialog.service';
 export class HeaderComponent implements OnInit {
   showMobile: boolean;
   constructor(private router: Router,
-              public accountService: AccountService,
-              public dialog: MatDialog,
+    public accountService: AccountService,
     private cookieService: CookieService,
     private dialogLocalsService: DialogService,
     private mobile: MobileService
@@ -62,7 +61,7 @@ export class HeaderComponent implements OnInit {
 
   public login(): void {
     const dialog = new DialogData("Login");
-    dialog.title = 'User Login';
+    dialog.title = '';
     dialog.text = '';
     this.dialogLocalsService.subjectType.next(dialog);
   }

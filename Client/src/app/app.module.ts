@@ -52,6 +52,8 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { LocationsComponent } from './components/locations/locations.component';
 import { RulesComponent } from './components/rules/rules.component';
+import { ScrollPositionDirective } from './directives/scroll-position.directive';
+import { ShowPasswordDirective } from './directives/show-password.directive';
 
 
 const globalSettings: RecaptchaSettings = { siteKey: '6LeFTeoZAAAAAOm4L0qfozbCzOYa3kzs_3zeCgUY'}
@@ -75,7 +77,9 @@ const globalSettings: RecaptchaSettings = { siteKey: '6LeFTeoZAAAAAOm4L0qfozbCzO
     AboutUsComponent,
     ContactUsComponent,
     LocationsComponent,
-    RulesComponent
+    RulesComponent,
+    ScrollPositionDirective,
+    ShowPasswordDirective
   ],
   imports: [
     BrowserModule,

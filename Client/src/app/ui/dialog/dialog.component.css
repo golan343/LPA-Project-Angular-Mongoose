@@ -7,7 +7,7 @@
   left: 0;
   z-index: 5;
 }
-.popup .container::after {
+.backtap {
   content: "";
   background-color: rgba(0, 2, 3, 0.6);
   width: 100%;
@@ -19,13 +19,13 @@
   position: absolute;
 }
 .popup .container {
-  max-width: 200px;
-  padding: 2%;
+  max-width: 400px;
   border: 1px solid #fff;
   display: block;
   background-color: #fff;
   margin: 7% auto;
-  box-shadow: 0 10px 25px rgb(84 81 81 / 58%), 0 20px 48px rgb(145 139 139 / 85%), 0 1px 4px #f0f0f0;
+  border-radius: 3px;
+  /* box-shadow: 0 10px 25px rgb(84 81 81 / 58%), 0 20px 48px rgb(145 139 139 / 85%), 0 1px 4px #f0f0f0; */
 }
 .popup .container h2 {
   border-bottom: 1px solid #000;
@@ -67,5 +67,7 @@
 @media only screen and (max-width: 880px) {
     .popup .container{
        padding: 5%;
+       max-width: unset;
+       width:95%;
     }
 }
