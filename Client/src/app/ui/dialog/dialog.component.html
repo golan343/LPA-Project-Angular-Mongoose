@@ -1,0 +1,17 @@
+<div class="popup" *ngIf="show">
+    <div class="close" (click)="close()"></div>
+
+    <div class="container">
+        <div class="backtap" (click)="close()"></div>
+        <h2 *ngIf="title" class="mr-b">{{title}}</h2>
+        <p *ngIf="text" class="mr-b">{{text}}</p>
+        <div [ngSwitch]="component">
+            <ng-template [ngSwitchCase]="'Login'">
+                <app-login></app-login>
+            </ng-template>
+            <ng-template ngSwitchDefault>
+                <div>This is default</div>
+            </ng-template>
+        </div>
+    </div>
+</div>

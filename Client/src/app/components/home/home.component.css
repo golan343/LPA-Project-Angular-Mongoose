@@ -10,7 +10,7 @@ h4 {
 }
 .top {
   z-index: 2;
-  color:#fff;
+  color: #fff;
 }
 .top h4 {
   margin-top: 0.7%;
@@ -21,6 +21,7 @@ h4 {
   top: 0;
   z-index: 0;
   height: 100%;
+  width: 100%;
 }
 .my-bid {
   display: inline-block;
@@ -93,7 +94,7 @@ section {
   position: absolute;
   display: inline-block;
   top: 8rem;
-  left:15%;
+  left: 15%;
 }
 .firstSection .secondHeader h1 {
   color: rgba(255, 255, 255, 0.18);
@@ -102,7 +103,7 @@ section {
   font-size: 150px;
   position: absolute;
   display: inline-block;
-  left:20%;
+  left: 20%;
 }
 .lastAuction {
   background-repeat: no-repeat;
@@ -140,10 +141,11 @@ section {
   padding-bottom: 3%;
 }
 
-
-.mainContent h3{    font-size: 3rem;
+.mainContent h3 {
+  font-size: 3rem;
   margin: 0 0 1% 0;
-  color: #000;}
+  color: #000;
+}
 .fwh-slide.section-how-its-work > .mainContent {
   text-align: center;
 }
@@ -266,43 +268,13 @@ section {
   margin: 0;
   padding: 3% 0px;
 }
-.wrap-email {
-  width: 50%;
-  position: relative;
-  border-radius: 20px;
-  min-height: 35px;
-  overflow: hidden;
-  margin: 2% auto;
-  display: flex;
-  flex-flow: wrap row;
-  background: #fff;
-  padding: 3px;
-}
-.wrap-email input[type="email"] {
-  flex-grow: 5;
-  border: none;
-  border-radius: 20px;
-  font-size: 1.3rem;
-}
-.wrap-email input[type="email"]:active,.wrap-email input[type=email]:focus {
-  outline: unset;
-  box-shadow: none;
-  text-indent: 20px;
-}
-.wrap-email button {
-  flex-grow: 1;
-  border-radius: 20px;
-  box-shadow: unset;
-  filter: none;
-}
+
 .fwh-slide.section-about-new-auction > .mainContent > * {
   color: #000000;
 }
 .fwh-slide.section-about-new-auction > .mainContent > h4 {
   font-weight: 100;
 }
-
-
 
 .fwh-slide.section-white {
   padding: 3% 0;
@@ -334,13 +306,80 @@ agm-map {
   text-align: center;
 }
 
-
 .fwh-slide.section-place-my-bid > p {
   color: white;
 }
 @media only screen and (max-width: 1245px) {
-  .lastAuction{width: 100%;padding: 0px;}
+  .lastAuction {
+    width: 100%;
+    padding: 0px;
+  }
 }
 @media only screen and (max-width: 880px) {
+  .lastAuction {
+    height: auto;
+  }
+  .lastAuction img {
+    height: auto;
+    position: static;
+  }
+  .firstSection .secondHeader {
+    height: auto;
+  }
+  .firstSection .secondHeader h1 {
+    font-size: 6rem;
+    position: static;
+  }
+  .my-bid {
+    display: block;
+    text-align: center;
+    padding: 2% 0px;
+  }
+  .my-bid h4 {
+    margin-bottom: 5%;
+  }
+  .datesDiv {
+    display: flex;
+    bottom: 37%;
+    left: 5%;
+    justify-content: space-between;
+  }
+  .datesDiv p,
+  .datesDiv p b {
+    font-size: 1rem;
+  }
+  .firstSection .secondHeader h2 {
+    font-size: 4rem;
+    position: static;
+  }
+  .fwh-slide.section-how-its-work
+    > .mainContent
+    > .how-its-work
+    > .how-its-work-details {
+    text-align: center;
+    width: 100%;
+    flex-direction: column;
+    margin: 0 auto;
+  }
+  .how-its-work-details {
+    perspective: 200vh;
+  }
 
+  .how-its-work-details > .col > p {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .arrow-long-right {
+    top: 0;
+    width: 2px;
+    height: 48px;
+    margin: 6% auto;
+  }
+  .arrow-long-right::after {
+    transform: rotate(135deg);
+    right: -5px;
+    bottom: 1px;
+  }
+}
+@media only screen and (max-width: 580px) {
 }

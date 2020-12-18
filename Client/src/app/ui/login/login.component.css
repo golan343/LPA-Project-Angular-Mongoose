@@ -1,0 +1,55 @@
+.loginPage {
+  height: 100%;
+  text-align: center;
+  padding: 5%;
+  padding: 0;
+  background-color: #d4f1f4;
+}
+.loginPage a,
+.loginPage h2 {
+  color: #07090e;
+  text-decoration: underline;
+  margin: 0 0 6% 0;
+}
+.loginPage button {
+  background-color: #fff;
+}
+
+form {
+  padding-top: 5%;
+}
+
+.input-container {
+  text-align: left;
+  margin-bottom: 5%;
+}
+.wrap-email input {
+  color: #07090e;
+  background: transparent;
+  border: none;
+  margin: 0;
+}
+.wrap-email input:focus,
+.wrap-email input:active,
+.wrap-email input:link {
+  outline: 0;
+  box-shadow: none;
+  background: transparent;
+}
+.wrap-email {
+  width: 90%;
+  padding: 2px 0;
+  align-items: center;
+  justify-content: flex-start;
+}
+.wrap-email label {
+  color: black;
+  flex-grow: 1;
+  font-weight: 900;
+  margin-left: 3%;
+}
+@media only screen and (max-width: 880px) {
+  .input-container {
+    transform: scaleX(1.2);
+  }
+}

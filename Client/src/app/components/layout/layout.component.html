@@ -1,8 +1,8 @@
 <app-header></app-header>
-<div class="top-margin">
+<div>
   <div class="flex ">
-    <nav>
-      <div class="wrap flex-col fixed" [class]="{show:showMenu}">
+    <nav [class]="menuColor">
+      <div appScrollPosition class="wrap flex-col fixed" [class]="{show:showMenu}">
         <div class="logo" (click)="moveToHome()"></div>
         <ul>
           <li><a routerLink="/live" > Live auctions </a></li>
@@ -28,4 +28,5 @@
       <a href="#">Cookies policy</a>
     </div>
   </footer>
+  <app-dialog></app-dialog>
 </div>
