@@ -5,4 +5,6 @@ export class DialogData {
     componentName: string;
     title: string;
     text: string;
+    wide: boolean;
+    show: boolean;
 }

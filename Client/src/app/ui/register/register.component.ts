@@ -1,7 +1,6 @@
 import { AccountService } from '../../services/account.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { errorModel, UserModel, validationConstrains } from 'src/app/models/user-model';
 
 @Component({

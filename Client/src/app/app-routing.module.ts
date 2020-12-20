@@ -11,7 +11,7 @@ import { HowItsWorkComponent } from './components/how-its-work/how-its-work.comp
 import { InsertComponent } from './components/insert/insert.component';
 import { LiveAuctionsComponent } from './components/live-auctions/live-auctions.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { RegisterComponent } from './components/register/register.component';
+// import { RegisterComponent } from './components/register/register.component';
 import { ClosedComponent } from './components/closed/closed.component';
 import { RulesComponent } from './components/rules/rules.component';
 
@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'auctions/:_id', component: AuctionComponent },
   { path: 'add-auction', component: InsertComponent, canActivate: [AdminGuard] },
   { path: 'dashboard', loadChildren: () => import('./components/dashboard/dashboard.module').then(d => d.DashboardModule) },
-  { path: 'register', component: RegisterComponent },
+  // { path: 'register', component: RegisterComponent },
   { path: 'live', component: LiveAuctionsComponent, canActivate: [AccountGuard]  },
   { path: 'closed', component: ClosedComponent, canActivate: [AccountGuard]  },
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // pathMath - exact empty string.

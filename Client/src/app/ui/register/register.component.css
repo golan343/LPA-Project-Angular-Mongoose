@@ -1,6 +1,6 @@
-.mainContent{background-color:#808080;}
-.register{    width: 50%;
-    margin: 3% auto 3% 0;
+.container{background-color:#808080;}
+.register{    width: 80%;
+    margin: 3% auto 3% auto;
     min-height: 80vh;}
 .register h1, .register h2{display: block;}
 .register *{color:#000;}

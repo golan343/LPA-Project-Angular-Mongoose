@@ -1,3 +1,5 @@
+import { throwMatDialogContentAlreadyAttachedError } from "@angular/material/dialog";
+
 export class UserModel {
     user: any;
     public constructor(
@@ -15,13 +17,20 @@ export class UserModel {
     public roleId?: string,
     public token?: string
     ) { }
+
 }
+
 export class errorModel extends UserModel {
     email: string;
     password: string;
     clear() {
         this.password = '';
         this.email = '';
+        for (let key in this) {
+            if (Object.prototype.hasOwnProperty.call(this, key) && typeof this[key] === 'string') {
+                this[key]    
+            }
+        }
     }
     validatePassword(passText) {
         if (!passText) {
@@ -47,6 +56,36 @@ export class errorModel extends UserModel {
         this.email = '';
         return true;
     }
+    validate(constrain: validationConstrains) {
+        if (!constrain.content && constrain.isRequire) {
+            this[constrain.prop] = constrain.errorMsg;
+            return false;
+        }
+        if (constrain.pattarn) {
+            if (!constrain.pattarn.test(constrain.content)) {
+                this[constrain.prop] = constrain.pattarnErrorMsg;
+                return false;
+            }
+        }
+        this[constrain.prop] = '';
+        return true;
+    }
+}
+export class validationConstrains {
+    constructor(args: any) {
+        this.isRequire = args.isReqire || false;
+        this.prop = args.prop;
+        this.content = args.content;
+        this.errorMsg = args.errorMsg;
+        this.pattarn = args.pattarn || null;
+        this.pattarnErrorMsg = args.pattarnErrorMsg;
+    }
+    isRequire: boolean;
+    prop: string;
+    content: string;
+    pattarn: RegExp;
+    errorMsg: string;
+    pattarnErrorMsg: string;
 }
 
 

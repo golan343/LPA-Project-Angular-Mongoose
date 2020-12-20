@@ -1,4 +1,4 @@
-import { Component, HostListener, Injector, OnInit, Type } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DialogService } from './../dialog.service';
 @Component({
   selector: 'app-dialog',
@@ -9,6 +9,7 @@ export class DialogComponent implements OnInit {
   title: string;
   text: string;
   show: boolean;
+  wide: boolean;
   component: string;
   constructor(private dialogService: DialogService) {
   }
@@ -23,7 +24,8 @@ export class DialogComponent implements OnInit {
       this.component = arg.componentName;
       this.text = arg.text;
       this.title = arg.title;
-      this.show = true;
+      this.show = !!arg.componentName;;
+      this.wide = arg.wide;
       window.addEventListener('keydown', this.escape);
     });
   }
