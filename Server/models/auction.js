@@ -48,6 +48,9 @@ const AuctionSchema = mongoose.Schema({
         type: Number
 
     },
+    bidsCount: {
+        type: Number
+    },
     bidPattern: {
         type: String
     },

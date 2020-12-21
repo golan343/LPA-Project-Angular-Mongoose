@@ -34,7 +34,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.menuColor = { black: true };
   }
   @HostListener('window:scroll', ['$event']) private onScroll($event: Event): void {
-    console.log(window.scrollY);
+    // console.log(window.scrollY);
     if (window.scrollY > window.innerHeight / 10) {
       this.menuColor = { black: true };
     }

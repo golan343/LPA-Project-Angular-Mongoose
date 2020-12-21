@@ -1,6 +1,5 @@
 const express = require('express');
 const bidsLogic = require('../business-logic/bids-logic');
-const errorHandler = require('../helpers/error-handler');
 const Bid = require('../models/bid');
 
 const router = express.Router();
@@ -43,7 +42,6 @@ router.post('/', async (request, response) => {
             response.status(400).send( { error: error });
             return;
         }
-
         const addedBid = await bidsLogic.addBidAsync(bid);
         response.status(201).json(addedBid);
         
