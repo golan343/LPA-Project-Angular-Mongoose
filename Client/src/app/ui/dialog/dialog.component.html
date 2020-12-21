@@ -1,4 +1,4 @@
-<div class="popup" *ngIf="show">
+<div class="popup" *ngIf="show" [class]="{wide:wide}">
     <div class="close" (click)="close()"></div>
 
     <div class="container">
@@ -8,6 +8,9 @@
         <div [ngSwitch]="component">
             <ng-template [ngSwitchCase]="'Login'">
                 <app-login></app-login>
+            </ng-template>
+            <ng-template [ngSwitchCase]="'Register'">
+                <app-register></app-register>
             </ng-template>
             <ng-template ngSwitchDefault>
                 <div>This is default</div>

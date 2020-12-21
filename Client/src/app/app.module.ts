@@ -42,7 +42,7 @@ import { InsertComponent } from './components/insert/insert.component';
 import { HowItsWorkComponent } from './components/how-its-work/how-its-work.component';
 import { LiveAuctionsComponent } from './components/live-auctions/live-auctions.component';
 import { HeaderComponent } from './components/header/header.component';
-import { RegisterComponent } from './components/register/register.component';
+// import { RegisterComponent } from './components/register/register.component';
 import { ClosedComponent } from './components/closed/closed.component';
 import { UpdateStatusComponent } from './components/update-status/update-status.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
@@ -69,7 +69,7 @@ const globalSettings: RecaptchaSettings = { siteKey: '6LeFTeoZAAAAAOm4L0qfozbCzO
     HowItsWorkComponent,
     LiveAuctionsComponent,
     HeaderComponent,
-    RegisterComponent,
+    // RegisterComponent,
     ClosedComponent,
     UpdateStatusComponent,
     ConfirmDialogComponent,

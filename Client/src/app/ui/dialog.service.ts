@@ -8,4 +8,5 @@ import { DialogData } from './model/dialog-data';
 export class DialogService {
   subjectType = new Subject<DialogData>();
   constructor() { }
+
 }
