@@ -14,17 +14,17 @@ export class AuctionsService {
   constructor(private http: HttpClient) { }
 
   public addAuctionToServer(auction: AuctionModel): Promise<undefined> {
-    return new Promise<undefined>((resolve, reject) => {
+    return //new Promise<undefined>((resolve, reject) => {
         this.http
             .post<AuctionModel>(BaseUrl + 'api/auctions', auction)
-            .subscribe(res => {
+          .toPromise().then(res => {
                 const action: Action = { type: ActionType.AddAuction, payload: res };
                 store.dispatch(action);
-                resolve(); // דיווח הצלחה
-            }, err => {
-                reject(err); // דיווח כשלון
+              // resolve(); // דיווח הצלחה
+            }).catch(err => {
+              //  reject(err); // דיווח כשלון
             });
-    });
+
 }
 
   // tslint:disable-next-line: typedef

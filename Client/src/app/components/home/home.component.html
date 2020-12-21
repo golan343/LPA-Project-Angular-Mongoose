@@ -2,7 +2,7 @@
 
     <section #first class="firstSection ">
         <div class="mainContent">
-            <div class="secondHeader ">
+            <div class="secondHeader">
                 <h1>We are</h1>
                 <h2>LOW PRICE AUCTION</h2>
             </div>
@@ -16,13 +16,16 @@
                 </div>
 
                 <div class="my-bid relative">
-                    <h4><span>my Bid:</span><b>{{auctions[0].bidPrice | currency}}</b></h4>
+                    <h4><span>Remaining offers </span><i>{{numberOfproposal}}</i><span>/</span><small>{{numberOfBids}}</small></h4>
                     <button class="auctionBtn" (click)="showAuction(auctions[0]._id)">Place My Bid</button>
                 </div>
 
                 <div class="datesDiv relative">
-                    <p class="left"><span>Starts:</span><b>{{auctions[0].startDate.replace('T', ' ')}}</b> </p>
-                    <p class="right"><span>Ends:</span><b>{{auctions[0].endDate.replace('T', ' ')}}</b> </p>
+                    <!-- <p class="left"><span>Starts:</span><b>{{auctions[0].startDate.replace('T', ' ')}}</b> </p> -->
+                    <p class="right">
+                        <span>price :</span><b>{{auctions[0].bidPrice | currency}}</b>
+                        <!-- <span>Ends:</span><b>{{auctions[0].endDate.replace('T', ' ')}}</b>  -->
+                    </p>
                 </div>
             </div>
         </div>
@@ -73,7 +76,11 @@
         <div class="mainContent center">
             <h3>Last Winner: the winner moment</h3>
             <div class="winnerVideo">
+                <iframe width="100%" height="315" src="https://www.youtube.com/embed/66-lgGHa_DA" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
             </div>
+            <div class="line"></div>
             <h3>On site Auction</h3>
             <agm-map [latitude]="lat" [longitude]="lng">
                 <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
@@ -84,8 +91,8 @@
 
     <section #fifth class="fwh-slide section-place-my-bid ">
         <div class="mainContent center">
-            <button *ngIf="!accountService.isUserLoggedIn()" (click)="login()"> i want place a bid!</button>
-            <button *ngIf="accountService.isUserLoggedIn()" (click)="router.navigateByUrl('/live')"> i want place a
+            <button *ngIf="!accountService.isUserLoggedIn()" (click)="login()"> i want to place a bid!</button>
+            <button *ngIf="accountService.isUserLoggedIn()" (click)="router.navigateByUrl('/live')"> i want to place a
                 bid!</button>
         </div>
     </section>

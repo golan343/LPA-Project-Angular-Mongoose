@@ -6,8 +6,7 @@
     <section class="step">
       <div [ngSwitch]="currentStep">
         <ng-template [ngSwitchCase]="'1'">
-          <div class="current">
-            <div class="flex center">
+          <div class="current first">
               <div class="mr-b input-container relative">
                 <label for="firstName">FirstName Name*</label>
                 <input type="text" placeholder="firstName" [(ngModel)]="user.firstName" (focus)="error.clear()"
@@ -20,8 +19,7 @@
                   name="lastName" id="lastName">
                 <span *ngIf="error.lastName" class="error">{{error.lastName}}</span>
               </div>
-            </div>
-            <div class="flex">
+            
               <div class="mr-b input-container relative">
                 <label for="password">Password</label>
                 <input type="password" placeholder="password" [(ngModel)]="user.password" (focus)="error.clear()"
@@ -29,7 +27,7 @@
                 <span *ngIf="error.password" class="error">{{error.password}}</span>
               </div>
             </div>
-          </div>
+  
 
         </ng-template>
         <ng-template [ngSwitchCase]="'2'">

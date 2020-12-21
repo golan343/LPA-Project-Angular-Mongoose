@@ -4,7 +4,6 @@
   padding: 0;
   margin: 0;
   box-sizing: content-box;
-  color: #fff;
   transition: all .3s ease;
 }
 
@@ -123,7 +122,7 @@ input {
   float: right;
 }
 .mainContent {
-  width: 85%;
+  width: 89%;
   margin: 0 0 0 auto;
 }
 .both::after {
@@ -153,12 +152,17 @@ input {
 .js-center {
   justify-content: center;
 }
-
+.line{
+  height: 2px;
+  width: 90%;
+  background-color: #07090e;
+  margin: 2% auto;
+}
 button {
   background: #d4f1f4;
   border-radius: 43px;
-  filter: drop-shadow(0 7px 4px rgba(0, 0, 0, 0.4));
-  padding: 6px 3rem;
+  box-shadow: 0px 8px 1px -5px #2b2a2a;
+  padding: 4px 3rem;
   color: #0e1119;
   font-weight: 200;
   font-size: 1.3rem;
@@ -374,27 +378,42 @@ button {
 @keyframes fadeIn {
   0% {
     opacity: 0;
+    top: 50%;
+  }
+  60%{
+    top:0%;
   }
   100% {
     opacity: 1;
+    
   }
 }
 
 @-moz-keyframes fadeIn {
   0% {
     opacity: 0;
+    top: 50%;
+  }
+  60%{
+    top:0%;
   }
   100% {
     opacity: 1;
+    
   }
 }
 
 @-webkit-keyframes fadeIn {
   0% {
     opacity: 0;
+    top: 50%;
+  }
+  60%{
+    top:0%;
   }
   100% {
     opacity: 1;
+    
   }
 }
 

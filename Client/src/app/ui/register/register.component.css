@@ -1,11 +1,10 @@
-.container{background-color:#808080;}
-.register{    width: 80%;
-    margin: 3% auto 3% auto;
-    min-height: 80vh;}
+.container{background-color:#808080;padding: 2% 0;}
+.register{    width: 60%;min-width: 230px;
+    margin: 3% auto 3% auto;}
 .register h1, .register h2{display: block;}
 .register *{color:#000;}
 .register .error{color:#fff;}
 .register .flex{justify-content: space-between;  align-items: center;}
 .register .input-container{text-align: left;}
 .register .input-container label{display: block;}
-.register  .step >div {height: 30vh;}
+.register  .step .first {height: 30vh;}

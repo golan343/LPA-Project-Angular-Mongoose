@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { fadeAnimation } from './../../models/animation'
 import { MobileService } from 'src/app/services/mobile.service';
 import { Subscription } from 'rxjs';
+import { BidsService } from 'src/app/services/bids.service';
 
 @Component({
   selector: 'app-layout',
@@ -23,11 +24,14 @@ export class LayoutComponent implements OnInit, OnDestroy {
     public accountService: AccountService,
     public dialog: MatDialog,
     private cookieService: CookieService,
-    private mobile: MobileService) { }
+    private mobile: MobileService,
+    private bidsService: BidsService
+  ) { }
   ngOnDestroy(): void {
     this.subscribeMenu.unsubscribe();
   }
   ngOnInit(): void {
+    this.bidsService.getAllBids();
     this.subscribeMenu = this.mobile.showMenuTrigger.subscribe(show => {
       this.showMenu = show;
     });
@@ -41,10 +45,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     if (window.scrollY > 3 * window.innerHeight / 10) {
       this.menuColor = { dark: true };
     }
-    if (window.scrollY > 6 * window.innerHeight / 10) {
-      this.menuColor = { gray: true };
-    }
-    if (window.scrollY > window.innerHeight) {
+    if (window.scrollY - 100 > window.innerHeight) {
       this.menuColor = { white: true };
     }
   };
@@ -75,18 +76,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.accountService.logout();
   }
 
-  public login(): void {
-
-    // const dialogRef = this.dialog.open(LoginComponent, {
-    //   panelClass: 'custom-dialog-container',
-    //   width: '450px',
-    //   height: '300px',
-    // });
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed');
-    // });
-  }
 
   public isExtraSmallDevice(): boolean {
     return this.bpo.isMatched(Breakpoints.XSmall);

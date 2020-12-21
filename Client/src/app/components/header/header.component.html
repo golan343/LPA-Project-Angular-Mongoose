@@ -6,7 +6,9 @@
     </div>
     <div class="user" title="login" *ngIf="accountService.isUserLoggedIn()"><span
             class="person-icon"></span></div>
-    <a class="btn" *ngIf="!accountService.isUserLoggedIn()" (click)="login()" title="log in"><i class="log-in"></i></a>
+    <div class="btn" *ngIf="!accountService.isUserLoggedIn()" (click)="login()" title="log in">
+        <i class="log-in"></i>
+    </div>
     <div class="search hide"><a class="search-icon"></a></div>
     <div class="languages">
         <ul>
@@ -15,5 +17,5 @@
         </ul>
     </div>
 
-    <div class="place-bid"><button type="button" click="palceBid()">Place Bid</button></div>
+    <div class="place-bid"><button type="button" click="palceBid()">Place A Bid</button></div>
 </header>
