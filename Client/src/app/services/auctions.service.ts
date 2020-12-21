@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuctionModel } from '../models/auction-model';
 import { Action } from '../redux/action';
+import { BidsService } from './bids.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,9 +21,15 @@ export class AuctionsService {
           .toPromise().then(res => {
                 const action: Action = { type: ActionType.AddAuction, payload: res };
                 store.dispatch(action);
+<<<<<<< HEAD
               // resolve(); // דיווח הצלחה
             }).catch(err => {
               //  reject(err); // דיווח כשלון
+=======
+                resolve;
+            }, err => {
+                reject(err); // דיווח כשלון
+>>>>>>> master
             });
 
 }
@@ -73,7 +80,7 @@ export class AuctionsService {
   }
   public getLastAuction(): void {
     this.http.get<AuctionModel>(BaseUrl + 'api/auctions/get/last')
-    .subscribe(res => {
+    .subscribe(async res => {
       const action: Action = { type: ActionType.GetLastAuction, payload: res };
       store.dispatch(action);
     },

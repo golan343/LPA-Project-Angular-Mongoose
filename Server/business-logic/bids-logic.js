@@ -1,4 +1,5 @@
 const Bid = require('../models/bid');
+const Auction = require('../models/auction');
 
 // get all bids
 function getAllBidsAsync() {
@@ -11,7 +12,12 @@ function getOneBidAsync(_id) {
 
 //add new bid 
 
-function addBidAsync(bid) {
+async function addBidAsync(bid) {
+    let auction = await Auction.find( { _id: bid.auctionId}).exec();
+    auction = auction[0];
+    auction.bidsCount = auction.bidsCount + 1;
+    const info = await Auction.updateOne({ _id: auction._id }, auction).exec();
+    info.n ? auction : null;
     return bid.save();
 }
 

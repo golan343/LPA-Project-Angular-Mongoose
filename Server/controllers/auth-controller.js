@@ -16,7 +16,7 @@ router.post("/register", async (request, response) => {
         const error = await user.validate();
         if(error){
             console.log(error);
-            response.status(400).send(error.message);
+            response.status(400).send( { error: error });
             return;
         }
 
@@ -31,7 +31,7 @@ router.post("/register", async (request, response) => {
     }
     catch(err){
         console.log(err);
-        response.status(500).send(errorHandler.getError(err));
+        response.status(500).send( { error: err });
     }
 
 });
@@ -52,7 +52,7 @@ router.post("/login", async (request, response) => {
         response.json({ user, token });
     }
     catch(err){
-        response.status(500).send(errorHandler.getError(err));
+        response.status(500).send( { error: err });
     }
 
 });
@@ -65,7 +65,31 @@ router.post("/logout", (request, response) => {
         console.log("success logout");
     }
     catch(err){
+        response.status(500).send( { error: err });
+    }
+});
 
+router.patch('/:_id', async (request, response) => {
+    try{
+        const user = new User(request.body);
+        user._id = request.params._id;
+
+        //validate
+        const error = user.validateSync();
+        if(error) {
+            response.status(400).send( { error: error });
+            return;
+        }
+
+        const updateUser = await authLogic.updateAsync(user);
+        if(!updateUser) {
+            response.sendStatus(404);
+            return;
+        }
+        response.json(updateUser);
+    }
+    catch(err){
+        response.status(500).send( { error: err });
     }
 });
 
