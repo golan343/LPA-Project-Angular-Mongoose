@@ -21,7 +21,7 @@ router.get('/sendSMS', (request, response) => {
         
     }
     catch(err){
-        response.status(500).send(errorHandler.getError(err));
+        response.status(500).send( { error: err });
     }
 });
 

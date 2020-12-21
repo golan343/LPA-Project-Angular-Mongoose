@@ -14,7 +14,7 @@ router.get('/', async (request, response) => {
 
     }
     catch(err) {
-        response.status(500).send(errorHandler.getError(err));
+        response.status(500).send( { error: err });
     }
 });
 
@@ -33,7 +33,7 @@ router.get('/:_id', async (request, response) => {
 
     }
     catch(err) {
-        response.status(500).send(errorHandler.getError(err));
+        response.status(500).send( { error: err });
     }
 });
 
@@ -51,7 +51,7 @@ router.post('/', async (request, response) => {
 
     }
     catch(err) {
-        response.status(500).send(errorHandler.getError(err));
+        response.status(500).send( { error: err });
     }
 });
 
@@ -73,7 +73,7 @@ router.put('/:_id', async (request, response) => {
         response.json(updateRule);
     }
     catch(err){
-        response.status(500).send(errorHandler.getError(err));
+        response.status(500).send( { error: err });
     }
 });
 
@@ -97,7 +97,7 @@ router.patch('/:_id', async (request, response) => {
         response.json(updateRule);
     }
     catch(err){
-        response.status(500).send(errorHandler.getError(err));
+        response.status(500).send( { error: err });
     }
 });
 
@@ -108,7 +108,7 @@ router.delete('/:_id', async (request, response) => {
         response.sendStatus(204);
     }
     catch(err) {
-        response.status(500).send(errorHandler.getError(err));
+        response.status(500).send( { error: err });
     }
 });
 

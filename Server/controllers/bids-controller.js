@@ -12,7 +12,7 @@ router.get('/', async (request, response) => {
         response.json(bids);
     }
     catch(err){
-        response.status(500).send(errorHandler.getError(err));
+        response.status(500).send( { error: err });
     }
 });
 
@@ -28,7 +28,7 @@ router.get('/:id', async (request, response) => {
         response.json(bid);
     }
     catch(err){
-        response.status(500).send(errorHandler.getError(err));
+        response.status(500).send( { error: err });
     }
 });
 
@@ -40,7 +40,7 @@ router.post('/', async (request, response) => {
         //validate bid
         const error = await bid.validate();
         if(error) {
-            response.status(400).send(error.message);
+            response.status(400).send( { error: error });
             return;
         }
 
@@ -49,7 +49,7 @@ router.post('/', async (request, response) => {
         
     }
     catch(err){
-        response.status(500).send(errorHandler.getError(err));
+        response.status(500).send( { error: err });
     }
 });
 
@@ -63,7 +63,7 @@ router.put('/:_id', async (request, response) => {
         //validate
         const error = bid.validateSync();
         if(error) {
-            response.status(400).send(error.message);
+            response.status(400).send( { error: error });
             return;
         }
 
@@ -75,7 +75,7 @@ router.put('/:_id', async (request, response) => {
         response.json(updateBid);
     }
     catch(err){
-        response.status(500).send(errorHandler.getError(err));
+        response.status(500).send( { error: err });
     }
 });
 
@@ -88,7 +88,7 @@ router.patch('/:_id', async (request, response) => {
         //validate
         const error = bid.validateSync();
         if(error) {
-            response.status(400).send(error.message);
+            response.status(400).send( { error: error });
             return;
         }
 
@@ -100,7 +100,7 @@ router.patch('/:_id', async (request, response) => {
         response.json(updateBid);
     }
     catch(err){
-        response.status(500).send(errorHandler.getError(err));
+        response.status(500).send( { error: err });
     }
 });
 
@@ -113,7 +113,7 @@ router.delete('/:id', async(request,response) => {
         response.sendStatus(204);
     }
     catch(err){
-        response.status(500).send(errorHandler.getError(err));
+        response.status(500).send( { error: err });
     }
 })
 
@@ -128,7 +128,7 @@ router.get('/join/bids-in-auction/:auctionId', async (request, response) => {
         response.json(bids);
     }
     catch(err){
-        response.status(500).send(err.message);
+        response.status(500).send( { error: err });
     }
 
 });

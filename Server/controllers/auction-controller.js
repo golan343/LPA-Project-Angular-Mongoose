@@ -13,7 +13,7 @@ router.get('/', async (request, response) => {
     }
     catch(err){
         
-        response.status(500).send(errorHandler.getError(err));
+        response.status(500).send( { error: err });
     }
 });
 // get all closed auction 
@@ -24,7 +24,7 @@ router.get('/get/closed', async (request, response) => {
     }
     catch(err){
         
-        response.status(500).send(errorHandler.getError(err));
+        response.status(500).send( { error: err });
     }
 });
 
@@ -36,7 +36,7 @@ router.get('/get/opened', async (request, response) => {
     }
     catch(err){
         
-        response.status(500).send(errorHandler.getError(err));
+        response.status(500).send( { error: err });
     }
 });
 
@@ -52,7 +52,7 @@ router.get('/:_id', async (request, response) => {
         response.json(auction);
     }
     catch(err){
-        response.status(500).send(errorHandler.getError(err));
+        response.status(500).send( { error: err });
     }
 });
 router.get('/get/last', async (request, response) => {
@@ -61,7 +61,7 @@ router.get('/get/last', async (request, response) => {
         response.json(auction);
     }
     catch(err){
-        response.status(500).send(errorHandler.getError(err));
+        response.status(500).send( { error: err });
     }
 });
 
@@ -73,7 +73,7 @@ router.post('/', async (request, response) => {
         //validate auction
         const error = await auction.validate();
         if(error) {
-            response.status(400).send(error.message);
+            response.status(400).send( { error: error });
             return;
         }
 
@@ -82,7 +82,7 @@ router.post('/', async (request, response) => {
         
     }
     catch(err){
-        response.status(500).send(errorHandler.getError(err));
+        response.status(500).send( { error: err });
     }
 });
 
@@ -96,7 +96,7 @@ router.put('/:_id', async (request, response) => {
         //validate
         const error = auction.validateSync();
         if(error) {
-            response.status(400).send(error.message);
+            response.status(400).send( { error: error });
             return;
         }
 
@@ -108,7 +108,7 @@ router.put('/:_id', async (request, response) => {
         response.json(updateAuction);
     }
     catch(err){
-        response.status(500).send(errorHandler.getError(err));
+        response.status(500).send( { error: err });
     }
 });
 
@@ -121,7 +121,7 @@ router.patch('/:_id', async (request, response) => {
         //validate
         const error = auction.validateSync();
         if(error) {
-            response.status(400).send(error.message);
+            response.status(400).send( { error: error });
             return;
         }
 
@@ -133,7 +133,7 @@ router.patch('/:_id', async (request, response) => {
         response.json(updateAuction);
     }
     catch(err){
-        response.status(500).send(errorHandler.getError(err));
+        response.status(500).send( { error: err });
     }
 });
 
@@ -146,7 +146,7 @@ router.delete('/:_id', async(request,response) => {
         response.sendStatus(204);
     }
     catch(err){
-        response.status(500).send(errorHandler.getError(err));
+        response.status(500).send( { error: err });
     }
 })
 

@@ -4,16 +4,20 @@ const mongoose = require('mongoose');
 const BidSchema = mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        ref: "User",
+        required: [true,  "is missing."]
     },
     auctionId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Auction"
+        ref: "Auction",
+        required: [true,  "is missing."]
     },
     offer: {
+        required: [true,  "is missing."],
         type: String
     },
     date: {
+        required: [true,  "is missing."],
         type: String
     }
 }, { 
