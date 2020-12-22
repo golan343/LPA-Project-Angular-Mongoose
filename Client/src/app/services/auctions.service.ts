@@ -14,25 +14,14 @@ export class AuctionsService {
 
   constructor(private http: HttpClient) { }
 
-  public addAuctionToServer(auction: AuctionModel): Promise<undefined> {
-    return //new Promise<undefined>((resolve, reject) => {
-        this.http
-            .post<AuctionModel>(BaseUrl + 'api/auctions', auction)
-          .toPromise().then(res => {
-                const action: Action = { type: ActionType.AddAuction, payload: res };
-                store.dispatch(action);
-<<<<<<< HEAD
-              // resolve(); // דיווח הצלחה
-            }).catch(err => {
-              //  reject(err); // דיווח כשלון
-=======
-                resolve;
-            }, err => {
-                reject(err); // דיווח כשלון
->>>>>>> master
-            });
-
-}
+  public addAuctionToServer(auction: AuctionModel): Promise<void> {
+    return this.http
+      .post<AuctionModel>(BaseUrl + 'api/auctions', auction)
+      .toPromise().then(res => {
+      }).catch(err => {
+        console.log(err); // דיווח כשלון
+      });
+  }
 
   // tslint:disable-next-line: typedef
   public getAllAuctions() {
