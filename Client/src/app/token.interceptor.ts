@@ -11,7 +11,7 @@ export class TokenInterceptor implements HttpInterceptor {
   // tslint:disable-next-line: typedef
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let authReq = req;
-        if (this.accountService.isUserLoggedIn()){
+        if (this.accountService.isLogin) {
             authReq = req.clone({
                 headers: req.headers.set('Authorization', 'Bearer ' + JSON.parse(this.cookieService.get('token')))
             });

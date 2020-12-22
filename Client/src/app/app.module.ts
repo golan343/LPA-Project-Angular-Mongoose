@@ -21,7 +21,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AppRoutingModule } from './app-routing.module';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { CookieService } from 'ngx-cookie-service';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -50,9 +49,9 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { LocationsComponent } from './components/locations/locations.component';
 import { RulesComponent } from './components/rules/rules.component';
-import { ScrollPositionDirective } from './directives/scroll-position.directive';
 import { ShowPasswordDirective } from './directives/show-password.directive';
-import { LoaderComponent } from './components/loader/loader.component'
+import { LoaderComponent } from './components/loader/loader.component';
+import { AuctionItemComponent } from './components/auction-item/auction-item.component'
 
 
 const globalSettings: RecaptchaSettings = { siteKey: '6LeFTeoZAAAAAOm4L0qfozbCzOYa3kzs_3zeCgUY' }
@@ -77,9 +76,9 @@ const globalSettings: RecaptchaSettings = { siteKey: '6LeFTeoZAAAAAOm4L0qfozbCzO
     ContactUsComponent,
     LocationsComponent,
     RulesComponent,
-    ScrollPositionDirective,
     ShowPasswordDirective,
-    LoaderComponent
+    LoaderComponent,
+    AuctionItemComponent
 
   ],
   imports: [
@@ -111,7 +110,6 @@ const globalSettings: RecaptchaSettings = { siteKey: '6LeFTeoZAAAAAOm4L0qfozbCzO
     RecaptchaModule,
     RecaptchaFormsModule,
     FlexLayoutModule,
-    MatDatepickerModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyA2wURHwwXpa8qENVlEumlR87zxya7Xy00'
     }),
@@ -121,7 +119,7 @@ const globalSettings: RecaptchaSettings = { siteKey: '6LeFTeoZAAAAAOm4L0qfozbCzO
   ],
   providers: [CookieService,
     // { provide: RECAPTCHA_SETTINGS, useValue: globalSettings },
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpLoadingInterceptor,

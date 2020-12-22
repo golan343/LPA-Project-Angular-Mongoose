@@ -1,0 +1,69 @@
+.lastAuction {
+    background-repeat: no-repeat;
+    padding-bottom: 50px;
+    margin: 5% auto;
+    width: 1000px;
+    height: 600px;
+    animation: fadeIn 6s linear ;
+  }
+  
+.top {
+    z-index: 2;
+  }
+  .top h4 {
+    margin-top: 0.7%;
+  }
+  .lastAuction img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0;
+    height: 100%;
+    width: 100%;
+  }
+  .my-bid {
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+    margin: 0 auto 0 0;
+    z-index: 2;
+  }
+  .my-bid  span {
+    font-size: 1.6rem;
+  }
+  .my-bid  i{color:green;font-size: 1.4rem;}
+  .my-bid  small{font-size: 1.4rem;}
+  .my-bid h4 {
+    margin: 1% 0;
+    z-index: 2;
+  }
+  .my-bid .inline-block.fadding-white.mr-l{
+    padding: 2px;
+  }
+  .my-bid  b {
+    color: #000;
+    font-size: 2rem;
+    direction: rtl;
+    background-color: rgba(256, 255, 255, 1);
+  }
+  .datesDiv {
+    position: absolute;
+    width: 90%;
+    bottom: 4%;
+    left: 5%;
+    font-weight: bold;
+  }
+  .datesDiv > p {
+    width: 40%;
+  }
+  .datesDiv > p b {
+    font-size: 1.5rem;
+    background: rgba(255, 255, 255, 0.38);
+    margin-left: 2%;
+    color: #000;
+    padding: 1% 2%;
+  }
+  .datesDiv > p> span{
+    font-size: 1.5rem;
+  }
+  

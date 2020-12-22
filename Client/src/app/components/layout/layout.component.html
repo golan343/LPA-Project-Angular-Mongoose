@@ -2,7 +2,7 @@
 <div>
   <div class="flex ">
     <nav [class]="menuColor">
-      <div appScrollPosition class="wrap flex-col fixed" [class]="{show:showMenu}">
+      <div class="wrap flex-col fixed" [class]="{show:showMenu}">
         <div class="logo" (click)="moveToHome()"></div>
         <ul>
           <li><a routerLink="/live" > Live auctions </a></li>
@@ -17,8 +17,8 @@
         
 
     </nav>
-    <main [@fadeAnimation]="o.isActivated ? o.activatedRoute : ''">
-      <router-outlet #o="outlet"></router-outlet>
+    <main>
+      <router-outlet></router-outlet>
     </main>
   </div>
   <footer>
@@ -29,5 +29,5 @@
     </div>
   </footer>
   <app-dialog></app-dialog>
+  <app-loader></app-loader>
 </div>
-<app-loader></app-loader>

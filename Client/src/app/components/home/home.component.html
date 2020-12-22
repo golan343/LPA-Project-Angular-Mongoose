@@ -1,13 +1,13 @@
 <div class="home">
 
-    <section #first class="firstSection ">
+    <section class="firstSection ">
         <div class="mainContent">
             <div class="secondHeader">
                 <h1>We are</h1>
                 <h2>LOW PRICE AUCTION</h2>
             </div>
-            <img class="loader" *ngIf="!auctions" src="/assets/images/loader.gif" alt="">
-            <div *ngIf="auctions" class="lastAuction l-padding relative">
+            <!-- <img class="loader" *ngIf="!auctions" src="/assets/images/loader.gif" alt=""> -->
+            <!-- <div *ngIf="auctions" class="lastAuction l-padding relative">
                 <img [hidden]="!auctions" [class]="{fadein:auctions}"
                     src="{{BaseUrl}}uploads/{{auctions[0].imageFileName}}" alt="{{auctions[0].name}}">
                 <div class="top border-bottom both relative">
@@ -16,18 +16,25 @@
                 </div>
 
                 <div class="my-bid relative">
-                    <h4><span>Remaining offers </span><i>{{numberOfproposal}}</i><span>/</span><small>{{numberOfBids}}</small></h4>
+                    <div>
+                        <h4 class="inline-block"><span>Remaining offers </span></h4>
+                        <div class="inline-block fadding-white mr-l">
+                            <i>{{numberOfproposal}}</i><span>/</span><small>{{numberOfBids}}</small>
+                        </div>
+                    </div>
                     <button class="auctionBtn" (click)="showAuction(auctions[0]._id)">Place My Bid</button>
                 </div>
 
                 <div class="datesDiv relative">
-                    <!-- <p class="left"><span>Starts:</span><b>{{auctions[0].startDate.replace('T', ' ')}}</b> </p> -->
+                    <p class="left"><span>Starts:</span><b>{{auctions[0].startDate.replace('T', ' ')}}</b> </p>
                     <p class="right">
                         <span>price :</span><b>{{auctions[0].bidPrice | currency}}</b>
-                        <!-- <span>Ends:</span><b>{{auctions[0].endDate.replace('T', ' ')}}</b>  -->
+                        <span>Ends:</span><b>{{auctions[0].endDate.replace('T', ' ')}}</b>
                     </p>
                 </div>
-            </div>
+            </div> -->
+            <app-auction-item [auction]="auction" [numberOfproposal]="numberOfproposal" [numberOfBids]="numberOfBids">
+            </app-auction-item>
         </div>
     </section>
     <section #second class="fwh-slide fwh-slide section-how-its-work ">
@@ -55,7 +62,8 @@
                 <div class="padding">
                     <button (click)="goToRules()"> View auction rules </button>
                 </div>
-
+                <div class="strip">
+                </div>
 
             </div>
         </div>
@@ -63,8 +71,9 @@
 
     <section #third class="fwh-slide section-about-new-auction ">
         <div class="mainContent">
-            <h2>Get to know about a new auction opening</h2>
-            <h3>Your Email here:</h3>
+            <h3>Get to know about a new auction opening</h3>
+            <h2>Your Email here:
+            </h2>
             <div class="wrap-email">
                 <input type="email" name="email" required>
                 <button (click)="sendEmail()"> Send </button>
@@ -91,8 +100,8 @@
 
     <section #fifth class="fwh-slide section-place-my-bid ">
         <div class="mainContent center">
-            <button *ngIf="!accountService.isUserLoggedIn()" (click)="login()"> i want to place a bid!</button>
-            <button *ngIf="accountService.isUserLoggedIn()" (click)="router.navigateByUrl('/live')"> i want to place a
+            <button *ngIf="!accountService.isLogin" (click)="login()"> i want to place a bid!</button>
+            <button *ngIf="accountService.isLogin" (click)="router.navigateByUrl('/live')"> i want to place a
                 bid!</button>
         </div>
     </section>

@@ -1,34 +1,43 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { AccountService } from 'src/app/services/account.service';
 import { MobileService } from 'src/app/services/mobile.service';
 import { DialogData } from 'src/app/ui/model/dialog-data';
 import { DialogService } from 'src/app/ui/dialog.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   showMobile: boolean;
+  isLogin: boolean;
+  subscriberLogin: Subscription;
   constructor(private router: Router,
     public accountService: AccountService,
     private cookieService: CookieService,
     private dialogLocalsService: DialogService,
     private mobile: MobileService
      ) { }
+  ngOnDestroy(): void {
+    this.subscriberLogin.unsubscribe();
+  }
 
   ngOnInit(): void {
+    this.subscriberLogin = this.accountService.isLoginSubject.subscribe(isLogin => {
+      debugger;
+      this.isLogin = isLogin;
+    });
   }
   menuToggle() {
     this.showMobile = !this.showMobile;
     this.mobile.showMenuTrigger.next(this.showMobile);
   }
   public moveToHome(): void {
-    this.router.navigateByUrl('/home');
+    this.router.navigateByUrl('/');
   }
 
   public goToDashboard(): void {

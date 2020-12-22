@@ -1,10 +1,11 @@
-import { BaseUrl } from './../../../environments/environment';
-import { store } from './../../redux/store';
+import { BaseUrl, environment } from './../../../environments/environment';
 import { AuctionModel } from './../../models/auction-model';
 import { AuctionsService } from './../../services/auctions.service';
 import { Component, OnInit } from '@angular/core';
-import { Unsubscribe } from 'redux';
+import { BidsService } from '../../services/bids.service';
 import { Router } from '@angular/router';
+import { map, tap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-live-auctions',
@@ -14,34 +15,46 @@ import { Router } from '@angular/router';
 
 export class LiveAuctionsComponent implements OnInit {
   public auctions: AuctionModel[];
-  private unsubscribe: Unsubscribe;
+  private subscriberBids: Subscription;
   public BaseUrl = BaseUrl;
 
-  constructor(private auctionsService: AuctionsService, private router: Router) { }
+  constructor(private auctionsService: AuctionsService, private router: Router, private BidsService: BidsService,) { }
 
   // tslint:disable-next-line: typedef
-  async ngOnInit() {
-    this.unsubscribe = store.subscribe(() => {
-      this.auctions = store.getState().auctions.filter(a => a.status === true);
+  ngOnInit() {
+    this.auctionsService.getAllAuctions();
+    // this.unsubscribe = store.subscribe(() => {
+    //   this.auctions = store.getState().auctions.filter(a => a.status === true);
 
 
+    // });
+    // if (store.getState().auctions.length > 1) {
+    //   this.auctions = store.getState().auctions.filter(a => a.status === true);
+    // }
+    // else {
+    //   try {
+    //     await this.auctionsService.getAllAuctions();
+    //   }
+    //   catch (err) {
+    //     alert(err.message);
+    //   }
+    // }
+
+    this.auctionsService.subjectAuction.pipe(map(auctions => {
+      this.auctions = auctions.map(auc => {
+        return {
+          ...auc,
+          imageFileName: environment.BaseUrl + 'uploads/' + auc.imageFileName
+        }
+      });
+    })).subscribe(data => {
+      console.table(data);
     });
-    if (store.getState().auctions.length > 1) {
-      this.auctions = store.getState().auctions.filter(a => a.status === true);
-    }
-    else {
-      try {
-        await this.auctionsService.getAllAuctions();
-      }
-      catch (err) {
-        alert(err.message);
-      }
-    }
   }
 
   // tslint:disable-next-line: variable-name
   public showAuction(_id: string): void {
-    this.router.navigateByUrl('/auctions/' + _id);
+    this.router.navigate(['/auctions/', _id]);
 
   }
 
