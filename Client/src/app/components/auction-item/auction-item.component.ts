@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuctionModel } from 'src/app/models/auction-model';
+import { AccountService } from 'src/app/services/account.service';
+import { DialogData } from 'src/app/ui/model/dialog-data';
 import { environment } from 'src/environments/environment';
 import { AuctionsService } from '../../services/auctions.service';
 
@@ -18,9 +20,11 @@ export class AuctionItemComponent implements OnInit {
   numberOfBids: number;
   @Input()
   numberOfproposal: number;
+  @Input()
+  placeBisText = 'Place my bid';
   constructor(private router: Router,
-
-    private auctionService: AuctionsService,
+    
+    private account: AccountService,
     private dialogLocalsService: DialogService) { }
 
   ngOnInit(): void {
@@ -28,7 +32,15 @@ export class AuctionItemComponent implements OnInit {
   }
 
   showAuction(_id: string): void {
-    this.router.navigateByUrl('/auctions/' + _id);
+    if (this.account.isLogin) {
+      this.router.navigateByUrl('/auctions/' + _id);
+    } else {
+      const dialog = new DialogData('Login');
+      dialog.text = "In Order to place this You need to sign in first";
+      dialog.show = true;
+      this.dialogLocalsService.subjectType.next(dialog);
+    }
+
   }
 
 }

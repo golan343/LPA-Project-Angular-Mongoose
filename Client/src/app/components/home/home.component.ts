@@ -48,29 +48,17 @@ export class HomeComponent implements OnInit, OnDestroy {
     alert('function not available right now');
   }
   ngOnInit() {
-    try {
-      this.auctionService.getLastAuction().subscribe(auctionsResult => {
-        debugger;
+
+    this.auctionService.getLastAuction().subscribe(auctionsResult => {
         const Last = auctionsResult[0];
         Last.imageFileName = environment.BaseUrl + 'uploads/' + Last.imageFileName;
         this.auction = Last;
       });
-      // store.subscribe(() => this.auctions = store.getState().auctions);
-      // if (store.getState().auctions.length === 0 || store.getState().auctions.length > 1 ) {
-      //   await 
-      // }
-      // else {
-      //   this.auctions = store.getState().auctions;
-      // }
       this.subscriberBids = this.BidsService.subjectBidList.subscribe(bids => {
         this.numberOfBids = bids.length;
         this.numberOfproposal = Math.floor(bids.length * 0.9);
       });
-    }
-    catch(err){
-      alert(err.message);
-    }
-    console.log(store.getState());
+
   }
 
   public login(): void {

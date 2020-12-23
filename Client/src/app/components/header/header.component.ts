@@ -28,7 +28,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscriberLogin = this.accountService.isLoginSubject.subscribe(isLogin => {
-      debugger;
       this.isLogin = isLogin;
     });
   }
