@@ -1,7 +1,8 @@
 import { AccountService } from '../../services/account.service';
-import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { errorModel, UserModel, validationConstrains } from 'src/app/models/user-model';
+import { DialogService } from '../dialog.service';
+import { DialogData } from '../model/dialog-data';
 
 @Component({
   selector: 'app-register',
@@ -16,38 +17,45 @@ export class RegisterComponent implements OnInit {
 
   public user = new UserModel();
   error = new errorModel();
+  errorMsg = '';
   currentStep = 1;
   steps = 3;
   backBtn = 'Back';
   nextBtn = 'Next Step';
   constructor(
     private accountService: AccountService,
-    public router: Router) { }
-  public async register() {
-    try {
-      this.user.roleId = '5f58ba6355eac12930d7b3ef';
-      console.log(this.user);
-      await this.accountService.addUser(this.user);
-      this.router.navigateByUrl('/home');
-    }
-    catch (err) {
-      console.log(err)
-    }
-  }
+    private dialog: DialogService
+    // public router: Router
+  ) { }
+  public register() {
 
+    this.user.roleId = '5f58ba6355eac12930d7b3ef';
+    this.accountService.addUser(this.user).then(result => {
+      const d = new DialogData('');
+      d.show = true;
+      d.title = 'you have sign in successfully!';
+      this.dialog.subjectType.next(d);
+    }).catch(err => {
+      console.table(err);
+
+    });
+
+
+  }
   public resolved(captchaResponse: string) {
     console.log(`Resolved captcha with response: ${captchaResponse}`);
   }
   back() {
+    this.errorMsg = '';
     if (this.currentStep == this.steps) {
       this.nextBtn = 'Next Step';
     }
     if (this.currentStep > 1) {
       this.currentStep -= 1;
     }
-
   }
   next() {
+    this.errorMsg = '';
     if (this.currentStep == this.steps) {
       this.register();
     }
@@ -74,7 +82,14 @@ export class RegisterComponent implements OnInit {
           pattarn: /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{8,}$/g,
           pattarnErrorMsg: 'password must contain at least 8 characters one uppercase letter and one lowercase letter'
         });
+
         return this.error.validate(constrainsFirst) && this.error.validate(constrainsLast) && this.error.validate(constrainsPassword);
+      }
+      case 2: {
+        const constrainsCountry = new validationConstrains({ prop: 'country', content: this.user.country, isReqire: true, errorMsg: 'country Name is missing' });
+        const constrainsCity = new validationConstrains({ prop: 'city', content: this.user.city, isReqire: true, errorMsg: 'city Name is missing' });
+        const constrainsStreet = new validationConstrains({ prop: 'street', content: this.user.street, isReqire: true, errorMsg: 'street Name is missing' });
+        return this.error.validate(constrainsCountry) && this.error.validate(constrainsCity) && this.error.validate(constrainsStreet);
       }
       case 3: {
         const constrainsEmail = new validationConstrains({
@@ -85,7 +100,8 @@ export class RegisterComponent implements OnInit {
           pattarn: /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/g,
           pattarnErrorMsg: 'Email must be valid example@example.com'
         });
-        return this.error.validate(constrainsEmail);
+        const constrainsbirthDate = new validationConstrains({ prop: 'birthDate', content: this.user.birthDate, isReqire: true, errorMsg: 'birth Date Name is missing' });
+        return this.error.validate(constrainsEmail) && this.error.validate(constrainsbirthDate);
       }
 
     }

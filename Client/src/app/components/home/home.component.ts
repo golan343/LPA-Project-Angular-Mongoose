@@ -1,5 +1,4 @@
-import { BaseUrl } from './../../../environments/environment';
-import { Unsubscribe } from 'redux';
+import { BaseUrl, environment } from './../../../environments/environment';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuctionModel } from 'src/app/models/auction-model';
@@ -18,8 +17,7 @@ import { Subscription } from 'rxjs';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-  public auctions: AuctionModel[];
-  public unsubscribe: Unsubscribe;
+  public auction: AuctionModel;
   numberOfBids: number;
   numberOfproposal: number;
   subscriberBids: Subscription;
@@ -36,8 +34,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscriberBids.unsubscribe();
   }
+  ngAfterViewInit() {
 
-  public showAuction(_id: string): void {
+  }
+  showAuction(_id: string): void {
     this.router.navigateByUrl('/auctions/' + _id);
   }
 
@@ -47,25 +47,18 @@ export class HomeComponent implements OnInit, OnDestroy {
   public sendEmail(): void {
     alert('function not available right now');
   }
-  async ngOnInit() {
-    try {
+  ngOnInit() {
 
-      this.unsubscribe = store.subscribe(() => this.auctions = store.getState().auctions);
-      if (store.getState().auctions.length === 0 || store.getState().auctions.length > 1 ) {
-        await this.auctionService.getLastAuction();
-      }
-      else {
-        this.auctions = store.getState().auctions;
-      }
+    this.auctionService.getLastAuction().subscribe(auctionsResult => {
+        const Last = auctionsResult[0];
+        Last.imageFileName = environment.BaseUrl + 'uploads/' + Last.imageFileName;
+        this.auction = Last;
+      });
       this.subscriberBids = this.BidsService.subjectBidList.subscribe(bids => {
         this.numberOfBids = bids.length;
         this.numberOfproposal = Math.floor(bids.length * 0.9);
-      })
-    }
-    catch(err){
-      alert(err.message);
-    }
-    console.log(store.getState());
+      });
+
   }
 
   public login(): void {

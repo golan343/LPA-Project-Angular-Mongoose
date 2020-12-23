@@ -18,7 +18,7 @@ import { RulesComponent } from './components/rules/rules.component';
 
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
+  { path: '', component: HomeComponent },
   { path: 'how-its-work', component: HowItsWorkComponent },
   { path: 'about', component: AboutUsComponent },
   { path: 'rules', component: RulesComponent },
@@ -28,9 +28,9 @@ const routes: Routes = [
   { path: 'add-auction', component: InsertComponent, canActivate: [AdminGuard] },
   { path: 'dashboard', loadChildren: () => import('./components/dashboard/dashboard.module').then(d => d.DashboardModule) },
   // { path: 'register', component: RegisterComponent },
-  { path: 'live', component: LiveAuctionsComponent, canActivate: [AccountGuard]  },
+  { path: 'live', component: LiveAuctionsComponent },
   { path: 'closed', component: ClosedComponent, canActivate: [AccountGuard]  },
-  { path: '', redirectTo: '/home', pathMatch: 'full' }, // pathMath - exact empty string.
+  { path: '', redirectTo: '/', pathMatch: 'full' }, // pathMath - exact empty string.
   { path: '**', component: PageNotFoundComponent } // Must be the last route!!
 ];
 

@@ -16,7 +16,8 @@ export class AccountService {
   public user: UserModel;
   public helper = new JwtHelperService();
   public decodedToken: any;
-
+  isLoginSubject = new BehaviorSubject<boolean>(false);
+  isLogin: boolean;
   constructor(private router: Router, private http: HttpClient, private cookieService: CookieService) { }
 
   public get currentUserValue(): UserModel {
@@ -26,9 +27,11 @@ export class AccountService {
     const _id = JSON.parse(this.cookieService.get('user')).user._id;
     return _id;
   }
-  public isUserLoggedIn(): any {
+  public isUserLoggedIn(): void {
     const token = this.cookieService.get('token');
-    return !this.helper.isTokenExpired(token);
+    this.isLogin = !this.helper.isTokenExpired(token);
+    console.log(this);
+    this.isLoginSubject.next(this.isLogin)
   }
   public getToken(): string {
     return this.cookieService.get('token');
@@ -39,7 +42,7 @@ export class AccountService {
   }
 
   public isAdmin(): boolean {
-    if (this.isUserLoggedIn()) {
+    if (this.isLogin) {
       const role = JSON.parse(this.cookieService.get('user')).user.roleId;
       if (role === '5f58ba8855eac12930d7b405' || role === '5f58ba9a55eac12930d7b40c' || role === '5f58badd55eac12930d7b427'){
         return true;

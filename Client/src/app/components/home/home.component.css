@@ -8,59 +8,6 @@ h4 {
   padding: 0;
   margin: 0px;
 }
-.top {
-  z-index: 2;
-}
-.top h4 {
-  margin-top: 0.7%;
-}
-.lastAuction img {
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 0;
-  height: 100%;
-  width: 100%;
-}
-.my-bid {
-  display: inline-block;
-  width: 100%;
-  text-align: left;
-  margin: 0 auto 0 0;
-  z-index: 2;
-}
-.my-bid h4 span {
-  font-size: 1.6rem;
-}
-.my-bid h4 i{color:green;font-size: 1.4rem;}
-.my-bid h4 small{font-size: 1.4rem;}
-.my-bid h4 {
-  margin: 1% 0;
-  z-index: 2;
-}
-.my-bid h4 b {
-  color: #000;
-  font-size: 2rem;
-  direction: rtl;
-  background-color: rgba(256, 255, 255, 1);
-}
-.datesDiv {
-  position: absolute;
-  width: 90%;
-  bottom: 4%;
-  left: 5%;
-  font-weight: bold;
-}
-.datesDiv > p {
-  width: 40%;
-}
-.datesDiv > p b {
-  font-size: 1.5rem;
-  background: rgba(255, 255, 255, 0.38);
-  margin-left: 2%;
-  color: #000;
-  padding: 1% 2%;
-}
 
 .home {
   width: 100%;
@@ -69,22 +16,7 @@ section {
   width: 100%;
 }
 
-.firstSection {
-  background: #0e1119;
-}
 
-.firstSection {
-  font-style: normal;
-  text-align: center;
-}
-
-.firstSection .secondHeader {
-  position: relative;
-  margin: auto;
-  height: 164px;
-  margin-bottom: 2rem;
-  text-align: center;
-}
 .firstSection .secondHeader h2 {
   color: white;
   margin-top: 0;
@@ -104,14 +36,6 @@ section {
   font-size: 1000%;
   animation: fadeIn 6s linear;
   position: relative;
-}
-.lastAuction {
-  background-repeat: no-repeat;
-  padding-bottom: 50px;
-  margin: 5% auto;
-  width: 1000px;
-  height: 600px;
-  animation: fadeIn 6s linear ;
 }
 
 

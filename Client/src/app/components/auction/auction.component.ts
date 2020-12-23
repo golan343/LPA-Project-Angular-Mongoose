@@ -9,7 +9,6 @@ import { Unsubscribe } from 'redux';
 import { CookieService } from 'ngx-cookie-service';
 import * as CanvasJS from '../../../assets/canvasjs.min';
 import { AccountService } from 'src/app/services/account.service';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UpdateStatusComponent } from '../update-status/update-status.component';
 
 
@@ -36,8 +35,7 @@ export class AuctionComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private cookieService: CookieService,
     private bidService: BidsService,
-    private accountService: AccountService,
-    private dialog: MatDialog  ) { }
+    private accountService: AccountService) { }
 
   // tslint:disable-next-line: typedef
   async ngOnInit() {
@@ -137,16 +135,16 @@ export class AuctionComponent implements OnInit {
   
 
   public updateStatusDialog(): void {
-    const dialogRef = this.dialog.open(UpdateStatusComponent, {
-      panelClass: 'custom-dialog-container',
-      width: '450px',
-      height: '300px',
-      data: this.auction
-    });
+    // const dialogRef = this.dialog.open(UpdateStatusComponent, {
+    //   panelClass: 'custom-dialog-container',
+    //   width: '450px',
+    //   height: '300px',
+    //   data: this.auction
+    // });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed');
+    // });
   }
 
 }

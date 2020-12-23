@@ -3,8 +3,9 @@
     margin: 3% auto 3% auto;}
 .register h1, .register h2{display: block;}
 .register *{color:#000;}
-.register .error{color:#fff;}
+.register .error{color:#fff;    padding: 10px 5px;top: -100%;}
 .register .flex{justify-content: space-between;  align-items: center;}
 .register .input-container{text-align: left;}
 .register .input-container label{display: block;}
 .register  .step .first {height: 30vh;}
+.register .wrap-email{overflow: visible;}

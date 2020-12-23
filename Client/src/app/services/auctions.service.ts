@@ -5,13 +5,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuctionModel } from '../models/auction-model';
 import { Action } from '../redux/action';
-import { BidsService } from './bids.service';
+//import { BidsService } from './bids.service';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuctionsService {
-
+  subjectAuction = new Subject<AuctionModel[]>();
   constructor(private http: HttpClient) { }
 
   public addAuctionToServer(auction: AuctionModel): Promise<void> {
@@ -27,9 +28,10 @@ export class AuctionsService {
   public getAllAuctions() {
     this.http
     .get<AuctionModel[]>(BaseUrl + 'api/auctions')
-    .subscribe(res => {
-      const action: Action = { type: ActionType.GetAllAuctions, payload: res };
-      store.dispatch(action);
+      .subscribe(AuctionsResult => {
+        this.subjectAuction.next(AuctionsResult);
+      // const action: Action = { type: ActionType.GetAllAuctions, payload: res };
+      // store.dispatch(action);
     }, err => {
         console.log(err.message);
     });
@@ -67,15 +69,15 @@ export class AuctionsService {
       console.log(err.message);
     });
   }
-  public getLastAuction(): void {
-    this.http.get<AuctionModel>(BaseUrl + 'api/auctions/get/last')
-    .subscribe(async res => {
-      const action: Action = { type: ActionType.GetLastAuction, payload: res };
-      store.dispatch(action);
-    },
-    err => {
-      console.log(err.message);
-    });
+  public getLastAuction(): Observable<AuctionModel[]> {
+    return this.http.get<AuctionModel[]>(BaseUrl + 'api/auctions/get/last');
+    // .subscribe(async res => {
+    //   // const action: Action = { type: ActionType.GetLastAuction, payload: res };
+    //   // store.dispatch(action);
+    // },
+    // err => {
+    //   console.log(err.message);
+    // });
   }
 
   public async updateAuction(auction: AuctionModel): Promise<any>{

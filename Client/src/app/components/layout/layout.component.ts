@@ -3,7 +3,6 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
 import { CookieService } from 'ngx-cookie-service';
-import { MatDialog } from '@angular/material/dialog';
 import { fadeAnimation } from './../../models/animation'
 import { MobileService } from 'src/app/services/mobile.service';
 import { Subscription } from 'rxjs';
@@ -22,7 +21,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
   public constructor(private bpo: BreakpointObserver,
     private router: Router,
     public accountService: AccountService,
-    public dialog: MatDialog,
     private cookieService: CookieService,
     private mobile: MobileService,
     private bidsService: BidsService
@@ -31,6 +29,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.subscribeMenu.unsubscribe();
   }
   ngOnInit(): void {
+    this.accountService.isUserLoggedIn();
     this.bidsService.getAllBids();
     this.subscribeMenu = this.mobile.showMenuTrigger.subscribe(show => {
       this.showMenu = show;
@@ -38,7 +37,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.menuColor = { black: true };
   }
   @HostListener('window:scroll', ['$event']) private onScroll($event: Event): void {
-    // console.log(window.scrollY);
     if (window.scrollY > window.innerHeight / 10) {
       this.menuColor = { black: true };
     }
@@ -86,6 +84,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
   }
 
   public moveToHome(): void {
-    this.router.navigateByUrl('/home');
+    this.router.navigateByUrl('/');
   }
 }

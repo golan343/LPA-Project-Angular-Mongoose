@@ -10,13 +10,14 @@ const router = express.Router();
 
 
 router.post("/register", async (request, response) => {
-    try{
+    try {
+        
         const user = new User(request.body);
-
+        console.log(user)
         const error = await user.validate();
         if(error){
             console.log(error);
-            response.status(400).send( { error: error });
+            response.status(400).json(error);
             return;
         }
 
@@ -31,7 +32,7 @@ router.post("/register", async (request, response) => {
     }
     catch(err){
         console.log(err);
-        response.status(500).send( { error: err });
+        response.status(500).json(err);
     }
 
 });
