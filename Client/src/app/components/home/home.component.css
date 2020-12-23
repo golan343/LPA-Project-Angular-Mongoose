@@ -195,8 +195,10 @@ section {
 .fwh-slide.section-about-new-auction > .mainContent > * {
   color: #000000;
 }
-.fwh-slide.section-about-new-auction > .mainContent > h4 {
-  font-weight: 100;
+.fwh-slide.section-about-new-auction > .mainContent > h2 {
+  font-size: 48px;
+  /* font-weight: 400; */
+
 }
 
 .fwh-slide.section-white {

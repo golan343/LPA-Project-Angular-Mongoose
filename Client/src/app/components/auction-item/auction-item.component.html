@@ -9,7 +9,11 @@
         <div>
             <h4 class="inline-block"><span>Remaining offers </span></h4>
             <div class="inline-block fadding-white mr-l">
+<<<<<<< HEAD
                 <i>{{auction?.bidsCount}}</i><span>/</span><small>{{auction?.totalBids}}</small>
+=======
+                <i>{{auction?.totalBids - auction?.bidsCount}}</i>
+>>>>>>> master
             </div>
         </div>
         <button class="auctionBtn" (click)="showAuction(auction._id)">{{placeBisText}} </button>

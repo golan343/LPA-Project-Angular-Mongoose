@@ -1,0 +1,23 @@
+BaseUrl from environments = start url;
+
+api/auth/register <post>
+api/auth/login  <post>
+api/auth/logout <post>
+api/auth/:_id <patch>
+//-------------------
+api/auctions/ <get> //getAll
+api/auctions/:_id <get> //get one by id
+api/auctions/get/closed <get>
+api/auctions/get/opened <get>
+api/auctions/get/last <get>
+api/auctions/ <post> add auction
+api/auctions/:_id <put> update full auction
+api/auctions/:_id <patch> update partial auction
+api/auctions/:_id <delete> delete auction
+//------------------------------------------- 
+api/
+
+
+
+
+

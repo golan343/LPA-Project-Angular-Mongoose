@@ -16,12 +16,7 @@
                 </div>
 
                 <div class="my-bid relative">
-                    <div>
-                        <h4 class="inline-block"><span>Remaining offers </span></h4>
-                        <div class="inline-block fadding-white mr-l">
-                            <i>{{numberOfproposal}}</i><span>/</span><small>{{numberOfBids}}</small>
-                        </div>
-                    </div>
+                    <h4><span>Remaining offers </span><i>{{auctions[0].totalBids - auctions[0].bidsCount}}</i></h4>
                     <button class="auctionBtn" (click)="showAuction(auctions[0]._id)">Place My Bid</button>
                 </div>
 

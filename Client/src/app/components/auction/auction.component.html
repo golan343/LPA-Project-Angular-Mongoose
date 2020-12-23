@@ -10,8 +10,7 @@
         </div>
         <br><br>
         <div class="remainingOffers">
-            <h3>Remaining Offers</h3>
-            <p>2168</p>
+            <h3><span>Remaining Offers</span><br><i>{{auction.totalBids - auction.bidsCount}}</i></h3>
         </div>
         <div class="placeBid" *ngIf="auction.status">
             
