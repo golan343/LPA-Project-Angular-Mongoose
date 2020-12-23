@@ -54,7 +54,7 @@ export class InsertComponent implements OnInit {
       this.auction.maxOffer = this.newAuction.value.maxOfferControl;
       this.auction.createdBy = this.accountService.getUserId();
       this.auction.imageFileName = this.imageName;
-      this.auction.createdDate = new Date().toLocaleString();
+      this.auction.createdDate = new Date();
       console.log(this.auction);
       // await this.auctionService.addAuctionToServer(this.auction);
       Swal.fire('You are logged in', '', 'success');

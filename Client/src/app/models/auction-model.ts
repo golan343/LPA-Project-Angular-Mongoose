@@ -1,24 +1,28 @@
-export class AuctionModel {
+export class Auction {
+    bidPrice: string;
+    bidsCount: number;
+    createdDate: Date;
+    description: string;
+    endDate: string;
+    imageFileName: string;
+    maxOffer: number;
+    minOffer: number;
+    name: string;
+    price: string;
+    startDate: string;
+    status: boolean;
+    totalBids: number;
+    _id: string;
+}
+export class AuctionModel extends Auction {
     public constructor(
-        // tslint:disable-next-line: variable-name
-        public _id?: string,
         public siteId?: string,
         public ruleId?: string,
-        public name?: string,
         public winPrice?: string,
         public youtubeId?: string,
-        public startDate?: string,
-        public endDate?: string,
-        public imageFileName?: string,
-        public price?: string,
-        public description?: string,
-        public status?: boolean,
-        public createdDate?: string,
-        public minOffer?: string,
-        public maxOffer?: string,
-        public totalBids?: number,
         public bidPattern?: string,
-        public bidPrice?: string,
-        public createdBy?: string
-    ) { }
+
+    ) { super(); }
+    createdBy: string;
 }
+

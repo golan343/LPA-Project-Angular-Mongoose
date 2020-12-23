@@ -40,7 +40,7 @@ export class LiveAuctionsComponent implements OnInit {
     //   }
     // }
 
-    this.auctionsService.subjectAuction.pipe(map(auctions => {
+    this.auctionsService.subjectAuctions.pipe(map(auctions => {
       this.auctions = auctions.map(auc => {
         return {
           ...auc,

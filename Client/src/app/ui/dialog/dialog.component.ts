@@ -14,7 +14,6 @@ export class DialogComponent implements OnInit {
   constructor(private dialogService: DialogService) {
   }
   escape($event) {
-    console.log($event);
     if ($event.keyCode === 27) {
       this.close();
     }

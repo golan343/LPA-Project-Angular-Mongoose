@@ -9,7 +9,7 @@
     <div class="btn" *ngIf="!isLogin" (click)="login()" title="log in">
         <i class="log-in"></i>
     </div>
-    <div class="search" *ngIf="!isLogin"><a class="search-icon"></a></div>
+    <div class="search" *ngIf="isLogin"><a class="search-icon"></a></div>
     <div class="languages">
         <ul>
             <li></li>

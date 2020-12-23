@@ -12,7 +12,7 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class AuctionsService {
-  subjectAuction = new Subject<AuctionModel[]>();
+  subjectAuctions = new Subject<AuctionModel[]>();
   constructor(private http: HttpClient) { }
 
   public addAuctionToServer(auction: AuctionModel): Promise<void> {
@@ -29,7 +29,7 @@ export class AuctionsService {
     this.http
     .get<AuctionModel[]>(BaseUrl + 'api/auctions')
       .subscribe(AuctionsResult => {
-        this.subjectAuction.next(AuctionsResult);
+        this.subjectAuctions.next(AuctionsResult);
       // const action: Action = { type: ActionType.GetAllAuctions, payload: res };
       // store.dispatch(action);
     }, err => {
@@ -61,9 +61,10 @@ export class AuctionsService {
   // tslint:disable-next-line: variable-name
   public getAuction(_id: string): void {
     this.http.get<AuctionModel>(BaseUrl + 'api/auctions/' + _id)
-    .subscribe(res => {
-      const action: Action = { type: ActionType.GetOneAuction, payload: res };
-      store.dispatch(action);
+      .subscribe(res => {
+        this.subjectAuctions.next([res]);
+      // const action: Action = { type: ActionType.GetOneAuction, payload: res };
+      // store.dispatch(action);
     },
     err => {
       console.log(err.message);

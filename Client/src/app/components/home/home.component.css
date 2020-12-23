@@ -239,6 +239,9 @@ agm-map {
   }
 }
 @media only screen and (max-width: 880px) {
+  .firstSection .secondHeader h2{
+    position: static;
+  }
   .lastAuction {
     height: auto;
   }
@@ -253,28 +256,7 @@ agm-map {
     font-size: 6rem;
     position: static;
   }
-  .my-bid {
-    display: block;
-    text-align: center;
-    padding: 2% 0px;
-  }
-  .my-bid h4 {
-    margin-bottom: 5%;
-  }
-  .datesDiv {
-    display: flex;
-    bottom: 37%;
-    left: 5%;
-    justify-content: space-between;
-  }
-  .datesDiv p,
-  .datesDiv p b {
-    font-size: 1rem;
-  }
-  .firstSection .secondHeader h2 {
-    font-size: 4rem;
-    position: static;
-  }
+
   .fwh-slide.section-how-its-work
     > .mainContent
     > .how-its-work

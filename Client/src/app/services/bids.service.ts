@@ -6,22 +6,21 @@ import { Injectable } from '@angular/core';
 import { BidModel } from '../models/bid-model';
 import { ActionType } from '../redux/action-type';
 import { Subject } from 'rxjs';
-import { BidiModule } from '@angular/cdk/bidi';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class BidsService {
   subjectBidList = new Subject<BidModel[]>();
-  subjectBidsInAuction = new Subject<BidiModule[]>();
+  subjectBidsInAuction = new Subject<BidModel[]>();
   constructor(private http: HttpClient) { }
 
   public getAllBidsIncludingAuction(auctionId): void {
-    this.http.get<BidModel[]>(`${BaseUrl}api/bids/join/bids-in-auction/${auctionId}`)
+     this.http.get<BidModel[]>(`${BaseUrl}api/bids/join/bids-in-auction/${auctionId}`)
       .subscribe(bids => {
         this.subjectBidsInAuction.next(bids);
-      // const action: Action = { type: ActionType.GetBidsIncludingSpecificAuction, payload: bids };
-      // store.dispatch(action);
     });
   }
 
@@ -36,7 +35,7 @@ export class BidsService {
       });
   }
 
-  public getAllBids(): Promise<BidModel[] | any> {
+  public getAllBids(): Promise<BidModel[] | any | any> {
     return this.http.get<BidModel[]>(`${BaseUrl}api/bids`)
       .toPromise().then(bids => {
         this.subjectBidList.next(bids);

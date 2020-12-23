@@ -6,10 +6,10 @@
     </div>
 
     <div class="my-bid relative">
-        <div *ngIf="numberOfproposal">
+        <div>
             <h4 class="inline-block"><span>Remaining offers </span></h4>
             <div class="inline-block fadding-white mr-l">
-                <i>{{numberOfproposal}}</i><span>/</span><small>{{numberOfBids}}</small>
+                <i>{{auction?.bidsCount}}</i><span>/</span><small>{{auction?.totalBids}}</small>
             </div>
         </div>
         <button class="auctionBtn" (click)="showAuction(auction._id)">{{placeBisText}} </button>

@@ -73,6 +73,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.dialogLocalsService.subjectType.next(dialog);
   }
   public placeBid(){
-    
+    this.router.navigate(["live"]);
   }
 }

@@ -1,6 +1,6 @@
 import { BidsService } from './../../services/bids.service';
 import { BidModel } from './../../models/bid-model';
-import { BaseUrl } from './../../../environments/environment';
+import { BaseUrl, environment } from './../../../environments/environment';
 import { store } from './../../redux/store';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -9,7 +9,8 @@ import { Unsubscribe } from 'redux';
 import { CookieService } from 'ngx-cookie-service';
 import * as CanvasJS from '../../../assets/canvasjs.min';
 import { AccountService } from 'src/app/services/account.service';
-import { UpdateStatusComponent } from '../update-status/update-status.component';
+import { AuctionsService } from './../../services/auctions.service';
+
 
 
 @Component({
@@ -19,8 +20,6 @@ import { UpdateStatusComponent } from '../update-status/update-status.component'
 })
 export class AuctionComponent implements OnInit {
   public auction: AuctionModel;
-  public unsubscribe: Unsubscribe;
-  public BaseUrl = BaseUrl;
   public bid = new BidModel();
   public bids: BidModel[];
   public setDataPoints = [];
@@ -28,27 +27,43 @@ export class AuctionComponent implements OnInit {
   public unique;
   public highest;
   public common;
+  price: number;
 
 
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    private auctionService: AuctionsService,
     private cookieService: CookieService,
     private bidService: BidsService,
     private accountService: AccountService) { }
 
   // tslint:disable-next-line: typedef
   async ngOnInit() {
-    try{
-      const _id = this.activatedRoute.snapshot.params._id;
-      this.auction = store.getState().auctions.find(a => a._id === _id);
-      this.bid.auctionId = _id;
+    try {
+
+      const id = this.activatedRoute.snapshot.params._id;
+      this.auctionService.getAuction(id);
+      this.auctionService.subjectAuctions.subscribe(auctions => {
+        debugger;
+        this.auction = auctions.map(auc => {
+          return {
+            ...auc,
+            imageFileName: environment.BaseUrl + 'uploads/' + auc.imageFileName
+          }
+        })[0];
+        this.price = parseFloat(this.auction.price);
+      });
+      //  this.auction = store.getState().auctions.find(a => a._id === _id);
+      this.bid.auctionId = id;
       // -----------------
-      await this.bidService.getAllBidsIncludingAuction(_id);
-      this.unsubscribe = store.subscribe(() => this.bids = store.getState().bids);
-      setTimeout(() => {
+      this.bidService.getAllBidsIncludingAuction(id);
+      this.bidService.subjectBidsInAuction.subscribe(bids => {
+        this.bids = bids;
         this.checkUnique();
-      }, 500);
+      })
+      //this.unsubscribe = store.subscribe(() => this.bids = store.getState().bids);
+
       //
   }
     catch (err) {

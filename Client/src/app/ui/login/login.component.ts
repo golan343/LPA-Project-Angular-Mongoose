@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
         .subscribe(
           response => {
             this.dialogService.subjectType.next(new DialogData());
-            this.router.navigateByUrl('/');
+            location.reload();
 
           },
           err => {

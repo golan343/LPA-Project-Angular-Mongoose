@@ -67,3 +67,52 @@
     font-size: 1.5rem;
   }
   
+  @media only screen and (max-width: 1245px) {
+    .lastAuction {
+      width: 100%;
+      padding: 0px;
+    }
+  }
+  @media only screen and (max-width: 880px) {
+    .lastAuction {
+      height: auto;
+    }
+    .lastAuction img {
+      height: auto;
+      position: static;
+    }
+    .top{
+        position: absolute;
+        width: 80%;
+        top: 5%;
+        right: 10%;
+    }
+    .my-bid {
+        padding: 2% 0px;
+        position: absolute;
+        top: 11%;
+        left: 10%;
+        width: 40%;
+      }
+      .my-bid h4 {
+        margin-bottom: 5%;
+      }
+      .datesDiv {
+        display: flex;
+        bottom: 37%;
+        left: 5%;
+        justify-content: space-between;
+      }
+      .datesDiv p,
+      .datesDiv p b {
+        font-size: 1rem;
+      }
+      .firstSection .secondHeader h2 {
+        font-size: 4rem;
+        position: static;
+      }
+}
+@media only screen and (max-width: 450px) {
+    .my-bid {position: static; color:#fff; width: 100%;}
+    .datesDiv {color:#fff;}
+}

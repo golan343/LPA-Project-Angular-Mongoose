@@ -1,12 +1,12 @@
-<img class="loader" *ngIf="!auction" src="/assets/images/loader.gif" alt="">
 <div *ngIf="auction" class="auctionPage">
     <h1 *ngIf="!auction.status">Closed Auction</h1>
     <h1 *ngIf="auction.status">Live Auction</h1>
+    <h2>Place your bid and get a chance to win in one of our cars</h2>
     <div *ngIf='auction.status' class="bg">
-        <div  class="auction" style="background-image: url({{BaseUrl}}uploads/{{auction.imageFileName}});">
-            <p>{{ auction.name }}</p>
+        <div class="auction" [style.backgroundImage]="'url('+auction.imageFileName+')'">
+            <p>{{auction.name}}</p>
             <hr>
-            <p *ngIf="auction.status" class="valueAuction">Value: $ {{auction.price}} </p>
+            <p *ngIf="auction.status" class="valueAuction"><span><b>Price</b></span>: <span>{{price | currency}}</span> </p>
         </div>
         <br><br>
         <div class="remainingOffers">
