@@ -41,7 +41,7 @@ export class LiveAuctionsComponent implements OnInit {
     // }
 
     this.auctionsService.subjectAuction.pipe(map(auctions => {
-      this.auctions = auctions.map(auc => {
+      this.auctions = auctions.filter(auction => auction.status === true).map(auc => {
         return {
           ...auc,
           imageFileName: environment.BaseUrl + 'uploads/' + auc.imageFileName

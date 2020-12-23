@@ -2,7 +2,6 @@ import { BaseUrl, environment } from './../../../environments/environment';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuctionModel } from 'src/app/models/auction-model';
-import { store } from 'src/app/redux/store';
 import { AuctionsService } from 'src/app/services/auctions.service';
 import { AccountService } from 'src/app/services/account.service';
 import { DialogData } from 'src/app/ui/model/dialog-data';

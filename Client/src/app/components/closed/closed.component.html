@@ -4,7 +4,7 @@
     <h4>you have placed your bids these cars</h4>
     <div class="auctions">
         <!-- these are the auctions that are already closed -->
-        <div *ngFor="let auction of auctions;" class="auction" style="background-image: url({{BaseUrl}}uploads/{{auction.imageFileName}});">
+        <!-- <div *ngFor="let auction of auctions;" class="auction" style="background-image: url({{BaseUrl}}uploads/{{auction.imageFileName}});">
             <br>
             <p>{{ auction.name }}</p>
             <hr>
@@ -14,6 +14,12 @@
                <p> Starts: {{auction.startDate.replace('T', ' ')}}</p>
                 <p> Ends: {{auction.endDate.replace('T', ' ')}}</p>
             </div>
+        </div> -->
+        <section class="firstSection ">
+        
+            <div *ngFor="let auction of auctions" class="mainContent">
+                <app-auction-item [auction]="auction"></app-auction-item>
         </div>
+        </section>
     </div>
 </div>

@@ -1,6 +1,6 @@
 import { BidsService } from './../../services/bids.service';
 import { BidModel } from './../../models/bid-model';
-import { BaseUrl } from './../../../environments/environment';
+import { BaseUrl, environment } from './../../../environments/environment';
 import { store } from './../../redux/store';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -10,6 +10,8 @@ import { CookieService } from 'ngx-cookie-service';
 import * as CanvasJS from '../../../assets/canvasjs.min';
 import { AccountService } from 'src/app/services/account.service';
 import { UpdateStatusComponent } from '../update-status/update-status.component';
+import { AuctionsService } from 'src/app/services/auctions.service';
+import { filter, map } from 'rxjs/operators';
 
 
 @Component({
@@ -19,6 +21,7 @@ import { UpdateStatusComponent } from '../update-status/update-status.component'
 })
 export class AuctionComponent implements OnInit {
   public auction: AuctionModel;
+  public auctions: AuctionModel[];
   public unsubscribe: Unsubscribe;
   public BaseUrl = BaseUrl;
   public bid = new BidModel();
@@ -35,14 +38,32 @@ export class AuctionComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private cookieService: CookieService,
     private bidService: BidsService,
-    private accountService: AccountService) { }
+    private accountService: AccountService,
+    private auctionsService: AuctionsService) { }
 
   // tslint:disable-next-line: typedef
   async ngOnInit() {
     try{
       const _id = this.activatedRoute.snapshot.params._id;
-      this.auction = store.getState().auctions.find(a => a._id === _id);
       this.bid.auctionId = _id;
+      await this.auctionsService.getAllAuctions();
+      
+      this.auctionsService.subjectAuction.pipe(map(auctions => {
+        this.auction = auctions.find(a => a._id === _id);
+        console.log(this.auction);
+        console.log('test');
+      }));
+      // this.auctionsService.subjectAuction.pipe(map(auctions => {
+      //   this.auctions = auctions.filter(auction => auction.status === true).map(auc => {
+      //     return {
+      //       ...auc,
+      //       imageFileName: environment.BaseUrl + 'uploads/' + auc.imageFileName
+      //     }
+      //   });
+      // })).subscribe(data => {
+      //   console.table(data);
+      // });
+      
       // -----------------
       await this.bidService.getAllBidsIncludingAuction(_id);
       this.unsubscribe = store.subscribe(() => this.bids = store.getState().bids);
