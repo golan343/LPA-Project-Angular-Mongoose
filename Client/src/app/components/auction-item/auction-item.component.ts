@@ -31,7 +31,11 @@ export class AuctionItemComponent implements OnInit {
 
   showAuction(_id: string): void {
     if (this.account.isLogin) {
+      if (this.auction.status) {
       this.router.navigateByUrl('/auctions/' + _id);
+      } else {
+        this.router.navigateByUrl('/closed-auction/' + _id);
+      }
     } else {
       const dialog = new DialogData('Login');
       dialog.text = "In Order to place this You need to sign in first";

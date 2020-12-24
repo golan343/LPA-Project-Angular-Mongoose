@@ -14,6 +14,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 // import { RegisterComponent } from './components/register/register.component';
 import { ClosedComponent } from './components/closed/closed.component';
 import { RulesComponent } from './components/rules/rules.component';
+import { ClosedAuctionComponent } from './components/closed-auction/closed-auction.component';
 
 
 
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'contact', component: ContactUsComponent },
   { path: 'locations', component: LocationsComponent },
   { path: 'auctions/:_id', component: AuctionComponent },
+  { path: 'closed-auction/:id', component: ClosedAuctionComponent },
   { path: 'add-auction', component: InsertComponent, canActivate: [AdminGuard] },
   { path: 'dashboard', loadChildren: () => import('./components/dashboard/dashboard.module').then(d => d.DashboardModule) },
   // { path: 'register', component: RegisterComponent },

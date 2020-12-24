@@ -55,7 +55,6 @@ export class LiveAuctionsComponent implements OnInit {
   // tslint:disable-next-line: variable-name
   public showAuction(_id: string): void {
     this.router.navigate(['/auctions/', _id]);
-
   }
 
 

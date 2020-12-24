@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DialogData } from '../model/dialog-data';
 import { DialogService } from './../dialog.service';
 @Component({
   selector: 'app-dialog',
@@ -6,11 +7,7 @@ import { DialogService } from './../dialog.service';
   styleUrls: ['./dialog.component.css']
 })
 export class DialogComponent implements OnInit {
-  title: string;
-  text: string;
-  show: boolean;
-  wide: boolean;
-  component: string;
+  dialogData: DialogData;
   constructor(private dialogService: DialogService) {
   }
   escape($event) {
@@ -20,19 +17,12 @@ export class DialogComponent implements OnInit {
   } 
   ngOnInit(): void {
     this.dialogService.subjectType.subscribe(arg => {
-      this.component = arg.componentName;
-      this.text = arg.text;
-      this.title = arg.title;
-      this.show = !!arg.componentName;;
-      this.wide = arg.wide;
+      this.dialogData = arg;
       window.addEventListener('keydown', this.escape);
     });
   }
   close() {
-    this.show = false;
-    this.title = '';
-    this.text = '';
-    this.component = '';
+    this.dialogData = new DialogData();
     window.removeEventListener('keydown', this.escape);
   }
 

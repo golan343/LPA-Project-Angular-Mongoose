@@ -4,11 +4,12 @@ import { DialogComponent } from './dialog/dialog.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
-
+import { VideoFrameComponent } from './video-frame/video-frame.component';
+import { SafePipe } from './../pipes/safe.pipe';
 
 
 @NgModule({
-  declarations: [DialogComponent, LoginComponent, RegisterComponent],
+  declarations: [DialogComponent, LoginComponent, RegisterComponent, VideoFrameComponent, SafePipe],
   imports: [
     CommonModule,
     FormsModule,

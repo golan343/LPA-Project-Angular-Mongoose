@@ -1,16 +1,19 @@
-<div class="popup" *ngIf="show" [class]="{wide:wide}">
+<div class="popup" *ngIf="dialogData?.show" [class]="{wide:dialogData?.wide}">
     <div class="close" (click)="close()"></div>
 
     <div class="container">
         <div class="backtap" (click)="close()"></div>
-        <h2 *ngIf="title" class="mr-b">{{title}}</h2>
-        <p *ngIf="text" class="mr-b">{{text}}</p>
-        <div [ngSwitch]="component">
+        <h2 *ngIf="title" class="mr-b">{{dialogData?.title}}</h2>
+        <p *ngIf="text" class="mr-b">{{dialogData?.text}}</p>
+        <div [ngSwitch]="dialogData.componentName">
             <ng-template [ngSwitchCase]="'Login'">
                 <app-login></app-login>
             </ng-template>
             <ng-template [ngSwitchCase]="'Register'">
                 <app-register></app-register>
+            </ng-template>
+            <ng-template [ngSwitchCase]="'video'">
+                <app-video-frame [src]="dialogData?.src"></app-video-frame>
             </ng-template>
             <ng-template ngSwitchDefault>
                 <div>This is default</div>

@@ -5,18 +5,37 @@
         <h4 class="right">{{auction?.description}}</h4>
     </div>
 
-    <div class="my-bid relative">
-        <div>
-            <h4 class="inline-block"><span>Remaining offers </span></h4>
-            <div *ngIf="homeFlag" class="inline-block fadding-white mr-l">
-                <i>{{auction?.bidsCount}}</i><span>/</span><small>{{auction?.totalBids}}</small>
-            </div>
-            <div *ngIf="!homeFlag" class="inline-block fadding-white mr-l">
-                <i>{{auction?.totalBids - auction?.bidsCount}}</i>
+    <div [ngSwitch]="auction.status">
+        <div *ngSwitchCase="true">
+            <div class="my-bid relative">
+                <div>
+                    <h4 class="inline-block"><span>Remaining offers </span></h4>
+                    <div *ngIf="homeFlag" class="inline-block fadding-white mr-l">
+                        <i>{{auction?.bidsCount}}</i><span>/</span><small>{{auction?.totalBids}}</small>
+                    </div>
+                    <div *ngIf="!homeFlag" class="inline-block fadding-white mr-l">
+                        <i>{{auction?.totalBids - auction?.bidsCount}}</i>
+                    </div>
+                </div>
+                <button class="auctionBtn" (click)="showAuction(auction._id)">{{placeBisText}} </button>
             </div>
         </div>
-        <button class="auctionBtn" (click)="showAuction(auction._id)">{{placeBisText}} </button>
-    </div>
+        <div *ngSwitchDefault>
+            <div class="my-bid relative">
+                <div class="sold-auction">
+                    <h2>sold out</h2>
+                </div>
+                <div>
+                    <h4 class="inline-block"><span>sold for </span></h4>
+                    <div class="inline-block fadding-white mr-l">
+                        <i>{{auction?.maxOffer | currency}}</i>
+                    </div>
+                </div>
+                <button class="auctionBtn" (click)="showAuction(auction._id)">Show details </button>
+            </div>
+        </div>
+        
+        </div>
 
     <div class="datesDiv relative">
         <!-- <p class="left"><span>Starts:</span><b>{{auctions[0].startDate.replace('T', ' ')}}</b> </p> -->

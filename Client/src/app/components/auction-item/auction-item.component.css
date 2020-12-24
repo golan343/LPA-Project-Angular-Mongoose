@@ -66,7 +66,26 @@
   .datesDiv > p> span{
     font-size: 1.5rem;
   }
-  
+  .sold-auction{
+    position: absolute;
+    left: 0;
+    right: 0%;
+    top: 100%;
+    perspective: 400px;
+    perspective-origin: center;
+    -webkit-perspective: 400px;
+    -webkit-perspective-origin: center;
+  }
+.sold-auction h2{
+    font-size: 6rem;
+    opacity: .4;
+    transform: rotateZ(-17deg);
+    color: #fff;
+    display: inline-block;
+    border-bottom: 2px solid;
+    box-shadow: 0px 2px 0px -1px;
+
+}
   @media only screen and (max-width: 1245px) {
     .lastAuction {
       width: 100%;

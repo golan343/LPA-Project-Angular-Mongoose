@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 import { BidModel } from '../models/bid-model';
 import { ActionType } from '../redux/action-type';
 import { Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 
 
@@ -23,7 +24,15 @@ export class BidsService {
         this.subjectBidsInAuction.next(bids);
     });
   }
+  getBidDetails(id: string) {
+    return this.http.get(`${BaseUrl}api/bid/${id}`).pipe(map(result => {
 
+      return {
+        ...result,
+        id
+      }
+    }));
+  }
   public addBid(bid: BidModel): void {
     this.http.post<BidModel>(`${BaseUrl}api/bids`, bid)
       .subscribe(addedBid => {

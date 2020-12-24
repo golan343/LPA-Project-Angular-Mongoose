@@ -24,10 +24,7 @@ export class HttpLoadingInterceptor implements HttpInterceptor {
       if ($event instanceof HttpResponse) {
         this.counter--;
         if (this.counter <= 0) {
-          setTimeout(() => {
-            this.loader.hide();
-          }, 3000);
-
+          this.loader.hide();
         }
 
       }

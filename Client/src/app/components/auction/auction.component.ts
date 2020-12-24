@@ -1,17 +1,15 @@
 import { BidsService } from './../../services/bids.service';
 import { BidModel } from './../../models/bid-model';
-import { BaseUrl, environment } from './../../../environments/environment';
-import { store } from './../../redux/store';
+import { environment } from './../../../environments/environment';
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuctionModel } from 'src/app/models/auction-model';
-import { Unsubscribe } from 'redux';
 import { CookieService } from 'ngx-cookie-service';
 import * as CanvasJS from '../../../assets/canvasjs.min';
-import { AccountService } from 'src/app/services/account.service';
-import { UpdateStatusComponent } from '../update-status/update-status.component';
 import { AuctionsService } from 'src/app/services/auctions.service';
-import { filter, map } from 'rxjs/operators';
+import { DialogData } from 'src/app/ui/model/dialog-data';
+import { DialogService } from 'src/app/ui/dialog.service';
 
 
 @Component({
@@ -20,14 +18,14 @@ import { filter, map } from 'rxjs/operators';
   styleUrls: ['./auction.component.css']
 })
 export class AuctionComponent implements OnInit {
-  public auction: AuctionModel;
-  public bid = new BidModel();
-  public bids: BidModel[];
-  public setDataPoints = [];
-  public bidOfferUnique;
-  public unique;
-  public highest;
-  public common;
+  auction: AuctionModel;
+  bid = new BidModel();
+  bids: BidModel[];
+  setDataPoints = [];
+  bidOfferUnique;
+  unique;
+  highest;
+  common;
   price: number;
 
 
@@ -37,7 +35,7 @@ export class AuctionComponent implements OnInit {
     private auctionService: AuctionsService,
     private cookieService: CookieService,
     private bidService: BidsService,
-    private accountService: AccountService,
+    private dialogService: DialogService,
     private auctionsService: AuctionsService) { }
 
   async ngOnInit() {
@@ -55,29 +53,28 @@ export class AuctionComponent implements OnInit {
         this.price = parseFloat(this.auction.price);
       });
       this.bid.auctionId = id;
-      this.bidService.getAllBidsIncludingAuction(id);
-      this.bidService.subjectBidsInAuction.subscribe(bids => {
-
-        this.bids = bids;
-        this.checkUnique();
-      })
+      // this.bidService.getAllBidsIncludingAuction(id);
+      // this.bidService.subjectBidsInAuction.subscribe(bids => {
+      //   this.bids = bids;
+      //   this.checkUnique();
+      // })
   }
     catch (err) {
       alert(err.message);
     }
   }
 
-  public setAmount(event): void {
+  setAmount(event): void {
     this.bid.offer = event.target.value;
   }
 
-  public async addBid(): Promise<any> {
+  async addBid(): Promise<any> {
     this.bid.userId = JSON.parse(this.cookieService.get('user')).user._id;
     this.bid.date = new Date();
     await this.bidService.addBid(this.bid);
   }
 
-  public checkUnique() {
+  checkUnique() {
     if(!this.bids) return;
     if(this.bids.length > 0){
       let uniqueValue = 1000;
@@ -108,7 +105,7 @@ export class AuctionComponent implements OnInit {
     return;
   }
 
-  public showBids(): void {
+  showBids(): void {
     this.setDataPoints = [];
     for (let i = 1; i <= 100; i++) {
       const bidOffer = i / 100;
@@ -143,9 +140,16 @@ export class AuctionComponent implements OnInit {
     chart.render();
 
   }
-  
+  showMovie() {
+    const dialogMovie = new DialogData("video");
+    dialogMovie.show = true;
+    dialogMovie.wide = true;
+    dialogMovie.src = 'https://www.youtube.com/embed/J25xNqa-knI';
+    this.dialogService.subjectType.next(dialogMovie);
+    
+  }
 
-  public updateStatusDialog(): void {
+  updateStatusDialog(): void {
     // const dialogRef = this.dialog.open(UpdateStatusComponent, {
     //   panelClass: 'custom-dialog-container',
     //   width: '450px',

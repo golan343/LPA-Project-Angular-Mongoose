@@ -51,7 +51,9 @@ import { LocationsComponent } from './components/locations/locations.component';
 import { RulesComponent } from './components/rules/rules.component';
 import { ShowPasswordDirective } from './directives/show-password.directive';
 import { LoaderComponent } from './components/loader/loader.component';
-import { AuctionItemComponent } from './components/auction-item/auction-item.component'
+import { AuctionItemComponent } from './components/auction-item/auction-item.component';
+import { ClosedAuctionComponent } from './components/closed-auction/closed-auction.component';
+
 
 
 const globalSettings: RecaptchaSettings = { siteKey: '6LeFTeoZAAAAAOm4L0qfozbCzOYa3kzs_3zeCgUY' }
@@ -78,7 +80,8 @@ const globalSettings: RecaptchaSettings = { siteKey: '6LeFTeoZAAAAAOm4L0qfozbCzO
     RulesComponent,
     ShowPasswordDirective,
     LoaderComponent,
-    AuctionItemComponent
+    AuctionItemComponent,
+    ClosedAuctionComponent
 
   ],
   imports: [
@@ -119,7 +122,7 @@ const globalSettings: RecaptchaSettings = { siteKey: '6LeFTeoZAAAAAOm4L0qfozbCzO
   ],
   providers: [CookieService,
     // { provide: RECAPTCHA_SETTINGS, useValue: globalSettings },
-    // { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpLoadingInterceptor,

@@ -12,6 +12,7 @@ export class TokenInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let authReq = req;
         if (this.accountService.isLogin) {
+            debugger;
             authReq = req.clone({
                 headers: req.headers.set('Authorization', 'Bearer ' + JSON.parse(this.cookieService.get('token')))
             });
