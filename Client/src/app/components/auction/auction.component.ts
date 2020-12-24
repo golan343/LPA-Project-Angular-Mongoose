@@ -9,14 +9,9 @@ import { Unsubscribe } from 'redux';
 import { CookieService } from 'ngx-cookie-service';
 import * as CanvasJS from '../../../assets/canvasjs.min';
 import { AccountService } from 'src/app/services/account.service';
-<<<<<<< HEAD
-import { AuctionsService } from './../../services/auctions.service';
-
-=======
 import { UpdateStatusComponent } from '../update-status/update-status.component';
 import { AuctionsService } from 'src/app/services/auctions.service';
 import { filter, map } from 'rxjs/operators';
->>>>>>> master
 
 
 @Component({
@@ -26,12 +21,6 @@ import { filter, map } from 'rxjs/operators';
 })
 export class AuctionComponent implements OnInit {
   public auction: AuctionModel;
-<<<<<<< HEAD
-=======
-  public auctions: AuctionModel[];
-  public unsubscribe: Unsubscribe;
-  public BaseUrl = BaseUrl;
->>>>>>> master
   public bid = new BidModel();
   public bids: BidModel[];
   public setDataPoints = [];
@@ -51,15 +40,12 @@ export class AuctionComponent implements OnInit {
     private accountService: AccountService,
     private auctionsService: AuctionsService) { }
 
-  // tslint:disable-next-line: typedef
   async ngOnInit() {
-<<<<<<< HEAD
     try {
 
       const id = this.activatedRoute.snapshot.params._id;
       this.auctionService.getAuction(id);
       this.auctionService.subjectAuctions.subscribe(auctions => {
-        debugger;
         this.auction = auctions.map(auc => {
           return {
             ...auc,
@@ -68,40 +54,13 @@ export class AuctionComponent implements OnInit {
         })[0];
         this.price = parseFloat(this.auction.price);
       });
-      //  this.auction = store.getState().auctions.find(a => a._id === _id);
       this.bid.auctionId = id;
-=======
-    try{
-      const _id = this.activatedRoute.snapshot.params._id;
-      this.bid.auctionId = _id;
-      await this.auctionsService.getAllAuctions();
-      
-      this.auctionsService.subjectAuction.pipe(map(auctions => {
-        this.auction = auctions.find(a => a._id === _id);
-        console.log(this.auction);
-        console.log('test');
-      }));
-      // this.auctionsService.subjectAuction.pipe(map(auctions => {
-      //   this.auctions = auctions.filter(auction => auction.status === true).map(auc => {
-      //     return {
-      //       ...auc,
-      //       imageFileName: environment.BaseUrl + 'uploads/' + auc.imageFileName
-      //     }
-      //   });
-      // })).subscribe(data => {
-      //   console.table(data);
-      // });
-      
->>>>>>> master
-      // -----------------
       this.bidService.getAllBidsIncludingAuction(id);
       this.bidService.subjectBidsInAuction.subscribe(bids => {
+
         this.bids = bids;
         this.checkUnique();
       })
-      //this.unsubscribe = store.subscribe(() => this.bids = store.getState().bids);
-
-      //
   }
     catch (err) {
       alert(err.message);
@@ -109,7 +68,7 @@ export class AuctionComponent implements OnInit {
   }
 
   public setAmount(event): void {
-    this.bid.offer = event;
+    this.bid.offer = event.target.value;
   }
 
   public async addBid(): Promise<any> {

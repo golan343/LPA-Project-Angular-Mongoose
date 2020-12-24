@@ -17,9 +17,7 @@ export class AuctionItemComponent implements OnInit {
   @Input()
   auction: AuctionModel;
   @Input()
-  numberOfBids: number;
-  @Input()
-  numberOfproposal: number;
+  homeFlag: string;
   @Input()
   placeBisText = 'Place my bid';
   constructor(private router: Router,

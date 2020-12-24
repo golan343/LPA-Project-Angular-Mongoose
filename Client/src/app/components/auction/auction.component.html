@@ -1,86 +1,113 @@
 <div *ngIf="auction" class="auctionPage">
-    <h1 *ngIf="!auction.status">Closed Auction</h1>
-    <h1 *ngIf="auction.status">Live Auction</h1>
-    <h2>Place your bid and get a chance to win in one of our cars</h2>
-    <div *ngIf='auction.status' class="bg">
-        <div class="auction" [style.backgroundImage]="'url('+auction.imageFileName+')'">
-            <p>{{auction.name}}</p>
-            <hr>
-            <p *ngIf="auction.status" class="valueAuction"><span><b>Price</b></span>: <span>{{price | currency}}</span> </p>
-        </div>
-        <br><br>
-        <div class="remainingOffers">
-            <h3><span>Remaining Offers</span><br><i>{{auction.totalBids - auction.bidsCount}}</i></h3>
-        </div>
-        <div class="placeBid" *ngIf="auction.status">
+    <div class="mainContent center">
+        <h1 *ngIf="!auction.status">Closed Auction</h1>
+        <h1 *ngIf="auction.status">Live Auction</h1>
+        <h2>Place your bid and get a chance to win in one of our cars</h2>
+        <div *ngIf='auction.status' class="bg">
+            <div class="auction relative" [style.backgroundImage]="'url('+auction.imageFileName+')'">
+                <h4 class="both"><span class="left">{{auction.name}}</span><span class="right">{{auction.description}}</span></h4>
             
-            <label style="color: white; font-size: 20px;">My bid: </label> 
-            <input type="text" 
-            data-type="currency"
-            required
-            pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$"
-            (change)="setAmount($event.target.value)"
-            placeholder="0.01$">
-            <br><br>
-            <button mat-raised-button (click)="addBid()"> Place my bid </button>
+                <p *ngIf="auction.status" class="valueAuction"><span><b>Price</b></span>: <span>{{price |
+                        currency}}</span> </p>
+            </div>
+            <div class="flex padding-top space">
+                <div class="placeBid" *ngIf="auction.status">
+
+                    <label> Offer cost: </label>
+                    <input type="text" data-type="currency" required pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" (change)="setAmount($event)"
+                        [value]="bid.offer || 0">
+                    <div class="overflow relative">
+                        <aside class="right plus " (click)="addBid()"></aside>
+                        <button type="button" (click)="addBid()"> Place my bid </button>
+                    </div>
+                </div>
+                <div class="remaining-offers">
+                    <h3><span>Remaining Offers</span></h3>
+                    <h3><i>{{auction.totalBids - auction.bidsCount}}</i></h3>
+                </div>
+                </div>
+
+            <button *ngIf="accountService.isAdmin()" mat-raised-button (click)="updateStatusDialog()">Update Status</button>
+        </div>
+        <div *ngIf='!auction.status' class="bgClosed">
+            <div class="auction" style="background-image: url({{BaseUrl}}uploads/{{auction.imageFileName}});">
+                <p>{{ auction.name }}</p>
+                <hr>
+                <p *ngIf="auction.status" class="valueAuction">Value: $ {{auction.price}} </p>
+            </div>
+
+            <button class="updateBtn" *ngIf="accountService.isAdmin()" mat-raised-button (click)="updateStatusDialog()">Update
+                Status</button>
+        </div>
+        <div class="bids" *ngIf="!auction.status">
+            <div class="description">
+                <h3>Description</h3>
+                <p>{{auction.description}}</p>
+            </div>
+            <div class="info">
+                <div class="headerInfo">
+                    <h3>Sold For</h3>
+                    <h3>Value</h3>
+                </div>
+                <div class="soldFor">
+                    <p *ngIf="unique">{{unique.offer}}</p>
+                </div>
+                <div class="value">
+                    <p *ngIf="unique">{{unique.auctionId.price}}</p>
+                </div>
+            </div>
+            <div class="closedDate">
+                <h3>Closed Date</h3>
+                <p>{{auction.endDate.replace('T', ' ')}}</p>
+            </div>
+            <div class="winner">
+                <h3>Winner</h3>
+            </div>
+            <div class="bidsInfo">
+                <div class="headerInfo">
+                    <h3>Most common bid</h3>
+                    <h3>Most highest bid</h3>
+                </div>
+                <div class="common">
+                    <p *ngIf="common">{{common}}</p>
+                </div>
+                <div class="highest">
+                    <p *ngIf="highest">{{highest.offer}}</p>
+                </div>
+            </div>
+            <div class="offerLogs">
+                <h3>Offer Logs</h3>
+                <button mat-raised-button (click)="showBids()">Show the bids</button>
+                <br><br>
+                <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+            </div>
 
         </div>
-        
-        <button class="updateBtn" *ngIf="accountService.isAdmin()" mat-raised-button (click)="updateStatusDialog()">Update Status</button>
-    </div>
-    <div *ngIf='!auction.status' class="bgClosed">
-        <div  class="auction" style="background-image: url({{BaseUrl}}uploads/{{auction.imageFileName}});">
-            <p>{{ auction.name }}</p>
-            <hr>
-            <p *ngIf="auction.status" class="valueAuction">Value: $ {{auction.price}} </p>
-        </div>
-        
-        <button class="updateBtn" *ngIf="accountService.isAdmin()" mat-raised-button (click)="updateStatusDialog()">Update Status</button>
-    </div>
-    <div class="bids" *ngIf="!auction.status">
-        <div class="description">
-            <h3>Description</h3>
-            <p>{{auction.description}}</p>
-        </div>
-        <div class="info">
-            <div class="headerInfo"><h3>Sold For</h3><h3>Value</h3></div>
-            <div class="soldFor"><p *ngIf="unique">{{unique.offer}}</p></div>
-            <div class="value"><p *ngIf="unique">{{unique.auctionId.price}}</p></div>
-        </div>
-        <div class="closedDate">
-            <h3>Closed Date</h3>
-            <p>{{auction.endDate.replace('T', ' ')}}</p>
-        </div>
-        <div class="winner">
-            <h3>Winner</h3>
-        </div>
-        <div class="bidsInfo">
-            <div class="headerInfo"><h3>Most common bid</h3><h3>Most highest bid</h3></div>
-            <div class="common"><p *ngIf="common">{{common}}</p></div>
-            <div class="highest"><p *ngIf="highest">{{highest.offer}}</p></div>
-        </div>
-        <div class="offerLogs">
-            <h3>Offer Logs</h3>
-            <button mat-raised-button (click)="showBids()">Show the bids</button>
-            <br><br>
-            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-        </div>
-        
-    </div>
-    <div class="liveInfo" *ngIf="auction.status">
-        <div class="liveBidInfo">
-            <div class="headerInfo"><h3>Minimum bid</h3><h3>Maximum bid</h3><h3>Maximum Offers</h3></div>
-            <div class="minBid"><p>${{auction.minOffer}}</p></div>
-            <div class="maxBid"><p>${{auction.maxOffer}}</p></div>
-            <div class="maxOffers"><p>3000</p></div>
-        </div>
-        <div class="productVideo">
-            <h3>Product's Video</h3>
-            <div class="productVideoLink"></div>
-        </div>
-        <div class="liveDescription">
-            <h3>Description</h3>
-            <p>{{auction.description}}</p>
+        <div class="liveInfo" *ngIf="auction.status">
+            <div class="liveBidInfo">
+                <div class="headerInfo flex">
+                    <h3>Minimum bid</h3>
+                    <h3>Maximum bid</h3>
+                    <h3>Maximum Offers</h3>
+                </div>
+                <div class="minBid">
+                    <p>${{auction.minOffer}}</p>
+                </div>
+                <div class="maxBid">
+                    <p>${{auction.maxOffer}}</p>
+                </div>
+                <div class="maxOffers">
+                    <p>3000</p>
+                </div>
+            </div>
+            <div class="productVideo">
+                <h3>Product's Video</h3>
+                <div class="productVideoLink"></div>
+            </div>
+            <div class="liveDescription">
+                <h3>Description</h3>
+                <p>{{auction.description}}</p>
+            </div>
         </div>
     </div>
-</div>    
+</div>

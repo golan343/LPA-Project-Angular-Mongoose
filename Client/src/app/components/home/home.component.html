@@ -6,29 +6,7 @@
                 <h1>We are</h1>
                 <h2>LOW PRICE AUCTION</h2>
             </div>
-            <!-- <img class="loader" *ngIf="!auctions" src="/assets/images/loader.gif" alt=""> -->
-            <!-- <div *ngIf="auctions" class="lastAuction l-padding relative">
-                <img [hidden]="!auctions" [class]="{fadein:auctions}"
-                    src="{{BaseUrl}}uploads/{{auctions[0].imageFileName}}" alt="{{auctions[0].name}}">
-                <div class="top border-bottom both relative">
-                    <h2 class="left">{{auctions[0].name}}</h2>
-                    <h4 class="right">{{auctions[0].description}}</h4>
-                </div>
-
-                <div class="my-bid relative">
-                    <h4><span>Remaining offers </span><i>{{auctions[0].totalBids - auctions[0].bidsCount}}</i></h4>
-                    <button class="auctionBtn" (click)="showAuction(auctions[0]._id)">Place My Bid</button>
-                </div>
-
-                <div class="datesDiv relative">
-                    <p class="left"><span>Starts:</span><b>{{auctions[0].startDate.replace('T', ' ')}}</b> </p>
-                    <p class="right">
-                        <span>price :</span><b>{{auctions[0].bidPrice | currency}}</b>
-                        <span>Ends:</span><b>{{auctions[0].endDate.replace('T', ' ')}}</b>
-                    </p>
-                </div>
-            </div> -->
-            <app-auction-item [auction]="auction"></app-auction-item>
+            <app-auction-item [homeFlag]="true" [auction]="auction"></app-auction-item>
         </div>
     </section>
     <section #second class="fwh-slide fwh-slide section-how-its-work ">
