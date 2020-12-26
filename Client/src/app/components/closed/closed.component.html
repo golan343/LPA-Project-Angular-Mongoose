@@ -1,25 +1,13 @@
-<img class="loader" *ngIf="!auctions" src="/assets/images/loader.gif" alt="">
 <div *ngIf="auctions" class="live">
     <h1>Closed auctions</h1>
     <h4>you have placed your bids these cars</h4>
     <div class="auctions">
-        <!-- these are the auctions that are already closed -->
-        <!-- <div *ngFor="let auction of auctions;" class="auction" style="background-image: url({{BaseUrl}}uploads/{{auction.imageFileName}});">
-            <br>
-            <p>{{ auction.name }}</p>
-            <hr>
-            <button *ngIf="auction.status" mat-raised-button (click)="showAuction(auction._id)">Place my bid</button>
-            <button *ngIf="!auction.status" mat-raised-button (click)="showAuction(auction._id)">Show the auction</button>
-            <div class="datesDiv">
-               <p> Starts: {{auction.startDate.replace('T', ' ')}}</p>
-                <p> Ends: {{auction.endDate.replace('T', ' ')}}</p>
+            <section class="firstSection ">
+                <div *ngFor="let auction of auctions" class="mainContent">
+                    <app-auction-item [auction]="auction"></app-auction-item>
             </div>
-        </div> -->
-        <section class="firstSection ">
-        
-            <div *ngFor="let auction of auctions" class="mainContent">
-                <app-auction-item [auction]="auction"></app-auction-item>
+            </section>
         </div>
-        </section>
+    
     </div>
-</div>
+    <app-global-loader></app-global-loader>

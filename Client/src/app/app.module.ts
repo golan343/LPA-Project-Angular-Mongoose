@@ -53,6 +53,7 @@ import { ShowPasswordDirective } from './directives/show-password.directive';
 import { LoaderComponent } from './components/loader/loader.component';
 import { AuctionItemComponent } from './components/auction-item/auction-item.component';
 import { ClosedAuctionComponent } from './components/closed-auction/closed-auction.component';
+import { GlobalLoaderComponent } from './components/loader/global-loader/global-loader.component';
 
 
 
@@ -81,7 +82,8 @@ const globalSettings: RecaptchaSettings = { siteKey: '6LeFTeoZAAAAAOm4L0qfozbCzO
     ShowPasswordDirective,
     LoaderComponent,
     AuctionItemComponent,
-    ClosedAuctionComponent
+    ClosedAuctionComponent,
+    GlobalLoaderComponent
 
   ],
   imports: [

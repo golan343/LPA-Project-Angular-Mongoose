@@ -4,7 +4,7 @@
     <div class="container">
         <div class="backtap" (click)="close()"></div>
         <h2 *ngIf="title" class="mr-b">{{dialogData?.title}}</h2>
-        <p *ngIf="text" class="mr-b">{{dialogData?.text}}</p>
+    
         <div [ngSwitch]="dialogData.componentName">
             <ng-template [ngSwitchCase]="'Login'">
                 <app-login></app-login>
@@ -16,7 +16,7 @@
                 <app-video-frame [src]="dialogData?.src"></app-video-frame>
             </ng-template>
             <ng-template ngSwitchDefault>
-                <div>This is default</div>
+                <p *ngIf="text" class="mr-b">{{dialogData?.text}}</p>
             </ng-template>
         </div>
     </div>

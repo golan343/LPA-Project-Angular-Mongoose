@@ -32,42 +32,26 @@
         </div>
 
         <div class="liveInfo">
-            <div class="liveBidInfo">
+        <div class="productVideo">
                 <div class="flex">
-                    <div class="cube third">
-                        <h3>Minimum bid</h3>
-                        <div class="cube-body">
-                            <div class="minBid">
-                                <p>{{auction.minOffer | currency}}</p>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="cube third">
-                        <h3>Maximum bid</h3>
-                        <div class="cube-body">
-                            <div class="maxBid">
-                                <p>{{auction.maxOffer | currency}}</p>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="cube third">
-                        <h3>Maximum Offers</h3>
-                        <div class="cube-body">
-                            <div class="maxOffers">
-                                <p>{{auction.totalBids}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="productVideo">
-                <div class="flex">
-                    <div class="cube half">
-                        <h3>Product's Video</h3>
-                        <div class="cube-body">
-                            <div (click)="showMovie()" class="productVideoLink"></div>
+                    <div class="cube half line">
+                        <div class="flex">
+                            <div class=" full-half">
+                                <h3>Sale Fore</h3>
+                                <div class="cube-body">
+                                    <div class="maxOffers">
+                                        <p>0.01 $</p>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    <div class=" full-half">
+                                        <h3>Value</h3>
+                                        <div class="cube-body">
+                                            <div class="maxBid">
+                                                <p>30000 $</p>
+                                            </div>
+                                        </div>
+                                    </div>
                         </div>
                     </div>
                     <div class="cube half">
@@ -81,3 +65,4 @@
         </div>
     </div>
 </div>
+<app-global-loader></app-global-loader>

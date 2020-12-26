@@ -23,7 +23,6 @@ export class ClosedAuctionComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.activatedRoute.snapshot.params.id;
-    debugger;
 
     this.auctionService.getAuction(id);
     this.auctionService.subjectAuctions.subscribe(auctions => {

@@ -27,11 +27,10 @@ const routes: Routes = [
   { path: 'locations', component: LocationsComponent },
   { path: 'auctions/:_id', component: AuctionComponent },
   { path: 'closed-auction/:id', component: ClosedAuctionComponent },
-  { path: 'add-auction', component: InsertComponent, canActivate: [AdminGuard] },
+  { path: 'add-auction', component: InsertComponent },
   { path: 'dashboard', loadChildren: () => import('./components/dashboard/dashboard.module').then(d => d.DashboardModule) },
-  // { path: 'register', component: RegisterComponent },
   { path: 'live', component: LiveAuctionsComponent },
-  { path: 'closed', component: ClosedComponent, canActivate: [AccountGuard]  },
+  { path: 'closed', component: ClosedComponent },
   { path: '', redirectTo: '/', pathMatch: 'full' }, // pathMath - exact empty string.
   { path: '**', component: PageNotFoundComponent } // Must be the last route!!
 ];

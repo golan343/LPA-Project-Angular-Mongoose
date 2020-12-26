@@ -1,0 +1,53 @@
+.show .multi {
+    height: 210px;
+    width: 210px;
+    border-width: 20px;
+    border-style: solid;
+    border-color: transparent rgba(255, 255, 255, 0.25) transparent rgba(255, 255, 255, 0.50);
+    border-radius: 100%;
+    animation: clockwise 1.01s linear infinite;
+    margin: 17% auto;
+}
+.show .multi:after {
+    position: absolute;
+    display: block;
+    top: 5px;
+    right: 5px;
+    height: 30px;
+    width: 30px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.50) transparent transparent;
+    border-radius: 100%;
+}
+.show .multi div {
+    position: relative;
+    height: 200px;
+    width: 200px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgb(28 149 238) transparent rgb(29 103 242);
+    border-radius: 100%;
+    animation: counter-clockwise 0.49s linear infinite;
+}
+.show .multi div:after {
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 0;
+    height: 30px;
+    width: 30px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent rgba(255, 255, 255, 0.25);
+    border-radius: 100%;
+   
+}
+
+@keyframes clockwise {
+  to {transform: rotate(360deg) translatez(0);}
+}
+
+@keyframes counter-clockwise {
+  to {transform: rotate(-360deg) translatez(0);}
+}

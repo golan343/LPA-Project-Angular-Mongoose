@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BidModel } from '../models/bid-model';
 import { ActionType } from '../redux/action-type';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 
@@ -33,18 +33,11 @@ export class BidsService {
       }
     }));
   }
-  public addBid(bid: BidModel): void {
-    this.http.post<BidModel>(`${BaseUrl}api/bids`, bid)
-      .subscribe(addedBid => {
-        const action: Action = { type: ActionType.AddBid, payload: addedBid };
-        store.dispatch(action);
-      },
-      err => {
-        console.log(err.message);
-      });
+  public addBid(bid: BidModel): Observable<any> {
+    return this.http.post<BidModel>(`${BaseUrl}api/bids`, bid);
   }
 
-  public getAllBids(): Promise<BidModel[] | any | any> {
+  public getAllBids(): Promise<BidModel[] | any> {
     return this.http.get<BidModel[]>(`${BaseUrl}api/bids`)
       .toPromise().then(bids => {
         this.subjectBidList.next(bids);

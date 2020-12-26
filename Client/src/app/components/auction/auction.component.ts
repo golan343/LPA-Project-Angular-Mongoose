@@ -53,12 +53,12 @@ export class AuctionComponent implements OnInit {
         this.price = parseFloat(this.auction.price);
       });
       this.bid.auctionId = id;
-      // this.bidService.getAllBidsIncludingAuction(id);
-      // this.bidService.subjectBidsInAuction.subscribe(bids => {
-      //   this.bids = bids;
-      //   this.checkUnique();
-      // })
-  }
+      this.bidService.getAllBidsIncludingAuction(id);
+      this.bidService.subjectBidsInAuction.subscribe(bids => {
+        this.bids = bids;
+        this.checkUnique();
+      })
+    }
     catch (err) {
       alert(err.message);
     }
@@ -69,14 +69,27 @@ export class AuctionComponent implements OnInit {
   }
 
   async addBid(): Promise<any> {
+    const dialog = new DialogData();
+    dialog.show = true;
     this.bid.userId = JSON.parse(this.cookieService.get('user')).user._id;
     this.bid.date = new Date();
-    await this.bidService.addBid(this.bid);
+    this.bidService.addBid(this.bid).subscribe(result => {
+      console.log(result)
+      dialog.title = 'Your bid is absorbed in our system!';
+      dialog.text = 'see you in the next auction!';
+      this.dialogService.subjectType.next(dialog);
+    },
+      err => {
+        console.log(err.message);
+        dialog.title = 'error ';
+        dialog.text = err.message;
+        this.dialogService.subjectType.next(dialog);
+      });;
   }
 
   checkUnique() {
-    if(!this.bids) return;
-    if(this.bids.length > 0){
+    if (!this.bids) return;
+    if (this.bids.length > 0) {
       let uniqueValue = 1000;
       let highestValue = 0;
       let commonValue = 0;
@@ -84,16 +97,16 @@ export class AuctionComponent implements OnInit {
         const bidOffer = i / 100;
         const value = this.bids.filter(b => +b.offer === bidOffer).length;
 
-        if (value > 0){ 
-          if(value < uniqueValue){
+        if (value > 0) {
+          if (value < uniqueValue) {
             uniqueValue = value;
             this.bidOfferUnique = bidOffer;
           }
-          if(bidOffer > highestValue){
+          if (bidOffer > highestValue) {
             highestValue = bidOffer;
           }
         }
-        if (value > commonValue){
+        if (value > commonValue) {
           commonValue = value;
           this.common = bidOffer;
         }
@@ -113,7 +126,7 @@ export class AuctionComponent implements OnInit {
         label: `Bid: ` + bidOffer,
         y: this.bids.filter(b => +b.offer === bidOffer).length
       };
-      if (obj.y > 0){
+      if (obj.y > 0) {
         this.setDataPoints.push(obj);
       }
 
@@ -122,8 +135,8 @@ export class AuctionComponent implements OnInit {
 
     const chart = new CanvasJS.Chart('chartContainer', {
       axisY: {
-			labelAutoFit: true,   // change it to false
-			prefix: 'Bidders: '
+        labelAutoFit: true,   // change it to false
+        prefix: 'Bidders: '
       },
       animationEnabled: true,
       exportEnabled: false,
@@ -146,7 +159,7 @@ export class AuctionComponent implements OnInit {
     dialogMovie.wide = true;
     dialogMovie.src = 'https://www.youtube.com/embed/J25xNqa-knI';
     this.dialogService.subjectType.next(dialogMovie);
-    
+
   }
 
   updateStatusDialog(): void {
