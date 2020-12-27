@@ -30,14 +30,13 @@ export class InsertComponent implements OnInit {
   // tslint:disable-next-line: typedef
   public async addAuction() {
     try{
-      if (this.newAuction.invalid){
-        return;
-      }
       this.auction.createdBy = this.accountService.getUserId();
       this.auction.imageFileName = this.imageName;
+      this.auction.bidsCount = 0;
       this.auction.createdDate = new Date();
+      this.auction.status = true;
       console.log(this.auction);
-      // await this.auctionService.addAuctionToServer(this.auction);
+      await this.auctionService.addAuctionToServer(this.auction);
       Swal.fire('auction added!', '', 'success');
     }
     catch (err){
