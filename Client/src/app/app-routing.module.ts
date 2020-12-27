@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'locations', component: LocationsComponent },
   { path: 'auctions/:_id', component: AuctionComponent },
   { path: 'closed-auction/:id', component: ClosedAuctionComponent },
-  { path: 'add-auction', component: InsertComponent },
+  { path: 'add-auction', component: InsertComponent, canActivate: [AccountGuard] },
   { path: 'dashboard', loadChildren: () => import('./components/dashboard/dashboard.module').then(d => d.DashboardModule) },
   { path: 'live', component: LiveAuctionsComponent },
   { path: 'closed', component: ClosedComponent },
