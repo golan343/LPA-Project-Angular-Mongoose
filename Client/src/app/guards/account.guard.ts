@@ -14,8 +14,12 @@ export class AccountGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const isLogedIn = this.accountService.isLogin;
-    console.log(isLogedIn);
-    return isLogedIn;
+    if(isLogedIn){
+      return true;
+    }
+    this.router.navigateByUrl('/')
+    return false;
+
   }
 
 }

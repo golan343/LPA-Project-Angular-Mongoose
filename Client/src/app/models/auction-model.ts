@@ -13,13 +13,14 @@ export class Auction {
     status: boolean;
     totalBids: number;
     _id: string;
+    youtubeId: string;
 }
 export class AuctionModel extends Auction {
     public constructor(
         public siteId?: string,
         public ruleId?: string,
         public winPrice?: string,
-        public youtubeId?: string,
+        public winnerYoutubeId?: string,
         public bidPattern?: string,
 
     ) { super(); }

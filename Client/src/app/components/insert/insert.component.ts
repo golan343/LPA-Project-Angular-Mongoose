@@ -24,40 +24,20 @@ export class InsertComponent implements OnInit {
               private accountService: AccountService) { }
 
   ngOnInit(): void {
-    this.newAuction = this.myFormBuilder.group({
-      nameControl: ['', Validators.required, Validators.minLength],
-      priceControl: ['', Validators.required],
-      descriptionControl: ['', Validators.required],
-      startDateControl: ['', Validators.required],
-      endDateControl: ['', Validators.required],
-      bidPriceControl: ['', Validators.required],
-      minOfferControl: ['', Validators.required],
-      maxOfferControl: ['', ],
-      imageInputControl: ['', Validators.required]
-    });
   }
 
 
   // tslint:disable-next-line: typedef
   public async addAuction() {
     try{
-      if (this.newAuction.invalid){
-        return;
-      }
-      this.auction.name = this.newAuction.value.nameControl;
-      this.auction.price = this.newAuction.value.priceControl;
-      this.auction.description = this.newAuction.value.descriptionControl;
-      this.auction.startDate = this.newAuction.value.startDateControl;
-      this.auction.endDate = this.newAuction.value.endDateControl;
-      this.auction.bidPrice = this.newAuction.value.bidPriceControl;
-      this.auction.minOffer = this.newAuction.value.minOfferControl;
-      this.auction.maxOffer = this.newAuction.value.maxOfferControl;
       this.auction.createdBy = this.accountService.getUserId();
       this.auction.imageFileName = this.imageName;
+      this.auction.bidsCount = 0;
       this.auction.createdDate = new Date();
+      this.auction.status = true;
       console.log(this.auction);
-      // await this.auctionService.addAuctionToServer(this.auction);
-      Swal.fire('You are logged in', '', 'success');
+      await this.auctionService.addAuctionToServer(this.auction);
+      Swal.fire('auction added!', '', 'success');
     }
     catch (err){
       alert(err.message);
@@ -65,7 +45,7 @@ export class InsertComponent implements OnInit {
   }
 
   // tslint:disable-next-line: typedef
-  onFileSelected(event) {
+  async onFileSelected(event) {
     const image = event.target.files[0];
     const imageName = image.name;
     const fd = new FormData();
@@ -74,15 +54,14 @@ export class InsertComponent implements OnInit {
     this.imageName = imageNewName;
     fd.append('image', image, imageNewName);
 
-    this.http.post(`${BaseUrl}api/upload-image`, fd)
+    await this.http.post(`${BaseUrl}api/upload-image`, fd)
       .subscribe(
         res => {
           console.log(res);
-          // this.alertService.success('image uploaded!');
+          Swal.fire('uploaded image!', '', 'success');
         },
         err => {
           console.log(err);
-          // this.alertService.danger('format is not valid! try jpg/png format');
         }
       );
   }
