@@ -33,7 +33,7 @@ async function deleteBidAsync(_id) {
     return Bid.deleteOne({ _id }).exec();
 }
 function getAllBidsIncludingSpecificAuctionAsync(auctionId) {
-    return Bid.find({ auctionId }).populate("auctionId").exec();
+    return Bid.find({ auctionId }).populate("auctionId").populate("userId").exec();
 }
 
 

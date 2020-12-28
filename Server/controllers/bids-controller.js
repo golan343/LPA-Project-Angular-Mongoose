@@ -123,6 +123,12 @@ router.get('/join/bids-in-auction/:auctionId', async (request, response) => {
             response.sendStatus(404);
             return;
         }
+        for(let bid of bids){
+            if(bid.userId){
+                bid.userId.password = '';
+                bid.userId.email = '';
+            }
+        }
         response.json(bids);
     }
     catch(err){
