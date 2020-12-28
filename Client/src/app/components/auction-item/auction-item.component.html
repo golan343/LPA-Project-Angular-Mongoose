@@ -5,7 +5,7 @@
         <h4 class="right">{{auction?.description}}</h4>
     </div>
 
-    <div [ngSwitch]="auction.status">
+    <div [ngSwitch]="auction?.status">
         <div *ngSwitchCase="true">
             <div class="my-bid relative">
                 <div>

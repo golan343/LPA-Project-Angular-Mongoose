@@ -7,6 +7,8 @@ import { AuctionModel } from '../models/auction-model';
 import { Action } from '../redux/action';
 //import { BidsService } from './bids.service';
 import { Observable, Subject } from 'rxjs';
+import { BidModel } from '../models/bid-model';
+import { map } from 'rxjs/internal/operators/map';
 
 @Injectable({
   providedIn: 'root'
@@ -59,18 +61,14 @@ export class AuctionsService {
 
 
   // tslint:disable-next-line: variable-name
-  public getAuction(_id: string): void {
-    this.http.get<AuctionModel>(BaseUrl + 'api/auctions/' + _id)
-      .subscribe(res => {
+  getAuction(_id: string): Observable<AuctionModel> {
+    return this.http.get<AuctionModel>(BaseUrl + 'api/auctions/' + _id)
+      .pipe(map(res => {
         this.subjectAuctions.next([res]);
-      // const action: Action = { type: ActionType.GetOneAuction, payload: res };
-      // store.dispatch(action);
-    },
-    err => {
-      console.log(err.message);
-    });
+        return res;
+      }));
   }
-  public getLastAuction(): Observable<AuctionModel[]> {
+  getLastAuction(): Observable<AuctionModel[]> {
     return this.http.get<AuctionModel[]>(BaseUrl + 'api/auctions/get/last');
     // .subscribe(async res => {
     //   // const action: Action = { type: ActionType.GetLastAuction, payload: res };
@@ -80,12 +78,14 @@ export class AuctionsService {
     //   console.log(err.message);
     // });
   }
+  getBidsAuction(auctionId: string): Observable<any> {
+    return this.http.get(`/join/bids-in-auction/${auctionId}`);
+  }
 
   public async updateAuction(auction: AuctionModel): Promise<any>{
     await this.http.patch<AuctionModel>(`${BaseUrl}api/auctions/${auction._id}`, auction)
     .subscribe(updatedAuction => {
-      const action: Action = { type: ActionType.UpdateAuction, payload: updatedAuction };
-      store.dispatch(action);
+
     });
   }
 }

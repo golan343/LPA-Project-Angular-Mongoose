@@ -1,6 +1,6 @@
 import { store } from './../redux/store';
 import { Action } from './../redux/action';
-import { BaseUrl } from './../../environments/environment';
+import { BaseUrl, environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BidModel } from '../models/bid-model';
@@ -35,6 +35,10 @@ export class BidsService {
   }
   public addBid(bid: BidModel): Observable<any> {
     return this.http.post<BidModel>(`${BaseUrl}api/bids`, bid);
+  }
+
+  getAuctionBids(auctionId: string): Observable<any> {
+    return this.http.get(`${environment.BaseUrl}api/bids/join/bids-in-auction/${auctionId}`);
   }
 
   public getAllBids(): Promise<BidModel[] | any> {

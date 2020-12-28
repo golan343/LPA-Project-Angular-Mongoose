@@ -263,7 +263,7 @@ h2 {
     align-items: center;
 }
 .cube h3 {
-    padding: 3%;
+    padding: 8px;
     background: #b0b1b3;
     text-shadow: 1px 1px 1px #000;
     font-size: 1.3rem;
@@ -273,13 +273,12 @@ h2 {
     border-radius: 10px;
     overflow: hidden;
 }
-.liveBidInfo .cube-body div {
+.liveBidInfo .cube-body div, .tube.cube .cube-body div {
     display: inline-block;
     padding: 5%;
     border-radius: 7px;
-    box-shadow: 2px 1px 0.1px 2px #4b4646;
 }
-.liveBidInfo .cube:after, .line.cube:after {
+.liveBidInfo .cube:after {
   content: "";
   position: absolute;
   left: 100%;
@@ -289,17 +288,30 @@ h2 {
   z-index: 1;
   top: 40%;
 }
-.liveBidInfo .cube:first-of-type div:after, .line.cube:first-of-type div:after {
+.tube.cube:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 1px;
+  height: 38%;
+  background: #888;
+  z-index: 1;
+  top: 40%;
+}
+.liveBidInfo .cube:first-of-type div:after, .tube.cube:first-of-type div:after {
   content: unset;
 }
 .minBid {
   background: #d6ff7e;
+  box-shadow: 2px 1px 0.1px 2px #4b4646;
 }
 .maxBid {
   background: #ff3e3e;
+  box-shadow: 2px 1px 0.1px 2px #4b4646;
 }
 .maxOffers {
   background: #d4f1f4;
+  box-shadow: 2px 1px 0.1px 2px #4b4646;
 }
 
 .productVideoLink {

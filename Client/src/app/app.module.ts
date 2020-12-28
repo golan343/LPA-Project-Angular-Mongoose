@@ -7,7 +7,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  BrowserAnimationsModule,
+  NoopAnimationsModule,
+} from '@angular/platform-browser/animations';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -25,11 +28,14 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { CookieService } from 'ngx-cookie-service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
-import { RecaptchaModule, RecaptchaSettings, RECAPTCHA_SETTINGS, RecaptchaFormsModule } from 'ng-recaptcha';
+import {
+  RecaptchaModule,
+  RecaptchaSettings,
+  RECAPTCHA_SETTINGS,
+  RecaptchaFormsModule,
+} from 'ng-recaptcha';
 import { NgxFlagIconCssModule } from 'ngx-flag-icon-css';
-import { DialogModule } from './ui/dialog.module'
-
-
+import { DialogModule } from './ui/dialog.module';
 
 import { LayoutComponent } from './components/layout/layout.component';
 import { HomeComponent } from './components/home/home.component';
@@ -55,10 +61,9 @@ import { AuctionItemComponent } from './components/auction-item/auction-item.com
 import { ClosedAuctionComponent } from './components/closed-auction/closed-auction.component';
 import { GlobalLoaderComponent } from './components/loader/global-loader/global-loader.component';
 
-
-
-const globalSettings: RecaptchaSettings = { siteKey: '6LeFTeoZAAAAAOm4L0qfozbCzOYa3kzs_3zeCgUY' }
-
+const globalSettings: RecaptchaSettings = {
+  siteKey: '6LeFTeoZAAAAAOm4L0qfozbCzOYa3kzs_3zeCgUY',
+};
 
 @NgModule({
   declarations: [
@@ -83,8 +88,7 @@ const globalSettings: RecaptchaSettings = { siteKey: '6LeFTeoZAAAAAOm4L0qfozbCzO
     LoaderComponent,
     AuctionItemComponent,
     ClosedAuctionComponent,
-    GlobalLoaderComponent
-
+    GlobalLoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -116,22 +120,23 @@ const globalSettings: RecaptchaSettings = { siteKey: '6LeFTeoZAAAAAOm4L0qfozbCzO
     RecaptchaFormsModule,
     FlexLayoutModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyA2wURHwwXpa8qENVlEumlR87zxya7Xy00'
+      apiKey: 'AIzaSyA2wURHwwXpa8qENVlEumlR87zxya7Xy00',
     }),
     I18nModule,
     NgxFlagIconCssModule,
-    DialogModule
+    DialogModule,
   ],
-  providers: [CookieService,
+  providers: [
+    CookieService,
     // { provide: RECAPTCHA_SETTINGS, useValue: globalSettings },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpLoadingInterceptor,
-      multi: true
-    }
+      multi: true,
+    },
   ],
   entryComponents: [ConfirmDialogComponent],
-  bootstrap: [LayoutComponent]
+  bootstrap: [LayoutComponent],
 })
 export class AppModule { }

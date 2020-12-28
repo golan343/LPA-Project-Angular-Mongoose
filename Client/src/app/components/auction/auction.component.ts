@@ -22,10 +22,7 @@ export class AuctionComponent implements OnInit {
   bid = new BidModel();
   bids: BidModel[];
   setDataPoints = [];
-  bidOfferUnique;
-  unique;
-  highest;
-  common;
+
   price: number;
 
 
@@ -42,7 +39,7 @@ export class AuctionComponent implements OnInit {
     try {
 
       const id = this.activatedRoute.snapshot.params._id;
-      this.auctionService.getAuction(id);
+      this.auctionService.getAuction(id).toPromise();
       this.auctionService.subjectAuctions.subscribe(auctions => {
         this.auction = auctions.map(auc => {
           return {
@@ -52,12 +49,7 @@ export class AuctionComponent implements OnInit {
         })[0];
         this.price = parseFloat(this.auction.price);
       });
-      this.bid.auctionId = id;
-      this.bidService.getAllBidsIncludingAuction(id);
-      this.bidService.subjectBidsInAuction.subscribe(bids => {
-        this.bids = bids;
-        this.checkUnique();
-      })
+
     }
     catch (err) {
       alert(err.message);
@@ -87,36 +79,7 @@ export class AuctionComponent implements OnInit {
       });;
   }
 
-  checkUnique() {
-    if (!this.bids) return;
-    if (this.bids.length > 0) {
-      let uniqueValue = 1000;
-      let highestValue = 0;
-      let commonValue = 0;
-      for (let i = 1; i <= 100; i++) {
-        const bidOffer = i / 100;
-        const value = this.bids.filter(b => +b.offer === bidOffer).length;
 
-        if (value > 0) {
-          if (value < uniqueValue) {
-            uniqueValue = value;
-            this.bidOfferUnique = bidOffer;
-          }
-          if (bidOffer > highestValue) {
-            highestValue = bidOffer;
-          }
-        }
-        if (value > commonValue) {
-          commonValue = value;
-          this.common = bidOffer;
-        }
-      }
-      this.unique = this.bids.find(b => b.offer === `${this.bidOfferUnique}`);
-      this.highest = this.bids.find(b => b.offer === `${highestValue}`);
-      console.log(this.unique);
-    }
-    return;
-  }
 
   showBids(): void {
     this.setDataPoints = [];

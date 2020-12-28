@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'rules', component: RulesComponent },
   { path: 'contact', component: ContactUsComponent },
   { path: 'locations', component: LocationsComponent },
-  { path: 'auctions/:_id', component: AuctionComponent },
+  { path: 'auction/:_id', component: AuctionComponent },
   { path: 'closed-auction/:id', component: ClosedAuctionComponent },
   { path: 'add-auction', component: InsertComponent },
   { path: 'dashboard', loadChildren: () => import('./components/dashboard/dashboard.module').then(d => d.DashboardModule) },

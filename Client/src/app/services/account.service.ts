@@ -62,6 +62,7 @@ export class AccountService {
     .pipe(map(user => {
       this.cookieService.set('token', JSON.stringify(user.token));
       this.cookieService.set('user', JSON.stringify(user));
+      this.isUserLoggedIn();
       return user;
     }));
   }

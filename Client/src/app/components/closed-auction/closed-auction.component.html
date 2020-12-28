@@ -22,46 +22,98 @@
                         <button type="button" (click)="addBid()"> Place my bid </button>
                     </div>
                 </div>
-                <div class="remaining-offers">
-                    <h3><span>Remaining Offers</span></h3>
-                    <h3><i>{{auction.totalBids - auction.bidsCount}}</i></h3>
-                </div>
             </div>
 
 
         </div>
 
         <div class="liveInfo">
-        <div class="productVideo">
+            <div class="productVideo">
                 <div class="flex">
-                    <div class="cube half line">
+                    <div class=" half tube">
                         <div class="flex">
-                            <div class=" full-half">
+                            <div class="cube full-half">
                                 <h3>Sale Fore</h3>
-                                <div class="cube-body">
+                                <div class="cube-body-half border-right">
                                     <div class="maxOffers">
                                         <p>0.01 $</p>
                                     </div>
+                                </div>
+                            </div>
+                            <div class=" cube full-half">
+                                <h3>Value</h3>
+                                <div class="cube-body-half">
+                                    <div class="maxBid">
+                                        <p>30000 $</p>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="cube half">
+                        <h3>Description</h3>
+                        <div class="cube-body-half">
+                            <p>{{auction.description}}</p>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        <div class="productVideo">
+                            <div class="flex">
+                        
+                                <div class="  half">
+                                    <div class="flex cube">
+                                        <div class=" full ">
+                                            <h3>Closed date</h3>
+                                            <div class="cube-body-half">
+                                                <h4><span class="calendar-icon mr-r"></span>{{auction.endDate | date: 'MM/dd/yyyy'}}
+                                                </h4>
+                                            </div>
+                                        </div>
+                        
                                     </div>
-                                    <div class=" full-half">
-                                        <h3>Value</h3>
-                                        <div class="cube-body">
-                                            <div class="maxBid">
-                                                <p>30000 $</p>
+                                    <div class=" full mr-t cube">
+                                        <div class="flex">
+                                            <div class=" relative full-half">
+                                                <h3>Most common bid</h3>
+                                                <div class="cube-body-half border-right">
+                                                    <div class="maxOffers">
+                                                        <p>3000$</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="  full-half">
+                                                <h3>Most highest bid</h3>
+                                                <div class="cube-body-half">
+                                                    <div class="maxBid">
+                                                        <p>30000 $</p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                        </div>
-                    </div>
-                    <div class="cube half">
-                        <h3>Description</h3>
-                        <div class="cube-body">
-                            <p>{{auction.description}}</p>
+                                </div>
+                                <div class="cube half ">
+                                    <div class="full">
+                                        <h3>Winner- <span></span></h3>
+                            <div class="cube-body">
+                                <div (click)="showMovie()" class="productVideoLink"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="productVideo">
+                <div class="cube">
+                    <h3>Offers Log</h3>
+                    <div class="cube-body">
+            
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

@@ -1,1 +1,38 @@
-.full-half{ width:50%}
+.full-half {
+  width: 50%;
+}
+.cube-body-half {
+  min-height: 75px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.cube-body-half div {
+  display: inline-block;
+  padding: 3%;
+  border-radius: 7px;
+  box-shadow: 2px 1px 0.1px 2px #4b4646;
+}
+h4 {
+  font-size: 2rem;
+  color: #fff;
+  width: 80%;
+}
+.tube .flex {
+  border-radius: 12px;
+  overflow: hidden;
+}
+.tube .flex .cube {
+  border-radius: 0;
+}
+.border-right:after {
+  content: "";
+  position: absolute;
+  right: 0%;
+  width: 1px;
+  height: 38%;
+  background: #888;
+  z-index: 1;
+  top: 47%;
+}
