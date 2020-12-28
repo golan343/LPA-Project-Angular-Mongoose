@@ -1,6 +1,5 @@
 const express = require('express');
 const auctionLogic = require('../business-logic/auction-logic');
-const errorHandler = require('../helpers/error-handler');
 const Auction = require('../models/auction');
 
 const router = express.Router();
@@ -9,6 +8,12 @@ const router = express.Router();
 router.get('/', async (request, response) => {
     try{
         const auctions = await auctionLogic.getAllAuctionsAsync();
+        for(let auc of auctions){
+            if(auc.createdBy){
+                auc.createdBy.password = '';
+                auc.createdBy.email = '';
+            }
+        }
         response.json(auctions);
     }
     catch(err){
