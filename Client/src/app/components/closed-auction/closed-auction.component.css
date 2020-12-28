@@ -36,3 +36,60 @@ h4 {
   z-index: 1;
   top: 47%;
 }
+.linear-graph {
+  display: block;
+  padding: 2% 0;
+  width: 70%;
+  position: relative;
+}
+.step-wrapper {
+  display: flex;
+  border-bottom: 1px solid #fff;
+  width: 100%;
+  flex-direction: row;
+  justify-self: start;
+  align-items: flex-start;
+}
+.step {
+  flex-grow: 1;
+  color: #fff;
+  text-align: left;
+  position: relative;
+}
+.step .number {
+  position: absolute;
+  top: 2px;
+}
+.white-back {
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 1%;
+  margin-bottom: 1%;
+  border-radius: 3px;
+  text-align: left;
+}
+.graph-row {
+  width: 40%;
+    height: 20px;
+    margin: 4px 0;
+    display: inline-block;
+    vertical-align: middle;
+}
+.prograss {
+  height: 100%;
+  background-color: #1CA4FC;
+  border-radius: 5px;
+}
+.val {
+  display: inline-block;
+  width: 20%;
+  color: #fff;
+  font-size: 1.5rem;
+  text-align: center;
+}
+.length {
+  display: inline-block;
+  width: 8%;
+  font-size: 1.4rem;
+ text-align: center;
+ color: #fff;
+}

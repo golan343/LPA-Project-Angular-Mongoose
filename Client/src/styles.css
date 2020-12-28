@@ -580,10 +580,14 @@ button {
   .show .phone_menu .sep:last-of-type {
     display: none;
   }
+ 
 }
 @media only screen and (max-width: 580px) {
   .left,
   .right {
     float: none;
+  }
+  .flex{
+    display: block;
   }
 }

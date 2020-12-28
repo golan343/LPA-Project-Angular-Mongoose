@@ -18,7 +18,7 @@ export class BidsService {
   subjectBidsInAuction = new Subject<BidModel[]>();
   constructor(private http: HttpClient) { }
 
-  public getAllBidsIncludingAuction(auctionId): void {
+  public getAllBidsIncludingAuction(auctionId: string): void {
      this.http.get<BidModel[]>(`${BaseUrl}api/bids/join/bids-in-auction/${auctionId}`)
       .subscribe(bids => {
         this.subjectBidsInAuction.next(bids);
@@ -37,9 +37,6 @@ export class BidsService {
     return this.http.post<BidModel>(`${BaseUrl}api/bids`, bid);
   }
 
-  getAuctionBids(auctionId: string): Observable<any> {
-    return this.http.get(`${environment.BaseUrl}api/bids/join/bids-in-auction/${auctionId}`);
-  }
 
   public getAllBids(): Promise<BidModel[] | any> {
     return this.http.get<BidModel[]>(`${BaseUrl}api/bids`)
