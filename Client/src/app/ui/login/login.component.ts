@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit {
         .subscribe(
           response => {
             this.dialogService.subjectType.next(new DialogData());
-            location.reload();
 
           },
           err => {

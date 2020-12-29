@@ -256,30 +256,30 @@ h2 {
   position: relative;
 }
 .cube-body {
-    min-height: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .cube h3 {
-    padding: 3%;
-    background: #b0b1b3;
-    text-shadow: 1px 1px 1px #000;
-    font-size: 1.3rem;
-    color: rgba(212, 241, 244, 1);
+  padding: 8px;
+  background: #b0b1b3;
+  text-shadow: 1px 1px 1px #000;
+  font-size: 1.3rem;
+  color: rgba(212, 241, 244, 1);
 }
 .productVideo .cube {
-    border-radius: 10px;
-    overflow: hidden;
+  border-radius: 10px;
+  overflow: hidden;
 }
-.liveBidInfo .cube-body div {
-    display: inline-block;
-    padding: 5%;
-    border-radius: 7px;
-    box-shadow: 2px 1px 0.1px 2px #4b4646;
+.liveBidInfo .cube-body div,
+.tube.cube .cube-body div {
+  display: inline-block;
+  padding: 5%;
+  border-radius: 7px;
 }
-.liveBidInfo .cube:after, .line.cube:after {
+.liveBidInfo .cube:after {
   content: "";
   position: absolute;
   left: 100%;
@@ -289,17 +289,31 @@ h2 {
   z-index: 1;
   top: 40%;
 }
-.liveBidInfo .cube:first-of-type div:after, .line.cube:first-of-type div:after {
+.tube.cube:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 1px;
+  height: 38%;
+  background: #888;
+  z-index: 1;
+  top: 40%;
+}
+.liveBidInfo .cube:first-of-type div:after,
+.tube.cube:first-of-type div:after {
   content: unset;
 }
 .minBid {
   background: #d6ff7e;
+  box-shadow: 2px 1px 0.1px 2px #4b4646;
 }
 .maxBid {
   background: #ff3e3e;
+  box-shadow: 2px 1px 0.1px 2px #4b4646;
 }
 .maxOffers {
   background: #d4f1f4;
+  box-shadow: 2px 1px 0.1px 2px #4b4646;
 }
 
 .productVideoLink {
@@ -377,18 +391,60 @@ h1 {
   font-size: 3rem;
   color: #fff;
 }
+/* Tablet resolution */
+@media only screen and (max-width: 1445px) {
+  .auction {
+    height: 60vh;
+  }
+}
+
+@media only screen and (max-width: 1245px) {
+  .auction {
+    height: 50vh;
+  }
+}
+@media only screen and (max-width: 880px) {
+  .auction {
+    height: 40vh;
+  }
+  .bg {
+    min-height: unset;
+  }
+  .cube {
+    margin: 2% auto;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .valueAuction{
+    position: static;
+    background-color: rgba(255,255,255,.2);
+    padding: 2%;
+    display: inline-block;
+  }
+  .placeBid{
+    margin: 3% auto;
+  }
+}
 
 /* desktop resolution */
-
-@media (min-device-width: 1281px) {
+@media only screen and (max-width: 680px) {
+  .auction {
+    height: 350px;
+  }
 }
-
-/* Tablet resolution */
-
-@media (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
-}
-
 /* TODO mobile resolutions */
 
-@media (min-width: 320px) and (max-width: 480px) {
+@media (max-width: 580px) {
+  .auction {
+    height: 200px;
+  }
+  .third {
+    width: 90%;
+  }
+  .half {
+    width: 90%;
+  }
+  .liveBidInfo .cube:after {
+    content: unset;
+  }
 }

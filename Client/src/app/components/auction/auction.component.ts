@@ -19,13 +19,11 @@ import { DialogService } from 'src/app/ui/dialog.service';
 })
 export class AuctionComponent implements OnInit {
   auction: AuctionModel;
-  bid = new BidModel();
+  Maxbid: BidModel;
+  Minbid: BidModel;
+  bid: BidModel;
   bids: BidModel[];
   setDataPoints = [];
-  bidOfferUnique;
-  unique;
-  highest;
-  common;
   price: number;
 
 
@@ -38,11 +36,9 @@ export class AuctionComponent implements OnInit {
     private dialogService: DialogService,
     private auctionsService: AuctionsService) { }
 
-  async ngOnInit() {
-    try {
-
+  ngOnInit() {
       const id = this.activatedRoute.snapshot.params._id;
-      this.auctionService.getAuction(id);
+      this.auctionService.getAuction(id).toPromise();
       this.auctionService.subjectAuctions.subscribe(auctions => {
         this.auction = auctions.map(auc => {
           return {
@@ -51,17 +47,18 @@ export class AuctionComponent implements OnInit {
           }
         })[0];
         this.price = parseFloat(this.auction.price);
+        this.bidService.getAllBidsIncludingAuction(id);
       });
-      this.bid.auctionId = id;
-      this.bidService.getAllBidsIncludingAuction(id);
-      this.bidService.subjectBidsInAuction.subscribe(bids => {
-        this.bids = bids;
-        this.checkUnique();
-      })
-    }
-    catch (err) {
-      alert(err.message);
-    }
+    this.bidService.subjectBidsInAuction.subscribe(bids => {
+      this.bids = bids;
+      this.Maxbid = bids.reduce((prev, current) => {
+        return prev.offer > current.offer ? prev : current;
+      });
+      this.Minbid = bids.reduce((prev, current) => {
+        return prev.offer < current.offer ? prev : current;
+      });
+    })
+    this.bid = new BidModel();
   }
 
   setAmount(event): void {
@@ -87,72 +84,12 @@ export class AuctionComponent implements OnInit {
       });;
   }
 
-  checkUnique() {
-    if (!this.bids) return;
-    if (this.bids.length > 0) {
-      let uniqueValue = 1000;
-      let highestValue = 0;
-      let commonValue = 0;
-      for (let i = 1; i <= 100; i++) {
-        const bidOffer = i / 100;
-        const value = this.bids.filter(b => +b.offer === bidOffer).length;
-
-        if (value > 0) {
-          if (value < uniqueValue) {
-            uniqueValue = value;
-            this.bidOfferUnique = bidOffer;
-          }
-          if (bidOffer > highestValue) {
-            highestValue = bidOffer;
-          }
-        }
-        if (value > commonValue) {
-          commonValue = value;
-          this.common = bidOffer;
-        }
-      }
-      this.unique = this.bids.find(b => b.offer === `${this.bidOfferUnique}`);
-      this.highest = this.bids.find(b => b.offer === `${highestValue}`);
-      console.log(this.unique);
-    }
-    return;
+  increament() {
+    debugger;
+    this.bid.offer += this.bid.offer;
   }
 
-  showBids(): void {
-    this.setDataPoints = [];
-    for (let i = 1; i <= 100; i++) {
-      const bidOffer = i / 100;
-      const obj = {
-        label: `Bid: ` + bidOffer,
-        y: this.bids.filter(b => +b.offer === bidOffer).length
-      };
-      if (obj.y > 0) {
-        this.setDataPoints.push(obj);
-      }
 
-
-    }
-
-    const chart = new CanvasJS.Chart('chartContainer', {
-      axisY: {
-        labelAutoFit: true,   // change it to false
-        prefix: 'Bidders: '
-      },
-      animationEnabled: true,
-      exportEnabled: false,
-      title: {
-        text: 'Bids in our auction'
-      },
-      data: [{
-        type: 'bar',
-        // yValueFormatString:"count ####",
-        // axisYType: 'secondary',
-        dataPoints: this.setDataPoints
-      }]
-    });
-    chart.render();
-
-  }
   showMovie() {
     const dialogMovie = new DialogData("video");
     dialogMovie.show = true;
@@ -163,16 +100,6 @@ export class AuctionComponent implements OnInit {
   }
 
   updateStatusDialog(): void {
-    // const dialogRef = this.dialog.open(UpdateStatusComponent, {
-    //   panelClass: 'custom-dialog-container',
-    //   width: '450px',
-    //   height: '300px',
-    //   data: this.auction
-    // });
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed');
-    // });
   }
 
 }

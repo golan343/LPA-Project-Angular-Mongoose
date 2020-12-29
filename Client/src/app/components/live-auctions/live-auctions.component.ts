@@ -38,7 +38,8 @@ export class LiveAuctionsComponent implements OnInit, OnDestroy {
   }
 
   public showAuction(_id: string): void {
-    this.router.navigate(['/auctions/', _id]);
+    debugger;
+    this.router.navigate(['/auction/', _id]);
   }
 
 

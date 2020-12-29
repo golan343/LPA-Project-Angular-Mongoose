@@ -85,6 +85,7 @@ header {
 .full-height {
   height: 100%;
 }
+.full{width: 100%;}
 input {
   text-indent: 5px;
   font-size: 1.1em;
@@ -370,6 +371,42 @@ button {
   margin-bottom: 2rem;
   text-align: center;
 }
+.calendar-icon {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-block;
+  transform: scale(var(--ggs,1));
+  width: 18px;
+  height: 18px;
+  border: 2px solid;
+  border-radius: 3px
+ }
+ 
+ .calendar-icon::after,
+ .calendar-icon::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  border-radius: 3px;
+  height: 2px;
+  left: 2px
+ }
+ 
+ .calendar-icon::before {
+  background: currentColor;
+  width: 2px;
+  box-shadow:
+  4px 0 0,8px 0 0,0 4px 0,
+  4px 4px 0,8px 4px 0;
+  top: 6px
+ }
+ 
+ .calendar-icon::after {
+  width: 10px;
+  top: -4px;
+  box-shadow: 0 6px 0 0
+ } 
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -543,10 +580,14 @@ button {
   .show .phone_menu .sep:last-of-type {
     display: none;
   }
+ 
 }
 @media only screen and (max-width: 580px) {
   .left,
   .right {
     float: none;
+  }
+  .flex{
+    display: block;
   }
 }

@@ -38,9 +38,8 @@ export class ClosedComponent implements OnInit, OnDestroy {
     });
   }
 
-  // tslint:disable-next-line: variable-name
   public showAuction(_id: string): void {
-    this.router.navigate(['/auctions/', _id]);
+    this.router.navigate(['/auction/', _id]);
   }
 
 
