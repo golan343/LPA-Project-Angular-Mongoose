@@ -5,7 +5,7 @@ export class BidModel {
     public constructor() {
     }
     userId?: string;
-    offer: number;
+    offer: string;
     auctionId?: string;
     date?: Date;
     bidPrice: string;
@@ -27,27 +27,41 @@ export class AuctionBidData {
     constructor(bids?: BidModel[]) {
         this.maxLength = 0;
         this.minLength = bids.length;
-        this.steps = [];
+        this.winner = {};
+        let minOffer = 0;
         if (bids) {
             const filteredObject = {};
             this.filteredObjectsArray = [];
+            this.highest = 0;
             bids.forEach(item => {
                 if (!filteredObject[item.offer]) {
                     filteredObject[item.offer] = [];
                 }
                 filteredObject[item.offer].push(item);
+                minOffer = Math.max(parseFloat(item.offer), minOffer);
                 this.maxLength = Math.max(this.maxLength, filteredObject[item.offer].length);
                 this.minLength = Math.min(this.minLength, filteredObject[item.offer].length);
             });
+
             for (const prop in filteredObject) {
                 if (filteredObject.hasOwnProperty(prop)) {
                     const element = filteredObject[prop];
                     let ob = {
+                        bidId: element[0]._id,
                         val: prop,
                         relation: (100 * (element.length / this.maxLength)),
                         length: element.length,
-                        minOffer: element.length === this.minLength ? element[0] : {}
+                        item: element.length === this.minLength ? element[0] : null
                     };
+                    if (element.length === this.minLength && parseFloat(prop) !== minOffer) {
+                        minOffer = Math.min(parseFloat(prop), minOffer);
+                        console.log(parseFloat(prop), minOffer);
+                        this.winner = filteredObject[minOffer][0];
+                    }
+                    if (element.length === this.maxLength) {
+                        this.mostCommon = parseFloat(prop);
+                    }
+                    this.highest = Math.max(parseFloat(prop), this.highest);
                     this.filteredObjectsArray.push(ob);
                 }
             }
@@ -60,15 +74,13 @@ export class AuctionBidData {
                 }
                 return 0;
             })
-            // steps
-         
-            for (let i = 0; i <= this.maxLength; i++) {
-                this.steps.push(i);
-            }
+
         }
     }
     filteredObjectsArray?: any[];
     maxLength: number;
     minLength: number;
-    steps: number[];
+    winner: any;
+    mostCommon: number;
+    highest: number;
 }

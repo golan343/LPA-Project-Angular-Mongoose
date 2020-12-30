@@ -6,10 +6,11 @@ import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { VideoFrameComponent } from './video-frame/video-frame.component';
 import { SafePipe } from './../pipes/safe.pipe';
+import { CarIconComponent } from './icons/car-icon/car-icon.component';
 
 
 @NgModule({
-  declarations: [DialogComponent, LoginComponent, RegisterComponent, VideoFrameComponent, SafePipe],
+  declarations: [DialogComponent, LoginComponent, RegisterComponent, VideoFrameComponent, SafePipe, CarIconComponent],
   imports: [
     CommonModule,
     FormsModule,

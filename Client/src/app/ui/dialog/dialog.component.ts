@@ -8,6 +8,7 @@ import { DialogService } from './../dialog.service';
 })
 export class DialogComponent implements OnInit {
   dialogData: DialogData;
+
   constructor(private dialogService: DialogService) {
   }
   escape($event) {

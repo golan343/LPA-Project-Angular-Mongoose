@@ -36,7 +36,7 @@
                                 <h3>Sale Fore</h3>
                                 <div class="cube-body-half border-right">
                                     <div class="maxOffers">
-                                        <p>0.01 $</p>
+                                        <p>{{bidAuctionGraphData?.winner.offer | currency}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -44,7 +44,7 @@
                                 <h3>Value</h3>
                                 <div class="cube-body-half">
                                     <div class="maxBid">
-                                        <p>30000 $</p>
+                                        <p>{{auction.price}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
                                                 <h3>Most common bid</h3>
                                                 <div class="cube-body-half border-right">
                                                     <div class="maxOffers">
-                                                        <p>3000$</p>
+                                                        <p>{{bidAuctionGraphData?.mostCommon | currency}}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -88,7 +88,7 @@
                                                 <h3>Most highest bid</h3>
                                                 <div class="cube-body-half">
                                                     <div class="maxBid">
-                                                        <p>30000 $</p>
+                                                        <p>{{bidAuctionGraphData?.highest | currency}}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -97,7 +97,7 @@
                                 </div>
                                 <div class="cube half ">
                                     <div class="full">
-                                        <h3>Winner- <span></span></h3>
+                                        <h3>Winner- <span>{{bidAuctionGraphData?.winner.userId.firstName}}</span></h3>
                             <div class="cube-body">
                                 <div (click)="showMovie()" class="productVideoLink"></div>
                             </div>
@@ -110,7 +110,7 @@
                     <h3>Offers Log</h3>
                     <div class="cube-body">
                         <div class="linear-graph">
-                            <div class="white-back" *ngFor="let item of bidAuctionGraphData.filteredObjectsArray">
+                            <div class="white-back" *ngFor="let item of bidAuctionGraphData?.filteredObjectsArray">
                                 <div class="val"><b>{{item.val | currency}}</b></div>
                                 <div class="graph-row">
                                     <div class="prograss" [style.width]="item.relation+'%'"></div>

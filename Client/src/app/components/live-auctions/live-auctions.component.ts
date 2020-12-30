@@ -5,7 +5,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BidsService } from '../../services/bids.service';
 import { Router } from '@angular/router';
 import { map, tap } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-live-auctions',
@@ -15,30 +15,30 @@ import { Subscription } from 'rxjs';
 
 export class LiveAuctionsComponent implements OnInit, OnDestroy {
   public auctions: AuctionModel[];
-  private subscriberBids: Subscription;
+  public auctions$: Observable<AuctionModel[]>;
   public BaseUrl = BaseUrl;
 
   constructor(private auctionsService: AuctionsService, private router: Router, private BidsService: BidsService,) { }
   ngOnDestroy(): void {
-    this.subscriberBids.unsubscribe();
+
   }
   ngOnInit() {
     this.auctionsService.getAllAuctions();
 
-    this.subscriberBids = this.auctionsService.subjectAuctions.pipe(map(auctions => {
-      this.auctions = auctions.map(auc => {
+    this.auctions$ = this.auctionsService.subjectAuctions.asObservable().pipe(map<AuctionModel[], any>(auctions => {
+      return auctions.map(auc => {
         return {
           ...auc,
           imageFileName: environment.BaseUrl + 'uploads/' + auc.imageFileName
         }
       }).filter(auc => auc.status);
-    })).subscribe(data => {
-      console.table(data);
+    }))
+    this.auctions$.subscribe(res => {
+      console.table(res);
     });
   }
 
   public showAuction(_id: string): void {
-    debugger;
     this.router.navigate(['/auction/', _id]);
   }
 

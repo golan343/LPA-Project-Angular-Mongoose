@@ -72,7 +72,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     dialog.text = '';
     this.dialogLocalsService.subjectType.next(dialog);
   }
-  public placeBid(){
-    this.router.navigate(["live"]);
+  public placeBid() {
+    if (this.accountService.isLogin) {
+      this.router.navigate(["live"]);
+    } else {
+      this.login();
+    }
+
   }
 }

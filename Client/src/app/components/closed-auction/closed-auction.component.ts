@@ -44,46 +44,9 @@ export class ClosedAuctionComponent implements OnInit {
     this.bidService.subjectBidsInAuction.subscribe(bids => {
       this.bids = bids;
       if (bids && bids.length > 1) {
-        this.Maxbid = bids.reduce((prev, current) => {
-          return prev.offer > current.offer ? prev : current;
-        });
-        this.Minbid = bids.reduce((prev, current) => {
-          return prev.offer < current.offer ? prev : current;
-        });
+        this.bidAuctionGraphData = new AuctionBidData(bids);
       }
-
-      this.bidAuctionGraphData = new AuctionBidData(bids);
-
-    })
+    });
   }
-  // checkUnique() {
-  //   if (!this.bids) return;
-  //   if (this.bids.length > 0) {
-  //     let uniqueValue = 1000;
-  //     let highestValue = 0;
-  //     let commonValue = 0;
-  //     for (let i = 1; i <= 100; i++) {
-  //       const bidOffer = i / 100;
-  //       const value = this.bids.filter(b => +b.offer === bidOffer).length;
 
-  //       if (value > 0) {
-  //         if (value < uniqueValue) {
-  //           uniqueValue = value;
-  //           this.bidOfferUnique = bidOffer;
-  //         }
-  //         if (bidOffer > highestValue) {
-  //           highestValue = bidOffer;
-  //         }
-  //       }
-  //       if (value > commonValue) {
-  //         commonValue = value;
-  //         this.common = bidOffer;
-  //       }
-  //     }
-  //     this.unique = this.bids.find(b => b.offer === `${this.bidOfferUnique}`);
-  //     this.highest = this.bids.find(b => b.offer === `${highestValue}`);
-  //     console.log(this.unique);
-  //   }
-  //   return;
-  // }
 }

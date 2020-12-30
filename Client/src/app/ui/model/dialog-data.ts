@@ -9,4 +9,5 @@ export class DialogData {
     wide: boolean;
     show: boolean;
     src: string;
+    innerTitle: string;
 }
