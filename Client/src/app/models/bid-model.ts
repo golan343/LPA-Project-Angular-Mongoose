@@ -56,7 +56,7 @@ export class AuctionBidData {
                     if (element.length === this.minLength && parseFloat(prop) !== minOffer) {
                         minOffer = Math.min(parseFloat(prop), minOffer);
                         console.log(parseFloat(prop), minOffer);
-                        this.winner = filteredObject[minOffer][0];
+                        this.winner = filteredObject[minOffer][this.minLength - 1];
                     }
                     if (element.length === this.maxLength) {
                         this.mostCommon = parseFloat(prop);
@@ -65,6 +65,7 @@ export class AuctionBidData {
                     this.filteredObjectsArray.push(ob);
                 }
             }
+            this.winner.winner = true;
             this.filteredObjectsArray = this.filteredObjectsArray.sort((a, b) => {
                 if (a.val > b.val) {
                     return -1;

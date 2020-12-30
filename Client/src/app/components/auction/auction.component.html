@@ -1,7 +1,7 @@
-<div *ngIf="auction" class="auctionPage">
+<div class="auctionPage">
     <div class="mainContent center">
-        <h1 *ngIf="!auction.status">Closed Auction</h1>
-        <h1 *ngIf="auction.status">Live Auction</h1>
+        <h1 *ngIf="!auction?.status">Closed Auction</h1>
+        <h1 *ngIf="auction?.status">Live Auction</h1>
         <h2>Place your bid and get a chance to win in one of our cars</h2>
         <div class="bg">
             <div class="auction relative" [style.backgroundImage]="'url('+auction.imageFileName+')'">

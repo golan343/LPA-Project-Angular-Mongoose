@@ -73,11 +73,13 @@ h4 {
     margin: 4px 0;
     display: inline-block;
     vertical-align: middle;
+    position: relative;
 }
 .prograss {
   height: 100%;
   background-color: #1CA4FC;
   border-radius: 5px;
+
 }
 .val {
   display: inline-block;
@@ -92,4 +94,12 @@ h4 {
   font-size: 1.4rem;
  text-align: center;
  color: #fff;
+}
+.winner{
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #f5f703;
+  position: absolute;
+  top: -50%;
+  left: 0;
 }

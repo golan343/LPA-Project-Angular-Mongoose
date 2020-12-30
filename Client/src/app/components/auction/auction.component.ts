@@ -3,13 +3,14 @@ import { AuctionBidData, BidModel } from './../../models/bid-model';
 import { environment } from './../../../environments/environment';
 
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuctionModel } from 'src/app/models/auction-model';
 import { CookieService } from 'ngx-cookie-service';
 import { AuctionsService } from 'src/app/services/auctions.service';
 import { DialogData } from 'src/app/ui/model/dialog-data';
 import { DialogService } from 'src/app/ui/dialog.service';
 import { errorModel, validationConstrains } from 'src/app/models/user-model';
+import { AccountService } from 'src/app/services/account.service';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class AuctionComponent implements OnInit {
   price: number;
   //bidAuctionGraphData: AuctionBidData;
   error: errorModel;
+  bidAuctionGraphData: AuctionBidData;
 
 
 
@@ -34,6 +36,8 @@ export class AuctionComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private auctionService: AuctionsService,
     private cookieService: CookieService,
+    private accountService: AccountService,
+    private route: Router,
     private bidService: BidsService,
     private dialogService: DialogService) { }
 
@@ -55,9 +59,9 @@ export class AuctionComponent implements OnInit {
     this.bidService.getAllBidsIncludingAuction(id);
     this.bidService.subjectBidsInAuction.subscribe(bids => {
       this.bids = bids;
-      // if (bids && bids.length > 1) {
-      //   this.bidAuctionGraphData = new AuctionBidData(bids);
-      // }
+      if (bids && bids.length > 1) {
+        this.bidAuctionGraphData = new AuctionBidData(bids);
+      }
     });
   }
   getBids() {
@@ -86,6 +90,9 @@ export class AuctionComponent implements OnInit {
     return this.error.validate(bidValidator);
   }
   async addBid(): Promise<any> {
+    if (!this.accountService.isLogin) {
+      this.route.navigate(['/']);
+    }
     if (!this.validateBid()) {
       return;
     }
