@@ -17,7 +17,7 @@ router.get('/sendSMS', (request, response) => {
             from: "+12515727644"
 
         })
-        .then((message) => response.send('send'));
+        .then((message) => response.send(`send : ${message}`));
         
     }
     catch(err){
