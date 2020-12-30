@@ -27,7 +27,7 @@ export class AuctionsService {
   }
 
   // tslint:disable-next-line: typedef
-  public getAllAuctions() {
+  getAllAuctions() {
     this.http
     .get<AuctionModel[]>(BaseUrl + 'api/auctions')
       .subscribe(AuctionsResult => {

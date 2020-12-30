@@ -60,6 +60,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { AuctionItemComponent } from './components/auction-item/auction-item.component';
 import { ClosedAuctionComponent } from './components/closed-auction/closed-auction.component';
 import { GlobalLoaderComponent } from './components/loader/global-loader/global-loader.component';
+import { OnlyNumericDirective } from './directives/only-numeric.directive';
 
 const globalSettings: RecaptchaSettings = {
   siteKey: '6LeFTeoZAAAAAOm4L0qfozbCzOYa3kzs_3zeCgUY',
@@ -89,6 +90,7 @@ const globalSettings: RecaptchaSettings = {
     AuctionItemComponent,
     ClosedAuctionComponent,
     GlobalLoaderComponent,
+    OnlyNumericDirective,
   ],
   imports: [
     BrowserModule,

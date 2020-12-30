@@ -22,15 +22,7 @@ export class UserModel {
 export class errorModel extends UserModel {
     email: string;
     password: string;
-    clear() {
-        this.password = '';
-        this.email = '';
-        for (let key in this) {
-            if (Object.prototype.hasOwnProperty.call(this, key) && typeof this[key] === 'string') {
-                this[key]    
-            }
-        }
-    }
+    bid: string;
     validatePassword(passText) {
         if (!passText) {
             this.password = 'Missing Password';
@@ -66,6 +58,12 @@ export class errorModel extends UserModel {
                 return false;
             }
         }
+        if (typeof constrain.callMethod == 'function') {
+            if (constrain.callMethod()) {
+                this[constrain.prop] = constrain.methodMsg;
+                return false;
+            }
+        }
         this[constrain.prop] = '';
         return true;
     }
@@ -78,6 +76,8 @@ export class validationConstrains {
         this.errorMsg = args.errorMsg;
         this.pattarn = args.pattarn || null;
         this.pattarnErrorMsg = args.pattarnErrorMsg;
+        this.callMethod = args.callMethod || null
+        this.methodMsg = args.methodMsg;
     }
     isRequire: boolean;
     prop: string;
@@ -85,6 +85,8 @@ export class validationConstrains {
     pattarn: RegExp;
     errorMsg: string;
     pattarnErrorMsg: string;
+    callMethod: any;
+    methodMsg: string;
 }
 
 
