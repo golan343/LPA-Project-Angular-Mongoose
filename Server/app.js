@@ -17,6 +17,7 @@ const ruleController = require('./controllers/rule-controller');
 const smsController = require('./controllers/sms-controller');
 const emailController = require('./controllers/email-controller');
 const mailchimpController = require('./controllers/mailchimp-controller');
+const kushkiController = require('./controllers/kushki-controller');
 const uploadImageController = require('./controllers/uploads-image-controller');
 require("./data-access-layer/dal");
 const sanitize = require('./middleware/sanitize');
@@ -52,6 +53,7 @@ server.use("/api/rule", ruleController);
 server.use("/api/sms", smsController);
 server.use("/api/email", emailController);
 server.use("/api/mail", mailchimpController);
+server.use("/api/kushki", kushkiController);
 
 
 
