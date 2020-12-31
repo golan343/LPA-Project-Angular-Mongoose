@@ -160,7 +160,14 @@ input {
 .relative {
   position: relative;
 }
-
+.auction h4.both {background: rgba(256,256,256,.4);}
+.auction h4.both:after {
+    width:100%;
+    content:"";
+    height:2px;
+    background:#000
+}
+.auction p.valueAuction {background: rgba(256,256,256,.4);padding:1%;}
 .js-center {
   justify-content: center;
 }

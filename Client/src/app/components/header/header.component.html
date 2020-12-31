@@ -4,12 +4,15 @@
         <span class="sep"></span>
         <span class="sep"></span>
     </div>
-    <div class="user" title="login" *ngIf="isLogin"><span
+    <div class="user" title="login" *ngIf="isLogin" [title]="'hello '+user?.firstName"><span
             class="person-icon"></span></div>
     <div class="btn" *ngIf="!isLogin" (click)="login()" title="log in">
         <i class="log-in"></i>
     </div>
-    <div class="search" *ngIf="isLogin"><a class="search-icon"></a></div>
+    <div *ngIf="isLogin">
+        <a type="button" class="sign-out" (click)="logout()">Sign out</a>
+    </div>
+    <!-- <div class="search" *ngIf="isLogin"><a class="search-icon"></a></div> -->
     <div class="languages">
         <ul>
             <li></li>

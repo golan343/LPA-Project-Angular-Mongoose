@@ -36,8 +36,8 @@ export class AuctionComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private auctionService: AuctionsService,
     private cookieService: CookieService,
-    private accountService: AccountService,
-    private route: Router,
+    private account: AccountService,
+    private router: Router,
     private bidService: BidsService,
     private dialogService: DialogService) { }
 
@@ -49,7 +49,7 @@ export class AuctionComponent implements OnInit {
 
         return {
           ...auc,
-          imageFileName: environment.BaseUrl + 'uploads/' + auc.imageFileName
+          imageFileName: environment.devUrl + 'uploads/' + auc.imageFileName
         }
       })[0];
       this.price = parseFloat(this.auction.price);
@@ -89,31 +89,35 @@ export class AuctionComponent implements OnInit {
     });
     return this.error.validate(bidValidator);
   }
-  async addBid(): Promise<any> {
-    if (!this.accountService.isLogin) {
-      this.route.navigate(['/']);
-    }
-    if (!this.validateBid()) {
-      return;
-    }
-    const dialog = new DialogData();
-    dialog.show = true;
-    this.bid.userId = JSON.parse(this.cookieService.get('user')).user._id;
-    this.bid.date = new Date();
-    this.bid.auctionId = this.auction._id;
-    this.bidService.addBid(this.bid).subscribe(result => {
-      console.log(result)
-      this.getBids();
-      dialog.innerTitle = 'Your bid is absorbed in our system!';
-      dialog.text = 'see you in the next auction!';
-      this.dialogService.subjectType.next(dialog);
-    },
-      err => {
-        console.log(err.message);
-        dialog.innerTitle = 'error ';
-        dialog.text = err.message;
+  addBid() {
+    if (this.account.isLogin) {
+      if (!this.validateBid()) {
+        return;
+      }
+      const dialog = new DialogData();
+      dialog.show = true;
+      this.bid.userId = JSON.parse(this.cookieService.get('user')).user._id;
+      this.bid.date = new Date();
+      this.bid.auctionId = this.auction._id;
+      this.bidService.addBid(this.bid).subscribe(result => {
+        console.log(result)
+        this.getBids();
+        dialog.innerTitle = 'Your bid is absorbed in our system!';
+        dialog.text = 'see you in the next auction!';
         this.dialogService.subjectType.next(dialog);
-      });;
+      },
+        err => {
+          console.log(err.message);
+          dialog.innerTitle = 'error ';
+          dialog.text = err.message;
+          this.dialogService.subjectType.next(dialog);
+        });
+    } else {
+      const dialog = new DialogData('Login');
+      dialog.title = "In Order to place this You need to sign in first";
+      dialog.show = true;
+      this.dialogService.subjectType.next(dialog);
+    }
   }
 
   increament() {

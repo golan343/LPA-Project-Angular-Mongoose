@@ -10,4 +10,5 @@ export class DialogData {
     show: boolean;
     src: string;
     innerTitle: string;
+    callBackDialog: any;
 }

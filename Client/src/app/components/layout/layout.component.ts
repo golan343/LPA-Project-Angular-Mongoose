@@ -1,4 +1,4 @@
-import { Component, HostListener, OnDestroy, OnInit, VERSION } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
@@ -16,6 +16,7 @@ import { BidsService } from 'src/app/services/bids.service';
 })
 export class LayoutComponent implements OnInit, OnDestroy {
   subscribeMenu: Subscription;
+  colorScriber: Subscription;
   showMenu: boolean;
   menuColor: any;
   public constructor(private bpo: BreakpointObserver,
@@ -27,6 +28,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   ) { }
   ngOnDestroy(): void {
     this.subscribeMenu.unsubscribe();
+    this.colorScriber.unsubscribe();
   }
   ngOnInit(): void {
     this.accountService.isUserLoggedIn();
@@ -34,19 +36,12 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.subscribeMenu = this.mobile.showMenuTrigger.subscribe(show => {
       this.showMenu = show;
     });
+    this.subscribeMenu = this.mobile.cahngeMenuColor.subscribe(color => {
+      this.menuColor = color;
+    });
     this.menuColor = { black: true };
   }
-  @HostListener('window:scroll', ['$event']) private onScroll($event: Event): void {
-    if (window.scrollY > window.innerHeight / 10) {
-      this.menuColor = { black: true };
-    }
-    if (window.scrollY > 3 * window.innerHeight / 10) {
-      this.menuColor = { dark: true };
-    }
-    if (window.scrollY - 100 > window.innerHeight) {
-      this.menuColor = { white: true };
-    }
-  };
+
   public goToDashboard(): void {
     let route = '/dashboard/user-panel';
     if (this.accountService.isAdmin()) {

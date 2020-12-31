@@ -30,7 +30,6 @@ export class AccountService {
   public isUserLoggedIn(): void {
     const token = this.cookieService.get('token');
     this.isLogin = !this.helper.isTokenExpired(token);
-    console.log(this);
     this.isLoginSubject.next(this.isLogin)
   }
   public getToken(): string {
@@ -55,10 +54,9 @@ export class AccountService {
 
   }
 
-  // tslint:disable-next-line: typedef
-  public login(user: UserModel) {
+  login(user: UserModel) {
     return this.http.post<UserModel>(`${BaseUrl}api/auth/login`, user)
-    // tslint:disable-next-line: no-shadowed-variable
+
     .pipe(map(user => {
       this.cookieService.set('token', JSON.stringify(user.token));
       this.cookieService.set('user', JSON.stringify(user));
@@ -69,7 +67,7 @@ export class AccountService {
 
   public logout(): void {
     this.cookieService.deleteAll();
-    this.router.navigateByUrl('/home');
+   // this.router.navigateByUrl('/');
   }
 
 

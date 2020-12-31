@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
       this.accountService.login(this.user).subscribe(
         (response) => {
           this.dialogService.subjectType.next(new DialogData());
+
         },
         (err) => {
           alert(err.message);

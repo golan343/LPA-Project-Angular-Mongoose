@@ -6,6 +6,7 @@ import { MobileService } from 'src/app/services/mobile.service';
 import { DialogData } from 'src/app/ui/model/dialog-data';
 import { DialogService } from 'src/app/ui/dialog.service';
 import { Subscription } from 'rxjs';
+import { UserModel } from 'src/app/models/user-model';
 
 @Component({
   selector: 'app-header',
@@ -16,6 +17,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   showMobile: boolean;
   isLogin: boolean;
   subscriberLogin: Subscription;
+  user: UserModel;
   constructor(private router: Router,
     public accountService: AccountService,
     private cookieService: CookieService,
@@ -27,9 +29,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscriberLogin = this.accountService.isLoginSubject.subscribe(isLogin => {
-      this.isLogin = isLogin;
-    });
+     this.subscriberLogin = this.accountService.isLoginSubject.subscribe(isLogin => {
+       this.isLogin = isLogin
+     });
+    const cookieUsr = this.cookieService.get('user');
+    if (cookieUsr) {
+      const cookieUsrParsed = JSON.parse(cookieUsr);
+      this.user = cookieUsrParsed.user as UserModel;
+    }
   }
   menuToggle() {
     this.showMobile = !this.showMobile;
@@ -39,45 +46,37 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('/');
   }
 
-  public goToDashboard(): void {
+  goToDashboard(): void {
     let route = '/user-panel';
     if (this.accountService.isAdmin()){
       const role = JSON.parse(this.cookieService.get('user')).user.roleId;
       if (role === '5f58ba8855eac12930d7b405'){
         route = '/admin-panel';
-        alert('admin');
 
       }
       else if (role === '5f58ba9a55eac12930d7b40c'){
         route = '/sub-admin';
-        alert('sub admin');
 
       }
       else if (role === '5f58badd55eac12930d7b427'){
         route = '/gish-admin';
-        alert('gish admin');
 
       }
     }
     this.router.navigateByUrl(route);
   }
 
-  public logout(): void{
+  logout(): void {
     this.accountService.logout();
   }
 
-  public login(): void {
+  login(): void {
     const dialog = new DialogData("Login");
     dialog.title = '';
     dialog.text = '';
     this.dialogLocalsService.subjectType.next(dialog);
   }
-  public placeBid() {
-    if (this.accountService.isLogin) {
-      this.router.navigate(["live"]);
-    } else {
-      this.login();
-    }
-
+  placeBid() {
+    this.router.navigate(["live"]);
   }
 }

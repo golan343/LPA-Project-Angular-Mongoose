@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 })
 export class MobileService {
   showMenuTrigger = new Subject<boolean>();
+  cahngeMenuColor = new Subject<any>();
   show: boolean;
   constructor() {
 
