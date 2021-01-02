@@ -1,27 +1,26 @@
-<div *ngIf="auction" class="auctionPage">
+<div class="auctionPage">
     <div class="mainContent center">
-        <h1 *ngIf="!auction.status">Closed Auction</h1>
-        <h1 *ngIf="auction.status">Live Auction</h1>
+        <h1>Live Auction</h1>
         <h2>Place your bid and get a chance to win in one of our cars</h2>
         <div class="bg">
-            <div class="auction relative" [style.backgroundImage]="'url('+auction.imageFileName+')'">
-                <h4 class="both"><span class="left">{{auction.name}}</span><span class="right">{{auction.description}}</span></h4>
-                <p *ngIf="auction.status" class="valueAuction"><span><b>Price</b></span>: <span>{{price |
+            <div class="auction relative" [style.backgroundImage]="'url('+auction?.imageFileName+')'">
+                <h4 class="both"><span class="left">{{auction?.name}}</span><span class="right">{{auction?.description}}</span></h4>
+                <p *ngIf="auction?.status" class="valueAuction"><span><b>Price</b></span>: <span>{{price |
                         currency}}</span> </p>
             </div>
             <div class="flex padding-top space">
-                <div class="placeBid relative" *ngIf="auction.status">
+                <div class="placeBid relative" *ngIf="auction?.status">
                     <span *ngIf="error?.bid" class="error">{{error?.bid}}</span>
                     <label> Offer cost: </label>
-                    <input type="text" appOnlyNumeric (change)="setAmount($event)" [value]="bid.offer || 0" />
+                    <input type="text" appOnlyNumeric (change)="setAmount($event)" [value]="bid?.offer || 0" />
                     <div class="overflow relative">
-                        <aside class="right plus " (click)="increament()"></aside>
+                        <!-- <aside class="right plus " (click)="increament()"></aside> -->
                         <button type="button" (click)="addBid()"> Place my bid </button>
                     </div>
                 </div>
                 <div class="remaining-offers">
                     <h3><span>Remaining Offers</span></h3>
-                    <h3><i>{{auction.totalBids - auction.bidsCount}}</i></h3>
+                    <h3><i>{{auction?.totalBids - auction?.bidsCount}}</i></h3>
                 </div>
             </div>
 
@@ -35,7 +34,7 @@
                         <h3>Minimum bid</h3>
                         <div class="cube-body">
                             <div class="minBid">
-                                <p>{{auction.minOffer | currency}}</p>
+                                <p>{{auction?.minOffer | currency}}</p>
                             </div>
                         </div>
 
@@ -44,7 +43,7 @@
                         <h3>Maximum bid</h3>
                         <div class="cube-body">
                             <div class="maxBid">
-                                <p>{{auction.maxOffer | currency}}</p>
+                                <p>{{auction?.maxOffer | currency}}</p>
                             </div>
 
                         </div>
@@ -53,7 +52,7 @@
                         <h3>Maximum Offers</h3>
                         <div class="cube-body">
                             <div class="maxOffers">
-                                <p>{{auction.totalBids}}</p>
+                                <p>{{auction?.totalBids}}</p>
                             </div>
                         </div>
                     </div>
@@ -69,7 +68,7 @@
                         <div class="cube half">
                             <h3>Description</h3>
                             <div class="cube-body">
-                                <p>{{auction.description}}</p>
+                                <p>{{auction?.description}}</p>
                             </div>
                         </div>
                     </div>

@@ -105,7 +105,7 @@
                     </div>
                 </div>
             </div>
-            <div class="productVideo">
+            <div class="productVideo" *ngIf="bidAuctionGraphData?.filteredObjectsArray && isLogin">
                 <div class="cube">
                     <h3>Offers Log</h3>
                     <div class="cube-body">
@@ -113,8 +113,9 @@
                             <div class="white-back" *ngFor="let item of bidAuctionGraphData?.filteredObjectsArray">
                                 <div class="val"><b>{{item.val | currency}}</b></div>
                                 <div class="graph-row">
-                                    <div class="prograss" [style.width]="item.relation+'%'"></div>
-                                   
+                                    
+                                    <div *ngIf="!item.item?.winner" class="prograss" [style.width]="item.relation+'%'"></div>
+                                    <div *ngIf="item.item?.winner" class="winner"><span>winner !</span></div>
                                 </div>
                                 <div class="length">{{item.length}}</div>
                                 </div>

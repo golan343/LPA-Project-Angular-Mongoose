@@ -3,13 +3,14 @@ import { AuctionBidData, BidModel } from './../../models/bid-model';
 import { environment } from './../../../environments/environment';
 
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuctionModel } from 'src/app/models/auction-model';
 import { CookieService } from 'ngx-cookie-service';
 import { AuctionsService } from 'src/app/services/auctions.service';
 import { DialogData } from 'src/app/ui/model/dialog-data';
 import { DialogService } from 'src/app/ui/dialog.service';
 import { errorModel, validationConstrains } from 'src/app/models/user-model';
+import { AccountService } from 'src/app/services/account.service';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class AuctionComponent implements OnInit {
   price: number;
   //bidAuctionGraphData: AuctionBidData;
   error: errorModel;
+  bidAuctionGraphData: AuctionBidData;
 
 
 
@@ -34,6 +36,8 @@ export class AuctionComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private auctionService: AuctionsService,
     private cookieService: CookieService,
+    private account: AccountService,
+    private router: Router,
     private bidService: BidsService,
     private dialogService: DialogService) { }
 
@@ -45,7 +49,7 @@ export class AuctionComponent implements OnInit {
 
         return {
           ...auc,
-          imageFileName: environment.BaseUrl + 'uploads/' + auc.imageFileName
+          imageFileName: environment.devUrl + 'uploads/' + auc.imageFileName
         }
       })[0];
       this.price = parseFloat(this.auction.price);
@@ -55,9 +59,9 @@ export class AuctionComponent implements OnInit {
     this.bidService.getAllBidsIncludingAuction(id);
     this.bidService.subjectBidsInAuction.subscribe(bids => {
       this.bids = bids;
-      // if (bids && bids.length > 1) {
-      //   this.bidAuctionGraphData = new AuctionBidData(bids);
-      // }
+      if (bids && bids.length > 1) {
+        this.bidAuctionGraphData = new AuctionBidData(bids);
+      }
     });
   }
   getBids() {
@@ -85,28 +89,35 @@ export class AuctionComponent implements OnInit {
     });
     return this.error.validate(bidValidator);
   }
-  async addBid(): Promise<any> {
-    if (!this.validateBid()) {
-      return;
-    }
-    const dialog = new DialogData();
-    dialog.show = true;
-    this.bid.userId = JSON.parse(this.cookieService.get('user')).user._id;
-    this.bid.date = new Date();
-    this.bid.auctionId = this.auction._id;
-    this.bidService.addBid(this.bid).subscribe(result => {
-      console.log(result)
-      this.getBids();
-      dialog.innerTitle = 'Your bid is absorbed in our system!';
-      dialog.text = 'see you in the next auction!';
-      this.dialogService.subjectType.next(dialog);
-    },
-      err => {
-        console.log(err.message);
-        dialog.innerTitle = 'error ';
-        dialog.text = err.message;
+  addBid() {
+    if (this.account.isLogin) {
+      if (!this.validateBid()) {
+        return;
+      }
+      const dialog = new DialogData();
+      dialog.show = true;
+      this.bid.userId = JSON.parse(this.cookieService.get('user')).user._id;
+      this.bid.date = new Date();
+      this.bid.auctionId = this.auction._id;
+      this.bidService.addBid(this.bid).subscribe(result => {
+        console.log(result)
+        this.getBids();
+        dialog.innerTitle = 'Your bid is absorbed in our system!';
+        dialog.text = 'see you in the next auction!';
         this.dialogService.subjectType.next(dialog);
-      });;
+      },
+        err => {
+          console.log(err.message);
+          dialog.innerTitle = 'error ';
+          dialog.text = err.message;
+          this.dialogService.subjectType.next(dialog);
+        });
+    } else {
+      const dialog = new DialogData('Login');
+      dialog.title = "In Order to place this You need to sign in first";
+      dialog.show = true;
+      this.dialogService.subjectType.next(dialog);
+    }
   }
 
   increament() {

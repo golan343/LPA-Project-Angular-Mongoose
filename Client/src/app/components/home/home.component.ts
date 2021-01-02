@@ -1,12 +1,12 @@
 import { BaseUrl, environment } from './../../../environments/environment';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuctionModel } from 'src/app/models/auction-model';
 import { AuctionsService } from 'src/app/services/auctions.service';
 import { AccountService } from 'src/app/services/account.service';
 import { DialogData } from 'src/app/ui/model/dialog-data';
 import { DialogService } from '../../ui/dialog.service';
-import { BidsService } from '../../services/bids.service';
+import { MobileService } from '../../services/mobile.service';
 
 @Component({
   selector: 'app-home',
@@ -20,18 +20,32 @@ export class HomeComponent implements OnInit, OnDestroy {
   lat = -3.180653;
   lng = -72.467834;
 
+
+
   constructor(
     private router: Router,
-    private BidsService: BidsService,
+    private UtilService: MobileService,
     private auctionService: AuctionsService,
     private dialogLocalsService: DialogService,
     public accountService: AccountService) { }
   ngOnDestroy(): void {
-
+    debugger;
+    window.removeEventListener("scroll", this.onScroll);
   }
-  ngAfterViewInit() {
-
-  }
+  ngAfterViewInit() { }
+  @HostListener('window:scroll', ['$event']) private onScroll($event: Event): void {
+    let menuColor = {};
+    if (window.scrollY > window.innerHeight / 10) {
+      menuColor = { black: true };
+    }
+    if (window.scrollY > 3 * window.innerHeight / 10) {
+      menuColor = { dark: true };
+    }
+    if (window.scrollY - 100 > window.innerHeight) {
+      menuColor = { white: true };
+    }
+    this.UtilService.cahngeMenuColor.next(menuColor);
+  };
   showAuction(_id: string): void {
     this.router.navigateByUrl('/auctions/' + _id);
   }
@@ -46,7 +60,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.auctionService.getLastAuction().subscribe(auctionsResult => {
       console.log(auctionsResult);
       const Last = auctionsResult[0];
-      Last.imageFileName = environment.BaseUrl + 'uploads/' + Last.imageFileName;
+      Last.imageFileName = environment.devUrl + 'uploads/' + Last.imageFileName;
       this.auction = Last;
     });
   }

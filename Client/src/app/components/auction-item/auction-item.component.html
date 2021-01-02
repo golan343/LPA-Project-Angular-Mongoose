@@ -1,47 +1,50 @@
-<div class="lastAuction l-padding relative">
-    <img [class]="{fadein:auction}" [src]="auction?.imageFileName" [alt]="auction?.name">
-    <div class="top border-bottom both relative">
-        <h2 class="left">{{auction?.name}}</h2>
-        <h4 class="right">{{auction?.description}}</h4>
+<div class="lastAuction relative">
+    <img [hidden]="!auction" [class]="{ fadein: auction }" [src]="auction?.imageFileName" [alt]="auction?.name" />
+    <div class="top both relative">
+        <h2 class="left">{{ auction?.name }}</h2>
+        <h4 class="right">{{ auction?.description }}</h4>
+  </div>
+
+  <div [ngSwitch]="auction?.status">
+    <div *ngSwitchCase="true" class="my-bid relative">
+      <div>
+        <h4 class="inline-block"><span>Remaining offers </span></h4>
+        <div *ngIf="homeFlag" class="inline-block fadding-white mr-l">
+        <small>{{ auction?.totalBids }}</small><span>/</span><i>{{ auction?.bidsCount}}</i>
+        </div>
+        <div *ngIf="!homeFlag" class="inline-block fadding-white mr-l">
+        <i>{{ auction?.totalBids - auction?.bidsCount }}</i>
+        </div>
+      </div>
+    <button class="auctionBtn" (click)="showAuction(auction._id)">
+        {{ placeBisText }}
+    </button>
     </div>
-
-    <div [ngSwitch]="auction?.status">
-        <div *ngSwitchCase="true">
-            <div class="my-bid relative">
-                <div>
-                    <h4 class="inline-block"><span>Remaining offers </span></h4>
-                    <div *ngIf="homeFlag" class="inline-block fadding-white mr-l">
-                        <i>{{auction?.bidsCount}}</i><span>/</span><small>{{auction?.totalBids}}</small>
-                    </div>
-                    <div *ngIf="!homeFlag" class="inline-block fadding-white mr-l">
-                        <i>{{auction?.totalBids - auction?.bidsCount}}</i>
-                    </div>
-                </div>
-                <button class="auctionBtn" (click)="showAuction(auction._id)">{{placeBisText}} </button>
-            </div>
-        </div>
-        <div *ngSwitchDefault>
-            <div class="my-bid relative">
-                <div class="sold-auction">
-                    <h2>sold out</h2>
-                </div>
-                <div>
-                    <h4 class="inline-block"><span>sold for </span></h4>
-                    <div class="inline-block fadding-white mr-l">
-                        <i>{{auction?.maxOffer | currency}}</i>
-                    </div>
-                </div>
-                <button class="auctionBtn" (click)="showAuction(auction._id)">Show details </button>
-            </div>
-        </div>
-        
-        </div>
-
-    <div class="datesDiv relative">
-        <!-- <p class="left"><span>Starts:</span><b>{{auctions[0].startDate.replace('T', ' ')}}</b> </p> -->
-        <p class="right">
-            <span>price :</span><b>{{auction?.bidPrice | currency}}</b>
-            <!-- <span>Ends:</span><b>{{auctions[0].endDate.replace('T', ' ')}}</b>  -->
+    <div *ngSwitchCase="true" class="datesDiv relative">
+        <p>
+            <span>Offer price:</span><b>{{ auction?.bidPrice | currency }}</b>
         </p>
     </div>
+    <div *ngSwitchDefault>
+      <div class="my-bid relative">
+        <div class="sold-auction">
+          <h2>closed</h2>
+        </div>
+        <div>
+          <h4 class="inline-block"><span>Closed on </span></h4>
+          <div class="inline-block fadding-white mr-l">
+            <i>{{ auction?.endDate | date: "dd/MM/yyyy" }}</i>
+          </div>
+        </div>
+        <button class="auctionBtn" (click)="showAuction(auction._id)">
+            Show details
+        </button>
+    </div>
+    <div class="datesDiv relative">
+        <p class="right">
+        <span>Winning price :</span><b>{{ auction?.bidPrice | currency }}</b>
+        </p>
+      </div>
+    </div>
+</div>
 </div>

@@ -1,4 +1,4 @@
-import { Injectable, Type, Injector } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { DialogData } from './model/dialog-data';
 
@@ -7,6 +7,8 @@ import { DialogData } from './model/dialog-data';
 })
 export class DialogService {
   subjectType = new Subject<DialogData>();
-  constructor() { }
+  constructor() {
+
+  }
 
 }
