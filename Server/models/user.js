@@ -20,20 +20,12 @@ const UserSchema = mongoose.Schema({
     firstName: {
         type: String,
         required: [true, "is missing"],
-        minlength: [3, "must be minimum 3 charts"],
-        validate: {
-            validator: value => /^[A-Z].*$/.test(value),
-            message: "Must start with a capital letter"
-        }
+        minlength: [3, "must be minimum 3 charts"]
     },
     lastName: {
         type: String,
         required: [true, "is missing"],
-        minlength: [3, "must be minimum 3 charts"],
-        validate: {
-            validator: value => /^[A-Z].*$/.test(value),
-            message: "Must start with a capital letter"
-        }
+        minlength: [3, "must be minimum 3 charts"]
     },
 
     city: {
