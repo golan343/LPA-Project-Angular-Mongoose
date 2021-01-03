@@ -85,7 +85,9 @@ header {
 .full-height {
   height: 100%;
 }
-.full{width: 100%;}
+.full {
+  width: 100%;
+}
 input {
   text-indent: 5px;
   font-size: 1.1em;
@@ -160,14 +162,19 @@ input {
 .relative {
   position: relative;
 }
-.auction h4.both {background: rgba(256,256,256,.4);}
-.auction h4.both:after {
-    width:100%;
-    content:"";
-    height:2px;
-    background:#000
+.auction h4.both {
+  background: rgba(256, 256, 256, 0.4);
 }
-.auction p.valueAuction {background: rgba(256,256,256,.4);padding:1%;}
+.auction h4.both:after {
+  width: 100%;
+  content: "";
+  height: 2px;
+  background: #000;
+}
+.auction p.valueAuction {
+  background: rgba(256, 256, 256, 0.4);
+  padding: 1%;
+}
 .js-center {
   justify-content: center;
 }
@@ -253,15 +260,24 @@ button {
   bottom: 4px;
   left: 8px;
 }
-.paging{width: 50%; padding: 2%;margin: 0 auto; display: flex; justify-content: space-around; align-items: center;}
-.next, .prev{
+.paging {
+  width: 50%;
+  padding: 2%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.next,
+.prev {
   width: 20px;
   height: 20px;
   text-align: center;
   position: relative;
   cursor: pointer;
 }
-.next:after,.prev:after{
+.next:after,
+.prev:after {
   content: "";
   position: absolute;
   display: block;
@@ -271,10 +287,10 @@ button {
   border-left: 3px solid #fff;
   border-radius: 4px 0;
 }
-.next::after{
+.next::after {
   transform: rotateZ(135deg);
 }
-.prev::after{
+.prev::after {
   transform: rotateZ(-45deg);
 }
 .log-in {
@@ -368,7 +384,7 @@ button {
   justify-content: center;
   align-items: center;
   padding: 3px;
-  box-shadow: .2px .2px .2px .2px;
+  box-shadow: 0.2px 0.2px 0.2px 0.2px;
 }
 .plus:before {
   content: "";
@@ -406,38 +422,36 @@ button {
   box-sizing: border-box;
   position: relative;
   display: inline-block;
-  transform: scale(var(--ggs,1));
+  transform: scale(var(--ggs, 1));
   width: 18px;
   height: 18px;
   border: 2px solid;
-  border-radius: 3px
- }
- 
- .calendar-icon::after,
- .calendar-icon::before {
+  border-radius: 3px;
+}
+
+.calendar-icon::after,
+.calendar-icon::before {
   content: "";
   display: block;
   box-sizing: border-box;
   position: absolute;
   border-radius: 3px;
   height: 2px;
-  left: 2px
- }
- 
- .calendar-icon::before {
+  left: 2px;
+}
+
+.calendar-icon::before {
   background: currentColor;
   width: 2px;
-  box-shadow:
-  4px 0 0,8px 0 0,0 4px 0,
-  4px 4px 0,8px 4px 0;
-  top: 6px
- }
- 
- .calendar-icon::after {
+  box-shadow: 4px 0 0, 8px 0 0, 0 4px 0, 4px 4px 0, 8px 4px 0;
+  top: 6px;
+}
+
+.calendar-icon::after {
   width: 10px;
   top: -4px;
-  box-shadow: 0 6px 0 0
- } 
+  box-shadow: 0 6px 0 0;
+}
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -611,14 +625,13 @@ button {
   .show .phone_menu .sep:last-of-type {
     display: none;
   }
- 
 }
 @media only screen and (max-width: 580px) {
   .left,
   .right {
     float: none;
   }
-  .flex{
+  .flex {
     display: block;
   }
 }
