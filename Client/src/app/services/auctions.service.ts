@@ -70,13 +70,6 @@ export class AuctionsService {
   }
   getLastAuction(): Observable<AuctionModel[]> {
     return this.http.get<AuctionModel[]>(BaseUrl + 'api/auctions/get/last');
-    // .subscribe(async res => {
-    //   // const action: Action = { type: ActionType.GetLastAuction, payload: res };
-    //   // store.dispatch(action);
-    // },
-    // err => {
-    //   console.log(err.message);
-    // });
   }
   getBidsAuction(auctionId: string): Observable<any> {
     return this.http.get(`/join/bids-in-auction/${auctionId}`);

@@ -7,6 +7,7 @@ import { AccountService } from 'src/app/services/account.service';
 import { DialogData } from 'src/app/ui/model/dialog-data';
 import { DialogService } from '../../ui/dialog.service';
 import { MobileService } from '../../services/mobile.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ import { MobileService } from '../../services/mobile.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-
+  auction$: Observable<AuctionModel[]>;
   public auction: AuctionModel;
   public BaseUrl = BaseUrl;
   lat = -3.180653;
@@ -29,7 +30,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     private dialogLocalsService: DialogService,
     public accountService: AccountService) { }
   ngOnDestroy(): void {
-    debugger;
     window.removeEventListener("scroll", this.onScroll);
   }
   ngAfterViewInit() { }
@@ -53,16 +53,18 @@ export class HomeComponent implements OnInit, OnDestroy {
   public goToRules(): void {
     this.router.navigateByUrl('/rules');
   }
-  public sendEmail(): void {
-    alert('function not available right now');
-  }
   ngOnInit() {
-    this.auctionService.getLastAuction().subscribe(auctionsResult => {
-      console.log(auctionsResult);
+    debugger;
+    this.auction$ = this.auctionService.getLastAuction();
+    this.auction$.subscribe(auctionsResult => {
+
       const Last = auctionsResult[0];
       Last.imageFileName = environment.devUrl + 'uploads/' + Last.imageFileName;
       this.auction = Last;
     });
+  }
+  sendEmail() {
+
   }
 
   public login(): void {

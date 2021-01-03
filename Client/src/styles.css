@@ -259,6 +259,7 @@ button {
   height: 20px;
   text-align: center;
   position: relative;
+  cursor: pointer;
 }
 .next:after,.prev:after{
   content: "";

@@ -34,7 +34,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { HttpLoadingInterceptor } from './interceptors/http-loading.interceptor';
 import { ClosedComponent } from './components/closed/closed.component';
 
-import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+
 import { I18nModule } from './i18n/i18n.module';
 import { SelectLanguageComponent } from './select-language/select-language.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
@@ -60,8 +60,6 @@ const globalSettings: RecaptchaSettings = {
     LiveAuctionsComponent,
     HeaderComponent,
     ClosedComponent,
-
-    ConfirmDialogComponent,
     SelectLanguageComponent,
     AboutUsComponent,
     ContactUsComponent,
@@ -102,7 +100,7 @@ const globalSettings: RecaptchaSettings = {
       multi: true,
     },
   ],
-  entryComponents: [ConfirmDialogComponent],
+  entryComponents: [],
   bootstrap: [LayoutComponent],
 })
 export class AppModule { }
