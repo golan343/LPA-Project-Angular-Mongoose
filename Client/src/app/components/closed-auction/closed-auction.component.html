@@ -110,7 +110,8 @@
                     <h3>Offers Log</h3>
                     <div class="cube-body">
                         <div class="linear-graph">
-                            <div class="white-back" *ngFor="let item of bidAuctionGraphData?.filteredObjectsArray">
+                            <div class="white-back"
+                                *ngFor="let item of bidAuctionGraphData?.filteredObjectsArray | slice: paging.start : paging.end ">
                                 <div class="val"><b>{{item.val | currency}}</b></div>
                                 <div class="graph-row">
                                     
@@ -121,6 +122,11 @@
                                 </div>
                                 <div class="step-wrapper" *ngIf="bidAuctionGraphData">
                                     <!-- <aside class="step" *ngFor="let item of bidAuctionGraphData.steps "><span class="number">{{item}}</span></aside> -->
+                                    <div class="paging">
+                                        <div class="prev" title="prev" (click)="paging.prev()"></div>
+                                        <div class="next" title="next" (click)="paging.next()"></div>
+                                    
+                                    </div>
                                 </div>
                                 </div>
                     </div>

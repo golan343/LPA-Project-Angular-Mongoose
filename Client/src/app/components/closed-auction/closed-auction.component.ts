@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuctionModel } from 'src/app/models/auction-model';
 import { AuctionBidData, BidModel } from 'src/app/models/bid-model';
+import { Pagination } from './../../models/pagination';
+
 import { AccountService } from 'src/app/services/account.service';
 import { AuctionsService } from 'src/app/services/auctions.service';
 import { BidsService } from 'src/app/services/bids.service';
@@ -24,6 +26,8 @@ export class ClosedAuctionComponent implements OnInit, OnDestroy {
   Minbid: BidModel;
   subscriberLogin: Subscription;
   isLogin: boolean;
+  paging: Pagination;
+
   constructor(private activatedRoute: ActivatedRoute,
     private auctionService: AuctionsService,
     private bidService: BidsService,
@@ -56,6 +60,7 @@ export class ClosedAuctionComponent implements OnInit, OnDestroy {
       this.bids = bids;
       if (bids && bids.length > 1) {
         this.bidAuctionGraphData = new AuctionBidData(bids);
+        this.paging = new Pagination(5, this.bidAuctionGraphData.filteredObjectsArray.length);
       }
     });
   }
