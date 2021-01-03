@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
-  BaseUrl: 'https://lpa-app-demo.azurewebsites.net/'
+  BaseUrl: 'https://lpa-app-demo.azurewebsites.net/',
+  devUrl: 'https://lpa-app-demo.azurewebsites.net/'
 };
 
 export const BaseUrl = 'https://lpa-app-demo.azurewebsites.net/';
