@@ -7,6 +7,7 @@ import { RegisterComponent } from './register/register.component';
 import { VideoFrameComponent } from './video-frame/video-frame.component';
 import { SafePipe } from './../pipes/safe.pipe';
 import { CarIconComponent } from './icons/car-icon/car-icon.component';
+import { UtilsModule } from './../utils/utils.module';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { CarIconComponent } from './icons/car-icon/car-icon.component';
   imports: [
     CommonModule,
     FormsModule,
+    UtilsModule
   ],
   exports: [
     DialogComponent

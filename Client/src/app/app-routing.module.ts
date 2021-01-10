@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'contact', component: ContactUsComponent },
   { path: 'auction/:id', component: AuctionComponent },
   { path: 'closed-auction/:id', component: ClosedAuctionComponent },
-  { path: 'dashboard', loadChildren: () => import('./components/dashboard/dashboard.module').then(d => d.DashboardModule) },
+  { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(d => d.DashboardModule), canActivate: [AdminGuard] },
   { path: 'live', component: LiveAuctionsComponent },
   { path: 'closed', component: ClosedComponent },
   { path: '', redirectTo: '/', pathMatch: 'full' }, // pathMath - exact empty string.

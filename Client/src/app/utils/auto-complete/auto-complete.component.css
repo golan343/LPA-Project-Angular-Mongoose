@@ -1,0 +1,34 @@
+div.absolute {
+  width: 67%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  z-index: 2;
+  background: #fff;
+  margin: 0 auto;
+}
+dl {
+  display: block;
+  margin: 0;
+  padding: 0;
+  max-height: 307px;
+  overflow-y: scroll;
+}
+dd {
+  display: block;
+  padding: 3px 4%;
+  border: 1px solid #888;
+  border-top: none;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+dd:hover{
+  background-color: #888;
+  color:#fff;
+}
+dd.current{
+  background-color: #888;
+  color: #fff;
+}

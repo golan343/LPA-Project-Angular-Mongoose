@@ -67,6 +67,9 @@ export class errorModel extends UserModel {
         this[constrain.prop] = '';
         return true;
     }
+    clear(val: string) {
+        this[val] = '';
+    }
 }
 export class validationConstrains {
     constructor(args: any) {

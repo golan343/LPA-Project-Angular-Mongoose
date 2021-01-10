@@ -1,11 +1,36 @@
-.container{background-color:#808080;padding: 2% 0;}
-.register{    width: 60%;min-width: 230px;
-    margin: 3% auto 3% auto;}
-.register h1, .register h2{display: block;}
-.register *{color:#000;}
-.register .error{color:#fff;    padding: 10px 5px;top: -100%;}
-.register .flex{justify-content: space-between;  align-items: center;}
-.register .input-container{text-align: left;}
-.register .input-container label{display: block;}
-.register  .step .first {height: 30vh;}
-.register .wrap-email{overflow: visible;}
+.container {
+  background-color: #808080;
+  padding: 2% 0;
+}
+.register {
+  min-width: 230px;
+  margin: 3% auto 3% auto;
+}
+.register h1,
+.register h2 {
+  display: block;
+}
+.register * {
+  color: #000;
+}
+.register .error {
+  color: #fff;
+  top: -100%;
+  width: auto;
+}
+.register .flex {
+  justify-content: space-between;
+  align-items: center;
+}
+.register .input-container {
+  text-align: left;
+}
+.register .input-container label {
+  display: block;
+}
+.register .step .first {
+  height: 30vh;
+}
+.register .wrap-email {
+  overflow: visible;
+}

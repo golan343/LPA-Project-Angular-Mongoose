@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LoaderState } from 'src/app/models/LoaderState';
 import { LoaderService } from 'src/app/services/loader.service';
@@ -6,7 +6,8 @@ import { LoaderService } from 'src/app/services/loader.service';
 @Component({
   selector: 'app-global-loader',
   templateUrl: './global-loader.component.html',
-  styleUrls: ['./global-loader.component.css', './../loader.component.css']
+  styleUrls: ['./global-loader.component.css', './../loader.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GlobalLoaderComponent implements OnInit, OnDestroy {
   show = false;

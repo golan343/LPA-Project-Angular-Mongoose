@@ -10,20 +10,20 @@
             <span class="error" *ngIf="errorMsg">errorMsg</span>
             <div class="mr-b wrap-email relative">
               <label for="firstName"> First Name *</label>
-              <input type="text" [(ngModel)]="user.firstName" (focus)="error.clear()"
+              <input type="text" [(ngModel)]="user.firstName" (focus)="error.clear('firstName')"
                   name="firstName" id="firstName">
                 <span *ngIf="error.firstName" class="error">{{error.firstName}}</span>
               </div>
               <div class="mr-b wrap-email relative">
                 <label for="lastName">Last Name *</label>
-                <input type="text" [(ngModel)]="user.lastName" (focus)="error.clear()"
+                <input type="text" [(ngModel)]="user.lastName" (focus)="error.clear('lastName')"
                   name="lastName" id="lastName">
                 <span *ngIf="error.lastName" class="error">{{error.lastName}}</span>
               </div>
             
               <div class="mr-b wrap-email relative">
                 <label for="password">Password *</label>
-                <input type="password" [(ngModel)]="user.password" (focus)="error.clear()"
+                <input type="password" [(ngModel)]="user.password" (focus)="error.clear('password')"
                   name="password" id="password">
                 <span *ngIf="error.password" class="error">{{error.password}}</span>
               </div>
@@ -32,17 +32,18 @@
 
         </ng-template>
         <ng-template [ngSwitchCase]="'2'">
-          <div class="current">
+          <div>
 <div class="mr-b wrap-email relative">
   <label for="country">country *</label>
-  <input type="text" [(ngModel)]="user.country" (focus)="error.clear()"
+  <input type="text" [(ngModel)]="user.country" (focus)="error.clear('country')"
                   name="country" id="country">
+                  <app-auto-complete [value]="user.country" (hasbeenSelected)="selectCountry($event)"></app-auto-complete>
                 <span *ngIf="error.country" class="error">{{error.country}}</span>
               </div>
             </div>
   <div class="mr-b wrap-email relative">
     <label for="city">city *</label>
-    <input type="text" [(ngModel)]="user.city" (focus)="error.clear()" name="city"
+    <input type="text" [(ngModel)]="user.city" (focus)="error.clear('city')" name="city"
                   id="city">
                 <span *ngIf="error.city" class="error">{{error.city}}</span>
               </div>
@@ -58,14 +59,14 @@
           <div class="current">
         <div class="mr-b wrap-email relative">
           <label for="email">email *</label>
-          <input type="email" [(ngModel)]="user.email" (focus)="error.clear()" name="email"
+          <input type="email" [(ngModel)]="user.email" (focus)="error.clear('email')" name="email"
                   id="email">
                 <span *ngIf="error.email" class="error">{{error.email}}</span>
               </div>
               <div class="mr-b wrap-email relative">
                 <label for="birthDate">birth Date *</label>
                 <input type="date" [(ngModel)]="user.birthDate" dateTemplate
-                  (focus)="error.clear()" name="birthDate" id="birthDate">
+                  (focus)="error.clear('birthDate')" name="birthDate" id="birthDate">
                 <span *ngIf="error.birthDate" class="error">{{error.birthDate}}</span>
               </div>
         

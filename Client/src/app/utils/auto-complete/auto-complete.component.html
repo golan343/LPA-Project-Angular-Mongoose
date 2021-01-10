@@ -1,0 +1,8 @@
+<div class="overflow absolute" *ngIf="autoComplete?.show || autoComplete?.list ">
+    <dl>
+        <dd *ngFor="let item of autoComplete?.list " (click)="select(item)"
+            [ngClass]="{current: autoComplete?.current.name == item.name}">
+            <span>{{item.name}}</span>
+        </dd>
+    </dl>
+</div>

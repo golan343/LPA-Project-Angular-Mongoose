@@ -45,6 +45,7 @@ import { AuctionItemComponent } from './components/auction-item/auction-item.com
 import { ClosedAuctionComponent } from './components/closed-auction/closed-auction.component';
 import { GlobalLoaderComponent } from './components/loader/global-loader/global-loader.component';
 import { OnlyNumericDirective } from './directives/only-numeric.directive';
+import { UtilsModule } from './utils/utils.module';
 
 const globalSettings: RecaptchaSettings = {
   siteKey: '6LeFTeoZAAAAAOm4L0qfozbCzOYa3kzs_3zeCgUY',
@@ -89,6 +90,7 @@ const globalSettings: RecaptchaSettings = {
     I18nModule,
     NgxFlagIconCssModule,
     DialogModule,
+    UtilsModule
   ],
   providers: [
     CookieService,

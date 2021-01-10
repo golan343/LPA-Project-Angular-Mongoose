@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { errorModel, UserModel, validationConstrains } from 'src/app/models/user-model';
 import { DialogService } from '../dialog.service';
 import { DialogData } from '../model/dialog-data';
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -25,8 +24,9 @@ export class RegisterComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private dialog: DialogService
-    // public router: Router
   ) { }
+  ngOnInit(): void {
+  }
   public register() {
 
     this.user.roleId = '5f58ba6355eac12930d7b3ef';
@@ -36,8 +36,15 @@ export class RegisterComponent implements OnInit {
       d.title = 'you have sign in successfully!';
       this.dialog.subjectType.next(d);
     }).catch(err => {
-      console.table(err);
-
+      debugger;
+      if (err.error) {
+        if (err.error.errors) {
+          for (let prop in err.error.errors) {
+            let errItem = err.error.errors[prop];
+            this.error[prop] = errItem.message;
+          }
+        }
+      }
     });
 
 
@@ -56,15 +63,15 @@ export class RegisterComponent implements OnInit {
   }
   next() {
     this.errorMsg = '';
-    if (this.currentStep == this.steps) {
-      this.register();
-    }
-    if (this.currentStep < this.steps) {
+    if (this.currentStep <= this.steps) {
       if (this.validate()) {
         this.currentStep += 1;
       }
-
     }
+    if (this.currentStep > this.steps) {
+      this.register();
+    }
+
     if (this.currentStep == this.steps) {
       this.nextBtn = 'Sign Me Up';
     }
@@ -108,7 +115,7 @@ export class RegisterComponent implements OnInit {
 
     return true;
   }
-  ngOnInit(): void {
-
+  selectCountry($event) {
+    this.user.country = $event;
   }
 }
