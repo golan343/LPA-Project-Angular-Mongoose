@@ -19,6 +19,7 @@ const emailController = require('./controllers/email-controller');
 const mailchimpController = require('./controllers/mailchimp-controller');
 const kushkiController = require('./controllers/kushki-controller');
 const uploadImageController = require('./controllers/uploads-image-controller');
+const infoController = require('./controllers/info-controller');
 require("./data-access-layer/dal");
 const sanitize = require('./middleware/sanitize');
 const expressRateLimit = require('express-rate-limit');
@@ -51,9 +52,11 @@ server.use("/api/auctions", auctionController);
 server.use("/api/bids", bidsController);
 server.use("/api/rule", ruleController);
 server.use("/api/sms", smsController);
+server.use("/api/info", infoController);
 server.use("/api/email", emailController);
 server.use("/api/mail", mailchimpController);
 server.use("/api/kushki", kushkiController);
+
 
 
 

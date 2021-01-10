@@ -30,19 +30,19 @@ const UserSchema = mongoose.Schema({
 
     city: {
         type: String,
-        required: [true, "is missing"]
+        required: [true, "city is missing"]
     } ,
     street: {
         type: String,
-        required: [true, "is missing"]
+        required: [true, "street details is missing"]
     },
     country: {
         type: String,
-        required: [true, "is missing"]
+        required: [true, "country is missing"]
     },
     birthDate: {
         type: Date,
-        required: [true, 'is missing']
+        required: [true, 'birth day is missing']
     },
     roleId:{
         type: mongoose.Schema.Types.ObjectId,
