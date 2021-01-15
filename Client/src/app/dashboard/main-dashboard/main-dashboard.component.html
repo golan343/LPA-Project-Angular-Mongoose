@@ -1,0 +1,43 @@
+<div class="error-top" *ngIf="errorMessgae">{{errorMessgae}}</div>
+<header>
+    <nav class="navbar">
+        <aside class="logo">
+        </aside>
+        <aside [title]="title" class="user">
+            <div class="round"></div>
+            <span>{{title}}</span>
+        </aside>
+
+        <aside class="mr-r">
+            <i class="user-icon"></i>
+        </aside>
+        <aside class="mr-r">
+            <i class="message-icon"></i>
+        </aside>
+        <aside class="mr-r">
+            <i class="earth-icon"></i>
+        </aside>
+        <aside class="mr-r">
+            <i class="bid-icon"></i>
+        </aside>
+        <aside class="mr-r" (click)="setModel(1)">
+            <i class="users-icon"></i>
+        </aside>
+        <aside class="mr-r">
+            <i class="form-icon"></i>
+        </aside>
+        <aside class="mr-r">
+            <i class="config-icon"></i>
+        </aside>
+    </nav>
+</header>
+<section class="container">
+    <div [ngSwitch]="modelNum">
+        <div *ngSwitchCase="1">
+            <app-admin></app-admin>
+        </div>
+        <div *ngSwitchDefault>no Access </div>
+    </div>
+</section>
+<app-dialog></app-dialog>
+<app-admin-loader></app-admin-loader>

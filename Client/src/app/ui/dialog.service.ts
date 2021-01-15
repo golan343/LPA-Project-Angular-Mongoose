@@ -10,5 +10,5 @@ export class DialogService {
   constructor() {
 
   }
-
+  method() { }
 }

@@ -37,7 +37,23 @@ router.post("/register", async (request, response) => {
 
 });
 
+router.get('/usersList', function (req, res) {
+    authLogic.getAllUsers(function (err, users) {
+        if (err) {
+            res.status(501).json(err);
+        }
+        const usersMap = {};
+        if (users) {
+            users.forEach(element => {
+                usersMap[element._id] = element;
+            });
+            res.send(usersMap); 
+        }
+        
+           
+    })
 
+ })
 router.post("/login", async (request, response) => {
     try{
         const user = await authLogic.loginAsync(request.body);
@@ -75,13 +91,6 @@ router.patch('/:_id', async (request, response) => {
         const user = new User(request.body);
         user._id = request.params._id;
 
-        //validate
-        const error = user.validateSync();
-        if(error) {
-            response.status(400).send( { error: error });
-            return;
-        }
-
         const updateUser = await authLogic.updateAsync(user);
         if(!updateUser) {
             response.sendStatus(404);
@@ -92,6 +101,35 @@ router.patch('/:_id', async (request, response) => {
     catch(err){
         response.status(500).send( { error: err });
     }
+});
+router.patch('/updateUser/:id',  (req, res) => {
+    try {
+        const user = new User(req.body);
+        const error = user.validateSync();
+        if(error) {
+            res.status(400).send( { error: error });
+            return;
+        }
+        console.log(user);
+        authLogic.adminUpdateUser(user, function(err, userModel){
+            if(err) {
+                console.log(err);
+                res.status(500).send(err);
+                return;
+            } 
+               res.status(200).send(userModel);
+         });
+        //res.send(result);
+    }
+    catch(err){
+        response.status(500).send( { error: err });
+    }
+})
+router.delete('/deleteUser/:id', async (request, response) => {
+    const id = request.params.id;
+    const result = await authLogic.deleteUser(id);
+    response.send(result);
+
 });
 
 

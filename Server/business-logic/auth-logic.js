@@ -7,7 +7,9 @@ function registerAsync(user) {
     user.password = hash(user.password);
     return user.save();
 }
-
+function getAllUsers(callback) {
+    User.find({}, callback);
+};
 
 function loginAsync(credentials) {
     credentials.password = hash(credentials.password);
@@ -19,8 +21,32 @@ async function updateAsync(user) {
     return info.n ? user : null;
 }
 
-module.exports = {
-    registerAsync,
-    loginAsync,
-    updateAsync
+async function deleteUser(id) {
+  const result = await User.find({ _id: id }).deleteOne().exec();
+  return result;
 }
+function adminUpdateUser(user, callback) {
+  User.findByIdAndUpdate(
+    { _id: user._id },
+    {
+      $set: {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        country: user.country,
+        city: user.city,
+        email: user.email,
+        birthDay: new Date(user.birthDay),
+        street: user.street,
+      },
+    },
+    { useFindAndModify: false }
+  ).exec(callback);
+}
+module.exports = {
+  registerAsync,
+  loginAsync,
+  updateAsync,
+  getAllUsers,
+  deleteUser,
+  adminUpdateUser,
+};

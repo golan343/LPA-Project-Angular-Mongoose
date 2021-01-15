@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
@@ -18,7 +18,7 @@ export class AccountService {
   public decodedToken: any;
   isLoginSubject = new BehaviorSubject<boolean>(false);
   isLogin: boolean;
-  constructor(private router: Router, private http: HttpClient, private cookieService: CookieService) { }
+  constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   public get currentUserValue(): UserModel {
     return this.currentUserSubject.value;
@@ -30,36 +30,45 @@ export class AccountService {
   public isUserLoggedIn(): void {
     const token = this.cookieService.get('token');
     this.isLogin = !this.helper.isTokenExpired(token);
+    this.user = this.getUser();
+    this.user.isAdmin = this.user.roleId ? this.checkIsAdmin(this.user.roleId) : false;
     this.isLoginSubject.next(this.isLogin)
   }
   public getToken(): string {
     return this.cookieService.get('token');
   }
 
-  public getUser(): UserModel {
-    return JSON.parse(this.cookieService.get('user'));
+  public getUser(): any {
+    let user = this.cookieService.get('user');
+    if (!user) {
+      return {};
+    }
+    return JSON.parse(user) as UserModel;
   }
 
-  public isAdmin(): boolean {
-    if (this.isLogin) {
-      const role = JSON.parse(this.cookieService.get('user')).user.roleId;
-      if (role === '5f58ba8855eac12930d7b405' || role === '5f58ba9a55eac12930d7b40c' || role === '5f58badd55eac12930d7b427'){
+  // public isAdmin(): boolean {
+  //   if (this.isLogin) {
+  //     const role = JSON.parse(this.cookieService.get('user')).user.roleId;
+  //     if (role === '5f58ba8855eac12930d7b405' || role === '5f58ba9a55eac12930d7b40c' || role === '5f58badd55eac12930d7b427'){
+  //       return true;
+  //     }
+  //   }
+  //   return false;
+
+  // }
+  checkIsAdmin(roleId) {
+    switch (roleId) {
+      case '5f58ba8855eac12930d7b405':
+      case '5f58ba9a55eac12930d7b40c':
+      case '5f58badd55eac12930d7b427':
         return true;
-      }
-      else{
-        return false;
-      }
     }
     return false;
-
   }
-
-  login(user: UserModel) {
-    return this.http.post<UserModel>(`${BaseUrl}api/auth/login`, user)
-
-    .pipe(map(user => {
+  login(user: UserModel): Observable<any> {
+    return this.http.post<any>(`${BaseUrl}api/auth/login`, user).pipe(map(user => {
       this.cookieService.set('token', JSON.stringify(user.token));
-      this.cookieService.set('user', JSON.stringify(user));
+      this.cookieService.set('user', JSON.stringify(user.user));
       this.isUserLoggedIn();
       return user;
     }));
@@ -67,7 +76,7 @@ export class AccountService {
 
   public logout(): void {
     this.cookieService.deleteAll();
-   // this.router.navigateByUrl('/');
+    this.isLoginSubject.next(false);
   }
 
 

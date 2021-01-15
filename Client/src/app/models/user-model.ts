@@ -1,6 +1,7 @@
 
 export class UserModel {
     user: any;
+    isAdmin: boolean;
     public constructor(
     // tslint:disable-next-line: variable-name
     public _id?: string,
@@ -16,7 +17,6 @@ export class UserModel {
     public roleId?: string,
     public token?: string
     ) { }
-
 }
 
 export class errorModel extends UserModel {
@@ -71,6 +71,7 @@ export class errorModel extends UserModel {
         this[val] = '';
     }
 }
+
 export class validationConstrains {
     constructor(args: any) {
         this.isRequire = args.isReqire || false;

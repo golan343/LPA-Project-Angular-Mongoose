@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap");
-@import url("http://fonts.cdnfonts.com/css/mesmerize");
 @import url(./font.css);
 * {
   padding: 0;
@@ -18,12 +17,13 @@ ul {
 body,
 html {
   font-family: "Roboto", sans-serif;
-  background: #0e1119;
   font-size: 14px;
   font-style: normal;
   padding: 0;
   margin: 0;
 }
+app-layout{  background: #0e1119;display: block;
+  height: auto;}
 .inline-block {
   display: inline-block;
 }
@@ -451,6 +451,33 @@ button {
   width: 10px;
   top: -4px;
   box-shadow: 0 6px 0 0;
+}
+.del:after{
+  content: "\f2ed";
+  
+}
+.add:after{
+  content: "\f234";
+}
+.edit-user::after{
+  content: '\f4ff';
+}
+.btn{
+  border-radius: 50%;
+  background: #FFF;
+  width: 32px;
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+  text-shadow: 5px 1px 6px #B1A6A6;
+  box-shadow: 0px 1px 2px 0px #3f3e3e;
+  cursor: pointer;
+  vertical-align: middle;
+  display: flex;
+  height: 32px;
+  position: relative;
+  justify-content: center;
+  align-items: center;
 }
 @keyframes fadeIn {
   0% {

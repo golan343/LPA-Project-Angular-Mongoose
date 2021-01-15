@@ -20,17 +20,21 @@ export class HttpLoadingInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(tap(($event: HttpEvent<any>) => {
       if (!$event.type) {
         this.counter++;
+        this.loader.show();
       }
       if ($event instanceof HttpResponse) {
         this.counter--;
         if (this.counter <= 0) {
-          this.loader.hide();
+          setTimeout(() => {
+            this.loader.hide();
+          }, 1000);
+
         }
 
       }
     },
       (err) => {
-        this.loader.hide();
+     //   this.loader.hide();
       }
     ));
   }

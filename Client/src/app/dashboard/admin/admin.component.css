@@ -1,0 +1,11 @@
+@import "./../../../../node_modules/ag-grid-community/dist/styles/ag-grid.css";
+@import "./../../../../node_modules/ag-grid-community/dist/styles/ag-theme-alpine.css";
+.container{display: block;}
+.row{  width: 80%;
+    margin: 2% auto;}
+ag-grid-angular{
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+    height: 65vh;
+}

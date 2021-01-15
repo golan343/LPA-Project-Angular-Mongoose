@@ -23,6 +23,7 @@ export class DialogComponent implements OnInit {
     });
   }
   close() {
+    this.dialogData.close();
     this.dialogData = new DialogData();
     window.removeEventListener('keydown', this.escape);
   }

@@ -33,10 +33,11 @@ export class RegisterComponent implements OnInit {
     this.accountService.addUser(this.user).then(result => {
       const d = new DialogData('');
       d.show = true;
-      d.title = 'you have sign in successfully!';
+      d.innerTitle = 'success message';
+      d.text = 'you have sign in successfully!';
+      this.dialog.method();
       this.dialog.subjectType.next(d);
     }).catch(err => {
-      debugger;
       if (err.error) {
         if (err.error.errors) {
           for (let prop in err.error.errors) {

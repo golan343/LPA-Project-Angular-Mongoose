@@ -63,7 +63,7 @@ export class AutoCompleteComponent implements OnInit, OnChanges, OnDestroy {
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.value) {
-      if (changes.value.currentValue && !this.autoComplete) {
+      if (changes.value.currentValue && this.autoComplete) {
         this.autoComplete.filterdListEvent(changes.value.currentValue);
         this.cdref.detectChanges();
         this.autoComplete.open();

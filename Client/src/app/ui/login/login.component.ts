@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { errorModel, UserModel } from './../../models/user-model';
-import { AccountService } from './../../services/account.service'; //'src/app/services/account.service';
+import { AccountService } from './../../services/account.service';
 import { DialogService } from '../dialog.service';
 import { DialogData } from '../model/dialog-data';
 
@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
   error = new errorModel();
 
   constructor(
-    private router: Router,
     public accountService: AccountService,
     private dialogService: DialogService
   ) { }
@@ -32,7 +31,6 @@ export class LoginComponent implements OnInit {
       this.accountService.login(this.user).subscribe(
         (response) => {
           this.dialogService.subjectType.next(new DialogData());
-
         },
         (err) => {
           alert(err.message);

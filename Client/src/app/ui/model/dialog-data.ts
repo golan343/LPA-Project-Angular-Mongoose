@@ -11,4 +11,7 @@ export class DialogData {
     src: string;
     innerTitle: string;
     callBackDialog: any;
+    close() {
+        this.show = false;
+    }
 }

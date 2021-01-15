@@ -1,0 +1,31 @@
+<app-header></app-header>
+<div>
+    <div class="flex ">
+        <nav [class]="menuColor">
+            <div class="wrap flex-col fixed" [class]="{show:showMenu}">
+                <div class="logo" (click)="moveToHome()"></div>
+                <ul>
+                    <li><a routerLink="/live"> Live auctions </a></li>
+                    <!-- <li><a routerLink="/rules" > Auction rules </a></li> -->
+                    <li><a routerLink="/closed"> Closed auctions </a></li>
+                    <li><a routerLink="/locations"> Locations </a></li>
+                    <li><a routerLink="/how-its-work"> How LPA works </a></li>
+                    <li><a routerLink="/about"> About us </a></li>
+                    <li><a routerLink="/contact"> Contact us </a></li>
+                </ul>
+            </div>
+        </nav>
+        <main>
+            <router-outlet></router-outlet>
+        </main>
+    </div>
+    <footer>
+        <div class="mainContent center">
+            <a href="#">Privacy policy</a> &nbsp;
+            <a href="#">Terms & Conditions</a> &nbsp;
+            <a href="#">Cookies policy</a>
+        </div>
+    </footer>
+    <app-dialog></app-dialog>
+
+</div>

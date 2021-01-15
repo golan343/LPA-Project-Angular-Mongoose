@@ -1,1 +1,18 @@
-<p>admin works!</p>
+<div class="container">
+
+    <div class="row flex relative">
+        <aside class="btn" (click)="deleteUsers()">
+            <i class="del fa "></i>
+        </aside>
+        <aside class="btn mr-l" (click)="addNewUser()">
+            <i class="add fa "></i>
+        </aside>
+        <aside class="btn mr-l" (click)="editUser()">
+            <i class="edit-user fa "></i>
+        </aside>
+    </div>
+    <ag-grid-angular #agGrid class="ag-theme-alpine" [rowSelection]="'multiple'" [defaultColDef]="defaultColDef"
+        [rowData]="rowData | async" [columnDefs]="columnDefs">
+    </ag-grid-angular>
+</div>
+
