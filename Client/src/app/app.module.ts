@@ -2,15 +2,15 @@ import { TokenInterceptor } from './token.interceptor';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {
-  BrowserAnimationsModule,
-  NoopAnimationsModule,
-} from '@angular/platform-browser/animations';
+// import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// import {
+//   BrowserAnimationsModule,
+//   NoopAnimationsModule,
+// } from '@angular/platform-browser/animations';
 
-import { AgmCoreModule } from '@agm/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { DragDropModule } from '@angular/cdk/drag-drop';
+// import { AgmCoreModule } from '@agm/core';
+// import { FlexLayoutModule } from '@angular/flex-layout';
+// import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SiteLayoutModule } from './site-layout/site-layout.module';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -26,7 +26,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { HttpLoadingInterceptor } from './interceptors/http-loading.interceptor';
 
 
-import { I18nModule } from './i18n/i18n.module';
+// import { I18nModule } from './i18n/i18n.module';
 import { SelectLanguageComponent } from './select-language/select-language.component';
 import { ShowPasswordDirective } from './directives/show-password.directive';
 import { OnlyNumericDirective } from './directives/only-numeric.directive';

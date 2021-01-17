@@ -113,3 +113,6 @@ header nav .user {
     background-position: center;
     background-size: 100% 100%;
 }
+.logout-icon{
+  font-size:2rem;
+}

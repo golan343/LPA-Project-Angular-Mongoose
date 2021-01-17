@@ -22,8 +22,11 @@ html {
   padding: 0;
   margin: 0;
 }
-app-layout{  background: #0e1119;display: block;
-  height: auto;}
+app-layout {
+  background: #0e1119;
+  display: block;
+  height: auto;
+}
 .inline-block {
   display: inline-block;
 }
@@ -202,7 +205,14 @@ button {
   outline: 0;
   box-shadow: 0 0 2px 2px #d6d2d2;
 }
-
+.row {
+  width: 80%;
+  margin: 2% auto;
+}
+.cube{
+  width: 30%;
+  background-color: #fff;
+}
 .arrow-long-right {
   box-sizing: border-box;
   position: relative;
@@ -452,24 +462,26 @@ button {
   top: -4px;
   box-shadow: 0 6px 0 0;
 }
-.del:after{
+.del:after {
   content: "\f2ed";
-  
 }
-.add:after{
+.add:after {
   content: "\f234";
 }
-.edit-user::after{
-  content: '\f4ff';
+.edit-user::after {
+  content: "\f4ff";
 }
-.btn{
+.logout-icon:after{
+  content: '\f2f5';
+}
+.btn {
   border-radius: 50%;
-  background: #FFF;
+  background: #fff;
   width: 32px;
   text-align: center;
   line-height: 20px;
   font-size: 12px;
-  text-shadow: 5px 1px 6px #B1A6A6;
+  text-shadow: 5px 1px 6px #b1a6a6;
   box-shadow: 0px 1px 2px 0px #3f3e3e;
   cursor: pointer;
   vertical-align: middle;
@@ -579,7 +591,9 @@ button {
 }
 
 @media only screen and (max-width: 880px) {
-  .wrap-email{width: 80%;}
+  .wrap-email {
+    width: 80%;
+  }
   .mainContent {
     margin: 0px;
     width: 100%;

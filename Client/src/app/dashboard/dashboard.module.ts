@@ -1,7 +1,6 @@
 import { AccountGuard } from '../guards/account.guard';
 import { NgModule, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { AdminComponent } from './admin/admin.component';
 import { GlobalSettingsComponent } from './global-settings/global-settings.component';
@@ -16,26 +15,7 @@ import { MainDashboardComponent } from './main-dashboard/main-dashboard.componen
 import { AgGridModule } from 'ag-grid-angular';
 import { DialogModule } from '../ui/dialog.module';
 import { AdminLoaderComponent } from './admin-loader/admin-loader.component';
-// const routes: Routes = [
-//   { path: '', component: AdminComponent },
-//   { path: 'my-account', component: MyAccountComponent },
-//       { path: 'global-settings', component: GlobalSettingsComponent },
-//       { path: 'cms', component: CMSComponent },
-//       { path: 'auctions', component: AuctionsComponent },
-//       { path: 'notifications', component: NotificationsComponent },
-//       { path: 'payment-transactions-history', component: PaymentTransactionsHistoryComponent },
-//       { path: 'user-manager', component: UserManagerComponent },
 
-//   , {
-//     path: 'sub-admin-panel', component: SubAdminComponent, children: [
-//       // here like the admin routes;
-//     ]
-//   }, {
-//     path: 'user-panel', component: UserPanelComponent, children: [
-//       // here like the admin routes;
-//     ]
-//   }
-// ];
 
 @NgModule({
   declarations: [MyAccountComponent,
@@ -49,7 +29,7 @@ import { AdminLoaderComponent } from './admin-loader/admin-loader.component';
     SubAdminComponent,
     UserPanelComponent,
     MainDashboardComponent,
-    AdminLoaderComponent,
+    AdminLoaderComponent
   ],
   imports: [
     CommonModule,

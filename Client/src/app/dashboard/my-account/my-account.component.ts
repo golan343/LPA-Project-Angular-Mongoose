@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserModel } from 'src/app/models/user-model';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-my-account',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyAccountComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private account: AccountService) { }
+  user: UserModel;
   ngOnInit(): void {
+    this.user = this.account.getUser();
   }
-
+  saveChanges() {
+    
+  }
 }

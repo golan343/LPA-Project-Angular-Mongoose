@@ -22,10 +22,13 @@ export class MainDashboardComponent implements OnInit {
     this.title = `hello ${this.user.firstName} ${this.user.lastName}`;
     this.adminService.errorSubject.subscribe(err => {
       this.errorMessgae = err;
-    })
+    });
   }
   setModel(num: number) {
     this.modelNum = num;
+  }
+  logout() {
+    this.account.logout();
   }
 
 }
