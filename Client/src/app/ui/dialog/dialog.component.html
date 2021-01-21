@@ -15,13 +15,15 @@
             <ng-template [ngSwitchCase]="'video'">
                 <app-video-frame [src]="dialogData?.src"></app-video-frame>
             </ng-template>
+            <ng-template [ngSwitchCase]="'forgotpass'">
+                <app-forgot-pass></app-forgot-pass>
+            </ng-template>
             <ng-template ngSwitchDefault>
                 <div class="dialog-model">
                     <h3 *ngIf="dialogData?.innerTitle" class="mr-b">{{dialogData?.innerTitle}}</h3>
                     <div class="relative app-car-icon">
                         <app-car-icon></app-car-icon>
                     </div>
-                
                     <p *ngIf="dialogData?.text" class="mr-b">{{dialogData?.text}}</p>
                 </div>
             </ng-template>

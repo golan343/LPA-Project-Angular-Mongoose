@@ -43,4 +43,8 @@ export class LoginComponent implements OnInit {
     dialogdata.wide = true;
     this.dialogService.subjectType.next(dialogdata);
   }
+  showForgotPass() {
+    const dialogdata = new DialogData('forgotpass');
+    this.dialogService.subjectType.next(dialogdata);
+  }
 }

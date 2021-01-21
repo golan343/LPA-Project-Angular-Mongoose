@@ -1,0 +1,16 @@
+<div class="loginPage padding">
+    <h2>reset Password</h2>
+    <p> please fill up the your email</p>
+    <p>receive confirmation email </p>
+    <div class="mr-b wrap-email relative">
+        <label for="email">Email:</label>
+        <input type="email" [(ngModel)]="email" (focus)="clear()" name="email" id="email">
+        <span *ngIf="error" class="error">{{error}}</span>
+    </div>
+
+    <div class="btn-wrap padding">
+        <button (click)="send()">send</button>
+    </div>
+
+
+</div>

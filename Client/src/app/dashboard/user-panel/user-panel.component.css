@@ -1,1 +1,6 @@
-.cube h3{padding: 7px; text-align: center;}
+.cube{
+    width: 30%;
+    background-color: #fff;
+    box-shadow: 0.1px 1px 1px 0px #888;
+  }
+  .cube h3{padding: 7px; text-align: center;}

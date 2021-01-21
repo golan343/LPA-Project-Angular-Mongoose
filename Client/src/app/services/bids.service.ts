@@ -1,10 +1,8 @@
-import { store } from './../redux/store';
-import { Action } from './../redux/action';
+
 import { BaseUrl, environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BidModel } from '../models/bid-model';
-import { ActionType } from '../redux/action-type';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 

@@ -15,6 +15,7 @@ import { MainDashboardComponent } from './main-dashboard/main-dashboard.componen
 import { AgGridModule } from 'ag-grid-angular';
 import { DialogModule } from '../ui/dialog.module';
 import { AdminLoaderComponent } from './admin-loader/admin-loader.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { AdminLoaderComponent } from './admin-loader/admin-loader.component';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     AgGridModule.withComponents([]),
     // RouterModule.forChild(routes)
     DialogModule

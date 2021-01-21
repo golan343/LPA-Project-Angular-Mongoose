@@ -22,8 +22,10 @@ export class MainlayoutComponent implements OnInit {
     private bidsService: BidsService
   ) { }
   ngOnDestroy(): void {
-    this.subscribeMenu.unsubscribe();
-    this.colorScriber.unsubscribe();
+    if (this.subscribeMenu)
+        this.subscribeMenu.unsubscribe();
+    if (this.colorScriber)
+        this.colorScriber.unsubscribe();
   }
   ngOnInit(): void {
     this.bidsService.getAllBids();

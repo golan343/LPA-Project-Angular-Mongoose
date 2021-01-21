@@ -32,7 +32,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
     },
     { field: 'country', sortable: true, filter: true, editable: true },
     { field: 'city', sortable: true, filter: true, editable: true },
-
+    { field: 'phone', sortable: true, filter: true, editable: true },
     { field: 'birthDate', sortable: true, filter: true, editable: true },
     { field: 'street', sortable: true, filter: true, editable: true },
     { field: 'email', sortable: true, filter: true, editable: true },

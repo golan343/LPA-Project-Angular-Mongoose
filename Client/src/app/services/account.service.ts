@@ -38,7 +38,7 @@ export class AccountService {
     return this.cookieService.get('token');
   }
 
-  public getUser(): any {
+  public getUser(): any | UserModel {
     let user = this.cookieService.get('user');
     if (!user) {
       return {};
@@ -76,7 +76,7 @@ export class AccountService {
 
   public logout(): void {
     this.cookieService.deleteAll();
-    this.isLoginSubject.next(false);
+    this.isUserLoggedIn();
   }
 
 

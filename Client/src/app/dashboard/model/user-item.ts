@@ -7,4 +7,6 @@ export interface userItem {
     roleId: string;
     birthDate: string;
     street: string;
+    token: string;
+    phone: string;
 }

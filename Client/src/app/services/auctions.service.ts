@@ -1,10 +1,7 @@
 import { BaseUrl } from './../../environments/environment';
-import { store } from './../redux/store';
-import { ActionType } from './../redux/action-type';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuctionModel } from '../models/auction-model';
-import { Action } from '../redux/action';
 //import { BidsService } from './bids.service';
 import { Observable, Subject } from 'rxjs';
 import { BidModel } from '../models/bid-model';
@@ -39,24 +36,12 @@ export class AuctionsService {
     });
   }
   public getAllOpenedAuctions(): void {
-    this.http
-    .get<AuctionModel[]>(BaseUrl + 'api/auctions/get/opened')
-    .subscribe(res => {
-      const action: Action = { type: ActionType.GetAllOpenedAuctions, payload: res };
-      store.dispatch(action);
-    }, err => {
-        console.log(err.message);
-    });
+    this.http.get<AuctionModel[]>(BaseUrl + 'api/auctions/get/opened');
+
   }
   public async getAllClosedAuctions(): Promise<any> {
     await this.http
-    .get<AuctionModel[]>(BaseUrl + 'api/auctions/get/closed')
-    .subscribe(res => {
-      const action: Action = { type: ActionType.GetAllClosedAuctions, payload: res };
-      store.dispatch(action);
-    }, err => {
-        console.log(err.message);
-    });
+      .get<AuctionModel[]>(BaseUrl + 'api/auctions/get/closed');
   }
 
 

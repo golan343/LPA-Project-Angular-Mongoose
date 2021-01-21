@@ -40,6 +40,10 @@ const UserSchema = mongoose.Schema({
         type: String,
         required: [true, "country is missing"]
     },
+    phone: {
+        type: String,
+        required:[true,'phone is obligated']
+    },
     birthDate: {
         type: Date,
         required: [true, 'birth day is missing']
@@ -47,9 +51,13 @@ const UserSchema = mongoose.Schema({
     roleId:{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Role"
+    },
+    token: {
+        type:String
+    },
+    img:{
+        type:String
     }
-
-    
 }, { 
     versionKey: false,
     toJSON: { virtuals: true },

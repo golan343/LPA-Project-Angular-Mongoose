@@ -1,7 +1,10 @@
+import { BidiModule } from '@angular/cdk/bidi';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Auction } from 'src/app/models/auction-model';
+import { BidModel } from 'src/app/models/bid-model';
 import { environment } from 'src/environments/environment';
 import { userItem } from '../model/user-item';
 
@@ -44,5 +47,18 @@ export class AdminService {
     return this.http.patch<any>(environment.BaseUrl + 'api/auth/updateUser/' + user._id, user).pipe(map(res => {
       return res;
     }))
+  }
+  getAllUsersBids(): Observable<BidModel[]> {
+    return this.http.get<BidModel[]>(environment.BaseUrl + 'api/bids').pipe(map(bids => {
+      return bids;
+    }));
+  }
+  getAllAuction(): Observable<Auction[]> {
+    return this.http.get<Auction[]>(environment.BaseUrl + 'api/auctions/all').pipe(map(bids => {
+      return bids;
+    }));
+  }
+  saveUserImage(id:string,img:string):Observable<any>{
+    return this.http.post<any>(environment.BaseUrl+'api/auth/setUserImage',{id,img});
   }
 }

@@ -93,7 +93,8 @@ export class AuctionComponent implements OnInit {
       }
       const dialog = new DialogData();
       dialog.show = true;
-      this.bid.userId = JSON.parse(this.cookieService.get('user')).user._id;
+      const user = this.account.getUser();
+      this.bid.userId = user._id;
       this.bid.date = new Date();
       this.bid.auctionId = this.auction._id;
       this.bidService.addBid(this.bid).subscribe(

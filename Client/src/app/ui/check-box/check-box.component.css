@@ -1,0 +1,13 @@
+.checkbox{
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #C4C4C4;
+    width: 12px;
+    height: 12px;
+    box-sizing: content-box;
+}
+.checkbox.checked .box{
+    width: 100%;
+    height: 100%;
+    background-color: #D6FF7E
+}

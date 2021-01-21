@@ -21,6 +21,17 @@ router.get('/', async (request, response) => {
         response.status(500).send( { error: err });
     }
 });
+router.get("/all", (req, res, next) => {
+  const all = auctionLogic.getAllAuction((err, auctionsRes) => {
+    if (err) {
+      return next(err);
+    }
+    if (auctionsRes.length === 0) {
+      return next(new NotFoundError());
+    }
+    res.send(auctionsRes);
+  });
+});
 // get all closed auction 
 router.get('/get/closed', async (request, response) => {
     try{
@@ -144,15 +155,17 @@ router.patch('/:_id', async (request, response) => {
 
 //delete auction - /api/auctions/id
 
-router.delete('/:_id', async(request,response) => {
-    try{
+router.delete('/:_id', async (request, response) => {
+    try {
         const _id = request.params._id;
         await auctionLogic.deleteAuctionAsync(_id);
         response.sendStatus(204);
     }
-    catch(err){
-        response.status(500).send( { error: err });
+    catch (err) {
+        response.status(500).send({ error: err });
     }
-})
+});
+
+
 
 module.exports = router;

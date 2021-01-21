@@ -209,10 +209,7 @@ button {
   width: 80%;
   margin: 2% auto;
 }
-.cube{
-  width: 30%;
-  background-color: #fff;
-}
+
 .arrow-long-right {
   box-sizing: border-box;
   position: relative;

@@ -1,45 +1,50 @@
 const express = require('express');
-const errorHandler = require('../helpers/error-handler');
-const nodemailer = require("nodemailer");
+const EmailLogic = require('../business-logic/email-logic');
+const User = require('../models/user');
 
 const router = express.Router();
 
-router.post('/', async (request, response) => {
-    try{
+router.post('/', async (request, response, next) => {
+    try {
         const info = request.body;
-
-        // create reusable transporter object using the default SMTP transport
-        let transporter = nodemailer.createTransport({
-        //   host: "smtp.ethereal.email",
-        //   port: 587,
-        //   secure: false, // true for 465, false for other ports
-            service: 'gmail', 
-            auth: {
-                user: 'golanstudys@gmail.com', // generated ethereal user
-                pass: 'Thyrfing054', // generated ethereal password
-            },
-        });
-        let mailOptions = {
-            from: '"LPA Group" <LPA@LPA.com>', // sender address
-            to: `${info.email}`, // list of receivers
-            subject: `${info.subject}`, // Subject line
-            text: `${info.text}`, // plain text body
+        if (info.email && info.subject && info.text) {
+            const email = new EmailLogic.EmailUtil();
+            email.send('"LPA Group" <LPA@LPA.com>', info.email, info.subject, info.text, function (err, result) {
+                if (err) {
+                    next(err);
+                }
+                response.json({ ...result, msg: 'Email Sent' });
+            })
+        } else {
+            response.json({ ...info, msg: 'something is missing' })
         }
-      
-        transporter.sendMail(mailOptions, function (err, info) {
-            if(err){
-                console.log(err);
-            }
-            else{
-                console.log(info);
-            }
-        });
-        response.send('email send');
+        // create reusable transporter object using the default SMTP transport
 
     }
-    catch(err){
-        response.status(500).send( { error: err });
+    catch (err) {
+        response.status(500).send({ error: err });
     }
-})
+});
 
+router.get('/temp', async (req, res) => {
+    const temp = new EmailLogic.emailTemplates();
+    const result = await temp.setTemplate('whats up', 'this is a test');
+    res.send(result);
+});
+router.post('/sendReset', async (req, res,next) => {
+    if (req.body.email) {
+        console.log(req.body);
+        const email = new EmailLogic.EmailUtil();
+        const text = '<div>please let us make the diffreance<a href="dsads">link Email Confirmation</a></div>';
+        email.send('"LPA Group" <LPA@LPA.com>', req.body.email, "Lap Email Confirmaition", text, (err, result) => {
+            if (err) {
+                next(err);
+            }
+            res.json({ ...result, msg: 'Email Sent' });
+        })
+    } else {
+        res.json({ msg: 'no Emait was typed' });
+    }
+    
+});
 module.exports = router;

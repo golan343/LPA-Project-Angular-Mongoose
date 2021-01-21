@@ -4,6 +4,9 @@ const Auction = require('../models/auction');
 function getAllAuctionsAsync() {
     return Auction.find().populate('rule').populate('site').populate('createdBy').exec();
 }
+function getAllAuction(callback) {
+  return Auction.find().exec(callback);
+}
 // get all closed auctions
 function getAllClosedAuctionsAsync() {
     return Auction.find({status: false}).exec();
@@ -47,12 +50,13 @@ async function deleteAuctionAsync(_id) {
 
 
 module.exports = {
-    getAllAuctionsAsync,
-    getOneAuctionAsync,
-    addAuctionAsync,
-    updateAuctionAsync,
-    deleteAuctionAsync,
-    getAllClosedAuctionsAsync,
-    getAllOpenedAuctionsAsync,
-    getLastAuctionAsync
-}
+  getAllAuctionsAsync,
+  getOneAuctionAsync,
+  addAuctionAsync,
+  updateAuctionAsync,
+  deleteAuctionAsync,
+  getAllClosedAuctionsAsync,
+  getAllOpenedAuctionsAsync,
+  getLastAuctionAsync,
+  getAllAuction,
+};

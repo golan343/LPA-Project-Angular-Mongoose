@@ -9,7 +9,7 @@
         </aside>
 
         <aside class="mr-r">
-            <i class="user-icon" (click)="setModel(3)"></i>
+            <i class="user-icon" (click)="setModel(1)"></i>
         </aside>
         <aside class="mr-r">
             <i class="message-icon"></i>
@@ -23,7 +23,7 @@
         <aside class="mr-r" (click)="setModel(2)">
             <i class="users-icon"></i>
         </aside>
-        <aside class="mr-r">
+        <aside class="mr-r" (click)="setModel(3)" >
             <i class="form-icon"></i>
         </aside>
         <aside class="mr-r">
@@ -36,13 +36,13 @@
 </header>
 <section class="container">
     <div [ngSwitch]="modelNum">
-        <div *ngSwitchCase="1">
+        <div *ngSwitchCase="3">
             <app-user-panel></app-user-panel>
             </div>
             <div *ngSwitchCase="2">
             <app-admin></app-admin>
         </div>
-        <div *ngSwitchCase="3">
+        <div *ngSwitchCase="1">
             <app-my-account></app-my-account>
         </div>
         <div *ngSwitchDefault>no Access </div>

@@ -35,12 +35,65 @@ function adminUpdateUser(user, callback) {
         country: user.country,
         city: user.city,
         email: user.email,
+        phone: user.phone,
         birthDay: new Date(user.birthDay),
         street: user.street,
       },
     },
     { useFindAndModify: false }
   ).exec(callback);
+}
+function getUserImage(id,callback){
+  User.findOne({_id:id}).select('img').exec(callback);
+}
+function saveUserImage(id,imgBase64,callback){
+  User.findByIdAndUpdate(
+    { _id: id },
+    {
+      $set: {
+        img:imgBase64 
+      },
+    },
+    { useFindAndModify: false }
+  ).exec(callback);
+}
+function findUserById(userId, callback) {
+  User.find({ _id: userId }, callback);
+}
+function resetPass(id, password, callback) {
+  console.log(hash(password));
+  User.findByIdAndUpdate(
+    { _id: id },
+    {
+      $set: {
+        password: hash(password),
+      },
+    },
+    { useFindAndModify: false }
+  ).exec(callback);
+}
+function genrateRandomToken(length) {
+  var result = "";
+  var characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+function findUserByEmail(email, callback) {
+  const update = {
+    token: genrateRandomToken(6),
+  };
+  User.findOneAndUpdate(
+    { email: new RegExp("^" + email + "$", "i") },
+    update,
+    function (err, doc) {
+      //Do your action here..
+      const foundUser = doc[0];
+    }
+  );
 }
 module.exports = {
   registerAsync,
@@ -49,4 +102,8 @@ module.exports = {
   getAllUsers,
   deleteUser,
   adminUpdateUser,
+  findUserById,
+  resetPass,
+  saveUserImage,
+  getUserImage
 };
