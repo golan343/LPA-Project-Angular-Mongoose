@@ -89,15 +89,17 @@ export class AdminComponent implements OnInit, AfterViewInit {
 
     if (selectedNodes.length > 0) {
       const httpCals = [];
-      selectedNodes.forEach(n => {
-        const user = (n.data as userItem);
-        httpCals.push(this.admins.editUser(user))
-      });
-      forkJoin(httpCals).subscribe(res => {
-        // if (res.deletedCount > 0) {
-        this.init();
-        // }
-      });
+      sessionStorage.setItem('user',JSON.stringify(selectedNodes[0].data));
+      this.admins.componentNumberSubject.next(1);
+      // selectedNodes.forEach(n => {
+      //   const user = (n.data as userItem);
+      //   httpCals.push(this.admins.editUser(user))
+      // });
+      // forkJoin(httpCals).subscribe(res => {
+      //   // if (res.deletedCount > 0) {
+      //   this.init();
+      //   // }
+      // });
 
     } else {
       this.admins.errorSubject.next('no user were selected');

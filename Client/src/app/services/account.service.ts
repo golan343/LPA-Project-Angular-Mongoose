@@ -18,6 +18,7 @@ export class AccountService {
   public decodedToken: any;
   isLoginSubject = new BehaviorSubject<boolean>(false);
   isLogin: boolean;
+  img:string;
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   public get currentUserValue(): UserModel {
@@ -68,6 +69,13 @@ export class AccountService {
   login(user: UserModel): Observable<any> {
     return this.http.post<any>(`${BaseUrl}api/auth/login`, user).pipe(map(user => {
       this.cookieService.set('token', JSON.stringify(user.token));
+      if(user.user){
+        if(user.user.img){
+          sessionStorage.setItem('userImage',user.user.img);
+          this.img = user.user.img;
+          delete user.user.img;
+        }
+      }
       this.cookieService.set('user', JSON.stringify(user.user));
       this.isUserLoggedIn();
       return user;

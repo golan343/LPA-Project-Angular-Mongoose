@@ -23,6 +23,9 @@ export class MainDashboardComponent implements OnInit {
     this.adminService.errorSubject.subscribe(err => {
       this.errorMessgae = err;
     });
+    this.adminService.componentNumberSubject.subscribe(modelNumber=>{
+      this.modelNum = modelNumber;
+    })
   }
   setModel(num: number) {
     this.modelNum = num;

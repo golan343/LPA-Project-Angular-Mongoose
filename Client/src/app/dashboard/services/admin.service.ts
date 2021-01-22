@@ -1,10 +1,11 @@
 import { BidiModule } from '@angular/cdk/bidi';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Auction } from 'src/app/models/auction-model';
 import { BidModel } from 'src/app/models/bid-model';
+import { UserModel } from 'src/app/models/user-model';
 import { environment } from 'src/environments/environment';
 import { userItem } from '../model/user-item';
 
@@ -13,6 +14,7 @@ import { userItem } from '../model/user-item';
 })
 export class AdminService {
   errorSubject = new BehaviorSubject<string>('');
+  componentNumberSubject = new Subject<number>();
   constructor(private http: HttpClient) { }
 
   getAllUsers(): Observable<userItem[]> {

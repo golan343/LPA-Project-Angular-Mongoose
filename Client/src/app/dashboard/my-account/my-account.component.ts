@@ -22,8 +22,18 @@ export class MyAccountComponent implements OnInit {
   @ViewChild('inputFile') fileUpload:any;
   @ViewChild('imgCanvas') imgCanvas:any;
   ngOnInit(): void {
-    this.user = this.account.getUser();
+  
+    if(!this.user){
+      this.user = this.account.getUser();
+    }
+   
     
+  }
+  ngAfterViewInit() {
+   const user = sessionStorage.getItem('user');
+   if(user){
+     this.user = JSON.parse(sessionStorage.getItem('user')) as UserModel;
+   }
   }
   chooseSms($event) {
     console.log($event);
@@ -69,7 +79,7 @@ export class MyAccountComponent implements OnInit {
     img.width = 100;
     img.height = 100;
     img.onload = (e)=>{
-      context.drawImage(img,0,0,300,100);
+      context.drawImage(img,0,0,200,100);
     }
     img.src = this.imgBase64;
     console.log('original'+this.imgBase64.length);

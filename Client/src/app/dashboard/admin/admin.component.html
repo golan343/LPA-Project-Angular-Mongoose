@@ -11,7 +11,8 @@
             <i class="edit-user fa "></i>
         </aside>
     </div>
-    <ag-grid-angular #agGrid class="ag-theme-alpine" [rowSelection]="'multiple'" [defaultColDef]="defaultColDef"
+    <!--[rowSelection]="'multiple'" -->
+    <ag-grid-angular #agGrid class="ag-theme-alpine"  [defaultColDef]="defaultColDef"
         [rowData]="rowData | async" [columnDefs]="columnDefs">
     </ag-grid-angular>
 </div>
