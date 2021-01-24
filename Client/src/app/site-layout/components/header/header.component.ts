@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isLogin: boolean;
   subscriberLogin: Subscription;
   user: UserModel;
+  userImage:string;
   constructor(private router: Router,
     public accountService: AccountService,
     private cookieService: CookieService,
@@ -37,6 +38,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       const cookieUsrParsed = JSON.parse(cookieUsr);
       this.user = cookieUsrParsed.user as UserModel;
     }
+    this.userImage = this.accountService.getUserIcon();
   }
   menuToggle() {
     this.showMobile = !this.showMobile;

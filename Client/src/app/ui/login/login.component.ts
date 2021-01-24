@@ -1,4 +1,3 @@
-import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { errorModel, UserModel } from './../../models/user-model';
 import { AccountService } from './../../services/account.service';
@@ -28,14 +27,16 @@ export class LoginComponent implements OnInit {
       this.error.validateEmail(this.user.email) &&
       this.error.validatePassword(this.user.password)
     ) {
-      this.accountService.login(this.user).subscribe(
+      this.accountService.login(this.user).then(
         (response) => {
           this.dialogService.subjectType.next(new DialogData());
-        },
-        (err) => {
-          alert(err.message);
         }
-      );
+      ).catch(err=>{
+        const dialog = new DialogData();
+        dialog.innerTitle = 'error message';
+        dialog.text = err.msg;
+        this.dialogService.subjectType.next(dialog);
+      });
     }
   }
   showRegisterlayout() {

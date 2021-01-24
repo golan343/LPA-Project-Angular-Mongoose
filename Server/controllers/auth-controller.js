@@ -65,7 +65,7 @@ router.post("/reset", async (req, res, next) => {
               res.json({ msg:'password was changed successfully'});
           });
       } else {
-        res.status(401).json({msg:"old password do"});
+        res.json({msg:"old password do not match"});
       }
       
     });

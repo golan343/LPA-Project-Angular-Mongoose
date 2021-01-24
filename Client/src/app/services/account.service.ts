@@ -29,7 +29,7 @@ export class AccountService {
     return _id;
   }
   public isUserLoggedIn(): void {
-    const token = this.cookieService.get('token');
+    const token = sessionStorage.getItem('token');
     this.isLogin = !this.helper.isTokenExpired(token);
     this.user = this.getUser();
     this.user.isAdmin = this.user.roleId ? this.checkIsAdmin(this.user.roleId) : false;
@@ -47,16 +47,9 @@ export class AccountService {
     return JSON.parse(user) as UserModel;
   }
 
-  // public isAdmin(): boolean {
-  //   if (this.isLogin) {
-  //     const role = JSON.parse(this.cookieService.get('user')).user.roleId;
-  //     if (role === '5f58ba8855eac12930d7b405' || role === '5f58ba9a55eac12930d7b40c' || role === '5f58badd55eac12930d7b427'){
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-
-  // }
+  getUserIcon(){
+    return sessionStorage.getItem('userImage');
+  }
   checkIsAdmin(roleId) {
     switch (roleId) {
       case '5f58ba8855eac12930d7b405':
@@ -66,9 +59,9 @@ export class AccountService {
     }
     return false;
   }
-  login(user: UserModel): Observable<any> {
-    return this.http.post<any>(`${BaseUrl}api/auth/login`, user).pipe(map(user => {
-      this.cookieService.set('token', JSON.stringify(user.token));
+  login(user: UserModel): Promise<any> {
+    return this.http.post<any>(`${BaseUrl}api/auth/login`, user).toPromise().then(user => {
+      sessionStorage.setItem('token', user.token);
       if(user.user){
         if(user.user.img){
           sessionStorage.setItem('userImage',user.user.img);
@@ -79,11 +72,12 @@ export class AccountService {
       this.cookieService.set('user', JSON.stringify(user.user));
       this.isUserLoggedIn();
       return user;
-    }));
+    });
   }
 
   public logout(): void {
     this.cookieService.deleteAll();
+    sessionStorage.clear();
     this.isUserLoggedIn();
   }
 

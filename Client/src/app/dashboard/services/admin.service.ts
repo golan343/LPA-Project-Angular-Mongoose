@@ -1,8 +1,7 @@
-import { BidiModule } from '@angular/cdk/bidi';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Auction } from 'src/app/models/auction-model';
 import { BidModel } from 'src/app/models/bid-model';
 import { UserModel } from 'src/app/models/user-model';
@@ -24,7 +23,9 @@ export class AdminService {
       })
     );
   }
-
+  resetPassword(id:string,old:string,password:string):Promise<any>{
+    return this.http.post<any>(environment.BaseUrl+'api/auth/reset',{id,old,password}).toPromise();
+  }
   deleteUser(id: string): Observable<{
     id;
     n: 1;
@@ -62,5 +63,10 @@ export class AdminService {
   }
   saveUserImage(id:string,img:string):Observable<any>{
     return this.http.post<any>(environment.BaseUrl+'api/auth/setUserImage',{id,img});
+  }
+  getUserImage(id:string):Observable<{_id:string; img:string;}>{
+    return this.http.get<{_id:string; img:string;}>(environment.BaseUrl+'api/auth/userImage/'+id).pipe(tap(result=>{
+      sessionStorage.setItem('userImage',result.img);
+    }))
   }
 }

@@ -50,7 +50,9 @@ header {
   display: flex;
   align-items: center;
 }
-
+.justify-end{
+  justify-self:end;
+}
 .logo {
   background-image: url(./assets/images/homeNavLogo.png);
   width: 57px;

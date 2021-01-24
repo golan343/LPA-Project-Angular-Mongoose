@@ -1,24 +1,40 @@
-<header class="sticky" [class]="{show:showMobile}">
-    <div (click)="menuToggle()" class="phone_menu">
-        <span class="sep"></span>
-        <span class="sep"></span>
-        <span class="sep"></span>
-    </div>
-    <div class="user" title="login" *ngIf="isLogin" [title]="'hello '+user?.firstName"><span class="person-icon"></span>
-    </div>
-    <div *ngIf="!isLogin" (click)="login()" title="log in">
-        <i class="log-in"></i>
-    </div>
-    <div *ngIf="isLogin">
-        <a type="button" class="sign-out" (click)="logout()">Sign out</a>
-    </div>
-    <!-- <div class="search" *ngIf="isLogin"><a class="search-icon"></a></div> -->
-    <div class="languages">
-        <ul>
-            <li></li>
-            <li></li>
-        </ul>
-    </div>
+<header class="sticky" [class]="{ show: showMobile }">
+  <div (click)="menuToggle()" class="phone_menu">
+    <span class="sep"></span>
+    <span class="sep"></span>
+    <span class="sep"></span>
+  </div>
+  <div
+    class=""
+    title="login"
+    *ngIf="isLogin"
+    [title]="'hello ' + user?.firstName"
+  >
+    <div
+      *ngIf="userImage"
+      class="round"
+      [style]="'background-image:url(' + userImage + ')'"
+    ></div>
 
-    <div class="place-bid"><button type="button" (click)="placeBid()">Place A Bid</button></div>
+    <div *ngIf="!userImage" class="user">
+      <span class="person-icon"></span>
+    </div>
+  </div>
+  <div *ngIf="!isLogin" (click)="login()" title="log in">
+    <i class="log-in"></i>
+  </div>
+  <div *ngIf="isLogin">
+    <a type="button" class="sign-out" (click)="logout()">Sign out</a>
+  </div>
+  <!-- <div class="search" *ngIf="isLogin"><a class="search-icon"></a></div> -->
+  <div class="languages">
+    <ul>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+
+  <div class="place-bid">
+    <button type="button" (click)="placeBid()">Place A Bid</button>
+  </div>
 </header>

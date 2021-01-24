@@ -1,22 +1,36 @@
-export class UserModel {
-    isAdmin: boolean;
-    _id?: string;
-    email?: string;
-    password?: string;
-    firstName?: string;
-    lastName?: string;
-    country?: string;
-    city?: string;
-    street?: string;
-    postcode?: string;
-    birthDate?: string;
-    roleId: string;
-    token?: string;
-    phone?: string;
-    img?: string;
-    constructor(
+import { userItem } from '../dashboard/model/user-item';
 
-    ) { }
+export class UserModel {
+  constructor() {}
+  isAdmin: boolean;
+  _id?: string;
+  email?: string;
+  password?: string;
+  firstName?: string;
+  lastName?: string;
+  country?: string;
+  city?: string;
+  street?: string;
+  postcode?: string;
+  birthDate?: string;
+  roleId: string;
+  token?: string;
+  phone?: string;
+  img?: string;
+  public toUserItem(): userItem {
+    return {
+      _id: this._id,
+      firstName: this.firstName,
+      lastName: this.lastName,
+      country: this.country,
+      city: this.country,
+      roleId: this.roleId,
+      birthDate: this.birthDate,
+      street: this.street,
+      token: this.token,
+      phone: this.phone,
+    };
+  }
 }
 
 export class errorModel extends UserModel {
@@ -29,8 +43,8 @@ export class errorModel extends UserModel {
       return false;
     }
     if (!/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{8,}$/g.test(passText)) {
-        this.password =
-            'password must contain at least 8 characters one uppercase letter and one lowercase letter';
+      this.password =
+        'password must contain at least 8 characters one uppercase letter and one lowercase letter';
       return false;
     }
     this.password = '';
@@ -81,7 +95,7 @@ export class validationConstrains {
     this.errorMsg = args.errorMsg;
     this.pattarn = args.pattarn || null;
     this.pattarnErrorMsg = args.pattarnErrorMsg;
-      this.callMethod = args.callMethod || null;
+    this.callMethod = args.callMethod || null;
     this.methodMsg = args.methodMsg;
   }
   isRequire: boolean;
