@@ -53,6 +53,10 @@ header {
 .justify-end{
   justify-self:end;
 }
+.flex-start{
+  justify-self: start;
+  align-items: flex-start;
+}
 .logo {
   background-image: url(./assets/images/homeNavLogo.png);
   width: 57px;
@@ -200,6 +204,9 @@ button {
   border: none;
   cursor: pointer;
 }
+.absolute{position: absolute;}
+.bottom{ bottom: 2%;}
+.full-height{height: 100%;}
 .center {
   text-align: center;
 }

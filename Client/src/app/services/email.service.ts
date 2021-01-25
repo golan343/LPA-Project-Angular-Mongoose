@@ -9,7 +9,7 @@ export class EmailService {
 
   constructor(private http: HttpClient) { }
   sendEmail(email: string): Observable<any> {
-    return this.http.post<any>(environment.BaseUrl + '/api/email/sendReset', { email });
+    return this.http.post<any>(environment.BaseUrl + 'api/email/sendReset', { email });
   }
 }
 

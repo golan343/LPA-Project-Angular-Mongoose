@@ -11,8 +11,8 @@ class EmailUtil {
       //   secure: false, // true for 465, false for other ports
       service: "gmail",
       auth: {
-        user: "golanstudys@gmail.com", // generated ethereal user
-        pass: "Thyrfing054", // generated ethereal password
+        user: "info@lowpriceauction.com", // generated ethereal user
+        pass: "LPA123info", // generated ethereal password
       },
     });
   }

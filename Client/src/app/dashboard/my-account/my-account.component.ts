@@ -55,11 +55,9 @@ export class MyAccountComponent implements OnInit {
 
   }
   chooseSms($event) {
-    console.log($event);
     this.smsNotification = $event;
   }
   chooseEmail($event) {
-    console.log($event);
     this.emailNotification = $event;
   }
   fileUploadEvent($event) {
