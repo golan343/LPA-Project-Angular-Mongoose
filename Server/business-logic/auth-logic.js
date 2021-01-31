@@ -82,6 +82,10 @@ function genrateRandomToken(length) {
   }
   return result;
 }
+function SetUserToken(email, callback) {
+  const update = {
+    token: genrateRandomToken(6),
+  };
 function findUserByEmail(email, callback) {
   const update = {
     token: genrateRandomToken(6),
