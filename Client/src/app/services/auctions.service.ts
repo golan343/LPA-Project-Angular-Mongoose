@@ -60,10 +60,10 @@ export class AuctionsService {
     return this.http.get(`/join/bids-in-auction/${auctionId}`);
   }
 
-  public async updateAuction(auction: AuctionModel): Promise<any>{
-    await this.http.patch<AuctionModel>(`${BaseUrl}api/auctions/${auction._id}`, auction)
-    .subscribe(updatedAuction => {
+  // public async updateAuction(auction: AuctionModel): Promise<any>{
+  //   await this.http.patch<AuctionModel>(`${BaseUrl}api/auctions/${auction._id}`, auction)
+  //   .subscribe(updatedAuction => {
 
-    });
-  }
+  //   });
+  // }
 }
