@@ -31,7 +31,7 @@ router.post('/',(request, response) => {
             console.log(body.toString());
             response.send(body.toString());
         });
-    })
+    });
 
     req.write(JSON.stringify({
         card: {
@@ -52,6 +52,73 @@ router.post('/',(request, response) => {
     
 
 });
+
+
+router.get('/transaction', (request, response) => {
+    try{
+        const options = {
+            "method": "GET",
+            "hostname": "api-uat.kushkipagos.com",
+            "port": null,
+            "path": "/analytics/v1/transactions-list",
+            "headers": { 'Private-Merchant-Id' : 'd357cc7ffa2f49058617233ce6f7db72' }
+        };
+
+        let req = http.request(options,  (res) => {
+            const chunks = [];
+            res.on('data', function (chunk) {
+                chunks.push(chunk);
+            });
+            console.log(chunks);
+            res.on('end', function () {
+                const body = Buffer.concat(chunks);
+                console.log(body.toString());
+                response.json(body.toString());
+            });
+        })
+          
+        req.end();
+
+    }
+    catch(err){
+        response.send(500).json(err.message);
+    }
+});
+router.get('/smartlink/:link', (request, response) => {
+    try{
+        const smartLinkId = request.params.link;
+        const options = {
+            "method": "GET",
+            "hostname": "api-uat.kushkipagos.com",
+            "port": null,
+            "path": "/smartlink/v2/smart-link/" + smartLinkId,
+            "headers": { 'content-type': 'application/json'}
+        };
+
+        let req = http.request(options,  (res) => {
+            const chunks = [];
+            res.on('data', function (chunk) {
+                chunks.push(chunk);
+            });
+            res.on('end', function () {
+                const body = Buffer.concat(chunks).toString();
+                const data = JSON.parse(body)
+                response.json(data);
+            });
+            
+            
+        })
+        
+        req.end();
+
+        
+
+    }
+    catch(err){
+        response.send(500).json(err.message);
+    }
+});
+
 
 
 module.exports = router;

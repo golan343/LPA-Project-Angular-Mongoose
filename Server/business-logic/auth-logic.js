@@ -82,6 +82,7 @@ function genrateRandomToken(length) {
   return result;
 }
 function SetUserToken(email, callback) {
+
   const update = {
     token: genrateRandomToken(6),
   };

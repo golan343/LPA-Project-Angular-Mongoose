@@ -1,25 +1,29 @@
 const nodemailer = require("nodemailer");
 const fs = require("fs");
+
 class EmailUtil {
   transporter;
   options;
   constructor() {
     // create reusable transporter object using the default SMTP transport
     this.transporter = nodemailer.createTransport({
-      //   host: "smtp.ethereal.email",
-      //   port: 587,
-      //   secure: false, // true for 465, false for other ports
-      service: "gmail",
+      // host: "smtp.gmail.com",
+      // port: 587,
+      // secure: false, // true for 465, false for other ports
+      service : 'gmail',
       auth: {
         user: "info@lowpriceauction.com", // generated ethereal user
         pass: "LPA123info", // generated ethereal password
       },
+      tls: {
+        rejectUnauthorized: false 
+      }
     });
   }
   async send(from, to, subject, text, callback) {
-    const temp = new emailTemplates();
-    const content = await temp.setTemplate(subject, text);
-    this.options = new mailOptions(from, to, subject, content);
+    // const temp = new emailTemplates();
+    // const content = await temp.setTemplate(subject, text);
+    this.options = new mailOptions(from, to, subject, text);
     if (typeof callback == "function") {
       return this.transporter.sendMail(this.options, callback);
     }
@@ -30,7 +34,7 @@ class EmailUtil {
 }
 
 class mailOptions {
-  form = "";
+  from = "";
   to = "";
   subject = "";
   text = "";
