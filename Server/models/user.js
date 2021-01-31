@@ -42,7 +42,7 @@ const UserSchema = mongoose.Schema({
     },
     phone: {
         type: String,
-        required:[true,'phone is obligated']
+        // required:[true,'phone is obligated']
     },
     birthDate: {
         type: Date,

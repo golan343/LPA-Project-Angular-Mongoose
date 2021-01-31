@@ -68,7 +68,7 @@ router.post("/", async (request, response, next) => {
     if (info.email && info.subject && info.text) {
       const email = new EmailLogic.EmailUtil();
       email.send(
-        '"LPA Group" <LPA@LPA.com>',
+        info.from? info.from : '"LPA Group" <LPA@LPA.com>',
         info.email,
         info.subject,
         info.text,

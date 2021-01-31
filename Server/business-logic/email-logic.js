@@ -21,9 +21,9 @@ class EmailUtil {
     });
   }
   async send(from, to, subject, text, callback) {
-    const temp = new emailTemplates();
-    const content = await temp.setTemplate(subject, text);
-    this.options = new mailOptions(from, to, subject, content);
+    // const temp = new emailTemplates();
+    // const content = await temp.setTemplate(subject, text);
+    this.options = new mailOptions(from, to, subject, text);
     if (typeof callback == "function") {
       return this.transporter.sendMail(this.options, callback);
     }
@@ -34,7 +34,7 @@ class EmailUtil {
 }
 
 class mailOptions {
-  form = "";
+  from = "";
   to = "";
   subject = "";
   text = "";
