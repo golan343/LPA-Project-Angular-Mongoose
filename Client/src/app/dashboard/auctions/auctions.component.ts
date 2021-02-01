@@ -39,7 +39,7 @@ export class AuctionsComponent implements OnInit {
     console.log($event.target.value);
     const val = $event.target.value;
     this.auctions = this.AllAuctions.filter(item=>{
-      return (new RegExp(val).test(item.name) || new RegExp(val).test(item.description)) && item.status !== this.aliveOrClose;
+      return (new RegExp(val,'g').test(item.name) || new RegExp(val,'g').test(item.description)) && item.status !== this.aliveOrClose;
     })
   }
   auctionsToCsv(){
@@ -62,15 +62,12 @@ export class AuctionsComponent implements OnInit {
   }
   saveItem(){
     this.admin.updateAuction(this.editAuction).subscribe(res=>{
-      
-      if(this.formData.has(this.editAuction.imageFileName)){
-        debugger;
-      }
+    
       this.admin.uploadImage(this.formData).subscribe(fileRes=>{
         this.admin.errorSubject.next(res.msg);
         console.log(fileRes);
       },fileErr=>{
-        console.log(fileErr);
+        this.admin.errorSubject.next(fileErr.msg);
       });
     },err=>{
       this.admin.errorSubject.next(JSON.stringify(err));
@@ -100,7 +97,7 @@ export class AuctionsComponent implements OnInit {
         case 'image/jpeg':
         case 'image/gif':
           this.editAuction.imageFileName = files[i].name+"."+this.fileUtil.getFileType(files[i].type);
-          this.formData.append(files[i].name,files[i],this.editAuction.imageFileName);
+          this.formData.append('file',files[i],this.editAuction.imageFileName);
           break;
         default:
           this.admin.errorSubject.next('only image format to upload');

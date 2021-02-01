@@ -59,22 +59,22 @@ export class AccountService {
     }
     return false;
   }
-  login(user: UserModel): Promise<any> {
-    return this.http.post<any>(`${BaseUrl}api/auth/login`, user).toPromise().then(user => {
-      sessionStorage.setItem('token', user.token);
-      if(user.user){
-        if(user.user.img){
-          sessionStorage.setItem('userImage',user.user.img);
-          this.img = user.user.img;
-          delete user.user.img;
-        }
-      }
-      this.cookieService.set('user', JSON.stringify(user.user));
-      this.isUserLoggedIn();
-      return user;
-    });
+  login(user: UserModel): Observable<{user:UserModel,token:string}> {
+    return this.http.post<{user:UserModel,token:string}>(`${BaseUrl}api/auth/login`, user);
   }
-
+  setLoginUser(user:UserModel, token){
+  sessionStorage.setItem('token', token);
+  if(user){
+    if(user.img){
+      sessionStorage.setItem('userImage',user.img);
+      this.img = user.img;
+      delete user.img;
+    }
+  }
+  this.cookieService.set('user', JSON.stringify(user));
+  this.isUserLoggedIn();
+  return user;
+}
   public logout(): void {
     this.cookieService.deleteAll();
     sessionStorage.clear();

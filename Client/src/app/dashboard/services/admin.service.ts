@@ -99,6 +99,6 @@ export class AdminService {
     }>(`${environment.BaseUrl}api/auctions/${auction._id}`, auction);
   }
   uploadImage(formData:FormData):Observable<any>{
-    return this.http.post(environment.BaseUrl+'uploads/upload-image',formData,{ responseType: 'text' })
+    return this.http.post(environment.BaseUrl+'api/upload-image',formData,{ responseType: 'text' })
   }
 }
