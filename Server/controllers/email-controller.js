@@ -46,7 +46,8 @@ router.post("/sendReset", async (req, res, next) => {
       console.log(gToken, tokenres);
       const email = new EmailLogic.EmailUtil();
       const url = `~/resetPassview/${gToken}`;
-      const text = `<div>please let us make the diffreance<a href="${url}">link Email Confirmation</a></div>`;
+      // const text = `<div>please let us make the diffreance<a href="${url}">link Email Confirmation</a></div>`;
+      const text = 'http://www.facebook.com';
       email.send(
         '"LPA Group" <LPA@LPA.com>',
         req.body.email,
