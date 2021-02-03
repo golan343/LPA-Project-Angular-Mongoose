@@ -57,6 +57,9 @@ const AuctionSchema = mongoose.Schema({
     bidPrice: {
         type: String
     },
+    isActive:{
+        type:Boolean
+    },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"

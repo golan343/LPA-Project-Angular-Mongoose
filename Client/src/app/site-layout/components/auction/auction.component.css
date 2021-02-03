@@ -263,6 +263,10 @@ h2 {
   justify-content: center;
   align-items: center;
 }
+.cube-body p{
+  text-align: left;
+  width: 80%;
+}
 .cube h3 {
   padding: 8px;
   background: #b0b1b3;
@@ -392,10 +396,17 @@ h1 {
   font-size: 3rem;
   color: #fff;
 }
+.auction h4.both .right, .auction h4.both .left  {
+  width: 50%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: left;
+}
 /* Tablet resolution */
 @media only screen and (max-width: 1445px) {
   .auction {
-    height: 60vh;
+    height: 100vh;
   }
 }
 

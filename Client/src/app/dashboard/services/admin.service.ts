@@ -7,6 +7,7 @@ import { Auction, AuctionModel } from 'src/app/models/auction-model';
 import { BidModel } from 'src/app/models/bid-model';
 import { UserModel } from 'src/app/models/user-model';
 import { environment } from 'src/environments/environment';
+import { auctionItem } from '../model/auctionItem';
 import { userItem } from '../model/user-item';
 
 @Injectable({
@@ -88,9 +89,13 @@ export class AdminService {
         })
       );
   }
-
+  addNewAuction(auction:auctionItem):Observable<{ n: 1;
+    ok: 1;}>{
+    return  this.http.post<{ n: 1;
+      ok: 1;}>(`${environment.BaseUrl}api/auctions`,{...auction})
+  }
   updateAuction(
-    auction: Auction
+    auction: auctionItem
   ): Observable<{
     msg:string
   }> {
@@ -98,7 +103,15 @@ export class AdminService {
       msg:string
     }>(`${environment.BaseUrl}api/auctions/${auction._id}`, auction);
   }
+  deleteAuction(
+    auctionId: string
+  ): Observable<any> {
+    return this.http.delete<any>(`${environment.BaseUrl}api/auctions/${auctionId}`);
+  }
   uploadImage(formData:FormData):Observable<any>{
     return this.http.post(environment.BaseUrl+'api/upload-image',formData,{ responseType: 'text' })
+  }
+  AuctiontoArcaiv(id:string):Observable<{n:number,ok:string}>{
+    return this.http.put<{n:number,ok:string}>(environment.BaseUrl+'api/auctions/setarcive/'+id,{id});
   }
 }
