@@ -11,18 +11,24 @@ import { UtilsModule } from './../utils/utils.module';
 import { DialogService } from './dialog.service';
 import { ForgotPassComponent } from './forgot-pass/forgot-pass.component';
 import { CheckBoxComponent } from './check-box/check-box.component';
-
+import { FlagSelectComponent } from './flag-select/flag-select.component';
+import { SwitchButtonComponent } from './switch-button/switch-button.component';
 
 @NgModule({
-  declarations: [DialogComponent, LoginComponent, RegisterComponent, VideoFrameComponent, SafePipe, CarIconComponent, ForgotPassComponent, CheckBoxComponent],
-  imports: [
-    CommonModule,
-    FormsModule,
-    UtilsModule
+  declarations: [
+    DialogComponent,
+    LoginComponent,
+    RegisterComponent,
+    VideoFrameComponent,
+    SafePipe,
+    CarIconComponent,
+    ForgotPassComponent,
+    CheckBoxComponent,
+    FlagSelectComponent,
+    SwitchButtonComponent,
   ],
-  exports: [
-    DialogComponent, CheckBoxComponent
-  ],
-  providers: [DialogService]
+  imports: [CommonModule, FormsModule, UtilsModule],
+  exports: [DialogComponent, CheckBoxComponent,FlagSelectComponent,SwitchButtonComponent],
+  providers: [DialogService],
 })
-export class DialogModule { }
+export class DialogModule {}

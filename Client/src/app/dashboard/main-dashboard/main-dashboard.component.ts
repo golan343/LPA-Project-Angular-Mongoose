@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { fromEvent } from 'rxjs';
 import { UserModel } from 'src/app/models/user-model';
 import { AccountService } from 'src/app/services/account.service';
 import { AdminService } from '../services/admin.service';
@@ -19,7 +20,7 @@ export class MainDashboardComponent implements OnInit {
     private account: AccountService,
     private adminService: AdminService
   ) {
-    this.modelNum = 1;
+    this.modelNum = 5;
     this.routerStateArray = new Array<number>();
     this.routerStateArray.push(1);
   }
@@ -39,12 +40,13 @@ export class MainDashboardComponent implements OnInit {
       this.routerStateArray.push(modelNumber);
     });
     window.history.pushState('forward', null, null);
-    window.onpopstate = (e) => {
-      console.log(e);
+    const popstateEvent = fromEvent(window,'popstate')
+    popstateEvent.subscribe((e) => {
+      debugger;
       let lastModule = this.routerStateArray.pop();
       console.log(lastModule);
       this.modelNum = lastModule;
-    };
+    });
   }
   clearError() {
     this.errorMessgae = '';

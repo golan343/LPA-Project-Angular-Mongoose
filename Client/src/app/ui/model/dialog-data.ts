@@ -1,6 +1,6 @@
 export class DialogData {
     constructor(component?: string) {
-        this.componentName = component;
+        this.componentName = component || '';
         this.show = !!component;
     }
     componentName: string;

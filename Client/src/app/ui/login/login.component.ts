@@ -27,15 +27,13 @@ export class LoginComponent implements OnInit {
       this.error.validateEmail(this.user.email) &&
       this.error.validatePassword(this.user.password)
     ) {
-      this.accountService.login(this.user).then(
+      this.accountService.login(this.user).subscribe(
         (response) => {
+          this.accountService.setLoginUser(response.user,response.token);
           this.dialogService.subjectType.next(new DialogData());
         }
-      ).catch(err=>{
-        const dialog = new DialogData();
-        dialog.innerTitle = 'error message';
-        dialog.text = err.msg;
-        this.dialogService.subjectType.next(dialog);
+      ,err=>{
+        this.error.email = err.error;
       });
     }
   }

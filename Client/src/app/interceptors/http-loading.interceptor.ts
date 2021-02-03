@@ -34,7 +34,7 @@ export class HttpLoadingInterceptor implements HttpInterceptor {
       }
     },
       (err) => {
-     //   this.loader.hide();
+       this.loader.hide();
       }
     ));
   }

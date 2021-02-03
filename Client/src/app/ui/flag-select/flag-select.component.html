@@ -1,0 +1,9 @@
+<div class="selector">
+    <div class="selected">
+        <div class="flag relative" [class]="flag"></div>
+        <i class="tringle"></i>
+    </div>
+    <ul *ngIf="show">
+        <li *ngFor="let item of list"><span>{{item.name}}</span></li>
+    </ul>
+</div>

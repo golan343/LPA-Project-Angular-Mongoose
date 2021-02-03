@@ -146,7 +146,7 @@ router.patch('/:_id', async (request, response) => {
             response.sendStatus(404);
             return;
         }
-        response.json(updateAuction);
+        response.json({msg:'auction Was saved successfuly'});
     }
     catch(err){
         response.status(500).send( { error: err });

@@ -1,1 +1,168 @@
-<p>auctions works!</p>
+<div class="container">
+  <div class="row">
+    <nav class="flex mr-b">
+      <aside><app-flag-select></app-flag-select></aside>
+      <aside class="right-bar datalist">
+        <input type="text" list="list" placeholder="Franchisee Company name" />
+        <datalist id="list">
+          <option>Uds</option>
+          <option>Ufa</option>
+          <option>Sds Laxus</option>
+          <option>FaceBook</option>
+        </datalist>
+      </aside>
+      <aside class="relative"><i (click)="openNewAuction()" class="fa plus-icon"></i></aside>
+      <aside><i class="fa pen-icon"></i></aside>
+      <aside><i class="delete-icon"></i></aside>
+      <aside><i class="movie-icon fa"></i></aside>
+      <aside class="right-bar relative">
+        <i class="excel-icon" (click)="auctionsToCsv()"></i>
+      </aside>
+      <aside>
+        <app-switch-button
+          [rightText]="'LIVE'"
+          [leftText]="'CLOSE'"
+          (observeToggleEvent)="filterAliveOrClose($event)"
+        ></app-switch-button>
+      </aside>
+      <aside class="relative">
+        <span class="search-icon fa"></span>
+        <input
+          type="text"
+          (keyup)="filterAuction($event)"
+          placeholder="find Auction"
+        />
+      </aside>
+    </nav>
+    <div class="white padding flex justify-center">
+      <div class="cube relative" *ngFor="let item of auctions">
+        <aside class="absolute top right" (click)="editItem(item)">
+          <i class="pen-icon"></i>
+        </aside>
+        <div class="show-auction">
+          <h3>{{ item.name }}</h3>
+          <P><span>price:</span>{{ item.price }}</P>
+          <p>
+            <span>{{ item.description }}</span>
+          </p>
+          <p class="fa" [class]="{ on: item.status, off: !item.status }"></p>
+        </div>
+
+      
+      </div>
+    </div>
+  </div>
+</div>
+<div class="edit-auction" *ngIf="showEditAuction">
+  <aside class="absolute close" (click)="closeItem()">
+    <i class="close-icon fa"></i>
+  </aside>
+  <h3>Edit Auction</h3>
+  <div class="flex">
+    <div class="input-container">
+      <label>auction name</label>
+      <input
+        type="text"
+        placeholder="auction name"
+        [(ngModel)]="editAuction.name"
+      />
+    </div>
+    <div class="input-container">
+      <label>auction description</label>
+      <input
+        type="text"
+        placeholder="auction description"
+        [(ngModel)]="editAuction.description"
+      />
+    </div>
+  </div>
+  <div class="flex">
+    <div class="input-container">
+      <label>auction start date</label>
+      <input
+        type="datetime"
+        placeholder="auction start date"
+        [(ngModel)]="editAuction.startDate"
+      />
+    </div>
+    <div class="input-container">
+      <label>auction end date</label>
+      <input
+        type="datetime"
+        placeholder="auction end date"
+        [(ngModel)]="editAuction.endDate"
+      />
+    </div>
+  </div>
+  <div class="flex">
+    <div class="input-container">
+      <label>auction bid Price</label>
+      <input
+        type="number"
+        placeholder="auction bid price"
+        [(ngModel)]="editAuction.bidPrice"
+      />
+    </div>
+    <div class="input-container">
+      <label>auction bid Price</label>
+      <input
+        type="number"
+        placeholder="auction bid price"
+        [(ngModel)]="editAuction.price"
+      />
+    </div>
+  </div>
+  
+    <!-- 'name','startDate','endDate','price','description','minOffer','bidPrice','totalBids', 'bidCount' -->
+    <div class="flex">
+      <div class="input-container">
+        <label>auction min offer</label>
+        <input
+          type="number"
+          placeholder="auction min offer"
+          [(ngModel)]="editAuction.minOffer"
+        />
+      </div>
+      <div class="input-container">
+        <label>auction number of bids</label>
+        <input
+          type="number"
+          placeholder="auction number of bids"
+          [(ngModel)]="editAuction.bidCount"
+        />
+      </div>
+    </div>
+    <div class="flex">
+      <div class="input-container">
+        <label>auction youtube Movie</label>
+        <input
+          type="text"
+          placeholder="auction start date"
+          [(ngModel)]="editAuction.youtubeId"
+        />
+      </div>
+      <div class="input-container">
+        <label>auction image</label>
+        <input
+          type="file"
+          placeholder="auction image file"
+          (change)="fileUploadEvent($event)"
+        />
+      </div>
+    </div>
+    <div class="flex">
+      <div class="input-container">
+        <app-switch-button
+        [rightText]="'LIVE'"
+        [leftText]="'CLOSE'"
+        (observeToggleEvent)="setStatus($event)"
+      ></app-switch-button>
+      </div>
+    </div>
+    <div class="flex">
+    <button (click)="saveItem()">
+      Save
+      <i class="save-icon fa"></i>
+    </button>
+  </div>
+</div>

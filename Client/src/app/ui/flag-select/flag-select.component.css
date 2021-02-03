@@ -1,0 +1,8 @@
+.tringle::after{
+    content: '\f0dd';
+    font-family: "Font Awesome 5 Pro";
+    position: absolute;
+    right: 5px;
+    top: 11%;
+    color: #4d8ab2;
+  }

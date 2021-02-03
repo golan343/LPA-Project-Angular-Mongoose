@@ -1,4 +1,6 @@
 export class Auction {
+    constructor(){
+    }
     bidPrice: string;
     bidsCount: number;
     createdDate: Date;

@@ -1,1 +1,94 @@
-<p>global-settings works!</p>
+<div class="container">
+    <div class="row white padding ">
+        <h2>Global Setting</h2>
+        <div class="flex flex-start">
+            <div class="cube">
+                <div class="input-container">
+                    <label for="site-title">Site title</label>
+                    <input type="text" >
+                </div>
+                <div class="input-container">
+                    <label for="site-name">Site name</label>
+                    <input type="text" >
+                </div>
+                <div class="input-container">
+                    <label for="site-Url">Site Url</label>
+                    <input type="text" id="site-Url" >
+                </div>
+                <div class="input-container">
+                    <label for="site-E-mail">Site E-mail</label>
+                    <input type="text" >
+                </div>
+                <div class="input-container">
+                    <label for="site-office-address">Site office address</label>
+                    <input type="text" >
+                </div>
+                <div class="flex padding">
+                    <div class="cube-right">
+                      <aside class="round-button" *ngIf="!imgBase64 && !imageFromData"
+                       (click)="triggerUplaod()">
+                        Add image <i class="plus-icon"></i>
+                        <input type="file" (change)="fileUploadEvent($event)" #inputFile id="inputFile" >
+                      </aside>
+                      <aside class="round-button" *ngIf="imageFromData && !imgBase64" (click)="triggerUplaod()">
+                          change image <i class="plus-icon"></i>
+                          <input type="file" (change)="fileUploadEvent($event)" #inputFile id="inputFile" >
+                        </aside>
+                      <aside class="file-info" *ngIf="imgBase64"><span>file Name: </span>
+                          {{fileName}}
+                      </aside>
+                      <aside class="round-button" (click)="saveUserImage()" *ngIf="imgBase64">
+                         save 
+                      </aside>
+                    </div>
+                    <div class="cube-left">
+                      <aside class="upload-button" *ngIf="!imgBase64 && !imageFromData"><i class="plus-icon"></i></aside>
+                      <canvas #imgCanvas id="imgCanvas" ></canvas>
+                    </div>
+              </div>
+            </div>
+            <div class="cube">
+                <div class="input-container">
+                    <label for="site-contract-number">Site contract number</label>
+                    <input type="text" >
+                </div>
+                <div class="input-container">
+                    <label for="site-social-media">Site social media</label>
+                    <input type="text" >
+                </div>
+                <div class="input-container">
+                    <label for="Android">Android App link</label>
+                    <input type="text" id="Android" >
+                </div>
+                <div class="input-container">
+                    <label for="ios">Ios App link</label>
+                    <input type="text" id="ios" >
+                </div>
+                <div class="input-container">
+                    <label for="site-office-address">Site office address</label>
+                    <input type="text" >
+                </div>
+            </div>
+            <div class="cube relative full-height">
+                <h2>Notifications</h2>
+                <div class="checkbox-input">
+                  <label for="sms">Sms</label>
+                  <app-check-box
+                    (triggerChange)="chooseSms($event)"
+                    [(checked)]="!emailNotification"
+                  ></app-check-box>
+                </div>
+                <div class="checkbox-input">
+                  <label for="sms">Email</label>
+                  <app-check-box
+                    (triggerChange)="chooseEmail($event)"
+                    [(checked)]="!smsNotification"
+                  ></app-check-box>
+                </div>
+                <div class="absolute bottom full center">
+                    <button class="padding" type="button">Save Site</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
