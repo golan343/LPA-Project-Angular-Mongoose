@@ -14,7 +14,7 @@ router.get('/sendSMS', (request, response) => {
         .create({
             body: sms.body,
             to: sms.to,
-            from: "+12515727644"
+            from: "LPA Group"
 
         })
         .then((message) => response.send(`send : ${message}`));

@@ -61,7 +61,6 @@ function findUserById(userId, callback) {
   User.find({ _id: userId }, callback);
 }
 function resetPass(id, password, callback) {
-  console.log(hash(password));
   User.findByIdAndUpdate(
     { _id: id },
     {
@@ -86,10 +85,6 @@ function SetUserToken(email, callback) {
   const update = {
     token: genrateRandomToken(6),
   };
-function findUserByEmail(email, callback) {
-  const update = {
-    token: genrateRandomToken(6),
-  };
   User.findOneAndUpdate(
     { email: new RegExp("^" + email + "$", "i") },
     update,
@@ -97,7 +92,8 @@ function findUserByEmail(email, callback) {
       //Do your action here..
       const foundUser = doc[0];
     }
-  );
+  ).exec(callback);
+  return update.token;
 }
 module.exports = {
   registerAsync,
@@ -109,5 +105,6 @@ module.exports = {
   findUserById,
   resetPass,
   saveUserImage,
-  getUserImage
+  getUserImage,
+  SetUserToken
 };
