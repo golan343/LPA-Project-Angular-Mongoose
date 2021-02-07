@@ -27,6 +27,7 @@ import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { LoaderComponent } from './components/loader/loader.component'
 import { ClosedAuctionComponent } from './components/closed-auction/closed-auction.component';
 import { MainlayoutComponent } from './mainlayout/mainlayout.component';
+import { PageComponent } from './components/page/page.component';
 
 
 
@@ -48,6 +49,7 @@ import { MainlayoutComponent } from './mainlayout/mainlayout.component';
     GlobalLoaderComponent,
     LoaderComponent,
     MainlayoutComponent,
+    PageComponent,
   ],
   imports: [
     AppRoutingModule,

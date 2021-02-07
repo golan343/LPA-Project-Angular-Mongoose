@@ -31,6 +31,7 @@ nav input {
   overflow: hidden;
   padding: 2px 16px 2px 0;
   margin: 1% 0;
+  width:auto;
 }
 input::-webkit-calendar-picker-indicator {
   display: none;
@@ -159,8 +160,8 @@ button {
   box-shadow: 0 1px 1px 0px #ccc;
 }
 .show-auction{
-  width: 70%;
-  margin-bottom: 40px;
+  width: 95%;
+  margin-bottom: 10px;
 }
 .show-auction p,.show-auction h3{
   text-overflow: ellipsis;

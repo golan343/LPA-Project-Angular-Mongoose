@@ -6,6 +6,9 @@ import { AgGridAngular } from 'ag-grid-angular';
 import { RowNode } from 'ag-grid-community';
 import { DialogData } from 'src/app/ui/model/dialog-data';
 import { DialogService } from 'src/app/ui/dialog.service';
+import { every, map, observeOn, tap } from 'rxjs/operators';
+import { ObserveOnOperator } from 'rxjs/internal/operators/observeOn';
+import { UserModel } from 'src/app/models/user-model';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -38,23 +41,24 @@ export class AdminComponent implements OnInit, AfterViewInit {
     { field: 'email', sortable: true, filter: true, editable: true },
     { field: 'roleId', sortable: true, filter: true, editable: true },
   ];
-  rowData: Observable<userItem[]>;
+  user$: Observable<userItem[]>;
+  rowData:userItem[];
   @ViewChild('agGrid') agGrid: AgGridAngular;
   constructor(private admins: AdminService, private dialogLocalsService: DialogService) { }
   ngAfterViewInit(): void {
     this.agGrid.api.addEventListener('rowClicked', this.cellClickedHandler.bind(this));
-
   }
 
   ngOnInit(): void {
     this.init();
-
   }
   init() {
-    this.rowData = this.admins.getAllUsers();
+    this.user$ = this.admins.getAllUsers();
+    this.user$.subscribe(users=>{
+      this.rowData = users;
+    })
   }
   cellClickedHandler($event) {
-    console.log($event);
     this.admins.errorSubject.next('');
   }
   deleteUsers() {
@@ -66,9 +70,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
         httpCals.push(this.admins.deleteUser(id))
       });
       forkJoin(httpCals).subscribe(res => {
-        // if (res.deletedCount > 0) {
         this.init();
-        // }
       });
 
     } else {
@@ -104,5 +106,35 @@ export class AdminComponent implements OnInit, AfterViewInit {
     } else {
       this.admins.errorSubject.next('no user were selected');
     }
+  }
+  filterUser($event:any){
+    const val = $event.target.value;
+    if(val){
+      console.log(val);
+      this.rowData.forEach(users=>{
+        
+      })
+    }
+    
+  }
+  UsersToCsv(){
+   
+    const keys = ['firstName','lastName','country','city','phone','street','email'];
+    let csv = keys.join(',')+'\n';
+    this.rowData.forEach(item=>{
+ 
+        keys.forEach(keyItem=>{
+          csv += item[keyItem]+',';
+        });
+        csv = csv.substr(0,csv.length-1)+'\n';
+      
+      });
+        console.log(csv);
+        let base64EncodeAuctions = btoa(csv);
+        console.log(base64EncodeAuctions);
+        base64EncodeAuctions = 'data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,'+base64EncodeAuctions;
+        window.open(base64EncodeAuctions);
+     
+      
   }
 }

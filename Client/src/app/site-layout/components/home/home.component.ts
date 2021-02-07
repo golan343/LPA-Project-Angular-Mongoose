@@ -18,8 +18,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   auction$: Observable<AuctionModel[]>;
   public auction: AuctionModel;
   public BaseUrl = BaseUrl;
-  lat = -3.180653;
-  lng = -72.467834;
+  lat = 33.180653;
+  lng = 31.4600;
 
 
 

@@ -1,0 +1,23 @@
+.container{
+    background-repeat: no-repeat;
+    padding-bottom: 50px;
+    margin: 5% auto;
+    width: 1000px;
+    height: 600px;
+    animation: fadeIn 6s linear ;
+    color:#fff;
+    font-size:1.5rem;
+}
+h1{
+    font-size:3rem;
+    text-align: center;
+    text-decoration: underline;
+    margin-bottom: 2%;
+}
+h2{
+    font-size:2rem;
+    margin-bottom: 2%;
+}
+p{
+    margin-bottom: 1%;
+}

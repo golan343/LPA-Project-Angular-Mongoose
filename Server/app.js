@@ -20,11 +20,13 @@ const mailchimpController = require('./controllers/mailchimp-controller');
 const kushkiController = require('./controllers/kushki-controller');
 const uploadImageController = require('./controllers/uploads-image-controller');
 const infoController = require('./controllers/info-controller');
+const pageController = require('./controllers/pages-controller');
 require("./data-access-layer/dal");
 const sanitize = require('./middleware/sanitize');
 const expressRateLimit = require('express-rate-limit');
 const expressSession = require('express-session');
 const fileUpload = require('express-fileupload');
+
 
 server.use(expressSession({
     name: "CaptchaSession",
@@ -56,8 +58,7 @@ server.use("/api/info", infoController);
 server.use("/api/email", emailController);
 server.use("/api/mail", mailchimpController);
 server.use("/api/kushki", kushkiController);
-
-
+server.use("/api/page", pageController);
 
 
 

@@ -1,6 +1,5 @@
 const express = require('express');
 const ruleLogic = require('../business-logic/rule-logic');
-const errorHandler = require('../helpers/error-handler');
 const Rule = require('../models/rule');
 
 const router = express.Router();

@@ -37,5 +37,6 @@ export class auctionItem {
     totalBids: number;
     youtubeId: string;
     previousImage:string;
+    isActive:boolean;
     _id:string;
 }

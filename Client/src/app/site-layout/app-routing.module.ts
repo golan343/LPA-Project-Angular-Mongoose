@@ -12,12 +12,13 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 // import { RegisterComponent } from './components/register/register.component';
 import { ClosedComponent } from './components/closed/closed.component';
 import { ClosedAuctionComponent } from './components/closed-auction/closed-auction.component';
+import { PageComponent } from './components/page/page.component';
 
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'how-its-work', component: HowItsWorkComponent },
+  { path: 'page/:name', component: PageComponent },
   { path: 'about', component: AboutUsComponent },
   { path: 'contact', component: ContactUsComponent },
   { path: 'auction/:id', component: AuctionComponent },

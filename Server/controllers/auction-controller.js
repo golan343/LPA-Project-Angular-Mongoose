@@ -82,8 +82,8 @@ router.get('/get/last', async (request, response) => {
 //add one auction - /api/auctions
 router.post('/', async (request, response) => {
     try{
+        request.body.isActive = true;
         const auction = new Auction(request.body);
-        
         //validate auction
         const error = await auction.validate();
         if(error) {
@@ -104,6 +104,7 @@ router.post('/', async (request, response) => {
 //update full auction - /api/products/id
 router.put('/:_id', async (request, response) => {
     try{
+        request.body.isActive = true;
         const auction = new Auction(request.body);
         auction._id = request.params._id;
         console.log(request.body);
@@ -137,6 +138,7 @@ router.put('/:_id', async (request, response) => {
 //update partial auction info - /api/products/id
 router.patch('/:_id', async (request, response) => {
     try{
+        request.body.isActive = true;
         const auction = new Auction(request.body);
         auction._id = request.params._id;
 
