@@ -32,9 +32,7 @@ export class AuctionComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private auctionService: AuctionsService,
-    private cookieService: CookieService,
     private account: AccountService,
-    private router: Router,
     private bidService: BidsService,
     private dialogService: DialogService
   ) { }
@@ -99,7 +97,6 @@ export class AuctionComponent implements OnInit {
       this.bid.auctionId = this.auction._id;
       this.bidService.addBid(this.bid).subscribe(
         (result) => {
-          console.log(result);
           this.getBids();
           dialog.innerTitle = 'Your bid is absorbed in our system!';
           dialog.text = 'see you in the next auction!';

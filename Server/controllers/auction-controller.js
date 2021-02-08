@@ -1,7 +1,7 @@
 const express = require('express');
 const auctionLogic = require('../business-logic/auction-logic');
 const Auction = require('../models/auction');
-
+const fs = require('fs');
 const router = express.Router();
 
 //get all auctions - /api/auctions
@@ -26,9 +26,7 @@ router.get("/all", (req, res, next) => {
     if (err) {
       return next(err);
     }
-    if (auctionsRes.length === 0) {
-      return next(new NotFoundError());
-    }
+  
     res.send(auctionsRes);
   });
 });
@@ -84,8 +82,8 @@ router.get('/get/last', async (request, response) => {
 //add one auction - /api/auctions
 router.post('/', async (request, response) => {
     try{
+        request.body.isActive = true;
         const auction = new Auction(request.body);
-        
         //validate auction
         const error = await auction.validate();
         if(error) {
@@ -106,9 +104,18 @@ router.post('/', async (request, response) => {
 //update full auction - /api/products/id
 router.put('/:_id', async (request, response) => {
     try{
+        request.body.isActive = true;
         const auction = new Auction(request.body);
         auction._id = request.params._id;
-
+        console.log(request.body);
+        if(request.body.previousImage){
+            /// remove previous auction image file
+            fs.unlink('./upload/'+request.body.previousImage,function(err, fr){
+                console.log(err,request.body.previousImage);
+                console.log(fr);
+            });
+        }
+        
         //validate
         const error = auction.validateSync();
         if(error) {
@@ -131,6 +138,7 @@ router.put('/:_id', async (request, response) => {
 //update partial auction info - /api/products/id
 router.patch('/:_id', async (request, response) => {
     try{
+        request.body.isActive = true;
         const auction = new Auction(request.body);
         auction._id = request.params._id;
 
@@ -140,7 +148,14 @@ router.patch('/:_id', async (request, response) => {
             response.status(400).send( { error: error });
             return;
         }
-
+        console.log(request.body);
+        if(request.body.previousImage){
+            /// remove previous auction image file
+            fs.unlink('./uploads/'+request.body.previousImage,function(err, fr){
+                console.log(err,request.body.previousImage);
+                console.log(fr);
+            });
+        }
         const updateAuction = await auctionLogic.updateAuctionAsync(auction);
         if(!updateAuction) {
             response.sendStatus(404);
@@ -158,14 +173,26 @@ router.patch('/:_id', async (request, response) => {
 router.delete('/:_id', async (request, response) => {
     try {
         const _id = request.params._id;
-        await auctionLogic.deleteAuctionAsync(_id);
-        response.sendStatus(204);
+        const result = await auctionLogic.deleteAuctionAsync(_id);
+        response.json(result);
     }
     catch (err) {
         response.status(500).send({ error: err });
     }
 });
 
-
+router.put('/setarcive/:_id',async (req,res)=>{
+    if(req.body.id){
+        const id = req.params._id;
+        console.log(id);
+        auctionLogic.setAuctionToArcaiv(id,function(err, result) {
+            if (err) {
+              res.status(401).json(err);
+            } else {
+              res.json(result);
+            }
+          });
+    }
+});
 
 module.exports = router;

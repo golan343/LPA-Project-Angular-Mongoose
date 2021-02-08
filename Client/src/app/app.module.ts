@@ -34,6 +34,7 @@ import { OnlyNumericDirective } from './directives/only-numeric.directive';
 import { MainComponent } from './main/main.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { CommonModule } from '@angular/common';
+import { NumberPipe } from './pipes/number.pipe';
 
 // const globalSettings: RecaptchaSettings = {
 //   siteKey: '6LeFTeoZAAAAAOm4L0qfozbCzOYa3kzs_3zeCgUY',
@@ -45,6 +46,7 @@ import { CommonModule } from '@angular/common';
     SelectLanguageComponent,
     ShowPasswordDirective,
     MainComponent,
+    NumberPipe,
   ],
   imports: [
     BrowserModule,

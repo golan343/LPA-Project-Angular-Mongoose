@@ -18,8 +18,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   auction$: Observable<AuctionModel[]>;
   public auction: AuctionModel;
   public BaseUrl = BaseUrl;
-  lat = -3.180653;
-  lng = -72.467834;
+  lat = 33.180653;
+  lng = 31.4600;
 
 
 
@@ -56,8 +56,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.auction$ = this.auctionService.getLastAuction();
     this.auction$.subscribe(auctionsResult => {
-
-      const Last = auctionsResult[0];
+      const aliveAuctions = auctionsResult.filter(auc=> auc.status);
+      const Last = aliveAuctions[0];
       Last.imageFileName = environment.devUrl + 'uploads/' + Last.imageFileName;
       this.auction = Last;
     });

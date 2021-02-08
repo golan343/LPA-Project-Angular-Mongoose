@@ -11,22 +11,23 @@
           <option>FaceBook</option>
         </datalist>
       </aside>
-      <aside class="relative"><i (click)="openNewAuction()" class="fa plus-icon"></i></aside>
-      <aside><i class="fa pen-icon"></i></aside>
-      <aside><i class="delete-icon"></i></aside>
-      <aside><i class="movie-icon fa"></i></aside>
-      <aside class="right-bar relative">
-        <i class="excel-icon" (click)="auctionsToCsv()"></i>
+      <aside class="relative"><i (click)="openNewAuction()" class="fa plus-icon pointer"></i></aside>
+      <aside><i class="fa pen-icon pointer"></i></aside>
+      <aside><i (click)="deleteSelected()" class="delete-icon pointer"></i></aside>
+      <aside><i class="movie-icon pointer fa"></i></aside>
+      <aside class=" relative">
+        <i class="excel-icon pointer" (click)="auctionsToCsv()"></i>
       </aside>
+      <aside class="relative right-bar"><i (click)="sendtoArcaiv()" class="arcive-icon pointer"></i></aside>
       <aside>
-        <app-switch-button
+        <app-switch-button class="pointer"
           [rightText]="'LIVE'"
           [leftText]="'CLOSE'"
           (observeToggleEvent)="filterAliveOrClose($event)"
         ></app-switch-button>
       </aside>
       <aside class="relative">
-        <span class="search-icon fa"></span>
+        <span class="search-icon fa pointer"></span>
         <input
           type="text"
           (keyup)="filterAuction($event)"
@@ -35,25 +36,28 @@
       </aside>
     </nav>
     <div class="white padding flex justify-center">
-      <div class="cube relative" *ngFor="let item of auctions">
-        <aside class="absolute top right" (click)="editItem(item)">
+      <div class="cube relative" *ngFor="let item of auctions" [ngClass]="{selected:item.selected}">
+        <aside class="absolute top right pointer" (click)="editItem(item)">
           <i class="pen-icon"></i>
         </aside>
-        <div class="show-auction">
+        <aside class="absolute bottom right">
+          <span class="fa" [class]="{ on: item.status, off: !item.status }"></span>
+        </aside>
+        <div class="show-auction pointer" (click)="selectItem(item)" >
           <h3>{{ item.name }}</h3>
-          <P><span>price:</span>{{ item.price }}</P>
-          <p>
+          <P *ngIf="item.price"><span>price:</span>{{ item.price | number }}</P>
+          <P *ngIf="item.bidPrice"><span>bid price:</span>{{ item.bidPrice | number }}</P>
+          <p title="{{item.description}}">
             <span>{{ item.description }}</span>
           </p>
-          <p class="fa" [class]="{ on: item.status, off: !item.status }"></p>
+         
         </div>
-
       
       </div>
     </div>
   </div>
 </div>
-<div class="edit-auction" *ngIf="showEditAuction">
+<div class="edit-auction" *ngIf="showEditAuction || addNewFlag">
   <aside class="absolute close" (click)="closeItem()">
     <i class="close-icon fa"></i>
   </aside>
@@ -80,7 +84,7 @@
     <div class="input-container">
       <label>auction start date</label>
       <input
-        type="datetime"
+        type="date"
         placeholder="auction start date"
         [(ngModel)]="editAuction.startDate"
       />
@@ -88,7 +92,7 @@
     <div class="input-container">
       <label>auction end date</label>
       <input
-        type="datetime"
+        type="date"
         placeholder="auction end date"
         [(ngModel)]="editAuction.endDate"
       />
@@ -104,7 +108,7 @@
       />
     </div>
     <div class="input-container">
-      <label>auction bid Price</label>
+      <label>auction Price</label>
       <input
         type="number"
         placeholder="auction bid price"
@@ -112,7 +116,6 @@
       />
     </div>
   </div>
-  
     <!-- 'name','startDate','endDate','price','description','minOffer','bidPrice','totalBids', 'bidCount' -->
     <div class="flex">
       <div class="input-container">
@@ -137,12 +140,23 @@
         <label>auction youtube Movie</label>
         <input
           type="text"
-          placeholder="auction start date"
+          placeholder="auction youtube Movie"
           [(ngModel)]="editAuction.youtubeId"
         />
       </div>
       <div class="input-container">
+        <app-switch-button
+        [rightText]="'LIVE'"
+        [leftText]="'CLOSE'"
+        (observeToggleEvent)="setStatus($event)"
+      [checked]="editAuction.status"
+      ></app-switch-button>
+      </div>
+    </div>
+    <div class="flex">
+      <div class="input-container">
         <label>auction image</label>
+        <span *ngIf="editAuction.imageFileName">{{editAuction.imageFileName}}</span>
         <input
           type="file"
           placeholder="auction image file"
@@ -151,17 +165,12 @@
       </div>
     </div>
     <div class="flex">
-      <div class="input-container">
-        <app-switch-button
-        [rightText]="'LIVE'"
-        [leftText]="'CLOSE'"
-        (observeToggleEvent)="setStatus($event)"
-      ></app-switch-button>
-      </div>
-    </div>
-    <div class="flex">
-    <button (click)="saveItem()">
+    <button (click)="saveItem()" *ngIf="!addNewFlag">
       Save
+      <i class="save-icon fa"></i>
+    </button>
+    <button (click)="saveNewAuction()" *ngIf="addNewFlag">
+      Add Auction
       <i class="save-icon fa"></i>
     </button>
   </div>

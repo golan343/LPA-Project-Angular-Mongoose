@@ -3,6 +3,8 @@ export class fileUtils{
         switch (type) {
             case "image/png":
               return "png";
+            case "image/jpg":
+              return "jpg";
             case "image/jpeg":
               return "jpeg";
             case "image/gif":

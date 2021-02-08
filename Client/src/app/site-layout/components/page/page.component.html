@@ -1,0 +1,8 @@
+<div class="container">
+    <h1>{{(page$ | async).title}}</h1>
+    <h2 *ngIf="(page$ | async).subTitle">{{(page$ | async).subTitle}}</h2>
+    <div class="paragraph">
+        <p *ngFor="let item of (page$ | async).content">{{item}}</p>
+    </div>
+</div>
+

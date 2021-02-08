@@ -1,7 +1,11 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { _ } from 'ag-grid-community';
+import { forkJoin } from 'rxjs';
 import { Auction } from 'src/app/models/auction-model';
 import { AdminService } from '../services/admin.service';
 import {fileUtils} from './../../models/fileUtils';
+import {auctionItem} from './../model/auctionItem';
 
 @Component({
   selector: 'app-auctions',
@@ -10,38 +14,47 @@ import {fileUtils} from './../../models/fileUtils';
 })
 export class AuctionsComponent implements OnInit {
 
-  auctions:Auction[];
-  AllAuctions:Auction[];
+  auctions:auctionItem[];
+  AllAuctions:auctionItem[];
+  selectedAuctions:auctionItem[];
   search = '';
   aliveOrClose = false;
-  editAuction:Auction;
+  editAuction:auctionItem;
   showEditAuction: boolean;
   formData:FormData;
   fileUtil:fileUtils;
+  addNewFlag:boolean;
   constructor(private admin: AdminService) { 
-    this.editAuction = new Auction();
+    this.editAuction = new auctionItem();
+    this.selectedAuctions = new Array<auctionItem>();
     this.showEditAuction = false;
     this.fileUtil = new fileUtils();
+    this.addNewFlag = false;
   }
 
   ngOnInit(): void {
-     this.admin.getAllAuction().subscribe(Auctions=>{
-       this.AllAuctions = Auctions;
-       this.auctions = Auctions.filter(item => { return item.status !== this.aliveOrClose });;
-     });
+    this.init();
    
   }
+  init(){
+    this.admin.getAllAuction().subscribe(Auctions=>{
+      this.AllAuctions = Auctions.map(a=> new auctionItem(a));
+      this.auctions = this.AllAuctions.filter(item => { return item.status !== this.aliveOrClose });;
+    });
+  }
+
   filterAliveOrClose($event) {
     this.aliveOrClose = $event;
     this.auctions = this.AllAuctions.filter(item=>item.status !== this.aliveOrClose);
   }
+
   filterAuction($event:any){
-    console.log($event.target.value);
-    const val = $event.target.value;
+    const val = $event.target.value.toLowerCase();
     this.auctions = this.AllAuctions.filter(item=>{
-      return (new RegExp(val,'g').test(item.name) || new RegExp(val,'g').test(item.description)) && item.status !== this.aliveOrClose;
+      return (new RegExp(val,'g').test(item.name.toLowerCase()) || new RegExp(val,'g').test(item.description.toLowerCase())) && item.status !== this.aliveOrClose;
     })
   }
+
   auctionsToCsv(){
     const keys = ['name','startDate','endDate','price','description','minOffer','bidPrice','totalBids', 'bidCount'];
     let csv = keys.join(',')+'\n';
@@ -56,16 +69,17 @@ export class AuctionsComponent implements OnInit {
     base64EncodeAuctions = 'data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,'+base64EncodeAuctions;
     window.open(base64EncodeAuctions);
   }
-  editItem(auction:Auction){
+
+  editItem(auction:auctionItem){
     this.editAuction = auction;
     this.showEditAuction = true;
   }
+
   saveItem(){
     this.admin.updateAuction(this.editAuction).subscribe(res=>{
     
       this.admin.uploadImage(this.formData).subscribe(fileRes=>{
-        this.admin.errorSubject.next(res.msg);
-        console.log(fileRes);
+        this.admin.errorSubject.next(fileRes.msg);
       },fileErr=>{
         this.admin.errorSubject.next(fileErr.msg);
       });
@@ -73,16 +87,27 @@ export class AuctionsComponent implements OnInit {
       this.admin.errorSubject.next(JSON.stringify(err));
     })
   }
-  closeItem(auction:Auction){
+  saveimg(){
+    this.admin.uploadImage(this.formData).subscribe(fileRes=>{
+      this.admin.errorSubject.next(fileRes.msg);
+    },fileErr=>{
+      this.admin.errorSubject.next(fileErr.msg);
+    });
+  }
+  closeItem(){
     this.showEditAuction  = false;
+    this.addNewFlag = false;
   }
+
   openNewAuction(){
-    this.editAuction = new Auction();
-    this.showEditAuction = true;
+    this.editAuction = new auctionItem();
+    this.addNewFlag = true;
   }
+
   setStatus($event){
-    this.editAuction.status = $event;
+    this.editAuction.status = !$event;
   }
+
   fileUploadEvent($event) {
     const files = $event.target.files as FileList;
     this.formData = new FormData();
@@ -96,6 +121,7 @@ export class AuctionsComponent implements OnInit {
         case 'image/png':
         case 'image/jpeg':
         case 'image/gif':
+          this.editAuction.previousImage = this.editAuction.imageFileName;
           this.editAuction.imageFileName = files[i].name+"."+this.fileUtil.getFileType(files[i].type);
           this.formData.append('file',files[i],this.editAuction.imageFileName);
           break;
@@ -103,5 +129,72 @@ export class AuctionsComponent implements OnInit {
           this.admin.errorSubject.next('only image format to upload');
       }
     }
+  }
+
+  selectItem(item:auctionItem){
+    item.selected = !item.selected;
+    if(item.selected){
+      this.selectedAuctions.push(item);
+    }else{
+      this.selectedAuctions = this.selectedAuctions.filter(select=>select._id!==item._id);
+    }
+    console.log(this.selectedAuctions);
+  }
+
+  deleteSelected(){
+    if(this.selectedAuctions.length>0){
+     const listOfRequests = this.selectedAuctions.map(item=>{ 
+        return this.admin.deleteAuction(item._id);
+      });
+      forkJoin(listOfRequests).subscribe(res=>{
+        console.log(res);
+        this.admin.errorSubject.next(JSON.stringify(res));
+        this.init();
+        this.closeItem();
+      },
+      err=>{
+        this.admin.errorSubject.next(JSON.stringify(err));
+      }
+      )
+    }else{
+      this.admin.errorSubject.next('No auction was selected');
+    }
+  }
+  saveNewAuction(){
+    if(this.editAuction.name && this.editAuction.endDate){
+      this.admin.addNewAuction(this.editAuction).subscribe(res=>{
+        console.log(res);
+        this.admin.errorSubject.next(JSON.stringify(res));
+        if(this.editAuction.imageFileName){
+          this.saveimg();
+        }
+        
+        this.init();
+        this.closeItem();
+      },
+      err=>{
+        this.admin.errorSubject.next(JSON.stringify(err));
+      }
+      )
+    }
+  }
+  sendtoArcaiv(){
+    if(this.selectedAuctions.length>0){
+      const listOfRequests = this.selectedAuctions.map(item=>{ 
+         return this.admin.AuctiontoArcaiv(item._id);
+       });
+       forkJoin(listOfRequests).subscribe(res=>{
+         console.log(res);
+         this.admin.errorSubject.next(JSON.stringify(res));
+         this.init();
+         this.closeItem();
+       },
+       err=>{
+         this.admin.errorSubject.next(JSON.stringify(err));
+       }
+       )
+     }else{
+       this.admin.errorSubject.next('No auction was selected');
+     }
   }
 }

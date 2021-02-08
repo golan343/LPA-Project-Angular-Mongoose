@@ -1,19 +1,34 @@
 <div class="container">
+  <nav class="flex mr-b">
+    <aside><app-flag-select></app-flag-select></aside>
 
-    <div class="row flex relative">
-        <aside class="btn" (click)="deleteUsers()">
-            <i class="del fa "></i>
-        </aside>
-        <aside class="btn mr-l" (click)="addNewUser()">
-            <i class="add fa "></i>
-        </aside>
-        <aside class="btn mr-l" (click)="editUser()">
-            <i class="edit-user fa "></i>
-        </aside>
-    </div>
-    <!--[rowSelection]="'multiple'" -->
-    <ag-grid-angular #agGrid class="ag-theme-alpine"  [defaultColDef]="defaultColDef"
-        [rowData]="rowData | async" [columnDefs]="columnDefs">
-    </ag-grid-angular>
+    <aside class="relative">
+      <i (click)="addNewUser()" class="fa plus-icon pointer"></i>
+    </aside>
+    <aside><i (click)="editUser()" class="fa pen-icon pointer"></i></aside>
+    <aside><i (click)="deleteUsers()" class="delete-icon pointer"></i></aside>
+    <aside class="relative">
+      <i class="excel-icon pointer" (click)="UsersToCsv()"></i>
+    </aside>
+    <aside class="relative right-bar">
+      <i  class="arcive-icon pointer"></i>
+    </aside>
+
+    <aside class="relative">
+      <span class="search-icon fa pointer"></span>
+      <input
+        type="text"
+        (keyup)="filterUser($event)"
+        placeholder="find User"
+      />
+    </aside>
+  </nav>
+  <ag-grid-angular
+    #agGrid
+    class="ag-theme-alpine"
+    [defaultColDef]="defaultColDef"
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+  >
+  </ag-grid-angular>
 </div>
-

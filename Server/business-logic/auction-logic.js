@@ -5,7 +5,7 @@ function getAllAuctionsAsync() {
     return Auction.find().populate('rule').populate('site').populate('createdBy').exec();
 }
 function getAllAuction(callback) {
-  return Auction.find().exec(callback);
+  return Auction.find({isActive:true}).exec(callback);
 }
 // get all closed auctions
 function getAllClosedAuctionsAsync() {
@@ -48,7 +48,13 @@ async function deleteAuctionAsync(_id) {
     return Auction.deleteOne({ _id }).exec();
 }
 
-
+function setAuctionToArcaiv(id,callback){
+    if(typeof callback == 'function'){
+        const result =  Auction.findByIdAndUpdate({_id:id},{isActive:false},callback);
+        return result;
+    }
+    
+}
 module.exports = {
   getAllAuctionsAsync,
   getOneAuctionAsync,
@@ -59,4 +65,5 @@ module.exports = {
   getAllOpenedAuctionsAsync,
   getLastAuctionAsync,
   getAllAuction,
+  setAuctionToArcaiv
 };

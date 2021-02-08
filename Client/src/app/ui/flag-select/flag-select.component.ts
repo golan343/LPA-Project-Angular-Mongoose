@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-flag-select',
@@ -6,16 +6,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./flag-select.component.css']
 })
 export class FlagSelectComponent implements OnInit {
-  flag:any;
+  choosenCountry:any;
   list:Array<any>
-  show:false;
-  constructor() { }
+  show:boolean;
+  @Output()
+  selectedEvent = new EventEmitter<any>();
+  constructor() {
+    this.show = false;
+   }
 
   ngOnInit(): void {
     this.list = [
       {
-        usa:true,
-        name:'usa'
+        mexico:true,
+        name:'mexico'
       },
       {
         ecuador:true,
@@ -26,8 +30,15 @@ export class FlagSelectComponent implements OnInit {
         name:'brazil'
       }
     ];
-    this.flag = this.list[0];
+    this.choosenCountry = this.list[0];
 
+  }
+  toogleList(){
+    this.show = !this.show;
+  }
+  selectCountry(item){
+    this.choosenCountry = item;
+    this.show = false;
   }
 
 }

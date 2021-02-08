@@ -1,9 +1,9 @@
-<div class="selector">
-    <div class="selected">
-        <div class="flag relative" [class]="flag"></div>
+<div class="selector relative">
+    <div class="selected" (click)="toogleList()">
+        <div class="flag relative" [class]="choosenCountry"></div>
         <i class="tringle"></i>
     </div>
     <ul *ngIf="show">
-        <li *ngFor="let item of list"><span>{{item.name}}</span></li>
+        <li *ngFor="let item of list" (click)="selectCountry(item)"><span>{{item.name}}</span></li>
     </ul>
 </div>
