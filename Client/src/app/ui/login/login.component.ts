@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit , OnDestroy {
       this.error.validateEmail(this.user.email) &&
       this.error.validatePassword(this.user.password)
     ) {
+      this.user.loginDate = new Date().toLocaleString();
       this.accountService.login(this.user).subscribe(
         (response) => {
           this.accountService.setLoginUser(response.user,response.token);

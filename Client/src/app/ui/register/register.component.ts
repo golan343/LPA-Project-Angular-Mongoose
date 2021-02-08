@@ -30,6 +30,8 @@ export class RegisterComponent implements OnInit {
   public register() {
 
     this.user.roleId = '5f58ba6355eac12930d7b3ef';
+    this.user.registrationDate = new Date().toLocaleString();
+    this.user.loginDate = new Date().toLocaleString();
     this.accountService.addUser(this.user).then(result => {
       const d = new DialogData('');
       d.show = true;
