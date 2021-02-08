@@ -66,7 +66,8 @@
               <div class="mr-b wrap-email relative">
                 <label for="birthDate">birth Date *</label>
                 <input type="date" [(ngModel)]="user.birthDate" dateTemplate
-                  (focus)="error.clear('birthDate')" name="birthDate" id="birthDate">
+                  (focus)="error.clear('birthDate')" name="birthDate" id="birthDate"
+                  max="{{minAge | date:'yyyy-MM-dd'}}"/>
                 <span *ngIf="error.birthDate" class="error">{{error.birthDate}}</span>
               </div>
         
