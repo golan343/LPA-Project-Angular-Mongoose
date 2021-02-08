@@ -18,20 +18,17 @@ class pagesUtil{
         }
         return await pageInstance.save();
     }
-    async setPageContent(urlName, title, content, subTitle, metaTypes){
+    async setPageContent(urlName, title, content ){
         let pageContent = {
-            urlName,
             title,
-            subTitle,
-            content,
-            metaTypes
+            content
         };
         const pageInstance = new Page(pageContent);
         return await pageInstance.save();
     }
 
-     updatePageContent(urlName, title, content, subTitle, metaTypes){
-      return Page.findOneAndUpdate({urlName: new RegExp("^" + urlName + "$", "i")},{title,content,subTitle,metaTypes});
+     updatePageContent(urlName, title, content, callback){
+      return Page.findOneAndUpdate({urlName: new RegExp("^" + urlName + "$", "i")},{title,content}).exec(callback);
     }
 }
 
