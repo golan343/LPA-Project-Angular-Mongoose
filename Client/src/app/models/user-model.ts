@@ -17,6 +17,8 @@ export class UserModel {
   token?: string;
   phone?: string;
   img?: string;
+  loginDate?: string;
+  registrationDate?: string;
   public toUserItem(): userItem {
     return {
       _id: this._id,

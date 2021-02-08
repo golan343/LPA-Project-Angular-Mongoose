@@ -1,4 +1,4 @@
-// const Auth = require('../models/auth');
+
 const hash = require('../helpers/hash');
 const User = require('../models/user');
 
@@ -16,11 +16,10 @@ function loginAsync(credentials) {
     return User.findOne({ email: credentials.email, password: credentials.password }).exec();
 }
 async function updateAsync(user) {
-    user.password = hash(user.password);
+    user.password? user.password = hash(user.password) : '';
     const info = await User.updateOne({_id: user._id }, user).exec();
     return info.n ? user : null;
 }
-
 async function deleteUser(id) {
   const result = await User.find({ _id: id }).deleteOne().exec();
   return result;
@@ -95,6 +94,23 @@ function SetUserToken(email, callback) {
   ).exec(callback);
   return update.token;
 }
+
+function searchUsersByFirstName(text) {
+  return User.find({firstName: { $regex: text, $options: 'i'}}).exec();
+}
+
+function searchUserByEmail(email) {
+  return User.findOne({email}).exec();
+}
+
+function searchUserByPhoneNumber(string) {
+  return User.findOne({phone: string}).exec();
+}
+
+function sortUsers() {
+  return User.find({}).sort({firstName: -1}).exec();
+}
+
 module.exports = {
   registerAsync,
   loginAsync,
@@ -106,5 +122,9 @@ module.exports = {
   resetPass,
   saveUserImage,
   getUserImage,
-  SetUserToken
+  SetUserToken,
+  searchUsersByFirstName,
+  searchUserByEmail,
+  searchUserByPhoneNumber,
+  sortUsers
 };

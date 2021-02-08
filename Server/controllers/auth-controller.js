@@ -91,11 +91,17 @@ router.get("/usersList", function (req, res) {
 
 router.post("/login", async (request, response) => {
   try {
+
     const user = await authLogic.loginAsync(request.body);
     if (!user) {
       response.status(401).send("Incorrect email or password");
       return;
     }
+    const loginUpdate = { 
+      _id: user._id,
+      loginDate: request.body.loginDate
+    }
+    await authLogic.updateAsync(loginUpdate);
 
     const token = jwt.sign({ user }, config.jwt.secretKey, {
       expiresIn: "30m",
@@ -162,5 +168,15 @@ router.delete("/deleteUser/:id", async (request, response) => {
   const result = await authLogic.deleteUser(id);
   response.send(result);
 });
+
+router.get('/sortByDate', async (request, response) => {
+  try{
+   const info =  await authLogic.sortUsers();
+   response.status(200).json(info);
+  }
+  catch(err){
+    response.status(500).send({error: err.message});
+  }
+})
 
 module.exports = router;

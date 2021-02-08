@@ -57,6 +57,12 @@ const UserSchema = mongoose.Schema({
     },
     img:{
         type:String
+    },
+    loginDate: {
+        type: Date
+    },
+    registrationDate: {
+        type: Date
     }
 }, { 
     versionKey: false,
