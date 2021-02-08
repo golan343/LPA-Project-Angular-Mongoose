@@ -169,14 +169,26 @@ router.delete("/deleteUser/:id", async (request, response) => {
   response.send(result);
 });
 
-router.get('/sortByDate', async (request, response) => {
+router.get('/sortAscending/:query', async (request, response) => {
   try{
-   const info =  await authLogic.sortUsers();
+    const query = request.params.query;
+   const info =  await authLogic.sortUsersAscending(query);
    response.status(200).json(info);
   }
   catch(err){
     response.status(500).send({error: err.message});
   }
-})
+});
+
+router.get('/sortDescending/:query', async (request, response) => {
+  try{
+    const query = request.params.query;
+   const info =  await authLogic.sortUsersDescending(query);
+   response.status(200).json(info);
+  }
+  catch(err){
+    response.status(500).send({error: err.message});
+  }
+});
 
 module.exports = router;

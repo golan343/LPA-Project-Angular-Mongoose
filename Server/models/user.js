@@ -19,6 +19,7 @@ const UserSchema = mongoose.Schema({
 
     firstName: {
         type: String,
+        index: true,
         required: [true, "is missing"],
         minlength: [3, "must be minimum 3 charts"]
     },
@@ -30,6 +31,7 @@ const UserSchema = mongoose.Schema({
 
     city: {
         type: String,
+        index: true,
         required: [true, "city is missing"]
     } ,
     street: {
@@ -38,6 +40,7 @@ const UserSchema = mongoose.Schema({
     },
     country: {
         type: String,
+        index: true,
         required: [true, "country is missing"]
     },
     phone: {
@@ -46,6 +49,7 @@ const UserSchema = mongoose.Schema({
     },
     birthDate: {
         type: Date,
+        index: true,
         required: [true, 'birth day is missing']
     },
     roleId:{
@@ -59,9 +63,11 @@ const UserSchema = mongoose.Schema({
         type:String
     },
     loginDate: {
+        index: true,
         type: Date
     },
     registrationDate: {
+        index: true,
         type: Date
     }
 }, { 

@@ -107,8 +107,11 @@ function searchUserByPhoneNumber(string) {
   return User.findOne({phone: string}).exec();
 }
 
-function sortUsers() {
-  return User.find({}).sort({firstName: -1}).exec();
+function sortUsersAscending(query) {
+  return User.find({}).sort( `${query}` ).exec();
+}
+function sortUsersDescending(query) {
+  return User.find({}).sort( `-${query}` ).exec();
 }
 
 module.exports = {
@@ -126,5 +129,6 @@ module.exports = {
   searchUsersByFirstName,
   searchUserByEmail,
   searchUserByPhoneNumber,
-  sortUsers
+  sortUsersAscending,
+  sortUsersDescending
 };
