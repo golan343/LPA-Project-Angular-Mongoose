@@ -1,0 +1,113 @@
+nav {
+    background-color: #fff;
+    width: 70%;
+    margin: 2% auto;
+    padding: 4px 5px;
+    margin-bottom: 2%;
+    border-radius: 5px;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  
+  nav aside {
+    display: block;
+    margin: 0 1%;
+    height: 30px;
+  }
+  nav aside i {
+    font-size: 1.4rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+    height: 30px;
+    color: rgb(34, 31, 31);
+  }
+  nav input {
+    background-color: #eaf8ff;
+    border: 0.2px solid rgb(191 220 235);
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 2px 16px 2px 0;
+    margin: 1% 0;
+    width:auto;
+  }
+  input::-webkit-calendar-picker-indicator {
+    display: none;
+  }
+  .datalist {
+    position: relative;
+  }
+  .datalist::after,
+  .tringle::after {
+    content: "\f0dd";
+    font-family: "Font Awesome 5 Pro";
+    position: absolute;
+    right: 5px;
+    top: 11%;
+    color: #4d8ab2;
+  }
+  .left-bar::after,
+  .right-bar::before {
+    content: "";
+    height: 100%;
+    top: 0%;
+    width: 1px;
+    border-radius: 14px;
+    background-color: #ccc;
+    display: block;
+    position: absolute;
+  }
+  .left-bar::after {
+    left: -4%;
+  }
+  .right-bar::before {
+    right: -4%;
+  }
+.white {
+  background: #fff;
+  box-shadow: -0.5px 1px 1px 0 #ccc;
+}
+
+.pages {
+  flex-grow: 2;
+  height: 100%;
+  border-right: 1px solid #bbe4ff;
+ width:10%;
+}
+.pages aside {
+    padding: 10%;
+  border-bottom: 1px solid #bbe4ff;
+  cursor: pointer;
+}
+.view {
+  flex-grow: 6;
+  padding: 0% 0%;
+  width: 70%;
+  background: #fff;
+  border-top: 1px solid #bbe4ff;
+  margin-top: 3%;
+}
+.view h3{
+    border: 1px solid #bbe4ff;
+    display: block;
+    width: 60%;
+    text-align: center;
+    padding: 8px 0;
+    border-radius: 7px;
+    margin: 1% auto;
+}
+.view .content{    border: 1px solid #bbe4ff;
+    display: block;
+    width: 60%;
+    padding: 8px;
+    border-radius: 7px;
+    margin: 1% auto;
+}
+.view .content p{margin-bottom: 2%;}
+.container .row .flex {
+  height: 60vh;
+  justify-content: flex-start;
+  align-items: flex-start;
+}

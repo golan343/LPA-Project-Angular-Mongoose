@@ -9,6 +9,9 @@ import { pageModel } from '../models/page';
 export class PageService {
 
   constructor(private http: HttpClient) { }
+  getAllPages():Observable<pageModel[]>{
+    return this.http.get<pageModel[]>(environment.BaseUrl+'api/page/')
+  }
   getPage(pageName:string):Observable<pageModel>{
     return this.http.get<pageModel>(environment.BaseUrl+'api/page/'+pageName);
   }

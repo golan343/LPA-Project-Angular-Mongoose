@@ -1,1 +1,25 @@
-<p>cms works!</p>
+<div class="container">
+    <nav class="flex mr-b">
+        <aside><app-flag-select></app-flag-select></aside>
+    
+        <aside><i (click)="editPost()" title="save edit content" class="fa pen-icon pointer"></i></aside>
+    
+      </nav>
+    <div class="row white ">
+        <div class="flex">
+            <div class="pages" *ngIf="pages$ | async as pages">
+                <aside></aside>
+                <aside *ngFor="let page of pages" (click)="showPage(page)"><span>{{page?.title}}</span></aside>
+            </div>
+            <div class="view " >
+                <h3 class="relative"><span (blur)="setTitle($event)" contenteditable="true">{{current?.title}}</span> <span class="absolute top right edit-icon"></span></h3>
+                <div class="content relative">
+                    <span (click)="addParagraph()" class="absolute top right edit-icon pointer"></span>
+                    <p contenteditable="true"  (focus)="focusPara($event)" (blur)="setPara($event,i)"  *ngFor="let content of current?.content,let i = index">{{content}}</p>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+ 
+</div>
