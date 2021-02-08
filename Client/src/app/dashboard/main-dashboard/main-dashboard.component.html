@@ -13,7 +13,7 @@
     <aside class="mr-r">
       <i class="user-icon" (click)="setModel(1)"></i>
     </aside>
-    <aside class="mr-r">
+    <aside class="mr-r" (click)="setModel(7)">
       <i class="message-icon"></i>
     </aside>
     <aside class="mr-r">
@@ -28,7 +28,7 @@
     <aside class="mr-r" (click)="setModel(3)">
       <i class="form-icon"></i>
     </aside>
-    <aside class="mr-r">
+    <aside class="mr-r" (click)="setModel(6)">
       <i class="config-icon"></i>
     </aside>
     <aside class="mr-l" (click)="logout()">
@@ -52,6 +52,12 @@
     </div>
     <div *ngSwitchCase="5" >
       <app-auctions></app-auctions>
+    </div>
+    <div *ngSwitchCase="6">
+      <app-cms></app-cms>
+    </div>
+    <div *ngSwitchCase="7">
+     <app-notifications></app-notifications>
     </div>
     <div *ngSwitchDefault>no Access</div>
   </div>

@@ -5,6 +5,7 @@ import { Action } from 'rxjs/internal/scheduler/Action';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Auction, AuctionModel } from 'src/app/models/auction-model';
 import { BidModel } from 'src/app/models/bid-model';
+import { pageModel } from 'src/app/models/page';
 import { UserModel } from 'src/app/models/user-model';
 import { environment } from 'src/environments/environment';
 import { auctionItem } from '../model/auctionItem';
@@ -113,5 +114,8 @@ export class AdminService {
   }
   AuctiontoArcaiv(id:string):Observable<{n:number,ok:string}>{
     return this.http.put<{n:number,ok:string}>(environment.BaseUrl+'api/auctions/setarcive/'+id,{id});
+  }
+  pageUpdate(p:pageModel):Observable<any>{
+    return this.http.put<any>(environment.BaseUrl+'api/page',{urlName:p.urlName,title:p.title,content:p.content});
   }
 }
