@@ -168,6 +168,6 @@ button {
   white-space: nowrap;
   overflow: hidden;
 }
-input{
+input,textarea{
   width: 80%;
 }

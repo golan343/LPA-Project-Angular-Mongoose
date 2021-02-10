@@ -15,7 +15,7 @@
                 <h3 class="relative"><span (blur)="setTitle($event)" contenteditable="true">{{current?.title}}</span> <span class="absolute top right edit-icon"></span></h3>
                 <div class="content relative">
                     <span (click)="addParagraph()" class="absolute top right edit-icon pointer"></span>
-                    <p contenteditable="true"  (focus)="focusPara($event)" (blur)="setPara($event,i)"  *ngFor="let content of current?.content,let i = index">{{content}}</p>
+                    <p contenteditable="true"   (blur)="setPara($event,i)"  *ngFor="let content of current?.content,let i = index">{{content}}</p>
                 </div>
                 
             </div>

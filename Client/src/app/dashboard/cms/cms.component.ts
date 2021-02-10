@@ -26,14 +26,17 @@ export class CMSComponent implements OnInit {
     this.current = page;
   }
   setPara($event:any,index){
-   this.current.content[index] = $event.target.innerHTML.replace(/<[^>]*>/g, '');
+    const el = document.createElement('div');
+    el.innerHTML = $event.target.innerHTML.replace(/<[^>]*>/g, '');
+   this.current.content[index] = el.innerText;
   }
   setTitle($event){
     this.current.title = $event.target.innerText;
   }
   editPost(){
+    this.current.content = this.current.content.filter(item=>item);
     this.admin.pageUpdate(this.current).subscribe(result=>{
-      this.admin.errorSubject.next(JSON.stringify(result));
+      this.admin.errorSubject.next('The content has been saved successfully');
       this.pages$.subscribe(result=>{
         this.current = result[0];
       })

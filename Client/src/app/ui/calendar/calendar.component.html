@@ -1,0 +1,25 @@
+<div class="calendar" *ngIf="show">
+  <div class="center ">
+    <h4>from - to</h4> 
+    <span class="delete-icon fa right top absolute" (click)="clear()" ></span> 
+  </div>  
+  <div class="calendar-kit">
+    <div class="tube">
+        <span (click)="prevMonth()" class="prev fa"></span>
+      <p>{{ monthName }}</p>
+      <span (click)="nextMonth()" class="next fa"></span>
+    </div>
+
+    <div class="tube">
+    <span (click)="prevYear()" class="prev fa"></span>
+      <p>{{ year }}</p>
+      <span (click)="nextYear()" class="next fa"></span>
+    </div>
+  </div>
+  <div class="wrap-calendar">
+    <div class="letter" *ngFor="let dayName of DaysInAweek">{{ dayName }}</div>
+    <div class="day"  (click)="selectDay(d)" *ngFor="let d of daysOftheMonth" [ngClass]="d">
+      <span class="ld"  >{{ d.day }}</span>
+    </div>
+  </div>
+</div>

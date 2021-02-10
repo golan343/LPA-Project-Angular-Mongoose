@@ -73,7 +73,22 @@ router.post("/reset", async (req, res, next) => {
     res.status(500).send(params);
   }
 });
+router.get('/users/:page',function(req,res){
+    const perPage = parseInt(req.params.page) || 1;
+    authLogic.getUsers(function (err, users) {
+      if (err) {
+        res.status(501).json(err);
+      }
+      const usersMap = {};
+      if (users) {
+        users.forEach((element) => {
+          usersMap[element._id] = element;
+        });
+        res.send(usersMap);
+      }
+    },perPage)
 
+})
 router.get("/usersList", function (req, res) {
   authLogic.getAllUsers(function (err, users) {
     if (err) {

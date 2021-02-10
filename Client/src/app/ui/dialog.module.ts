@@ -13,6 +13,7 @@ import { ForgotPassComponent } from './forgot-pass/forgot-pass.component';
 import { CheckBoxComponent } from './check-box/check-box.component';
 import { FlagSelectComponent } from './flag-select/flag-select.component';
 import { SwitchButtonComponent } from './switch-button/switch-button.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -26,9 +27,10 @@ import { SwitchButtonComponent } from './switch-button/switch-button.component';
     CheckBoxComponent,
     FlagSelectComponent,
     SwitchButtonComponent,
+    CalendarComponent,
   ],
   imports: [CommonModule, FormsModule, UtilsModule],
-  exports: [DialogComponent, CheckBoxComponent,FlagSelectComponent,SwitchButtonComponent],
+  exports: [DialogComponent, CheckBoxComponent,FlagSelectComponent,SwitchButtonComponent,CalendarComponent],
   providers: [DialogService],
 })
 export class DialogModule {}

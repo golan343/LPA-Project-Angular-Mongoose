@@ -10,7 +10,11 @@ function registerAsync(user) {
 function getAllUsers(callback) {
     User.find({}, callback);
 };
-
+function getUsers(callback,perPage){
+  const pagesSkip = perPage * 50;
+  
+  User.find({},callback).skip(pagesSkip).limit(50);
+}
 function loginAsync(credentials) {
     credentials.password = hash(credentials.password);
     return User.findOne({ email: credentials.email, password: credentials.password }).exec();
@@ -119,6 +123,7 @@ module.exports = {
   loginAsync,
   updateAsync,
   getAllUsers,
+  getUsers,
   deleteUser,
   adminUpdateUser,
   findUserById,

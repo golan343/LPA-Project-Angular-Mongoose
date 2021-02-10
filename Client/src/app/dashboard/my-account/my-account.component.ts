@@ -104,12 +104,10 @@ export class MyAccountComponent implements OnInit {
   }
   saveUserImage() {
     if (this.imgBase64) {
-      const context = this.imgCanvas.nativeElement.getContext('2d');
+      // const context = this.imgCanvas.nativeElement.getContext('2d');
       const shrinkedImgBase64 = this.imgCanvas.nativeElement.toDataURL(
         'image/png'
       );
-      console.log('shrinked' + shrinkedImgBase64.length);
-
       if (shrinkedImgBase64) {
         this.admin.saveUserImage(this.user._id, shrinkedImgBase64).subscribe(
           (result) => {
@@ -118,6 +116,7 @@ export class MyAccountComponent implements OnInit {
           },
           (err) => {
             console.log(err);
+            this.admin.errorSubject.next(err.msg);
           }
         );
       }

@@ -360,6 +360,7 @@ button {
   background-repeat: no-repeat;
 }
 .right{right:1%;}
+.top{top:1%;}
 .plus-icon::after{
     content: '\f067';
     font-family: "Font Awesome 5 Pro";
