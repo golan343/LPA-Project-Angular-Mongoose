@@ -21,17 +21,20 @@ export class RegisterComponent implements OnInit {
   steps = 3;
   backBtn = 'Back';
   nextBtn = 'Next Step';
+  public today = new Date();
+  public minAge = new Date(this.today.getFullYear() - 18, this.today.getMonth(), this.today.getDate());
   constructor(
     private accountService: AccountService,
     private dialog: DialogService
   ) { }
   ngOnInit(): void {
+    
   }
   public register() {
 
     this.user.roleId = '5f58ba6355eac12930d7b3ef';
-    this.user.registrationDate = new Date().toLocaleString();
-    this.user.loginDate = new Date().toLocaleString();
+    this.user.registrationDate = this.today.toLocaleString();
+    this.user.loginDate = this.today.toLocaleString();
     this.accountService.addUser(this.user).then(result => {
       const d = new DialogData('');
       d.show = true;
