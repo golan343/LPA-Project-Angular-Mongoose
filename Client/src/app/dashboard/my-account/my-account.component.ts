@@ -89,7 +89,6 @@ export class MyAccountComponent implements OnInit {
     this.fileUpload.nativeElement.click();
   }
   setUploadFile(data) {
-    console.log(data.currentTarget.result);
     this.imgBase64 = data.currentTarget.result;
     const context = this.imgCanvas.nativeElement.getContext('2d');
     context.clearRect(0, 0, this.imgCanvas.nativeElement.width, this.imgCanvas.nativeElement.height);

@@ -14,10 +14,10 @@ import { UserModel } from 'src/app/models/user-model';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css'],
 })
-export class AdminComponent implements OnInit, AfterViewInit , OnDestroy {
-  lastloged:string;
-  gridOptions:GridOptions;
-  user:UserModel;
+export class AdminComponent implements OnInit, AfterViewInit, OnDestroy {
+  lastloged: string;
+  gridOptions: GridOptions;
+  user: UserModel;
   show = false;
   showCalendar = false;
   defaultColDef = {
@@ -42,16 +42,16 @@ export class AdminComponent implements OnInit, AfterViewInit , OnDestroy {
     { field: 'loginDate', sortable: true, filter: true, editable: true }
   ];
   userSubscriber = new Subscription();
-  rowData:userItem[];
-  users:userItem[];
+  rowData: userItem[];
+  users: userItem[];
   @ViewChild('agGrid') agGrid: AgGridAngular;
   constructor(private admins: AdminService, private dialogLocalsService: DialogService) { }
   ngOnDestroy(): void {
     this.userSubscriber.unsubscribe();
   }
   ngAfterViewInit(): void {
-    if(this.agGrid)
-    this.agGrid.api.addEventListener('rowClicked', this.cellClickedHandler.bind(this));
+    if (this.agGrid)
+      this.agGrid.api.addEventListener('rowClicked', this.cellClickedHandler.bind(this));
     this.agGrid.api.onFilterChanged()
     this.gridOptions = <GridOptions>{
       defaultColDef: {
@@ -81,39 +81,42 @@ export class AdminComponent implements OnInit, AfterViewInit , OnDestroy {
     this.init();
   }
   init() {
-    this.userSubscriber = this.admins.getAllUsers().pipe(tap(users=>{
+    this.userSubscriber = this.admins.getAllUsers().pipe(tap(users => {
       this.users = users;
       this.rowData = users;
-    })).subscribe(users=>{
+    })).subscribe(users => {
       this.admins.errorSubject.next('');
-     },err=>{
-      this.admins.errorSubject.next('error'+JSON.stringify(err));
-     });
+    }, err => {
+      this.admins.errorSubject.next('error' + JSON.stringify(err));
+    });
   }
-  setInput($event){
-    if($event){
+  setInput($event) {
+    if ($event) {
       const start = $event.start as Date;
-      const end =  $event.end as Date;
-      this.lastloged = start.toLocaleDateString() +'-'+ end.toLocaleDateString();
-      this.rowData = this.users.filter(user=>{
+      const end = $event.end as Date;
+      this.lastloged = start.toLocaleDateString() + '-' + end.toLocaleDateString();
+      this.rowData = this.users.filter(user => {
         let d = new Date(user.loginDate).getTime();
-        return d && d > start.getTime() && d < end.getTime(); 
-      })
-      setTimeout(()=>{
-        this.showCalendar = false;
-      },2000);
-    }else{
+        return d && d > start.getTime() && d < end.getTime();
+      });
+    } else {
       this.lastloged = '';
       this.rowData = [...this.users];
     }
-  
+    setTimeout(() => {
+      this.showCalendar = false;
+    }, 2000);
+
   }
-  showCalendarEvent(){
+
+  showCalendarEvent() {
     this.showCalendar = true;
   }
+
   cellClickedHandler($event) {
     this.admins.errorSubject.next('');
   }
+
   deleteUsers() {
     const selectedNodes: RowNode[] = this.agGrid.api.getSelectedNodes();
     if (selectedNodes.length > 0) {
@@ -127,9 +130,10 @@ export class AdminComponent implements OnInit, AfterViewInit , OnDestroy {
       });
 
     } else {
-      this.admins.errorSubject.next('');
+      this.admins.errorSubject.next('no user were selected');
     }
   }
+
   addNewUser() {
     const dialog = new DialogData("Register");
     dialog.wide = true;
@@ -139,9 +143,11 @@ export class AdminComponent implements OnInit, AfterViewInit , OnDestroy {
     }
     this.dialogLocalsService.subjectType.next(dialog);
   }
-  close(){
+
+  close() {
     this.show = false;
   }
+
   editUser() {
     const selectedNodes: RowNode[] = this.agGrid.api.getSelectedNodes();
 
@@ -153,49 +159,53 @@ export class AdminComponent implements OnInit, AfterViewInit , OnDestroy {
       this.admins.errorSubject.next('no user were selected');
     }
   }
-  filterUser($event:any){
+
+  filterUser($event: any) {
     const val = $event.target.value;
-    if(val){
+    if (val) {
       console.log(val);
-      this.rowData = this.users.filter(user=>{
-        return new RegExp(val.toLowerCase(),'g').test(user.firstName.toLowerCase()) || new RegExp(val.toLowerCase(),'g').test(user.lastName.toLowerCase());
+      this.rowData = this.users.filter(user => {
+        return new RegExp(val.toLowerCase(), 'g').test(user.firstName.toLowerCase()) || new RegExp(val.toLowerCase(), 'g').test(user.lastName.toLowerCase());
       });
-    }else{
+    } else {
       this.rowData = [...this.users];
     }
-    
+
   }
-  UsersToCsv(){
-   
-    const keys = ['firstName','lastName','country','city','phone','street','email'];
-    let csv = keys.join(',')+'\n';
-    this.rowData.forEach(item=>{
- 
-        keys.forEach(keyItem=>{
-          csv += item[keyItem]+',';
-        });
-        csv = csv.substr(0,csv.length-1)+'\n';
-      
+
+  UsersToCsv() {
+
+    const keys = ['firstName', 'lastName', 'country', 'city', 'phone', 'street', 'email'];
+    let csv = keys.join(',') + '\n';
+    this.rowData.forEach(item => {
+
+      keys.forEach(keyItem => {
+        csv += item[keyItem] + ',';
       });
-        console.log(csv);
-        let base64EncodeAuctions = btoa(csv);
-        console.log(base64EncodeAuctions);
-        base64EncodeAuctions = 'data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,'+base64EncodeAuctions;
-        window.open(base64EncodeAuctions);
-     
-      
+      csv = csv.substr(0, csv.length - 1) + '\n';
+
+    });
+    console.log(csv);
+    let base64EncodeAuctions = btoa(csv);
+    console.log(base64EncodeAuctions);
+    base64EncodeAuctions = 'data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,' + base64EncodeAuctions;
+    window.open(base64EncodeAuctions);
+
+
   }
-  saveChanges(){
-    const userMaped:userItem = this.user as userItem;
-    this.admins.editUser(userMaped).subscribe(result=>{
+
+  saveChanges() {
+    const userMaped: userItem = this.user as userItem;
+    this.admins.editUser(userMaped).subscribe(result => {
       this.admins.errorSubject.next('The user has been updated successfuly!');
       this.close();
       this.init();
     },
-    err=>{
-      console.log(err);
-      this.admins.errorSubject.next('The user was not change!'+JSON.stringify(err));
-    }
+      err => {
+        console.log(err);
+        this.admins.errorSubject.next('The user was not change!' + JSON.stringify(err));
+      }
     )
   }
+
 }

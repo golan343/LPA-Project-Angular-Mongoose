@@ -2,7 +2,7 @@ const Auction = require('../models/auction');
 
 // get all auctions
 function getAllAuctionsAsync() {
-    return Auction.find({isActive:false}).populate('rule').populate('site').populate('createdBy').exec();
+    return Auction.find({isActive:true}).populate('rule').populate('site').populate('createdBy').exec();
 }
 function getAllAuction(callback) {
   return Auction.find({isActive:true}).exec(callback);
