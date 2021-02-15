@@ -51,7 +51,7 @@ router.post("/sendReset", async (req, res, next) => {
       email.send(
         '"LPA Group" <LPA@LPA.com>',
         req.body.email,
-        "Lap Email Confirmaition",
+        "Lap Email Confirmation",
         text,
         (err, result) => {
           if (err) {

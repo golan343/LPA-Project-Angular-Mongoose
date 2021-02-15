@@ -2,6 +2,7 @@ import { TokenInterceptor } from './token.interceptor';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 // import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import {
 //   BrowserAnimationsModule,
@@ -35,6 +36,7 @@ import { MainComponent } from './main/main.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { CommonModule } from '@angular/common';
 import { NumberPipe } from './pipes/number.pipe';
+import { ResetComponent } from './site-layout/components/reset/reset.component';
 
 // const globalSettings: RecaptchaSettings = {
 //   siteKey: '6LeFTeoZAAAAAOm4L0qfozbCzOYa3kzs_3zeCgUY',
@@ -47,6 +49,7 @@ import { NumberPipe } from './pipes/number.pipe';
     ShowPasswordDirective,
     MainComponent,
     NumberPipe,
+    ResetComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +57,7 @@ import { NumberPipe } from './pipes/number.pipe';
     HttpClientModule,
     DashboardModule,
     SiteLayoutModule,
+    FormsModule
   ],
   providers: [
     CookieService,

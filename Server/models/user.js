@@ -56,9 +56,10 @@ const UserSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Role"
     },
-    token: {
-        type:String
-    },
+
+    token: { type:String },
+    expiredToken: { type: Number},
+    
     img:{
         type:String
     },

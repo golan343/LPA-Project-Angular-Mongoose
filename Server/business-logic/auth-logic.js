@@ -20,6 +20,12 @@ async function updateAsync(user) {
     const info = await User.updateOne({_id: user._id }, user).exec();
     return info.n ? user : null;
 }
+async function updateNewPassAsync(user) {
+  user.password = hash(user.password);
+  const update = {password: user.password, token: '', expiredToken: null}
+  const info = await User.findOneAndUpdate({token: user.token, expiredToken: {$gt: Date.now()} }, update).exec();
+  return info ? user : null;
+}
 async function deleteUser(id) {
   const result = await User.find({ _id: id }).deleteOne().exec();
   return result;
@@ -130,5 +136,6 @@ module.exports = {
   searchUserByEmail,
   searchUserByPhoneNumber,
   sortUsersAscending,
-  sortUsersDescending
+  sortUsersDescending,
+  updateNewPassAsync
 };

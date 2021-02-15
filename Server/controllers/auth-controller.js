@@ -1,9 +1,13 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const authLogic = require("../business-logic/auth-logic");
+const EmailLogic = require("../business-logic/email-logic");
 const errorHandler = require("../helpers/error-handler");
 const hash = require("../helpers/hash");
 const User = require("../models/user");
+const crypto = require('crypto');
+const nodemailer = require("nodemailer");
+
 
 const router = express.Router();
 router.get('/userImage/:id',(req,res,next)=>{
@@ -188,6 +192,70 @@ router.get('/sortDescending/:query', async (request, response) => {
   }
   catch(err){
     response.status(500).send({error: err.message});
+  }
+});
+
+
+router.post('/reset-password', async (request, response) => {
+  try{
+    const transporter = nodemailer.createTransport({
+      service : 'gmail',
+      auth: {
+        user: "info@lowpriceauction.com",
+        pass: "LPA123info", 
+      },
+      tls: {
+        rejectUnauthorized: false 
+      }
+    });
+    crypto.randomBytes(32, (err, buffer) => {
+      if(err){
+        console.log(err);
+      }
+      const token = buffer.toString('hex');
+      User.findOne({email: request.body.email})
+        .then(user => {
+          if(!user){
+            console.log('error')
+            return response.status(422).json({error: "User don't exist with that email"})
+          }
+          user.token = token;
+          user.expiredToken = Date.now() + 3600000;
+          
+          user.save().then(result => {
+            transporter.sendMail({
+              to: user.email,
+              from: 'LPA Group',
+              subject: "Lap Email Confirmaition",
+              html: `
+              <p>You requested for password reset</p>
+              <h5>click in this <a href="https://lpa-app-demo.azurewebsites.net/reset/${token}">link</a> to reset password</h5>
+              `
+            });
+            response.json({message: 'check your email'})
+          })
+        })
+    });
+
+  }
+  catch(err){
+    response.status(500).send({error: err.message});
+  }
+});
+
+router.patch('/new-password/:token', async (request, response) => {
+  try{
+    const user = new User(request.body);
+    const updatedUser = await authLogic.updateNewPassAsync(user);
+    if(!updatedUser) {
+      return response.status(422).json({error: 'Try again session expired'})
+    }
+    response.status(200).json(updatedUser);
+
+
+  }
+  catch(err){
+    response.status(500).json({error: err.message});
   }
 });
 
