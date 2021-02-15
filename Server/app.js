@@ -21,6 +21,7 @@ const kushkiController = require('./controllers/kushki-controller');
 const uploadImageController = require('./controllers/uploads-image-controller');
 const infoController = require('./controllers/info-controller');
 const pageController = require('./controllers/pages-controller');
+const roleController = require('./controllers/roles-controller');
 require("./data-access-layer/dal");
 const sanitize = require('./middleware/sanitize');
 const expressRateLimit = require('express-rate-limit');
@@ -59,6 +60,7 @@ server.use("/api/email", emailController);
 server.use("/api/mail", mailchimpController);
 server.use("/api/kushki", kushkiController);
 server.use("/api/page", pageController);
+server.use("/api/role", roleController);
 
 
 

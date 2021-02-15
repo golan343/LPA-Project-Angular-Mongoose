@@ -73,6 +73,19 @@
             <label>City</label>
             <input type="text" [(ngModel)]="user.city" />
           </div>
+          
+        </div>
+        
+        <div class="flex">
+          <div class="input-container">
+            <label>Street</label>
+            <input type="text" [(ngModel)]="user.street" />
+          </div>
+          
+          <div class="input-container">
+            <label>Mobile number</label>
+            <input type="text" [(ngModel)]="user.phone" />
+          </div>
         </div>
         <div class="flex">
           <div class="input-container">
@@ -80,8 +93,11 @@
             <input type="email" [(ngModel)]="user.email" />
           </div>
           <div class="input-container">
-            <label>Mobile number</label>
-            <input type="text" [(ngModel)]="user.phone" />
+            <label>Role</label>
+            <select name="" id="">
+              <option value="" *ngFor="let role of roles">{{role.name}}</option>
+            </select>
+            <!-- <input type="email" [(ngModel)]="user.email" /> -->
           </div>
         </div>
         <div class="flex">

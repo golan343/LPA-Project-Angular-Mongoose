@@ -70,6 +70,18 @@ const UserSchema = mongoose.Schema({
     registrationDate: {
         index: true,
         type: Date
+    },
+    winingOffers: {
+        index: true,
+        type: Number
+    },
+    loosingOffers: {
+        index: true,
+        type: Number
+    },
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "CreatedBy"
     }
 }, { 
     versionKey: false,
@@ -80,6 +92,13 @@ const UserSchema = mongoose.Schema({
 UserSchema.virtual("role", {
     ref: "Role",
     localField: "roleId",
+    foreignField: "_id",
+    justOne: true
+});
+
+UserSchema.virtual("user", {
+    ref: "CreatedBy",
+    localField: "createdBy",
     foreignField: "_id",
     justOne: true
 });

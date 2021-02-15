@@ -241,7 +241,7 @@ router.post('/reset-password', async (request, response) => {
             transporter.sendMail({
               to: user.email,
               from: 'LPA Group',
-              subject: "Lap Email Confirmaition",
+              subject: "LPA - Email Confirmation",
               html: `
               <p>You requested for password reset</p>
               <h5>click in this <a href="https://lpa-app-demo.azurewebsites.net/reset/${token}">link</a> to reset password</h5>

@@ -20,6 +20,7 @@ export class AdminComponent implements OnInit, AfterViewInit, OnDestroy {
   user: UserModel;
   show = false;
   showCalendar = false;
+  roles
   defaultColDef = {
     resizable: true
   };
@@ -39,7 +40,11 @@ export class AdminComponent implements OnInit, AfterViewInit, OnDestroy {
     { field: 'birthDate', sortable: true, filter: true, editable: true },
     { field: 'street', sortable: true, filter: true, editable: true },
     { field: 'email', sortable: true, filter: true, editable: true },
-    { field: 'loginDate', sortable: true, filter: true, editable: true }
+    { field: 'loginDate', sortable: true, filter: true, editable: false },
+    { field: 'registrationDate', sortable: true, filter: true, editable: false },
+    { field: 'createdBy', sortable: true, filter: true, editable: false },
+    { field: 'winingOffers', sortable: true, filter: true, editable: false },
+    { field: 'loosingOffers', sortable: true, filter: true, editable: false },
   ];
   userSubscriber = new Subscription();
   rowData: userItem[];
@@ -79,6 +84,9 @@ export class AdminComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this.lastloged = '';
     this.init();
+    this.admins.getAllRoles().subscribe(roles => {
+      this.roles = roles;
+    });
   }
   init() {
     this.userSubscriber = this.admins.getAllUsers().pipe(tap(users => {
