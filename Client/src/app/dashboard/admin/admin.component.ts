@@ -1,31 +1,31 @@
-import { AfterViewInit, Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AdminService } from './../services/admin.service';
 import { userItem } from './../model/user-item';
-import { forkJoin, noop, Observable } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 import { AgGridAngular } from 'ag-grid-angular';
-import { RowNode } from 'ag-grid-community';
+import { GridOptions, RowNode } from 'ag-grid-community';
 import { DialogData } from 'src/app/ui/model/dialog-data';
 import { DialogService } from 'src/app/ui/dialog.service';
 import { every, map, observeOn, tap } from 'rxjs/operators';
-import { ObserveOnOperator } from 'rxjs/internal/operators/observeOn';
 import { UserModel } from 'src/app/models/user-model';
+
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  styleUrls: ['./admin.component.css'],
 })
-export class AdminComponent implements OnInit, AfterViewInit {
-
+export class AdminComponent implements OnInit, AfterViewInit, OnDestroy {
+  lastloged: string;
+  gridOptions: GridOptions;
+  user: UserModel;
+  show = false;
+  showCalendar = false;
   defaultColDef = {
     resizable: true
   };
   columnDefs = [
-    { field: '_id', sortable: true, filter: true, checkboxSelection: true },
     {
-      field: 'firstName', sortable: true, filter: true, icons: {
-        sortAscending: '<i class="fa fa-sort-alpha-up"/>',
-        sortDescending: '<i class="fa fa-sort-alpha-down"/>',
-      }, editable: true
+      field: 'firstName', sortable: true, filter: true, editable: true, checkboxSelection: true
     },
     {
       field: 'lastName', sortable: true, filter: true, icons: {
@@ -39,28 +39,84 @@ export class AdminComponent implements OnInit, AfterViewInit {
     { field: 'birthDate', sortable: true, filter: true, editable: true },
     { field: 'street', sortable: true, filter: true, editable: true },
     { field: 'email', sortable: true, filter: true, editable: true },
-    { field: 'roleId', sortable: true, filter: true, editable: true },
+    { field: 'loginDate', sortable: true, filter: true, editable: true }
   ];
-  user$: Observable<userItem[]>;
-  rowData:userItem[];
+  userSubscriber = new Subscription();
+  rowData: userItem[];
+  users: userItem[];
   @ViewChild('agGrid') agGrid: AgGridAngular;
   constructor(private admins: AdminService, private dialogLocalsService: DialogService) { }
+  ngOnDestroy(): void {
+    this.userSubscriber.unsubscribe();
+  }
   ngAfterViewInit(): void {
-    this.agGrid.api.addEventListener('rowClicked', this.cellClickedHandler.bind(this));
+    if (this.agGrid)
+      this.agGrid.api.addEventListener('rowClicked', this.cellClickedHandler.bind(this));
+    this.agGrid.api.onFilterChanged()
+    this.gridOptions = <GridOptions>{
+      defaultColDef: {
+        editable: true,
+        enableRowGroup: true,
+        enablePivot: true,
+        enableValue: true,
+        sortable: true,
+        resizable: true,
+        filter: true,
+        flex: 1,
+        minWidth: 100,
+      },
+      suppressRowClickSelection: true,
+      groupSelectsChildren: true,
+      debug: true,
+      rowSelection: 'multiple',
+      rowGroupPanelShow: 'always',
+      pivotPanelShow: 'always',
+      enableRangeSelection: true,
+      pagination: true,
+    };
   }
 
   ngOnInit(): void {
+    this.lastloged = '';
     this.init();
   }
   init() {
-    this.user$ = this.admins.getAllUsers();
-    this.user$.subscribe(users=>{
+    this.userSubscriber = this.admins.getAllUsers().pipe(tap(users => {
+      this.users = users;
       this.rowData = users;
-    })
+    })).subscribe(users => {
+      this.admins.errorSubject.next('');
+    }, err => {
+      this.admins.errorSubject.next('error' + JSON.stringify(err));
+    });
   }
+  setInput($event) {
+    if ($event) {
+      const start = $event.start as Date;
+      const end = $event.end as Date;
+      this.lastloged = start.toLocaleDateString() + '-' + end.toLocaleDateString();
+      this.rowData = this.users.filter(user => {
+        let d = new Date(user.loginDate).getTime();
+        return d && d > start.getTime() && d < end.getTime();
+      });
+    } else {
+      this.lastloged = '';
+      this.rowData = [...this.users];
+    }
+    setTimeout(() => {
+      this.showCalendar = false;
+    }, 2000);
+
+  }
+
+  showCalendarEvent() {
+    this.showCalendar = true;
+  }
+
   cellClickedHandler($event) {
     this.admins.errorSubject.next('');
   }
+
   deleteUsers() {
     const selectedNodes: RowNode[] = this.agGrid.api.getSelectedNodes();
     if (selectedNodes.length > 0) {
@@ -77,6 +133,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
       this.admins.errorSubject.next('no user were selected');
     }
   }
+
   addNewUser() {
     const dialog = new DialogData("Register");
     dialog.wide = true;
@@ -86,55 +143,69 @@ export class AdminComponent implements OnInit, AfterViewInit {
     }
     this.dialogLocalsService.subjectType.next(dialog);
   }
+
+  close() {
+    this.show = false;
+  }
+
   editUser() {
     const selectedNodes: RowNode[] = this.agGrid.api.getSelectedNodes();
 
     if (selectedNodes.length > 0) {
-      const httpCals = [];
-      sessionStorage.setItem('user',JSON.stringify(selectedNodes[0].data));
-      this.admins.componentNumberSubject.next(1);
-      // selectedNodes.forEach(n => {
-      //   const user = (n.data as userItem);
-      //   httpCals.push(this.admins.editUser(user))
-      // });
-      // forkJoin(httpCals).subscribe(res => {
-      //   // if (res.deletedCount > 0) {
-      //   this.init();
-      //   // }
-      // });
+      this.show = true;
+      this.user = selectedNodes[0].data as UserModel;
 
     } else {
       this.admins.errorSubject.next('no user were selected');
     }
   }
-  filterUser($event:any){
+
+  filterUser($event: any) {
     const val = $event.target.value;
-    if(val){
+    if (val) {
       console.log(val);
-      this.rowData.forEach(users=>{
-        
-      })
-    }
-    
-  }
-  UsersToCsv(){
-   
-    const keys = ['firstName','lastName','country','city','phone','street','email'];
-    let csv = keys.join(',')+'\n';
-    this.rowData.forEach(item=>{
- 
-        keys.forEach(keyItem=>{
-          csv += item[keyItem]+',';
-        });
-        csv = csv.substr(0,csv.length-1)+'\n';
-      
+      this.rowData = this.users.filter(user => {
+        return new RegExp(val.toLowerCase(), 'g').test(user.firstName.toLowerCase()) || new RegExp(val.toLowerCase(), 'g').test(user.lastName.toLowerCase());
       });
-        console.log(csv);
-        let base64EncodeAuctions = btoa(csv);
-        console.log(base64EncodeAuctions);
-        base64EncodeAuctions = 'data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,'+base64EncodeAuctions;
-        window.open(base64EncodeAuctions);
-     
-      
+    } else {
+      this.rowData = [...this.users];
+    }
+
   }
+
+  UsersToCsv() {
+
+    const keys = ['firstName', 'lastName', 'country', 'city', 'phone', 'street', 'email'];
+    let csv = keys.join(',') + '\n';
+    this.rowData.forEach(item => {
+
+      keys.forEach(keyItem => {
+        csv += item[keyItem] + ',';
+      });
+      csv = csv.substr(0, csv.length - 1) + '\n';
+
+    });
+    console.log(csv);
+    let base64EncodeAuctions = btoa(csv);
+    console.log(base64EncodeAuctions);
+    base64EncodeAuctions = 'data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,' + base64EncodeAuctions;
+    window.open(base64EncodeAuctions);
+
+
+  }
+
+  saveChanges() {
+    const userMaped: userItem = this.user as userItem;
+    this.admins.editUser(userMaped).subscribe(result => {
+      this.admins.errorSubject.next('The user has been updated successfuly!');
+      this.close();
+      this.init();
+    },
+      err => {
+        console.log(err);
+        this.admins.errorSubject.next('The user was not change!' + JSON.stringify(err));
+      }
+    )
+  }
+
 }

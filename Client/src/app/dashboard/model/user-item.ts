@@ -9,4 +9,5 @@ export interface userItem {
     street: string;
     token: string;
     phone: string;
+    loginDate:string;
 }

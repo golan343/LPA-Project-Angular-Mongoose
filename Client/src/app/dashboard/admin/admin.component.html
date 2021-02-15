@@ -1,4 +1,5 @@
 <div class="container">
+    
   <nav class="flex mr-b">
     <aside><app-flag-select></app-flag-select></aside>
 
@@ -21,14 +22,75 @@
         (keyup)="filterUser($event)"
         placeholder="find User"
       />
+
     </aside>
+    <aside class="relative">
+        <span class="search-icon fa pointer"></span>
+        <input
+            [(ngModel)]="lastloged"
+          type="text"
+          placeholder="filter last Loged"
+          (focus)='showCalendarEvent()'
+        />
+        <app-calendar (triggerdategap)="setInput($event)" [show]="showCalendar" ></app-calendar>
+      </aside>
   </nav>
-  <ag-grid-angular
+ <ag-grid-angular
     #agGrid
     class="ag-theme-alpine"
-    [defaultColDef]="defaultColDef"
     [rowData]="rowData"
     [columnDefs]="columnDefs"
+    [gridOptions]="gridOptions"
   >
-  </ag-grid-angular>
+  </ag-grid-angular> 
+
+</div>
+<div class="edit-auction" *ngIf="show">
+    <aside class="absolute close" (click)="close()">
+      <i class="close-icon fa"></i>
+    </aside>
+  
+    <div class="col white round-border l-padding">
+        <h3 class="center">Edit User {{user.firstName}} {{user.lastName}}</h3>
+        <div class="flex">
+          <div class="input-container">
+            <label>First Name</label>
+            <input type="text" [(ngModel)]="user.firstName" />
+          </div>
+          <div class="input-container">
+            <label>Last Name</label>
+            <input type="email" [(ngModel)]="user.lastName" />
+          </div>
+        </div>
+        <div class="flex">
+          <div class="input-container">
+            <label>Country</label>
+            <input type="text" [(ngModel)]="user.country" />
+          </div>
+          <div class="input-container"></div>
+       
+          <div class="input-container">
+            <label>City</label>
+            <input type="text" [(ngModel)]="user.city" />
+          </div>
+        </div>
+        <div class="flex">
+          <div class="input-container">
+            <label>E-Mail</label>
+            <input type="email" [(ngModel)]="user.email" />
+          </div>
+          <div class="input-container">
+            <label>Mobile number</label>
+            <input type="text" [(ngModel)]="user.phone" />
+          </div>
+        </div>
+        <div class="flex">
+        <div class="input-container">
+          <aside class="btn" (click)="saveChanges()">
+              <i class="edit-user fa"></i>
+            </aside>
+        </div>
+        </div>
+     
+      </div>
 </div>

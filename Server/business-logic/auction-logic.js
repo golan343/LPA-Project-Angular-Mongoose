@@ -2,14 +2,14 @@ const Auction = require('../models/auction');
 
 // get all auctions
 function getAllAuctionsAsync() {
-    return Auction.find().populate('rule').populate('site').populate('createdBy').exec();
+    return Auction.find({isActive:true}).populate('rule').populate('site').populate('createdBy').exec();
 }
 function getAllAuction(callback) {
   return Auction.find({isActive:true}).exec(callback);
 }
 // get all closed auctions
 function getAllClosedAuctionsAsync() {
-    return Auction.find({status: false}).exec();
+    return Auction.find({status: false,isActive:false}).exec();
 }
 // get all closed auctions
 function getLastAuctionAsync() {
@@ -17,7 +17,7 @@ function getLastAuctionAsync() {
 }
 // get all opened auctions
 function getAllOpenedAuctionsAsync() {
-    return Auction.find({status: true}).exec();
+    return Auction.find({status: true,isActive:false}).exec();
 }
 
 // get one auction by id

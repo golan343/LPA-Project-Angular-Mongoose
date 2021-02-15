@@ -5,6 +5,9 @@
     width: 1000px;
     height: 600px;
     animation: fadeIn 6s linear ;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
   }
   
 .top {

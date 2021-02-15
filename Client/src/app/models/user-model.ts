@@ -31,6 +31,7 @@ export class UserModel {
       street: this.street,
       token: this.token,
       phone: this.phone,
+      loginDate:this.loginDate
     };
   }
 }

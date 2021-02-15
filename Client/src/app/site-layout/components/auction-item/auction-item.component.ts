@@ -1,8 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuctionModel } from './../../../models/auction-model';
-import { AccountService } from './../../../services/account.service';
-import { DialogService } from '../../../ui/dialog.service';
+import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-auction-item',
@@ -16,12 +15,10 @@ export class AuctionItemComponent implements OnInit {
   homeFlag: string;
   @Input()
   placeBisText = 'Place my bid';
-  constructor(private router: Router,
-    private account: AccountService,
-    private dialogLocalsService: DialogService) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
-
+   
   }
 
   showAuction(_id: string): void {

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
-import { LayoutComponent } from './components/layout/layout.component';
 import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AuctionComponent } from './components/auction/auction.component';
@@ -34,7 +33,6 @@ import { PageComponent } from './components/page/page.component';
 
 @NgModule({
   declarations: [
-    LayoutComponent,
     HomeComponent,
     PageNotFoundComponent,
     AuctionComponent,

@@ -61,57 +61,56 @@
   <aside class="absolute close" (click)="closeItem()">
     <i class="close-icon fa"></i>
   </aside>
-  <h3>Edit Auction</h3>
+  <h3>Edit Product</h3>
   <div class="flex">
     <div class="input-container">
-      <label>auction name</label>
+      <label>Product name</label>
       <input
         type="text"
-        placeholder="auction name"
+        placeholder="Product name"
         [(ngModel)]="editAuction.name"
       />
     </div>
     <div class="input-container">
-      <label>auction description</label>
-      <input
-        type="text"
-        placeholder="auction description"
+      <label>Product description</label>
+      <textarea
+        placeholder="Product description"
         [(ngModel)]="editAuction.description"
-      />
+      ></textarea>
     </div>
   </div>
   <div class="flex">
     <div class="input-container">
-      <label>auction start date</label>
+      <label> Start date</label>
       <input
         type="date"
-        placeholder="auction start date"
+        placeholder="Start date"
         [(ngModel)]="editAuction.startDate"
       />
     </div>
     <div class="input-container">
-      <label>auction end date</label>
+      <label> End date</label>
       <input
         type="date"
-        placeholder="auction end date"
+        placeholder=" End date"
         [(ngModel)]="editAuction.endDate"
       />
     </div>
   </div>
   <div class="flex">
     <div class="input-container">
-      <label>auction bid Price</label>
+      <label> Offer price</label>
       <input
         type="number"
-        placeholder="auction bid price"
+        placeholder="Offer price"
         [(ngModel)]="editAuction.bidPrice"
       />
     </div>
     <div class="input-container">
-      <label>auction Price</label>
+      <label>Product value</label>
       <input
         type="number"
-        placeholder="auction bid price"
+        placeholder="Product value"
         [(ngModel)]="editAuction.price"
       />
     </div>
@@ -119,28 +118,28 @@
     <!-- 'name','startDate','endDate','price','description','minOffer','bidPrice','totalBids', 'bidCount' -->
     <div class="flex">
       <div class="input-container">
-        <label>auction min offer</label>
+        <label>Minimum bid</label>
         <input
           type="number"
-          placeholder="auction min offer"
+          placeholder="Minimum bid"
           [(ngModel)]="editAuction.minOffer"
         />
       </div>
       <div class="input-container">
-        <label>auction number of bids</label>
+        <label>Maximum bid</label>
         <input
           type="number"
-          placeholder="auction number of bids"
+          placeholder="Maximum bid"
           [(ngModel)]="editAuction.bidCount"
         />
       </div>
     </div>
     <div class="flex">
       <div class="input-container">
-        <label>auction youtube Movie</label>
+        <label>Product's Youtube link</label>
         <input
           type="text"
-          placeholder="auction youtube Movie"
+          placeholder="Product's Youtube link"
           [(ngModel)]="editAuction.youtubeId"
         />
       </div>
@@ -155,11 +154,11 @@
     </div>
     <div class="flex">
       <div class="input-container">
-        <label>auction image</label>
+        <label> Product image</label>
         <span *ngIf="editAuction.imageFileName">{{editAuction.imageFileName}}</span>
         <input
           type="file"
-          placeholder="auction image file"
+          placeholder=" Product image file"
           (change)="fileUploadEvent($event)"
         />
       </div>
