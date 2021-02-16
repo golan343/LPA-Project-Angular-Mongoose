@@ -40,7 +40,7 @@ function adminUpdateUser(user, callback) {
         email: user.email,
         phone: user.phone,
         birthDay: new Date(user.birthDay),
-        street: user.street,
+        street: user.street
       },
     },
     { useFindAndModify: false }

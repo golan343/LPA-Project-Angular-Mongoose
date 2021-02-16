@@ -84,12 +84,23 @@ nav {
   }
   .edit-auction {
     position: absolute;
+ 
+    background-color: #4d8ab2;
+    z-index: 4;
+    visibility: hidden;
+    height: 0px;
+    width: 0px;
+    top:0px;
+    padding:0px;
+  }
+  .edit-auction.show{
     min-width: 430px;
     top: 20%;
     right: 33%;
     padding: 2%;
-    background-color: #4d8ab2;
-    z-index: 4;
+    visibility: visible;
+    width: auto;
+    height: auto;
   }
   .edit-auction:after {
     content: "";

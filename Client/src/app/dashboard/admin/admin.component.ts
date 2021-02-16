@@ -1,12 +1,13 @@
-import { AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AdminService } from './../services/admin.service';
+import { UploadService } from './../services/upload.service';
 import { userItem } from './../model/user-item';
 import { forkJoin, Subscription } from 'rxjs';
 import { AgGridAngular } from 'ag-grid-angular';
 import { GridOptions, RowNode } from 'ag-grid-community';
 import { DialogData } from 'src/app/ui/model/dialog-data';
 import { DialogService } from 'src/app/ui/dialog.service';
-import { every, map, observeOn, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { UserModel } from 'src/app/models/user-model';
 
 @Component({
@@ -17,9 +18,11 @@ import { UserModel } from 'src/app/models/user-model';
 export class AdminComponent implements OnInit, AfterViewInit, OnDestroy {
   lastloged: string;
   gridOptions: GridOptions;
-  user: UserModel;
+  user = new UserModel();
   show = false;
   showCalendar = false;
+  @ViewChild('inputFile') fileUpload: any;
+  @ViewChild('imgCanvas') canvasWrap: ElementRef;
   defaultColDef = {
     resizable: true
   };
@@ -45,7 +48,7 @@ export class AdminComponent implements OnInit, AfterViewInit, OnDestroy {
   rowData: userItem[];
   users: userItem[];
   @ViewChild('agGrid') agGrid: AgGridAngular;
-  constructor(private admins: AdminService, private dialogLocalsService: DialogService) { }
+  constructor(private admins: AdminService, private dialogLocalsService: DialogService, public fileUploasService: UploadService) { }
   ngOnDestroy(): void {
     this.userSubscriber.unsubscribe();
   }
@@ -75,15 +78,19 @@ export class AdminComponent implements OnInit, AfterViewInit, OnDestroy {
       pagination: true,
     };
   }
-
+  triggerUplaod() {
+    this.fileUpload.nativeElement.click();
+  }
   ngOnInit(): void {
     this.lastloged = '';
+
     this.init();
   }
   init() {
     this.userSubscriber = this.admins.getAllUsers().pipe(tap(users => {
       this.users = users;
       this.rowData = users;
+      this.user = users[0] as UserModel;
     })).subscribe(users => {
       this.admins.errorSubject.next('');
     }, err => {
@@ -154,7 +161,12 @@ export class AdminComponent implements OnInit, AfterViewInit, OnDestroy {
     if (selectedNodes.length > 0) {
       this.show = true;
       this.user = selectedNodes[0].data as UserModel;
-
+      this.fileUploasService.canvas = this.canvasWrap.nativeElement;
+      this.fileUploasService.clear();
+      if (this.user.img) {
+        
+        this.fileUploasService.setImageOnCanvas(this.user.img);
+      }
     } else {
       this.admins.errorSubject.next('no user were selected');
     }
@@ -195,8 +207,14 @@ export class AdminComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   saveChanges() {
-    const userMaped: userItem = this.user as userItem;
-    this.admins.editUser(userMaped).subscribe(result => {
+    const userMaped: UserModel = this.user as UserModel;
+    const requests = [];
+   
+    requests.push(this.admins.editUser(userMaped));
+    if (this.fileUploasService.imageFromData) {
+      requests.push(this.admins.saveUserImage(this.user._id, this.fileUploasService.imgBase64));
+    }
+    forkJoin(requests).subscribe(result => {
       this.admins.errorSubject.next('The user has been updated successfuly!');
       this.close();
       this.init();

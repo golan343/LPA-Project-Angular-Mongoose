@@ -117,7 +117,12 @@ export class AuctionComponent implements OnInit {
     }
   }
 
-  increament() { }
+  setValue($event: KeyboardEvent) {
+    console.log($event.key, $event.keyCode, $event.returnValue);
+    let reg = /^[0-9.]/g;
+    let key = $event.key;
+    return reg.test(key) || /(Delete)|(Backspace)/gs.test(key);
+  }
 
   showMovie() {
     const dialogMovie = new DialogData('video');

@@ -12,7 +12,7 @@
                 <div class="placeBid relative" *ngIf="auction?.status">
                     <span *ngIf="error?.bid" class="error">{{error?.bid}}</span>
                     <label> Offer cost: </label>
-                    <input type="text" appOnlyNumeric (change)="setAmount($event)" [value]="bid?.offer || 0" />
+                    <input type="text" (keydown)="setValue($event)" (change)="setAmount($event)" [value]="bid?.offer || 0" />
                     <div class="overflow relative">
                         <!-- <aside class="right plus " (click)="increament()"></aside> -->
                         <button type="button" (click)="addBid()"> Place my bid </button>
