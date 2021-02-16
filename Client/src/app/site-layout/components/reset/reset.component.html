@@ -1,0 +1,29 @@
+<!-- <div class="reset">
+    <h1>Reset Password</h1>
+
+    <form action="">
+        <input type="text" 
+            name="newPass"
+            placeholder="New Password"
+            [(ngModel)]="password">
+        <button (click)="updatePass()"></button>
+    </form>
+</div> -->
+
+<div class="reset padding">
+    <h2>Reset Password</h2>
+    <p> please fill up the new password</p>
+    <form action="">
+    <div class="mr-b ">
+        <label for="password">New Password:</label>
+        <input type="text" [(ngModel)]="password" (focus)="clear()" name="password" id="password">
+        <p class="errorP">{{error}}</p>
+    </div>
+    
+
+    <div class="btn-wrap ">
+        <button (click)="updatePass()">send</button>
+    </div>
+    </form>
+
+</div>

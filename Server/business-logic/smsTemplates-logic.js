@@ -1,0 +1,1 @@
+const SmsTemplates = require('../models/smsTemplates');

@@ -1,3 +1,4 @@
+import { AccountService } from 'src/app/services/account.service';
 import { Component, OnInit } from '@angular/core';
 import { EmailService, EmailContent } from './../../services/email.service';
 @Component({
@@ -9,7 +10,7 @@ export class ForgotPassComponent implements OnInit {
   email: string;
   error: string;
 
-  constructor(private emailService: EmailService) { }
+  constructor(private emailService: EmailService, private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.email = '';
@@ -18,14 +19,14 @@ export class ForgotPassComponent implements OnInit {
   send() {
     this.error = '';
     if (/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.email)) {
-      this.emailService.sendEmail(this.email).subscribe(
-        result => {
-
-        },
-        err => {
-
-        }
-      );
+      this.accountService.resetPassword(this.email).subscribe(
+          result => {
+  
+          },
+          err => {
+  
+          }
+        );
 
     } else {
       this.error = 'This email is inValid'

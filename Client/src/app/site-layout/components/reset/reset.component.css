@@ -1,0 +1,22 @@
+.reset {
+    height: 100vh;
+    background: #ffffff;
+    text-align: center;
+}
+
+
+h1{
+    color: white;
+    margin-top: 0;
+    font-size: 50px;
+    font-weight: bolder;
+    text-shadow: 1px 1px;
+}
+label {
+    color:  white;
+}
+.errorP {
+    color: red;
+}
+
+.wrap-password{width: 80%;}

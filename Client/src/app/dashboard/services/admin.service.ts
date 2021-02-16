@@ -118,4 +118,8 @@ export class AdminService {
   pageUpdate(p:pageModel):Observable<any>{
     return this.http.put<any>(environment.BaseUrl+'api/page',{urlName:p.urlName,title:p.title,content:p.content});
   }
+
+  getAllRoles():Observable<any> {
+    return this.http.get(`${environment.BaseUrl}api/role`);
+  }
 }

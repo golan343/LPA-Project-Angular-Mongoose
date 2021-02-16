@@ -52,7 +52,7 @@ const AuctionSchema = mongoose.Schema({
         type: Number
     },
     bidPattern: {
-        type: String
+        type: Number
     },
     bidPrice: {
         type: String

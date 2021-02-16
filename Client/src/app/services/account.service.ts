@@ -85,4 +85,12 @@ export class AccountService {
   public addUser(user: UserModel): Promise<any> {
     return this.http.post<UserModel>(`${BaseUrl}api/auth/register`, user).toPromise();
   }
+
+  public resetPassword(email: string): Observable<any> {
+    return this.http.post(`${BaseUrl}api/auth/reset-password`, { email });
+  }
+
+  public updatePassword(token: string, password: string): Observable<any> {
+    return this.http.patch(`${BaseUrl}api/auth/new-password/${token}`, {token, password});
+  }
 }

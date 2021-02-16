@@ -13,6 +13,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { ClosedComponent } from './components/closed/closed.component';
 import { ClosedAuctionComponent } from './components/closed-auction/closed-auction.component';
 import { PageComponent } from './components/page/page.component';
+import { ResetComponent } from './components/reset/reset.component';
 
 
 
@@ -26,6 +27,7 @@ const routes: Routes = [
   //{ path: 'dashboard', loadChildren: () => import('./../dashboard/dashboard.module').then(d => d.DashboardModule), canActivate: [AdminGuard] },
   { path: 'live', component: LiveAuctionsComponent },
   { path: 'closed', component: ClosedComponent },
+  { path: 'reset/:token', component: ResetComponent },
   { path: '', redirectTo: '/', pathMatch: 'full' }, // pathMath - exact empty string.
   { path: '**', component: PageNotFoundComponent } // Must be the last route!!
 ];

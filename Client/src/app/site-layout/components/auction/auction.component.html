@@ -5,8 +5,7 @@
         <div class="bg">
             <div class="auction relative" [style.backgroundImage]="'url('+auction?.imageFileName+')'">
                 <h4 class="both"><span class="left">{{auction?.name}}</span><span class="right">{{auction?.description}}</span></h4>
-                <p *ngIf="auction?.status" class="valueAuction"><span><b>Price</b></span>: <span>{{price |
-                        currency}}</span> </p>
+                <p *ngIf="auction?.status" class="valueAuction"><span><b>Price</b></span>: <span>{{price | currency}}</span> </p>
             </div>
             <div class="flex padding-top space">
                 <div class="placeBid relative" *ngIf="auction?.status">
@@ -14,7 +13,6 @@
                     <label> Offer cost: </label>
                     <input type="text" (keydown)="setValue($event)" (change)="setAmount($event)" [value]="bid?.offer || 0" />
                     <div class="overflow relative">
-                        <!-- <aside class="right plus " (click)="increament()"></aside> -->
                         <button type="button" (click)="addBid()"> Place my bid </button>
                     </div>
                 </div>
