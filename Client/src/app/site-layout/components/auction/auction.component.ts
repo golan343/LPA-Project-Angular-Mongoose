@@ -28,7 +28,7 @@ export class AuctionComponent implements OnInit {
   //bidAuctionGraphData: AuctionBidData;
   error: errorModel;
   bidAuctionGraphData: AuctionBidData;
-
+  suggests:{up:number,down:number};
   constructor(
     private activatedRoute: ActivatedRoute,
     private auctionService: AuctionsService,
@@ -117,13 +117,36 @@ export class AuctionComponent implements OnInit {
     }
   }
 
-  setValue($event: KeyboardEvent) {
-    console.log($event.key, $event.keyCode, $event.returnValue);
+  preventValue($event: KeyboardEvent) {
     let reg = /^[0-9.]/g;
     let key = $event.key;
     return reg.test(key) || /(Delete)|(Backspace)/gs.test(key);
   }
+  calcValue(arg:any) {
+    let price = parseFloat(arg[0].target.value);
+    let bidPattern = arg[1];
+    
+    let res = Math.fround(price / bidPattern % 1);
+    console.log(res);
+    this.error = new errorModel();
+    if(!price){
+      this.error.bid = 'This value is Empty To Apply the bid fill up the price';
+      return false;
+    }
+    if(res !== 0){
+      this.error.bid = 'This value has be Duplicates of the value '+bidPattern;
+      let decimal = 1;
+      let up = price;
+      let down = price;
+      while(bidPattern/decimal<1){decimal/=10;}
+      while(up/bidPattern%1 !== 0){up= parseFloat((up + decimal).toFixed(2));}
+      while(down/bidPattern%1 !== 0 && down>0){down= parseFloat((down - decimal).toFixed(2));}
+      this.suggests = {down, up};
+    }else{
+      this.suggests = null;
+    }
 
+  }
   showMovie() {
     const dialogMovie = new DialogData('video');
     dialogMovie.show = true;
@@ -132,5 +155,7 @@ export class AuctionComponent implements OnInit {
     this.dialogService.subjectType.next(dialogMovie);
   }
 
-  updateStatusDialog(): void { }
+  updateStatusDialog(): void {
+
+  }
 }

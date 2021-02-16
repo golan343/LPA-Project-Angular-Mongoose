@@ -11,9 +11,13 @@
                 <div class="placeBid relative" *ngIf="auction?.status">
                     <span *ngIf="error?.bid" class="error">{{error?.bid}}</span>
                     <label> Offer cost: </label>
-                    <input type="text" (keydown)="setValue($event)" (change)="setAmount($event)" [value]="bid?.offer || 0" />
+                    <input type="text" (keydown)="preventValue($event)" (keyup)="calcValue.call(this,[$event,auction.bidPattern])" (change)="setAmount($event)" [value]="bid?.offer || 0" />
                     <div class="overflow relative">
                         <button type="button" (click)="addBid()"> Place my bid </button>
+                    </div>
+                    <div class="suggests" *ngIf="suggests">
+                        <span>{{suggests.up}}</span>
+                        <span>{{suggests.down}}</span>
                     </div>
                 </div>
                 <div class="remaining-offers">
