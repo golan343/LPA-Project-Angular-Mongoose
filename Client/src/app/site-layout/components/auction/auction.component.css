@@ -263,11 +263,12 @@ h2 {
   justify-content: center;
   align-items: center;
 }
-.cube-body p{
+.cube-body p {
   text-align: left;
   width: 80%;
 }
-.suggests{    background-color: #001;
+.suggests {
+  background-color: #001;
   padding: 5px;
   text-align: center;
   display: flex;
@@ -275,12 +276,16 @@ h2 {
   position: absolute;
   left: 103%;
   top: 0px;
-  width: 48%;
-  border-radius: 5px;}
-.suggests span{    background-color: #fff;
+  border-radius: 5px;
+}
+.suggests span {
+  background-color: #fff;
   color: #000;
   padding: 5px;
-
+  cursor: pointer;
+}
+.suggests span:first-of-type{
+margin:0 8px 0 0 ;
 }
 .cube h3 {
   padding: 8px;
@@ -411,7 +416,8 @@ h1 {
   font-size: 3rem;
   color: #fff;
 }
-.auction h4.both .right, .auction h4.both .left  {
+.auction h4.both .right,
+.auction h4.both .left {
   width: 50%;
   overflow: hidden;
   white-space: nowrap;
@@ -442,13 +448,13 @@ h1 {
     border-radius: 10px;
     overflow: hidden;
   }
-  .valueAuction{
+  .valueAuction {
     position: static;
-    background-color: rgba(255,255,255,.2);
+    background-color: rgba(255, 255, 255, 0.2);
     padding: 2%;
     display: inline-block;
   }
-  .placeBid{
+  .placeBid {
     margin: 3% auto;
   }
 }

@@ -15,9 +15,9 @@
                     <div class="overflow relative">
                         <button type="button" (click)="addBid()"> Place my bid </button>
                     </div>
-                    <div class="suggests" *ngIf="suggests">
-                        <span>{{suggests.up}}</span>
-                        <span>{{suggests.down}}</span>
+                    <div class="suggests padding" *ngIf="suggests">
+                        <span class="cursor" (click)="chooseTop()">{{suggests.up}}</span>
+                        <span class="cursor" (click)="chooseDown()">{{suggests.down}}</span>
                     </div>
                 </div>
                 <div class="remaining-offers">
