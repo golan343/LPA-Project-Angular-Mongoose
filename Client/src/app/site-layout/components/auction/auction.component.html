@@ -11,15 +11,21 @@
                 <div class="placeBid relative" *ngIf="auction?.status">
                     <span *ngIf="error?.bid" class="error">{{error?.bid}}</span>
                     <label> Offer cost: </label>
-                    <input type="text" (keydown)="preventValue($event)" (keyup)="calcValue.call(this,[$event,auction.bidPattern])" (change)="setAmount($event)" [value]="bid?.offer || 0" />
-                    <div class="overflow relative">
-                        <button type="button" (click)="addBid()"> Place my bid </button>
-                    </div>
                     <div class="suggests padding" *ngIf="suggests">
+                        <h5>Suggestions</h5>
                         <span class="cursor" (click)="chooseTop()">{{suggests.up}}</span>
                         <span class="cursor" (click)="chooseDown()">{{suggests.down}}</span>
                     </div>
+                    <input type="text" (keydown)="preventValue($event)" (keyup)="calcValue.call(this,[$event,auction.bidPattern])" (change)="setAmount($event)" [value]="bid?.offer || 0" />
+                    <div class="overflow relative l-padding">
+                        <button type="button" (click)="addBid()"> Place my bid </button>
+                    </div>
+               
+                    <div class="overflow relative l-padding">
+                        <button type="button" (click)="randomSuggestions()">Place Random bid</button>
+                    </div>
                 </div>
+                <app-bounch-stairs [bidBounce]="auction?.bidPattern || 0.3"></app-bounch-stairs>
                 <div class="remaining-offers">
                     <h3><span>Remaining Offers</span></h3>
                     <h3><i>{{auction?.totalBids - auction?.bidsCount}}</i></h3>

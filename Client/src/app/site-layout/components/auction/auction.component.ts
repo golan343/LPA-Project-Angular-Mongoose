@@ -25,6 +25,7 @@ export class AuctionComponent implements OnInit {
   bids: BidModel[];
   setDataPoints = [];
   price: number;
+  bidsRange = new Array<string>();
   //bidAuctionGraphData: AuctionBidData;
   error: errorModel;
   bidAuctionGraphData: AuctionBidData;
@@ -39,14 +40,12 @@ export class AuctionComponent implements OnInit {
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.params.id;
-    this.auctionService.getAuction(id).toPromise();
-    this.auctionService.subjectAuctions.subscribe((auctions) => {
-      this.auction = auctions.map((auc) => {
-        return {
-          ...auc,
-          imageFileName: environment.devUrl + 'uploads/' + auc.imageFileName,
+    this.auctionService.getAuction(id).subscribe((auctions) => {
+      this.auction =  {
+          ...auctions,
+          imageFileName: environment.devUrl + 'uploads/' + auctions.imageFileName,
         };
-      })[0];
+      
       this.price = parseFloat(this.auction.price);
       this.bid = new BidModel();
       this.bid.offer = this.auction.bidPrice;
@@ -148,7 +147,6 @@ export class AuctionComponent implements OnInit {
     let decimal = 1;
     let counter = 0;
     while (bidPattern / decimal < 1) { decimal /= 10; counter++; }
-    console.log(price, decimal, Math.fround(price / decimal));
     if (`${price}`.includes('.')) {
       if (`${price}`.split('.')[1].length > counter) {
         this.error.bid = 'This Value has to be divded to ' + bidPattern;
@@ -166,10 +164,15 @@ export class AuctionComponent implements OnInit {
       while (up / bidPattern % 1 !== 0) { up = parseFloat((up + decimal).toFixed(2)); }
       while (down / bidPattern % 1 !== 0 && down > 0) { down = parseFloat((down - decimal).toFixed(2)); }
       this.suggests = { down, up };
+
     } else {
       this.suggests = null;
     }
 
+  }
+  randomSuggestions(){
+    let bidBounce = parseFloat(this.auction.bidPattern);
+    this.bid.offer = (Math.floor(100*Math.random())* bidBounce).toFixed(2);
   }
   showMovie() {
     const dialogMovie = new DialogData('video');

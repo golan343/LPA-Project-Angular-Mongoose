@@ -1,0 +1,25 @@
+<div class="wrap">
+    <h3>Bids Instructions</h3>
+    <h4>Bids Step {{bidBounce | currency}}</h4>
+    <div class="bids-steps">
+        <div class="row-grid">{{bidsRange[0] | currency}}</div>
+        <div class="row-grid"></div>
+        <div class="row-grid"></div>
+        <div class="row-grid"></div>
+        <div class="row-grid"></div>
+        <div class="row-grid">{{bidsRange[1] | currency }}</div>
+        <div class="row-grid"></div>
+        <div class="row-grid"></div>
+        <div class="row-grid"></div>
+        <div class="row-grid"></div>
+        <div class="row-grid">{{bidsRange[2] | currency}}</div>
+        <div class="row-grid"></div>
+        <div class="row-grid"> </div>
+        <div class="row-grid"></div>
+        <div class="row-grid"></div>
+        <div class="row-grid">{{bidsRange[3]| currency}}</div>
+    </div>
+    <h5>You can’t offer bids such as</h5>
+    <h5> <span *ngFor="let item of notAllowed">${{item}}</span></h5>
+</div>
+

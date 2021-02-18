@@ -47,11 +47,7 @@ export class AuctionsService {
 
   // tslint:disable-next-line: variable-name
   getAuction(_id: string): Observable<AuctionModel> {
-    return this.http.get<AuctionModel>(BaseUrl + 'api/auctions/' + _id)
-      .pipe(map(res => {
-        this.subjectAuctions.next([res]);
-        return res;
-      }));
+    return this.http.get<AuctionModel>(BaseUrl + 'api/auctions/' + _id);
   }
   getLastAuction(): Observable<AuctionModel[]> {
     return this.http.get<AuctionModel[]>(BaseUrl + 'api/auctions/get/last');
