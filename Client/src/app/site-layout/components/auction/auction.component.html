@@ -25,7 +25,7 @@
                         <button type="button" (click)="randomSuggestions()">Place Random bid</button>
                     </div>
                 </div>
-                <app-bounch-stairs [bidBounce]="auction?.bidPattern || 0.3"></app-bounch-stairs>
+                <app-bounch-stairs *ngIf="auction?.bidPattern" [bidBounce]="auction?.bidPattern"></app-bounch-stairs>
                 <div class="remaining-offers">
                     <h3><span>Remaining Offers</span></h3>
                     <h3><i>{{auction?.totalBids - auction?.bidsCount}}</i></h3>
