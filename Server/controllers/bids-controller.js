@@ -1,6 +1,7 @@
 const express = require('express');
 const bidsLogic = require('../business-logic/bids-logic');
 const Bid = require('../models/bid');
+const verifyLogin = require('../middleware/verify-logged-in');
 
 const router = express.Router();
 
@@ -32,7 +33,7 @@ router.get('/:id', async (request, response) => {
 });
 
 //add bid - /api/bid
-router.post('/', async (request, response) => {
+router.post('/', verifyLogin, async (request, response) => {
     try{
         const bid = new Bid(request.body);
         
@@ -53,7 +54,7 @@ router.post('/', async (request, response) => {
 
 
 //update full bid - /api/bid/id
-router.put('/:_id', async (request, response) => {
+router.put('/:_id', verifyLogin, async (request, response) => {
     try{
         const bid = new Bid(request.body);
         bid._id = request.params._id;
@@ -78,7 +79,7 @@ router.put('/:_id', async (request, response) => {
 });
 
 //update partial bid info - /api/bid/id
-router.patch('/:_id', async (request, response) => {
+router.patch('/:_id', verifyLogin, async (request, response) => {
     try{
         const bid = new Bid(request.body);
         bid._id = request.params._id;
@@ -104,7 +105,7 @@ router.patch('/:_id', async (request, response) => {
 
 //delete bid - /api/bid/id
 
-router.delete('/:id', async(request,response) => {
+router.delete('/:id', verifyLogin, async(request,response) => {
     try{
         const _id = request.params._id;
         await bidsLogic.deleteBidAsync(_id);
