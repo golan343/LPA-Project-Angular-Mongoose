@@ -10,6 +10,7 @@ import { AuctionsService } from './../../../services/auctions.service';
 import { BidsService } from './../../../services/bids.service';
 import { DialogService } from './../../../ui/dialog.service';
 import { environment } from './../../../../environments/environment';
+import { DialogData } from 'src/app/ui/model/dialog-data';
 
 @Component({
   selector: 'app-closed-auction',
@@ -43,15 +44,11 @@ export class ClosedAuctionComponent implements OnInit, OnDestroy {
     });
     const id = this.activatedRoute.snapshot.params.id;
 
-    this.auctionService.getAuction(id).toPromise();
-    this.auctionService.subjectAuctions.subscribe(auctions => {
-      this.auction = auctions.map(auc => {
-
-        return {
-          ...auc,
-          imageFileName: environment.BaseUrl + 'uploads/' + auc.imageFileName
-        }
-      })[0];
+    this.auctionService.getAuction(id).subscribe(auctions => {
+      this.auction =  {
+        ...auctions,
+        imageFileName: environment.devUrl + 'uploads/' + auctions.imageFileName,
+      };
       this.price = parseFloat(this.auction.price);
     });
     this.bidService.getAllBidsIncludingAuction(id);
@@ -63,5 +60,11 @@ export class ClosedAuctionComponent implements OnInit, OnDestroy {
       }
     });
   }
-
+  showMovie() {
+    const dialogMovie = new DialogData('video');
+    dialogMovie.show = true;
+    dialogMovie.wide = true;
+    dialogMovie.src = 'https://www.youtube.com/embed/' + this.auction.youtubeId;
+    this.dialogService.subjectType.next(dialogMovie);
+  }
 }

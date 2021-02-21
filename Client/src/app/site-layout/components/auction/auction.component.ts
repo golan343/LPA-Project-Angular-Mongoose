@@ -2,10 +2,9 @@ import { BidsService } from './../../../services/bids.service';
 import { AuctionBidData, BidModel } from './../../../models/bid-model';
 import { environment } from './../../../../environments/environment';
 
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuctionModel } from './../../../models/auction-model';
-import { CookieService } from 'ngx-cookie-service';
 import { AuctionsService } from './../../../services/auctions.service';
 import { DialogData } from './../../../ui/model/dialog-data';
 import { DialogService } from './../../../ui/dialog.service';
@@ -16,6 +15,7 @@ import { AccountService } from './../../../services/account.service';
   selector: 'app-auction',
   templateUrl: './auction.component.html',
   styleUrls: ['./auction.component.css'],
+  //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuctionComponent implements OnInit {
   auction: AuctionModel;
@@ -170,10 +170,12 @@ export class AuctionComponent implements OnInit {
     }
 
   }
+
   randomSuggestions(){
     let bidBounce = parseFloat(this.auction.bidPattern);
     this.bid.offer = (Math.floor(100*Math.random())* bidBounce).toFixed(2);
   }
+
   showMovie() {
     const dialogMovie = new DialogData('video');
     dialogMovie.show = true;

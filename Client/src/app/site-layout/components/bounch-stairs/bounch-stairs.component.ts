@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-bounch-stairs',
   templateUrl: './bounch-stairs.component.html',
-  styleUrls: ['./bounch-stairs.component.css']
+  styleUrls: ['./bounch-stairs.component.css'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class BounchStairsComponent implements OnInit {
   bidsRange = new Array<string>();

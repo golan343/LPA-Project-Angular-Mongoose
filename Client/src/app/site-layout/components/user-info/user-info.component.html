@@ -1,0 +1,116 @@
+<div class="container">
+    <div class="row flex relative">
+    </div>
+    <div class="row">
+      <div class="col white round-border l-padding">
+        <h2>User info</h2>
+       
+        <div class="flex">
+          <div class="input-container">
+            <label>First Name</label>
+            <app-error-bubble></app-error-bubble>
+            <input type="text" [(ngModel)]="user.firstName" />
+          </div>
+          <div class="input-container">
+            <label>Last Name</label>
+            <input type="email" [(ngModel)]="user.lastName" />
+          </div>
+          <div class="input-container">
+            <label>Country</label>
+            <input type="text" [(ngModel)]="user.country" />
+          </div>
+          <div class="input-container"></div>
+        </div>
+        <div class="flex">
+          <div class="input-container">
+            <label>City</label>
+            <input type="text" [(ngModel)]="user.city" />
+          </div>
+          <div class="input-container">
+            <label>E-Mail</label>
+            <input type="email" [(ngModel)]="user.email" />
+          </div>
+          <div class="input-container">
+            <label>Mobile number</label>
+            <input type="text" [(ngModel)]="user.phone" />
+          </div>
+        <div class="input-container">
+          <aside class="btn" (click)="saveChanges()">
+              <i class="edit-user fa"></i>
+            </aside>
+        </div>
+        </div>
+     
+      </div>
+      <div class="col mr-t ">
+        <div class="flex">
+          <div class="cube white l-padding round-border mr-r flex align-end">
+              <div class="cube-right">
+                  <h2>reset password</h2>
+                  <div class="input-container">
+                    <label>old Password</label>
+                    <input type="password" [(ngModel)]="old" />
+                  </div>
+                  <div class="input-container">
+                    <label>New Password</label>
+                    <input type="password" [(ngModel)]="password" />
+                  </div>
+              </div>
+             
+            <div class="cube-left">
+              <aside class="round-button"  (click)="resetPass()">
+                  Reset Password
+                </aside>
+            </div>
+     
+          </div>
+          <div class="cube  white l-padding round-border  mr-r">
+              <h2>
+                  Add/Change
+                  Profile photo
+                </h2>
+              <div class="flex">
+                    <div class="cube-right">
+                      <aside class="round-button" *ngIf="!imgBase64 && !imageFromData" (click)="triggerUplaod()">
+                        Add image <i class="plus-icon"></i>
+                        <input type="file" (change)="fileUploadEvent($event)" #inputFile id="inputFile" >
+                      </aside>
+                      <aside class="round-button" *ngIf="imageFromData && !imgBase64" (click)="triggerUplaod()">
+                          change image <i class="plus-icon"></i>
+                          <input type="file" (change)="fileUploadEvent($event)" #inputFile id="inputFile" >
+                        </aside>
+                      <aside class="file-info" *ngIf="imgBase64"><span>file Name: </span>
+                          {{fileName}}
+                      </aside>
+                      <aside class="round-button" (click)="saveUserImage()" *ngIf="imgBase64">
+                         save 
+                      </aside>
+                    </div>
+                    <div class="cube-left">
+                      <aside class="upload-button" *ngIf="!imgBase64 && !imageFromData"><i class="plus-icon"></i></aside>
+                      <canvas #imgCanvas id="imgCanvas" ></canvas>
+                    </div>
+              </div>
+          </div>
+          <div class="cube white round-border l-padding">
+            <h2>Notifications</h2>
+            <div class="checkbox-input">
+              <label for="sms">Sms</label>
+              <app-check-box
+                (triggerChange)="chooseSms($event)"
+                [(checked)]="!emailNotification"
+              ></app-check-box>
+            </div>
+            <div class="checkbox-input">
+              <label for="sms">Email</label>
+              <app-check-box
+                (triggerChange)="chooseEmail($event)"
+                [(checked)]="!smsNotification"
+              ></app-check-box>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

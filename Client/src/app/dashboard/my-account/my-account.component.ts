@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { UserModel } from 'src/app/models/user-model';
 import { AccountService } from 'src/app/services/account.service';
-import { userItem } from '../model/user-item';
 import { AdminService } from '../services/admin.service';
 
 @Component({

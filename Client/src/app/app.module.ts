@@ -60,7 +60,6 @@ import { ResetComponent } from './site-layout/components/reset/reset.component';
   providers: [
     CookieService,
     // { provide: RECAPTCHA_SETTINGS, useValue: globalSettings },
-    // { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpLoadingInterceptor,

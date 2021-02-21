@@ -33,7 +33,7 @@ BidSchema.virtual("auction", {
     justOne: true
 });
 BidSchema.virtual("user", {
-    ref: "User",
+    ref: "User._id",
     localField: "userId",
     foreignField: "_id",
     justOne: true
