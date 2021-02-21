@@ -122,8 +122,7 @@ export class MyAccountComponent implements OnInit {
     }
   }
   saveChanges() {
-    const userMaped:userItem = this.user.toUserItem();
-    this.admin.editUser(userMaped).subscribe(result=>{
+    this.admin.editUser(this.user).subscribe(result=>{
       this.admin.errorSubject.next('The user has been updated successfuly!');
     },
     err=>{

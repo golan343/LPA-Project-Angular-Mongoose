@@ -5,19 +5,27 @@
         <div class="bg">
             <div class="auction relative" [style.backgroundImage]="'url('+auction?.imageFileName+')'">
                 <h4 class="both"><span class="left">{{auction?.name}}</span><span class="right">{{auction?.description}}</span></h4>
-                <p *ngIf="auction?.status" class="valueAuction"><span><b>Price</b></span>: <span>{{price |
-                        currency}}</span> </p>
+                <p *ngIf="auction?.status" class="valueAuction"><span><b>Price</b></span>: <span>{{price | currency}}</span> </p>
             </div>
             <div class="flex padding-top space">
                 <div class="placeBid relative" *ngIf="auction?.status">
                     <span *ngIf="error?.bid" class="error">{{error?.bid}}</span>
                     <label> Offer cost: </label>
-                    <input type="text" appOnlyNumeric (change)="setAmount($event)" [value]="bid?.offer || 0" />
-                    <div class="overflow relative">
-                        <!-- <aside class="right plus " (click)="increament()"></aside> -->
+                    <div class="suggests padding" *ngIf="suggests">
+                        <h5>Suggestions</h5>
+                        <span class="cursor" (click)="chooseTop()">{{suggests.up}}</span>
+                        <span class="cursor" (click)="chooseDown()">{{suggests.down}}</span>
+                    </div>
+                    <input type="text" (keydown)="preventValue($event)" (keyup)="calcValue.call(this,[$event,auction.bidPattern])" (change)="setAmount($event)" [value]="bid?.offer || 0" />
+                    <div class="overflow relative l-padding">
                         <button type="button" (click)="addBid()"> Place my bid </button>
                     </div>
+               
+                    <div class="overflow relative l-padding">
+                        <button type="button" (click)="randomSuggestions()">Place Random bid</button>
+                    </div>
                 </div>
+                <app-bounch-stairs *ngIf="auction?.bidPattern" [bidBounce]="auction?.bidPattern"></app-bounch-stairs>
                 <div class="remaining-offers">
                     <h3><span>Remaining Offers</span></h3>
                     <h3><i>{{auction?.totalBids - auction?.bidsCount}}</i></h3>

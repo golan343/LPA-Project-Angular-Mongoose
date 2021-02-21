@@ -25,10 +25,11 @@ export class AuctionComponent implements OnInit {
   bids: BidModel[];
   setDataPoints = [];
   price: number;
+  bidsRange = new Array<string>();
   //bidAuctionGraphData: AuctionBidData;
   error: errorModel;
   bidAuctionGraphData: AuctionBidData;
-
+  suggests: { up: number, down: number };
   constructor(
     private activatedRoute: ActivatedRoute,
     private auctionService: AuctionsService,
@@ -39,14 +40,12 @@ export class AuctionComponent implements OnInit {
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.params.id;
-    this.auctionService.getAuction(id).toPromise();
-    this.auctionService.subjectAuctions.subscribe((auctions) => {
-      this.auction = auctions.map((auc) => {
-        return {
-          ...auc,
-          imageFileName: environment.devUrl + 'uploads/' + auc.imageFileName,
+    this.auctionService.getAuction(id).subscribe((auctions) => {
+      this.auction =  {
+          ...auctions,
+          imageFileName: environment.devUrl + 'uploads/' + auctions.imageFileName,
         };
-      })[0];
+      
       this.price = parseFloat(this.auction.price);
       this.bid = new BidModel();
       this.bid.offer = this.auction.bidPrice;
@@ -116,9 +115,65 @@ export class AuctionComponent implements OnInit {
       this.dialogService.subjectType.next(dialog);
     }
   }
+  chooseTop() {
+    this.bid.offer = this.suggests.up + '';
+    this.suggests = null;
+    this.error.clear("bid");
+  }
+  chooseDown() {
+    this.bid.offer = this.suggests.down + '';
+    this.suggests = null;
+    this.error.clear("bid");
+  }
+  preventValue($event: KeyboardEvent) {
+    let reg = /^[0-9.]/g;
+    let key = $event.key;
+    return reg.test(key) || /(Delete)|(Backspace)/gs.test(key);
+  }
 
-  increament() { }
+  /**
+   * bind on key down event to validate its number 
+   * @param reaguments bid bounce and event target
+   */
+  calcValue(arg: any) {
+    let price = parseFloat(arg[0].target.value);
+    this.error = new errorModel();
 
+    if (!price) {
+      this.error.bid = 'This value is Empty To Apply the bid fill up the price';
+      return false;
+    }
+    let bidPattern = arg[1];
+    let decimal = 1;
+    let counter = 0;
+    while (bidPattern / decimal < 1) { decimal /= 10; counter++; }
+    if (`${price}`.includes('.')) {
+      if (`${price}`.split('.')[1].length > counter) {
+        this.error.bid = 'This Value has to be divded to ' + bidPattern;
+        return false;
+      }
+    }
+    let res = Math.fround(price / bidPattern) % 1;
+
+    if (res !== 0) {
+      this.error.bid = 'This value has to be Multiples  of the value ' + bidPattern + ' you can choose one the suggestions beside';
+
+      let up = price;
+      let down = price;
+
+      while (up / bidPattern % 1 !== 0) { up = parseFloat((up + decimal).toFixed(2)); }
+      while (down / bidPattern % 1 !== 0 && down > 0) { down = parseFloat((down - decimal).toFixed(2)); }
+      this.suggests = { down, up };
+
+    } else {
+      this.suggests = null;
+    }
+
+  }
+  randomSuggestions(){
+    let bidBounce = parseFloat(this.auction.bidPattern);
+    this.bid.offer = (Math.floor(100*Math.random())* bidBounce).toFixed(2);
+  }
   showMovie() {
     const dialogMovie = new DialogData('video');
     dialogMovie.show = true;
@@ -127,5 +182,7 @@ export class AuctionComponent implements OnInit {
     this.dialogService.subjectType.next(dialogMovie);
   }
 
-  updateStatusDialog(): void { }
+  updateStatusDialog(): void {
+
+  }
 }

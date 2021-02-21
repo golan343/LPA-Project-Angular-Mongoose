@@ -46,7 +46,6 @@ export class AccountService {
     }
     return JSON.parse(user) as UserModel;
   }
-
   getUserIcon(){
     return sessionStorage.getItem('userImage');
   }
@@ -80,7 +79,11 @@ export class AccountService {
     sessionStorage.clear();
     this.isUserLoggedIn();
   }
-
+  changePassword(id: string, old: string, password: string): Promise<any> {
+    return this.http
+      .post<any>(BaseUrl + 'api/auth/reset', { id, old, password })
+      .toPromise();
+  }
 
   public addUser(user: UserModel): Promise<any> {
     return this.http.post<UserModel>(`${BaseUrl}api/auth/register`, user).toPromise();
@@ -92,5 +95,14 @@ export class AccountService {
 
   public updatePassword(token: string, password: string): Observable<any> {
     return this.http.patch(`${BaseUrl}api/auth/new-password/${token}`, {token, password});
+  }
+  editUser(user: UserModel): Observable<any> {
+    return this.http
+      .patch<any>(BaseUrl + 'api/auth/updateUser/' + user._id, user)
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
   }
 }

@@ -30,7 +30,6 @@ import { HttpLoadingInterceptor } from './interceptors/http-loading.interceptor'
 // import { I18nModule } from './i18n/i18n.module';
 import { SelectLanguageComponent } from './select-language/select-language.component';
 import { ShowPasswordDirective } from './directives/show-password.directive';
-import { OnlyNumericDirective } from './directives/only-numeric.directive';
 //import { UtilsModule } from './utils/utils.module';
 import { MainComponent } from './main/main.component';
 import { DashboardModule } from './dashboard/dashboard.module';
@@ -44,7 +43,6 @@ import { ResetComponent } from './site-layout/components/reset/reset.component';
 
 @NgModule({
   declarations: [
-    OnlyNumericDirective,
     SelectLanguageComponent,
     ShowPasswordDirective,
     MainComponent,

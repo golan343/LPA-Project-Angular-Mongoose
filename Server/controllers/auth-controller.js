@@ -24,9 +24,10 @@ router.post("/setUserImage",(req,res,next)=>{
 //  if(req.body.img && req.body.id){
     authLogic.saveUserImage(req.body.id, req.body.img, (err,result)=>{
       if(err){
-        return next(err);
+        res.status(501).json({...err});
+        return;
       }
-      res.json({...result,msg:'image has been saved successfuly!'});
+      res.json({msg:'image has been saved successfuly!'});
     });
   // }
   // res.status(401).json({msg:'no params sent'});

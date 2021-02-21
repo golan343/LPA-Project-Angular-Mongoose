@@ -54,7 +54,7 @@ export class AdminService {
         })
       );
   }
-  editUser(user: userItem): Observable<any> {
+  editUser(user: UserModel): Observable<any> {
     return this.http
       .patch<any>(environment.BaseUrl + 'api/auth/updateUser/' + user._id, user)
       .pipe(

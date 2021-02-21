@@ -1,0 +1,70 @@
+.bids-steps {
+  display: grid;
+  grid: 30px / repeat(4, 46px);
+  justify-content: center;
+  grid-gap: 8px;
+  margin: 3% auto;
+}
+
+.row-grid {
+  color: #fff;
+  font-weight: 700;
+  position: relative;
+  text-align: left;
+}
+h3,h4{
+    color:#fff;
+}
+h5 {
+  color: #fff;
+  text-align: left;
+}
+h5 span {
+  margin-right: 6px;
+  position: relative;
+}
+h5 span:after {
+  content: "";
+  height: 100%;
+  width: 2px;
+  background-color: #fff;
+  transform: rotateZ(23deg);
+  display: block;
+  position: absolute;
+  right: -6px;
+  top: 0;
+}
+h5 span:last-of-type:after{
+    content:unset;
+}
+.row-grid:first-of-type {
+  border-bottom: 2px solid #fff;
+}
+.row-grid:nth-of-type(6),
+.row-grid:nth-of-type(11),
+.row-grid:nth-of-type(16) {
+  border-bottom: 2px solid #fff;
+  border-left: 2px solid #fff;
+}
+.row-grid:nth-of-type(6)::before,
+.row-grid:nth-of-type(11)::before,
+.row-grid:nth-of-type(16)::before {
+  content: "";
+  width: 2px;
+  height: 150%;
+  display: block;
+  position: absolute;
+  left: -2px;
+  top: -10px;
+  background-color: #fff;
+}
+.row-grid:nth-of-type(5n + 1):after {
+  content: "";
+  height: 2px;
+  width: 126%;
+  display: block;
+  position: absolute;
+  left: -2px;
+  bottom: -2px;
+  background-color: #fff;
+}
