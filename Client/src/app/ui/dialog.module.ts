@@ -14,6 +14,7 @@ import { CheckBoxComponent } from './check-box/check-box.component';
 import { FlagSelectComponent } from './flag-select/flag-select.component';
 import { SwitchButtonComponent } from './switch-button/switch-button.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { ErrorBubbleComponent } from './error-bubble/error-bubble.component';
 
 @NgModule({
   declarations: [
@@ -28,9 +29,10 @@ import { CalendarComponent } from './calendar/calendar.component';
     FlagSelectComponent,
     SwitchButtonComponent,
     CalendarComponent,
+    ErrorBubbleComponent,
   ],
   imports: [CommonModule, FormsModule, UtilsModule],
-  exports: [DialogComponent, CheckBoxComponent,FlagSelectComponent,SwitchButtonComponent,CalendarComponent],
+  exports: [DialogComponent, CheckBoxComponent,FlagSelectComponent,SwitchButtonComponent,CalendarComponent, ErrorBubbleComponent],
   providers: [DialogService],
 })
 export class DialogModule {}
