@@ -1,10 +1,12 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const authLogic = require("../business-logic/auth-logic");
-const EmailLogic = require("../business-logic/email-logic");
-const errorHandler = require("../helpers/error-handler");
+//const EmailLogic = require("../business-logic/email-logic");
+//const errorHandler = require("../helpers/error-handler");
+const imageLogic = require('./../business-logic/images-logic');
 const hash = require("../helpers/hash");
 const User = require("../models/user");
+
 const crypto = require('crypto');
 const nodemailer = require("nodemailer");
 
@@ -12,22 +14,26 @@ const nodemailer = require("nodemailer");
 const router = express.Router();
 router.get('/userImage/:id',(req,res,next)=>{
   const id = req.params.id;
-  authLogic.getUserImage(id, function(err, result){
+  imageLogic.getUserImage(id, function(err, result){
     if(err){
       return next(err);
     }
+    console.log(result);
+
     res.json(result);
+
   })
 })
 router.post("/setUserImage",(req,res,next)=>{
   
 //  if(req.body.img && req.body.id){
-    authLogic.saveUserImage(req.body.id, req.body.img, (err,result)=>{
+  imageLogic.saveUserImage(req.body.id, req.body.img, (err,result)=>{
       if(err){
         res.status(501).json({...err});
         return;
       }
-      res.json({msg:'image has been saved successfuly!'});
+      console.log(result);
+      res.json({msg:'image has been saved successfuly!',...result});
     });
   // }
   // res.status(401).json({msg:'no params sent'});

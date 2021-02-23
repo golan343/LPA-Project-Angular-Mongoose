@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'live', component: LiveAuctionsComponent },
   { path: 'closed', component: ClosedComponent },
   { path: 'reset/:token', component: ResetComponent },
-  { path:'info', component:UserInfoComponent },
+  { path:'info', component:UserInfoComponent, canActivate:[AccountGuard] },
   { path: '', redirectTo: '/', pathMatch: 'full' }, // pathMath - exact empty string.
   { path: '**', component: PageNotFoundComponent } // Must be the last route!!
 ];

@@ -171,10 +171,6 @@ export class AdminComponent implements OnInit, AfterViewInit, OnDestroy {
       this.user = selectedNodes[0].data as UserModel;
       this.fileUploasService.canvas = this.canvasWrap.nativeElement;
       this.fileUploasService.clear();
-      if (this.user.img) {
-        
-        this.fileUploasService.setImageOnCanvas(this.user.img);
-      }
     } else {
       this.admins.errorSubject.next('no user were selected');
     }

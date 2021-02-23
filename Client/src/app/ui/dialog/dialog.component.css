@@ -6,6 +6,7 @@
   top: 0;
   left: 0;
   z-index: 5;
+  overflow: visible;
 }
 .backtap {
   content: "";
@@ -23,7 +24,7 @@
   border: 1px solid #fff;
   display: block;
   background-color: #d4f1f4;
-  margin: 7% auto;
+  margin: 4% auto 0% auto;
   border-radius: 3px;
   /* box-shadow: 0 10px 25px rgb(84 81 81 / 58%), 0 20px 48px rgb(145 139 139 / 85%), 0 1px 4px #f0f0f0; */
 }

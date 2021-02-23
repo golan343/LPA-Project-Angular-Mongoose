@@ -1,16 +1,19 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { AccountService } from './../../../services/account.service';
 import { DialogService } from './../../../ui/dialog.service';
-import { errorModel, UserModel, validationConstrains } from './../../../models/user-model';
+import { errorModel, UserImageRespone, UserModel, validationConstrains } from './../../../models/user-model';
 import { DialogData } from 'src/app/ui/model/dialog-data';
+import { ResourceLoader } from '@angular/compiler';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-user-info',
   templateUrl: './user-info.component.html',
   styleUrls: ['./user-info.component.css']
 })
-export class UserInfoComponent implements OnInit {
-
+export class UserInfoComponent implements OnInit, AfterViewInit {
+  imgObserver$:Observable<UserImageRespone>;
   constructor(private account: AccountService, private dialog: DialogService) { }
+
   @Input()
   user: UserModel;
   old: string;
@@ -24,21 +27,31 @@ export class UserInfoComponent implements OnInit {
   @ViewChild('inputFile') fileUpload: any;
   @ViewChild('imgCanvas') imgCanvas: any;
   ngOnInit(): void {
+    
     const user = sessionStorage.getItem('user');
-    this.user = user
-      ? (JSON.parse(sessionStorage.getItem('user')) as UserModel)
-      : (this.account.getUser() as UserModel);
-    const icon = this.account.getUserIcon();
-    if (icon) {
-      const context = this.imgCanvas.nativeElement.getContext('2d');
-      const img = new Image();
-      img.onload = (e) => {
-        context.drawImage(img, 0, 0);
-      };
-      img.src = icon;
+    if(user){
+      this.user = (JSON.parse(sessionStorage.getItem('user')) as UserModel);
+      this.imgObserver$ = this.account.getUserIcon(this.user._id);
     }
   }
-
+  ngAfterViewInit(): void {
+    this.imgObserver$.subscribe(result=>{
+      if (result.base64StringImg) {
+          this.setImageOnCanvas(result.base64StringImg);
+      }
+    },
+    err=>{
+      this.error.email = JSON.stringify(err);
+    });
+  }  
+  setImageOnCanvas(base64:string){
+    const context = this.imgCanvas.nativeElement.getContext('2d');
+    const img = new Image();
+    img.onload = (e) => {
+      context.drawImage(img, 0, 0);
+    };
+    img.src = base64;
+  }
   async resetPass() {
     if (this.password && this.old && this.user) {
       const result = await this.account.changePassword(this.user._id, this.old, this.password);
@@ -104,32 +117,32 @@ export class UserInfoComponent implements OnInit {
         'image/png'
       );
       if (shrinkedImgBase64) {
-        // this.admin.saveUserImage(this.user._id, shrinkedImgBase64).subscribe(
-        //   (result) => {
-        //     this.imageFromData = shrinkedImgBase64;
-        //     this.admin.errorSubject.next(result.msg);
-        //   },
-        //   (err) => {
-        //     console.log(err);
-        //     this.admin.errorSubject.next(err.msg);
-        //   }
-        // );
+        this.account.saveUserImage(this.user._id, shrinkedImgBase64).subscribe(
+          (result) => {
+            this.imageFromData = shrinkedImgBase64;
+            debugger;
+            sessionStorage.setItem('userImage',shrinkedImgBase64);
+            this.account.getUserIcon(this.user._id);
+            console.log(result);
+           // this.admin.errorSubject.next(result.msg);
+          },
+          (err) => {
+            console.log(err);
+            //this.admin.errorSubject.next(err.msg);
+          }
+        );
       }
     }
   }
   saveChanges() {
     const ValidationRequiArray = [new validationConstrains({ prop: 'firstName', content: this.user.firstName, isReqire: true, errorMsg: 'first Name is missing' })
       , new validationConstrains({ prop: 'lastName', content: this.user.lastName, isReqire: true, errorMsg: 'Last Name is missing' })
-      , new validationConstrains({
-        prop: 'password', content: this.user.password, isReqire: true,
-        errorMsg: 'Password  is missing',
-        pattarn: /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{8,}$/g,
-        pattarnErrorMsg: 'password must contain at least 8 characters one uppercase letter and one lowercase letter'
-      })
       , new validationConstrains({ prop: 'country', content: this.user.country, isReqire: true, errorMsg: 'country Name is missing' })
       , new validationConstrains({ prop: 'city', content: this.user.city, isReqire: true, errorMsg: 'city Name is missing' })
       , new validationConstrains({ prop: 'street', content: this.user.street, isReqire: true, errorMsg: 'street Name is missing' })];
-      validationConstrains
+      const vliatedArray = ValidationRequiArray.map(item=>this.error.validate(item));
+      console.log(vliatedArray);
+      return;
     this.account.editUser(this.user).subscribe(result => {
       // this.admin.errorSubject.next('The user has been updated successfuly!');
     },

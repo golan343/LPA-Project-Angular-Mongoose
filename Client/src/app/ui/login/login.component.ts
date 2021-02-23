@@ -20,12 +20,9 @@ export class LoginComponent implements OnInit , OnDestroy {
     this.keypress.unsubscribe();
   }
 
-  ngOnInit(): void {
-  
-   }
+  ngOnInit(): void {}
    ngAfterViewInit() {
     this.keypress =  fromEvent(window,"keyup").subscribe((e:KeyboardEvent)=>{
-      console.log(e.keyCode, e.code);
       if(e.code === 'Enter' || e.keyCode === 13){
         this.login();
       }

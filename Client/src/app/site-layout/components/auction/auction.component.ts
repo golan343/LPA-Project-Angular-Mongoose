@@ -138,12 +138,12 @@ export class AuctionComponent implements OnInit {
   calcValue(arg: any) {
     let price = parseFloat(arg[0].target.value);
     this.error = new errorModel();
-
-    if (!price) {
+    let bidPattern = arg[1];
+    if (!price || !bidPattern) {
       this.error.bid = 'This value is Empty To Apply the bid fill up the price';
       return false;
     }
-    let bidPattern = arg[1];
+    
     let decimal = 1;
     let counter = 0;
     while (bidPattern / decimal < 1) { decimal /= 10; counter++; }

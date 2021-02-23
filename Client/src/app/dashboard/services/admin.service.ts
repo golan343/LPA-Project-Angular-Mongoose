@@ -79,14 +79,14 @@ export class AdminService {
       img,
     });
   }
-  getUserImage(id: string): Observable<{ _id: string; img: string }> {
+  getUserImage(id: string): Observable<{ userId: string; base64StringImg: string }> {
     return this.http
-      .get<{ _id: string; img: string }>(
+      .get<{ userId: string; base64StringImg: string }>(
         environment.BaseUrl + 'api/auth/userImage/' + id
       )
       .pipe(
         tap((result) => {
-          sessionStorage.setItem('userImage', result.img);
+          sessionStorage.setItem('userImage', result.base64StringImg);
         })
       );
   }

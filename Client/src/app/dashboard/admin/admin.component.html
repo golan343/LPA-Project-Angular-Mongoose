@@ -82,11 +82,11 @@
               <div class="flex">
                <canvas class="canvasWrap" id="imgCanvas" #imgCanvas ></canvas>
                   <div class="cube-right">
-                    <aside class="round-button" *ngIf="!fileUploasService?.imgBase64 && !user.img" (click)="triggerUplaod()">
+                    <aside class="round-button" *ngIf="!fileUploasService?.imgBase64" (click)="triggerUplaod()">
                       Add image <i class="plus-icon"></i>
                       <input type="file" (change)="fileUploasService.fileUploadEvent($event)" #inputFile id="inputFile" >
                     </aside>
-                    <aside class="round-button" *ngIf="user.img && !fileUploasService?.imgBase64" (click)="triggerUplaod()">
+                    <aside class="round-button" *ngIf="!fileUploasService?.imgBase64" (click)="triggerUplaod()">
                         change image <i class="plus-icon"></i>
                         <input type="file" (change)="fileUploasService.fileUploadEvent($event)" #inputFile id="inputFile" >
                       </aside>
@@ -95,7 +95,7 @@
                     </aside>
                   </div>
                   <div class="cube-left">
-                    <aside class="upload-button" *ngIf="!fileUploasService?.imgBase64 && !user.img"><i class="plus-icon"></i></aside>
+                    <aside class="upload-button" *ngIf="!fileUploasService?.imgBase64"><i class="plus-icon"></i></aside>
                   </div>
             </div>
             <div class="flex">

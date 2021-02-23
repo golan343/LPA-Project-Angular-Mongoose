@@ -27,14 +27,14 @@ export class MyAccountComponent implements OnInit {
       ? (JSON.parse(sessionStorage.getItem('user')) as UserModel)
       : (this.account.getUser() as UserModel);
     this.admin.getUserImage(this.user._id).subscribe((result) => {
-      if(result.img){
-        this.imageFromData = result.img;
+      if(result.base64StringImg){
+        this.imageFromData = result.base64StringImg;
         const context = this.imgCanvas.nativeElement.getContext('2d');
         const img = new Image();
         img.onload = (e) => {
           context.drawImage(img, 0, 0);
         };
-        img.src = result.img;
+        img.src = result.base64StringImg;
       }else{
         this.admin.errorSubject.next('this user has no own pic');
       }

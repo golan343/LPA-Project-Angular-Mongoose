@@ -38,6 +38,9 @@ const UserSchema = mongoose.Schema({
         type: String,
         required: [true, "street details is missing"]
     },
+    settlement: {
+        type: String,
+    },
     country: {
         type: String,
         index: true,
@@ -56,13 +59,19 @@ const UserSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Role"
     },
+    postalCode:{
+        type:String
+    },
+    profileName:{
+        type:String
+    },
 
     token: { type:String },
     expiredToken: { type: Number},
-    
-    img:{
-        type:String
+    sectorNumber:{
+        type:Number,
     },
+    
     loginDate: {
         index: true,
         type: Date
