@@ -1,57 +1,55 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AccountService } from './../../../services/account.service';
 import { DialogService } from './../../../ui/dialog.service';
-import { errorModel, UserImageRespone, UserModel, validationConstrains } from './../../../models/user-model';
+import { errorModel,  UserImageRespone,  UserModel, validationConstrains } from './../../../models/user-model';
 import { DialogData } from 'src/app/ui/model/dialog-data';
-import { ResourceLoader } from '@angular/compiler';
-import { Observable } from 'rxjs';
+import {  Observable, Subscription } from 'rxjs';
 @Component({
   selector: 'app-user-info',
   templateUrl: './user-info.component.html',
-  styleUrls: ['./user-info.component.css']
+  styleUrls: ['./user-info.component.css'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
-export class UserInfoComponent implements OnInit, AfterViewInit {
-  imgObserver$:Observable<UserImageRespone>;
-  constructor(private account: AccountService, private dialog: DialogService) { }
+export class UserInfoComponent implements   OnDestroy, AfterViewInit  {
+  imgSubscriber = new Subscription();
+  constructor(private account: AccountService, private dialog: DialogService) {
+    this.user = this.account.getUser();
+   }
 
+  
   @Input()
   user: UserModel;
   old: string;
   password: string;
   smsNotification: boolean;
   emailNotification: boolean;
-  imgBase64: string;
-  imageFromData: string;
+  //UserImage$:Observable<UserImageRespone>;
+  imgBase64image: string;
+  filrErrorMsg: string;
   fileName: string;
   error = new errorModel();
   @ViewChild('inputFile') fileUpload: any;
   @ViewChild('imgCanvas') imgCanvas: any;
-  ngOnInit(): void {
-    
-    const user = sessionStorage.getItem('user');
-    if(user){
-      this.user = (JSON.parse(sessionStorage.getItem('user')) as UserModel);
-      this.imgObserver$ = this.account.getUserIcon(this.user._id);
+  
+   
+  ngAfterViewInit(): void {
+    if(this.user){
+      this.imgSubscriber = this.account.getUserIcon(this.user._id).subscribe(result=>{
+        console.log(result);
+        if (result.base64StringImg) {
+           // this.imageFromData = result.base64StringImg;
+            this.imgBase64image = result.base64StringImg;
+        }
+      },
+      err=>{
+        this.error.email = JSON.stringify(err);
+      });
     }
   }
-  ngAfterViewInit(): void {
-    this.imgObserver$.subscribe(result=>{
-      if (result.base64StringImg) {
-          this.setImageOnCanvas(result.base64StringImg);
-      }
-    },
-    err=>{
-      this.error.email = JSON.stringify(err);
-    });
-  }  
-  setImageOnCanvas(base64:string){
-    const context = this.imgCanvas.nativeElement.getContext('2d');
-    const img = new Image();
-    img.onload = (e) => {
-      context.drawImage(img, 0, 0);
-    };
-    img.src = base64;
+  ngOnDestroy(): void {
+    this.imgSubscriber.unsubscribe();
   }
+  
   async resetPass() {
     if (this.password && this.old && this.user) {
       const result = await this.account.changePassword(this.user._id, this.old, this.password);
@@ -69,60 +67,18 @@ export class UserInfoComponent implements OnInit, AfterViewInit {
   chooseEmail($event) {
     this.emailNotification = $event;
   }
-  fileUploadEvent($event) {
-    const files = $event.target.files as FileList;
-    for (let i = 0; i < files.length; i++) {
-      if (files[i].size > 3000000) {
-        // this.admin.errorSubject.next('file size exceeded the range');
-        break;
-      }
-      switch (files[i].type) {
-        case 'image/png':
-        case 'image/jpeg':
-        case 'image/gif':
-          this.fileName = files[i].name;
-          const reader = new FileReader();
-          reader.readAsDataURL(files[i]);
-          reader.onload = this.setUploadFile.bind(this);
-          reader.onerror = (err) => {
-            console.log(err);
-            // this.admin.errorSubject.next(JSON.stringify(err));
-          };
-          break;
-        default:
-        // this.admin.errorSubject.next('only image format to upload');
-      }
-    }
-  }
-  triggerUplaod() {
-    this.fileUpload.nativeElement.click();
-  }
-  setUploadFile(data) {
-    this.imgBase64 = data.currentTarget.result;
-    const context = this.imgCanvas.nativeElement.getContext('2d');
-    context.clearRect(0, 0, this.imgCanvas.nativeElement.width, this.imgCanvas.nativeElement.height);
-    const img = new Image();
-    img.width = 100;
-    img.height = 100;
-    img.onload = (e) => {
-      context.drawImage(img, 0, 0, 200, 100);
-    };
-    img.src = this.imgBase64;
-    console.log('original' + this.imgBase64.length);
-  }
-  saveUserImage() {
-    if (this.imgBase64) {
-      // const context = this.imgCanvas.nativeElement.getContext('2d');
-      const shrinkedImgBase64 = this.imgCanvas.nativeElement.toDataURL(
-        'image/png'
-      );
-      if (shrinkedImgBase64) {
+  saveUserImage($event) {
+
+    
+      if ($event) {
+        const shrinkedImgBase64 = $event;
+
         this.account.saveUserImage(this.user._id, shrinkedImgBase64).subscribe(
           (result) => {
-            this.imageFromData = shrinkedImgBase64;
-            debugger;
+            // this.imageFromData = shrinkedImgBase64;
+            // debugger;
             sessionStorage.setItem('userImage',shrinkedImgBase64);
-            this.account.getUserIcon(this.user._id);
+            
             console.log(result);
            // this.admin.errorSubject.next(result.msg);
           },
@@ -132,7 +88,11 @@ export class UserInfoComponent implements OnInit, AfterViewInit {
           }
         );
       }
-    }
+    
+  }
+  setFileUploadError($event){
+    console.log($event);
+    this.filrErrorMsg = $event;
   }
   saveChanges() {
     const ValidationRequiArray = [new validationConstrains({ prop: 'firstName', content: this.user.firstName, isReqire: true, errorMsg: 'first Name is missing' })

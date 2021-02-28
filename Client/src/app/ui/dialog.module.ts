@@ -15,6 +15,7 @@ import { FlagSelectComponent } from './flag-select/flag-select.component';
 import { SwitchButtonComponent } from './switch-button/switch-button.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { ErrorBubbleComponent } from './error-bubble/error-bubble.component';
+import { ProfileImageSettingComponent } from './profile-image-setting/profile-image-setting.component';
 
 @NgModule({
   declarations: [
@@ -30,9 +31,16 @@ import { ErrorBubbleComponent } from './error-bubble/error-bubble.component';
     SwitchButtonComponent,
     CalendarComponent,
     ErrorBubbleComponent,
+    ProfileImageSettingComponent,
   ],
   imports: [CommonModule, FormsModule, UtilsModule],
-  exports: [DialogComponent, CheckBoxComponent,FlagSelectComponent,SwitchButtonComponent,CalendarComponent, ErrorBubbleComponent],
+  exports: [DialogComponent,
+     CheckBoxComponent,
+     FlagSelectComponent,
+     SwitchButtonComponent,
+     CalendarComponent, 
+     ErrorBubbleComponent,
+     ProfileImageSettingComponent],
   providers: [DialogService],
 })
 export class DialogModule {}
