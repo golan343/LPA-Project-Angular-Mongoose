@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from './../../../services/account.service';
 import { MobileService } from './../../../services/mobile.service';
@@ -10,41 +10,45 @@ import { UserModel } from './../../../models/user-model';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   showMobile: boolean;
   isLogin: boolean;
   subscriberLogin: Subscription;
+  subscriberUserIcon: Subscription;
   user: UserModel;
   userImage:string;
   constructor(private router: Router,
     public accountService: AccountService,
     private dialogLocalsService: DialogService,
-    private mobile: MobileService
+    private mobile: MobileService,
+    private cdr: ChangeDetectorRef
   ) { }
   ngOnDestroy(): void {
     this.subscriberLogin.unsubscribe();
+    this.subscriberUserIcon.unsubscribe();
   }
 
   ngOnInit(): void {
     this.subscriberLogin = this.accountService.isLoginSubject.subscribe(isLogin => {
       this.isLogin = isLogin
-    });
-    const cookieUsr = sessionStorage.getItem('user');
-    debugger;
-    if (cookieUsr) {
+      const cookieUsr = sessionStorage.getItem('user');
+    if (cookieUsr && isLogin && !this.userImage) {
       const cookieUsrParsed = JSON.parse(cookieUsr);
       this.user = cookieUsrParsed as UserModel;
-      this.accountService.getUserIcon(this.user._id).subscribe(result=>{
-        if(result.base64StringImg)
-          this.userImage = result.base64StringImg;
-      },
-      err=>{
-        console.log(err);
-      }
-      );
+      
     }
+    this.accountService.currentUserIconSubject.subscribe(base64StringImg=>{
+      if(base64StringImg){
+        this.cdr.detectChanges();
+        this.userImage = base64StringImg;
+      }
+    },
+    err=>{ console.log(err);});
+    });
+    
   }
   menuToggle() {
     this.showMobile = !this.showMobile;

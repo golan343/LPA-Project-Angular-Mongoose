@@ -63,7 +63,6 @@ export class UserPanelComponent implements OnInit {
     plugins: {
       datalabels: {
         formatter: (value, ctx) => {
-          debugger;
           let sum = 0;
           let dataArr = ctx.chart.data.datasets[0].data;
           dataArr.map(data => {

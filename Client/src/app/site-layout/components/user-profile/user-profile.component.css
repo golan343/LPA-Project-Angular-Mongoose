@@ -1,0 +1,120 @@
+.container {
+  background-repeat: no-repeat;
+  padding-bottom: 50px;
+  margin: 2% 3% 1% auto;
+  width: 80%;
+  min-height: 600px;
+  font-size: 1.5rem;
+}
+.up,
+.down {
+  width: 96%;
+  padding: 2%;
+  position: relative;
+}
+.wrap {
+  margin-bottom: 1%;
+}
+.line {
+  background-color: #fff;
+  width: 100%;
+  clear: both;
+  height: 1px;
+}
+i.config-icon {
+  background-repeat: no-repeat;
+  margin: 0 0 1% 0;
+}
+h1 {
+  margin: 0 0 1% 0;
+  text-align: center;
+  color:#fff;
+}
+
+.profile {
+  justify-content: space-around;
+  align-items: flex-start;
+}
+.round {
+  width: 120px;
+  height: 120px;
+  background-color: #54708c;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex > div {
+  flex-basis: 20%;
+  color: #54708c;
+}
+.person-image {
+  flex-grow: 1;
+}
+.round canvas {
+  max-width: 150px;
+  max-height: 150px;
+  flex-grow: 1;
+}
+.details {
+  flex-grow: 3;
+}
+.details h2 {
+  display: inline-block;
+  font-style: normal;
+  border-bottom: 1px solid rgb(197, 184, 184);
+  vertical-align: middle;
+  padding: 2px 0;
+  margin-bottom: 1%;
+  width: 65%;
+}
+.details h4 {
+  margin-bottom: 1px;
+}
+.prop .flex {
+  justify-content: space-between;
+  width: 65%;
+}
+.prop h3 {
+  display: inline-block;
+}
+.prop span {
+  font-size: 0.6rem;
+  font-weight: 200;
+}
+.third {
+  width: 29%;
+}
+.white {
+  background-color: #fff;
+  color: #54708c;
+}
+.cube {
+  padding: 2%;
+  border-radius: 5px;
+}
+.down > .flex {
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+.wins {
+  justify-content: space-between;
+  margin-bottom: 3%;
+  margin-top: 3%;
+}
+.wins h3 {
+  border: 1px solid;
+  padding: 0 0 2px 0;
+}
+.wins p {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.wins p span{
+  font-size: 1rem;
+}
+.wins p i {
+  margin: 0 1% 0 0;
+}

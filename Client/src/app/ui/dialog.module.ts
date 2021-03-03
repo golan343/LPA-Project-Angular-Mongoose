@@ -16,6 +16,7 @@ import { SwitchButtonComponent } from './switch-button/switch-button.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { ErrorBubbleComponent } from './error-bubble/error-bubble.component';
 import { ProfileImageSettingComponent } from './profile-image-setting/profile-image-setting.component';
+import { ImageCanvasComponent } from './image-canvas/image-canvas.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ProfileImageSettingComponent } from './profile-image-setting/profile-im
     CalendarComponent,
     ErrorBubbleComponent,
     ProfileImageSettingComponent,
+    ImageCanvasComponent,
   ],
   imports: [CommonModule, FormsModule, UtilsModule],
   exports: [DialogComponent,
@@ -40,7 +42,7 @@ import { ProfileImageSettingComponent } from './profile-image-setting/profile-im
      SwitchButtonComponent,
      CalendarComponent, 
      ErrorBubbleComponent,
-     ProfileImageSettingComponent],
+     ProfileImageSettingComponent,ImageCanvasComponent],
   providers: [DialogService],
 })
 export class DialogModule {}

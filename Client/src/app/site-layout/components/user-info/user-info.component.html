@@ -54,13 +54,11 @@
         <label>Sector Number</label>
         <input type="text" [(ngModel)]="user.sectorNumber" />
       </div>
-    </div>
-
-    <div class="flex">
       <div class="input-container">
-        <aside class="btn" (click)="saveChanges()">
+        <button class="" (click)="saveChanges()">
+          Save
           <i class="edit-user fa"></i>
-        </aside>
+        </button>
       </div>
     </div>
   </div>
@@ -80,14 +78,15 @@
         </div>
 
         <div class="cube-left">
-          <aside class="round-button" (click)="resetPass()">
-            Reset Password
-          </aside>
+          <button  (click)="resetPass()">
+            Reset
+            <i class="edit-user fa"></i>
+          </button>
         </div>
       </div>
-      <div class="cube white l-padding round-border mr-r">
+      <div class="cube white l-padding round-border mr-r relative">
         <h2>Add/Change Profile photo</h2>
-        <app-error-bubble [errorMsg]="filrErrorMsg"></app-error-bubble>
+        <app-error-bubble [errorMsg]="fileErrorMsg"></app-error-bubble>
         <app-profile-image-setting
           [imgBase64]="imgBase64image"
           (ErrorEvent)="setFileUploadError($event)"
@@ -114,3 +113,4 @@
     </div>
   </div>
 </div>
+<app-global-loader></app-global-loader>

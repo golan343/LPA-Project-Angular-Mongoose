@@ -130,7 +130,7 @@ router.post("/login", async (request, response) => {
     await authLogic.updateAsync(loginUpdate);
 
     const token = jwt.sign({ user }, config.jwt.secretKey, {
-      expiresIn: "30m",
+      expiresIn: "3h",
     });
     user.password = undefined;
     request.session.user = user;

@@ -27,8 +27,15 @@ const sanitize = require('./middleware/sanitize');
 const expressRateLimit = require('express-rate-limit');
 const expressSession = require('express-session');
 const fileUpload = require('express-fileupload');
+const rateLimit = require("express-rate-limit");
 
-
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100 // limit each IP to 100 requests per windowMs
+  });
+  
+  //  apply to all requests
+server.use(limiter);
 server.use(expressSession({
     name: "CaptchaSession",
     secret: "GishValidate",

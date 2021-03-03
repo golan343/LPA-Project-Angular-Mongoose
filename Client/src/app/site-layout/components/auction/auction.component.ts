@@ -44,6 +44,7 @@ export class AuctionComponent implements OnInit {
       this.auction =  {
           ...auctions,
           imageFileName: environment.devUrl + 'uploads/' + auctions.imageFileName,
+          bidPattern: auctions.bidPattern || "0.5"
         };
       
       this.price = parseFloat(this.auction.price);
@@ -109,6 +110,7 @@ export class AuctionComponent implements OnInit {
         }
       );
     } else {
+
       const dialog = new DialogData('Login');
       dialog.title = 'In Order to place this You need to sign in first';
       dialog.show = true;
@@ -138,7 +140,7 @@ export class AuctionComponent implements OnInit {
   calcValue(arg: any) {
     let price = parseFloat(arg[0].target.value);
     this.error = new errorModel();
-    let bidPattern = arg[1];
+    let bidPattern = arg[1] || 1;
     if (!price || !bidPattern) {
       this.error.bid = 'This value is Empty To Apply the bid fill up the price';
       return false;

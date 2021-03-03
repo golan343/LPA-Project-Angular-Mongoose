@@ -1,0 +1,75 @@
+
+<div class="container">
+    <h1>{{title}}</h1>
+    <section class="up">
+        <div class="wrap">
+        <div class="profile flex">
+            <div class="person-image">
+                <div class="round overflow">
+                    <app-image-canvas [imgBase64]="userImage" ></app-image-canvas>
+                </div>
+            </div>
+            
+            <div class="details">
+                <h2>{{account?.user.profileName}}</h2>
+                <h4>{{account?.user.firstName}} {{account?.user.lastName}}</h4>  
+                <h4>{{account?.user.phone}}</h4>
+                <h4>{{account?.user.email}}</h4>   
+            </div>
+            <div class="details">
+                <h2>{{account?.user.country}}<span *ngIf="account?.user.settelment">- {{account?.user.settelment}}</span>  </h2>  
+                <h4 *ngIf="account?.user.city">{{account?.user.city}}</h4>
+                <h4 *ngIf="account?.user.street">{{account?.user.street}} {{account?.user.homeNumber}}</h4>
+                <h4 *ngIf="account?.user.sector">{{account?.user.sector}}</h4>   
+                <h4 *ngIf="account?.user.postalCode">{{account?.user.postalCode}}</h4>   
+            </div>
+            <div class="details">
+                <h2>Notifications</h2>
+                <div class="prop padding">
+                    <div class="flex">
+                        <h3>SMS</h3>
+                        <app-switch-button class="pointer"
+                        [rightText]="'ON'"
+                        [leftText]="'OFF'"
+                        [left]="smaNotify"
+                      ></app-switch-button>
+                    </div>
+                    
+                  <span>Notification by phone Sms </span>
+                </div>
+                <div class="prop padding">
+                    <div class="flex">
+                        <h3>Email</h3>
+                        <app-switch-button class="pointer"
+                        [rightText]="'ON'"
+                        [leftText]="'OFF'"
+                        [left]="emailNotify"
+                      ></app-switch-button>
+                    </div>
+                    
+                  <span>Notification directly to your Email </span>
+                </div>
+            </div>
+
+        </div>
+            <i class="config-icon right" routerLink="/info"  ></i>
+            <div class="line"></div>
+        </div>
+     
+    </section>
+    <section class="down">
+        <div class="flex">
+            <aside class="two-third flex">
+                <app-sale-item *ngFor="let item of UserAuctions" [auction]="item"></app-sale-item>
+            </aside>
+            <aside class="third cube white">
+                <h2>Winning On Auctions</h2>
+                <aside *ngFor="let auctionItem of winningAuctions" class="flex wins justify-space">
+                   
+                   <p><span>{{auctionItem?.name}}</span></p> <p><span>{{auctionItem?.winningOffer | currency}}</span> <i class="trophy-icon fa"></i></p>
+                </aside>
+            </aside>
+        </div>
+    </section>
+</div>
+<app-global-loader></app-global-loader>

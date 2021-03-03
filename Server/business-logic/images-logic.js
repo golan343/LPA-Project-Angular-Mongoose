@@ -9,11 +9,11 @@ function getUserImage(id, callback) {
 //otherwise update user base64 image
 ////
 function saveUserImage(id, imgBase64, callback) {
- // const options = { upsert: true, new: true, setDefaultsOnInsert: true };
  imageModel.findOneAndUpdate(
-    { userId: id, base64StringImg: imgBase64, src: "" },
+    { userId: id},
     {
       base64StringImg: imgBase64,
+      altered: new Date()
     },
     { upsert: true },
     callback

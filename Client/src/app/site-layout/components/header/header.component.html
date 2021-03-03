@@ -13,8 +13,8 @@
     <div
       *ngIf="userImage"
       class="round"
-      [style]="'background-image:url(' + userImage + ')'"
-    ></div>
+      style="background-image:url(' {{userImage}} ')"
+    ></div> 
 
     <div *ngIf="!userImage" class="user">
       <span class="person-icon"></span>

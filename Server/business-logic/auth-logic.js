@@ -52,20 +52,20 @@ function adminUpdateUser(user, callback) {
     { useFindAndModify: false }
   ).exec(callback);
 }
-function getUserImage(id,callback){
-  User.findOne({_id:id}).select('img').exec(callback);
-}
-function saveUserImage(id,imgBase64,callback){
-  User.findByIdAndUpdate(
-    { _id: id },
-    {
-      $set: {
-        img:imgBase64 
-      },
-    },
-    { useFindAndModify: false }
-  ).exec(callback);
-}
+// function getUserImage(id,callback){
+//   User.findOne({_id:id}).select('img').exec(callback);
+// }
+// function saveUserImage(id,imgBase64,callback){
+//   User.findByIdAndUpdate(
+//     { _id: id },
+//     {
+//       $set: {
+//         img:imgBase64 
+//       },
+//     },
+//     { useFindAndModify: false }
+//   ).exec(callback);
+// }
 function findUserById(userId, callback) {
   User.find({ _id: userId }, callback);
 }
@@ -134,8 +134,8 @@ module.exports = {
   adminUpdateUser,
   findUserById,
   resetPass,
-  saveUserImage,
-  getUserImage,
+  // saveUserImage,
+  // getUserImage,
   SetUserToken,
   searchUsersByFirstName,
   searchUserByEmail,

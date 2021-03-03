@@ -42,7 +42,6 @@ export class MainDashboardComponent implements OnInit {
     window.history.pushState('forward', null, null);
     const popstateEvent = fromEvent(window,'popstate')
     popstateEvent.subscribe((e) => {
-      debugger;
       let lastModule = this.routerStateArray.pop();
       console.log(lastModule);
       this.modelNum = lastModule;

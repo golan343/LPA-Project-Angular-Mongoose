@@ -19,6 +19,9 @@ const BidSchema = mongoose.Schema({
     date: {
         required: [true,  "is missing."],
         type: String
+    },
+    isWinner:{
+        type:Boolean
     }
 }, { 
     versionKey: false,

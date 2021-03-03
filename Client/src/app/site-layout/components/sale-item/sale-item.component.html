@@ -1,0 +1,5 @@
+<div class="sale" (click)="showSaleInfo()">
+    <h4>{{auction?.name}}</h4>
+    <aside class="image" [style.backgroundImage]="'url('+auction?.imageFileName+')'" ></aside>
+    <p>{{auction?.description}}</p>
+</div>

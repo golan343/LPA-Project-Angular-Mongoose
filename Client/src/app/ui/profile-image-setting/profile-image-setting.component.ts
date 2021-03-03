@@ -1,22 +1,22 @@
-import { Component, Input, OnInit, Output, ViewChild, EventEmitter, AfterViewInit, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewChild, EventEmitter, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
 
 
 @Component({
   selector: 'app-profile-image-setting',
   templateUrl: './profile-image-setting.component.html',
   styleUrls: ['./profile-image-setting.component.css'],
-  changeDetection:ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileImageSettingComponent implements OnInit, OnChanges {
 
   constructor() { }
-  
+
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes.imgBase64.currentValue){
-        this.btntext = "Change Icon";
-        this.setImageOnCanvas();
-      } else {
-        this.btntext = "Add New";
+    if (changes.imgBase64.currentValue) {
+      this.btntext = "Change Icon";
+      this.setImageOnCanvas();
+    } else {
+      this.btntext = "Add New";
     }
   }
   btntext: string;
@@ -30,13 +30,13 @@ export class ProfileImageSettingComponent implements OnInit, OnChanges {
   @ViewChild('inputFile') fileUpload: any;
   @ViewChild('imgCanvas') imgCanvas: any;
   ngOnInit(): void {
-    if(this.imgBase64){
-      
+    if (this.imgBase64) {
+
       this.btntext = "Change Icon";
       this.setImageOnCanvas();
     } else {
       this.btntext = "Add New";
-  }
+    }
   }
   setImageOnCanvas() {
     const context = this.imgCanvas.nativeElement.getContext('2d');
@@ -64,11 +64,11 @@ export class ProfileImageSettingComponent implements OnInit, OnChanges {
           reader.onerror = (err) => {
             console.log(err);
             // this.admin.errorSubject.next(JSON.stringify(err));
-            this.ErrorEvent.emit("Erorr loading the File "+JSON.stringify(err));
+            this.ErrorEvent.emit("Erorr loading the File " + JSON.stringify(err));
           };
           break;
         default:
-          this.ErrorEvent.emit('only image formats arw allowed to upload ' )
+          this.ErrorEvent.emit('Only image formats are allowed')
         // this.admin.errorSubject.next('only image format to upload');
       }
     }
