@@ -27,7 +27,7 @@ import { LoaderComponent } from './components/loader/loader.component'
 import { ClosedAuctionComponent } from './components/closed-auction/closed-auction.component';
 import { MainlayoutComponent } from './mainlayout/mainlayout.component';
 import { PageComponent } from './components/page/page.component';
-// import { UserInfoComponent } from './components/user-info/user-info.component';
+import { UserInfoComponent } from './components/user-info/user-info.component';
 import { BounchStairsComponent } from './components/bounch-stairs/bounch-stairs.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { SaleItemComponent } from './components/sale-item/sale-item.component';
@@ -52,7 +52,7 @@ import { SaleItemComponent } from './components/sale-item/sale-item.component';
     LoaderComponent,
     MainlayoutComponent,
     PageComponent,
-    // UserInfoComponent,
+    UserInfoComponent,
     BounchStairsComponent,
     UserProfileComponent,
     SaleItemComponent,
