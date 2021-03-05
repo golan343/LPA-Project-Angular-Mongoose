@@ -43,15 +43,11 @@ export class ClosedAuctionComponent implements OnInit, OnDestroy {
     });
     const id = this.activatedRoute.snapshot.params.id;
 
-    this.auctionService.getAuction(id).toPromise();
-    this.auctionService.subjectAuctions.subscribe(auctions => {
-      this.auction = auctions.map(auc => {
-
-        return {
-          ...auc,
-          imageFileName: environment.BaseUrl + 'uploads/' + auc.imageFileName
-        }
-      })[0];
+    this.auctionService.getAuction(id).subscribe(auctions => {
+      this.auction =  {
+        ...auctions,
+        imageFileName: environment.devUrl + 'uploads/' + auctions.imageFileName,
+      };
       this.price = parseFloat(this.auction.price);
     });
     this.bidService.getAllBidsIncludingAuction(id);

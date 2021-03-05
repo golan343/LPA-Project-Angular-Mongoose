@@ -7,7 +7,7 @@ function verifyLoggedIn(request, response, next) {
         return;
     }
 
-    const token = request.headers.authorization.spit(" ")[1];
+    const token = request.headers.authorization.split(" ")[1];
 
     // if there is not token
     if(!token) {

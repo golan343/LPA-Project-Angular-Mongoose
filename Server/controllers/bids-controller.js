@@ -1,6 +1,7 @@
 const express = require('express');
 const bidsLogic = require('../business-logic/bids-logic');
 const Bid = require('../models/bid');
+const userLogic = require('../business-logic/auth-logic');
 const verifyLogin = require('../middleware/verify-logged-in');
 
 const router = express.Router();
@@ -136,6 +137,61 @@ router.get('/join/bids-in-auction/:auctionId', async (request, response) => {
         response.status(500).send( { error: err });
     }
 
+});
+
+router.get('/join/top10/:auctionId', async (request, response) => {
+    try{    
+        const auctionId = request.params.auctionId;
+        const bidsArr = await bidsLogic.getAllBidsIncludingSpecificAuctionAsync(auctionId);
+        if(!bidsArr){
+            return;
+        }
+        const uniqueArr = [];
+        const filteredObj = {};
+        const users = [];
+
+        
+        for(let item of bidsArr) {
+            if(!filteredObj[item.offer]){
+                filteredObj[item.offer] = [];
+            }
+            users.push(item.userId);
+            filteredObj[item.offer].push(item);
+        }
+        for(const prop in filteredObj) {
+            if(filteredObj[prop].length === 1) {
+                const obj = {
+                    "offer" : filteredObj[prop][0].offer,
+                    "userId" : filteredObj[prop][0].userId
+                }
+                uniqueArr.push(obj);
+            }
+        }
+        uniqueArr.sort((a, b)=> { 
+            return a.offer - b.offer
+        });
+        
+        const info = uniqueArr.slice(0, 10);
+        for(const item of info) {
+            // console.log(item);
+            const user = {
+                _id: item.userId,
+                unique: true
+            }
+           await userLogic.updateAsync(user);
+        }
+
+        // console.log(info);
+
+
+        
+
+        response.status(200).json();
+        return;
+
+    }catch(err){
+        response.status(500).json({ error: err.message });
+    }
 });
 
 module.exports = router;
