@@ -2,10 +2,9 @@ import { BidsService } from './../../../services/bids.service';
 import { AuctionBidData, BidModel } from './../../../models/bid-model';
 import { environment } from './../../../../environments/environment';
 
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuctionModel } from './../../../models/auction-model';
-import { CookieService } from 'ngx-cookie-service';
 import { AuctionsService } from './../../../services/auctions.service';
 import { DialogData } from './../../../ui/model/dialog-data';
 import { DialogService } from './../../../ui/dialog.service';
@@ -16,6 +15,7 @@ import { AccountService } from './../../../services/account.service';
   selector: 'app-auction',
   templateUrl: './auction.component.html',
   styleUrls: ['./auction.component.css'],
+  //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuctionComponent implements OnInit {
   auction: AuctionModel;
@@ -44,6 +44,7 @@ export class AuctionComponent implements OnInit {
       this.auction =  {
           ...auctions,
           imageFileName: environment.devUrl + 'uploads/' + auctions.imageFileName,
+          bidPattern: auctions.bidPattern || "0.5"
         };
       
       this.price = parseFloat(this.auction.price);
@@ -109,6 +110,7 @@ export class AuctionComponent implements OnInit {
         }
       );
     } else {
+
       const dialog = new DialogData('Login');
       dialog.title = 'In Order to place this You need to sign in first';
       dialog.show = true;
@@ -138,12 +140,12 @@ export class AuctionComponent implements OnInit {
   calcValue(arg: any) {
     let price = parseFloat(arg[0].target.value);
     this.error = new errorModel();
-
-    if (!price) {
+    let bidPattern = arg[1] || 1;
+    if (!price || !bidPattern) {
       this.error.bid = 'This value is Empty To Apply the bid fill up the price';
       return false;
     }
-    let bidPattern = arg[1];
+    
     let decimal = 1;
     let counter = 0;
     while (bidPattern / decimal < 1) { decimal /= 10; counter++; }
@@ -170,10 +172,12 @@ export class AuctionComponent implements OnInit {
     }
 
   }
+
   randomSuggestions(){
     let bidBounce = parseFloat(this.auction.bidPattern);
     this.bid.offer = (Math.floor(100*Math.random())* bidBounce).toFixed(2);
   }
+
   showMovie() {
     const dialogMovie = new DialogData('video');
     dialogMovie.show = true;

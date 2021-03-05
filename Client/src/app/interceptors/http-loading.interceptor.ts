@@ -23,6 +23,7 @@ export class HttpLoadingInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     ///jwt
+
     // if (this.accountService.isLogin) {
     //   const token = sessionStorage.getItem('token');
     //   if(token){
@@ -37,6 +38,7 @@ export class HttpLoadingInterceptor implements HttpInterceptor {
     //   }
       
     // }
+
     ///preloader
     this.loader.show();
     return next

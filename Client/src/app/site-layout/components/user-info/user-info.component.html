@@ -1,0 +1,116 @@
+<div class="container">
+  <div class="col white round-border l-padding">
+    <h2>User info</h2>
+
+    <div class="flex">
+      <div class="input-container">
+        <label>First Name</label>
+        <app-error-bubble></app-error-bubble>
+        <input type="text" [(ngModel)]="user.firstName" />
+      </div>
+      <div class="input-container">
+        <label>Last Name</label>
+        <input type="email" [(ngModel)]="user.lastName" />
+      </div>
+      <div class="input-container">
+        <label>Mobile number</label>
+        <input type="text" [(ngModel)]="user.phone" />
+      </div>
+    </div>
+    <div class="flex">
+      <div class="input-container">
+        <label>E-Mail</label>
+        <input type="email" [(ngModel)]="user.email" />
+      </div>
+      <div class="input-container">
+        <label>Profile Name</label>
+        <input type="text" [(ngModel)]="user.profileName" />
+      </div>
+      <div class="input-container">
+        <label>Country</label>
+        <input type="text" [(ngModel)]="user.country" />
+      </div>
+    </div>
+    <div class="flex">
+      <div class="input-container">
+        <label>State</label>
+        <input type="text" [(ngModel)]="user.state" />
+      </div>
+      <div class="input-container">
+        <label>City</label>
+        <input type="text" [(ngModel)]="user.city" />
+      </div>
+      <div class="input-container">
+        <label>Settlement</label>
+        <input type="text" [(ngModel)]="user.settlement" />
+      </div>
+    </div>
+    <div class="flex">
+      <div class="input-container">
+        <label>Postal code</label>
+        <input type="text" [(ngModel)]="user.postalCode" />
+      </div>
+      <div class="input-container">
+        <label>Sector Number</label>
+        <input type="text" [(ngModel)]="user.sectorNumber" />
+      </div>
+      <div class="input-container">
+        <button class="" (click)="saveChanges()">
+          Save
+          <i class="edit-user fa"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col mr-t">
+    <div class="flex">
+      <div class="cube white l-padding round-border mr-r flex align-end">
+        <div class="cube-right">
+          <h2>reset password</h2>
+          <div class="input-container">
+            <label>old Password</label>
+            <input type="password" [(ngModel)]="old" />
+          </div>
+          <div class="input-container">
+            <label>New Password</label>
+            <input type="password" [(ngModel)]="password" />
+          </div>
+        </div>
+
+        <div class="cube-left">
+          <button  (click)="resetPass()">
+            Reset
+            <i class="edit-user fa"></i>
+          </button>
+        </div>
+      </div>
+      <div class="cube white l-padding round-border mr-r relative">
+        <h2>Add/Change Profile photo</h2>
+        <app-error-bubble [errorMsg]="fileErrorMsg"></app-error-bubble>
+        <app-profile-image-setting
+          [imgBase64]="imgBase64image"
+          (ErrorEvent)="setFileUploadError($event)"
+          (setImageEvent)="saveUserImage($event)"
+        ></app-profile-image-setting>
+      </div>
+      <div class="cube white round-border l-padding">
+        <h2>Notifications</h2>
+        <div class="checkbox-input">
+          <label for="sms">Sms</label>
+          <app-check-box
+            (triggerChange)="chooseSms($event)"
+            [(checked)]="!emailNotification"
+          ></app-check-box>
+        </div>
+        <div class="checkbox-input">
+          <label for="sms">Email</label>
+          <app-check-box
+            (triggerChange)="chooseEmail($event)"
+            [(checked)]="!smsNotification"
+          ></app-check-box>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-global-loader></app-global-loader>

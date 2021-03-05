@@ -35,14 +35,16 @@ export class RegisterComponent implements OnInit {
     this.user.roleId = '5f58ba6355eac12930d7b3ef';
     this.user.registrationDate = this.today.toLocaleString();
     this.user.loginDate = this.today.toLocaleString();
-    this.accountService.addUser(this.user).then(result => {
+    this.accountService.addUser(this.user).subscribe(result => {
       const d = new DialogData('');
       d.show = true;
-      d.innerTitle = 'success message';
-      d.text = 'you have sign in successfully!';
+      d.title = 'success message';
+      d.innerTitle = 'you have sign in successfully!';
+      d.text = 'start to take a bid today.'
       this.dialog.method();
       this.dialog.subjectType.next(d);
-    }).catch(err => {
+      this.accountService.setLoginUser(result.addedUser,result.token)
+    },err => {
       if (err.error) {
         if (err.error.errors) {
           for (let prop in err.error.errors) {

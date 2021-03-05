@@ -1,10 +1,12 @@
 .container {
   background-color: #808080;
   padding: 2% 0;
+  max-height: 70vh;
+  overflow-y: scroll;
 }
 .register {
   min-width: 230px;
-  margin: 3% auto 3% auto;
+  margin: 2% auto 2% auto;
 }
 .register h1,
 .register h2 {
@@ -19,8 +21,10 @@
   width: auto;
 }
 .register .flex {
+  margin: 0 auto;
   justify-content: space-between;
   align-items: center;
+  width: 89%;
 }
 .register .input-container {
   text-align: left;
@@ -34,3 +38,5 @@
 .register .wrap-email {
   overflow: visible;
 }
+
+

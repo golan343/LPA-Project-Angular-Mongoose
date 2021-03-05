@@ -36,6 +36,7 @@ export class MainlayoutComponent implements OnInit {
       this.menuColor = color;
     });
     this.menuColor = { black: true };
+    
   }
 
   public logout(): void {

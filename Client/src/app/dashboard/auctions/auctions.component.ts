@@ -111,7 +111,6 @@ export class AuctionsComponent implements OnInit {
   fileUploadEvent($event) {
     const files = $event.target.files as FileList;
     this.formData = new FormData();
-    debugger;
     for (let i = 0; i < files.length; i++) {
       if (files[i].size > 3000000) {
         this.admin.errorSubject.next('file size exceeded the range');

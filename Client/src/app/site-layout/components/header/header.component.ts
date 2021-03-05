@@ -1,6 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 import { AccountService } from './../../../services/account.service';
 import { MobileService } from './../../../services/mobile.service';
 import { DialogData } from './../../../ui/model/dialog-data';
@@ -11,34 +10,45 @@ import { UserModel } from './../../../models/user-model';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   showMobile: boolean;
   isLogin: boolean;
   subscriberLogin: Subscription;
+  subscriberUserIcon: Subscription;
   user: UserModel;
   userImage:string;
   constructor(private router: Router,
     public accountService: AccountService,
-    private cookieService: CookieService,
     private dialogLocalsService: DialogService,
-    private mobile: MobileService
+    private mobile: MobileService,
+    private cdr: ChangeDetectorRef
   ) { }
   ngOnDestroy(): void {
     this.subscriberLogin.unsubscribe();
+    this.subscriberUserIcon.unsubscribe();
   }
 
   ngOnInit(): void {
     this.subscriberLogin = this.accountService.isLoginSubject.subscribe(isLogin => {
       this.isLogin = isLogin
-    });
-    const cookieUsr = this.cookieService.get('user');
-    if (cookieUsr) {
+      const cookieUsr = sessionStorage.getItem('user');
+    if (cookieUsr && isLogin && !this.userImage) {
       const cookieUsrParsed = JSON.parse(cookieUsr);
-      this.user = cookieUsrParsed.user as UserModel;
+      this.user = cookieUsrParsed as UserModel;
+      
     }
-    this.userImage = this.accountService.getUserIcon();
+    this.accountService.currentUserIconSubject.subscribe(base64StringImg=>{
+      if(base64StringImg){
+        this.cdr.detectChanges();
+        this.userImage = base64StringImg;
+      }
+    },
+    err=>{ console.log(err);});
+    });
+    
   }
   menuToggle() {
     this.showMobile = !this.showMobile;
@@ -47,26 +57,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public moveToHome(): void {
     this.router.navigateByUrl('/');
   }
-
-  // goToDashboard(): void {
-  //   let route = '/user-panel';
-  //   if (this.accountService.isAdmin()){
-  //     const role = JSON.parse(this.cookieService.get('user')).user.roleId;
-  //     if (role === '5f58ba8855eac12930d7b405'){
-  //       route = '/admin-panel';
-
-  //     }
-  //     else if (role === '5f58ba9a55eac12930d7b40c'){
-  //       route = '/sub-admin';
-
-  //     }
-  //     else if (role === '5f58badd55eac12930d7b427'){
-  //       route = '/gish-admin';
-
-  //     }
-  //   }
-  //   this.router.navigateByUrl(route);
-  // }
 
   logout(): void {
     this.accountService.logout();

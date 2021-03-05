@@ -83,15 +83,7 @@ router.get('/get/last', async (request, response) => {
 router.post('/', async (request, response) => {
     try{
         request.body.isActive = true;
-        const auction = new Auction(request.body);
-        //validate auction
-        const error = await auction.validate();
-        if(error) {
-            response.status(400).send( { error: error });
-            return;
-        }
-
-        const addedAuction = await auctionLogic.addAuctionAsync(auction);
+        const addedAuction = await auctionLogic.addAuctionAsync(request.body);
         response.status(201).json(addedAuction);
         
     }
@@ -193,6 +185,45 @@ router.put('/setarcive/:_id',async (req,res)=>{
             }
           });
     }
+});
+router.get('/getUserAuctions/:id',async (req, res, next)=>{
+    if(req.params.id){
+            auctionLogic.getUsersAuctionsInfo(req.params.id, (err,bidsResult)=> {
+                if (err) {
+                    res.status(501).json({msg:'id is Not Valid'});
+                    return;
+                }
+                if (!bidsResult) {
+                    res.status(501).json({msg:'no Data returned',bidsResult});
+                    return;
+                }
+                const filterObject = {};
+                JSON.parse(JSON.stringify(bidsResult)).forEach(bidItem=>{
+                    if(bidItem.auction && bidItem.auction.isActive){
+                        if(!filterObject[bidItem.auctionId]){
+                            filterObject[bidItem.auctionId] = Object.assign({}, bidItem.auction);
+                            filterObject[bidItem.auctionId].bids = [];
+                        }
+                        filterObject[bidItem.auctionId].bids.push({
+                            id:bidItem._id,
+                            offer:bidItem.offer,
+                            date:bidItem.date,
+                            isWinner:!!bidItem.isWinner
+                        })
+                        if(bidItem.isWinner){
+                            filterObject[bidItem.auctionId].isWinner = bidItem.isWinner;
+
+                            // futuer addition data to include to winning person
+                            filterObject[bidItem.auctionId].winningOffer = bidItem.offer;
+                        }
+                    }
+                    
+                });
+                res.json(filterObject);
+            });
+     
+    }
+   //res.status(401).json({msg:'no id was attached here'})
 });
 
 module.exports = router;

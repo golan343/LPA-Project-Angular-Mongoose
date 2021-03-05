@@ -14,6 +14,8 @@ import { ClosedComponent } from './components/closed/closed.component';
 import { ClosedAuctionComponent } from './components/closed-auction/closed-auction.component';
 import { PageComponent } from './components/page/page.component';
 import { ResetComponent } from './components/reset/reset.component';
+import { UserInfoComponent } from './components/user-info/user-info.component';
+import {UserProfileComponent} from './components/user-profile/user-profile.component'
 
 
 
@@ -28,6 +30,8 @@ const routes: Routes = [
   { path: 'live', component: LiveAuctionsComponent },
   { path: 'closed', component: ClosedComponent },
   { path: 'reset/:token', component: ResetComponent },
+  { path:'info', component:UserInfoComponent, canActivate:[AccountGuard] },
+  { path:'profile', component:UserProfileComponent, canActivate:[AccountGuard] },
   { path: '', redirectTo: '/', pathMatch: 'full' }, // pathMath - exact empty string.
   { path: '**', component: PageNotFoundComponent } // Must be the last route!!
 ];

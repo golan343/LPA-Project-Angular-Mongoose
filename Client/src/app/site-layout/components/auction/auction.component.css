@@ -264,7 +264,6 @@ h2 {
   align-items: center;
 }
 .cube-body p {
-  text-align: left;
   width: 80%;
 }
 .suggests {
@@ -454,7 +453,9 @@ h1 {
 }
 @media only screen and (max-width: 900px) {
   .auction {
-    height: 40vh;
+    height: 50vh;
+    background-position: 0px 0px;
+    background-size: 100%;
   }
   .flex{
     display: block;

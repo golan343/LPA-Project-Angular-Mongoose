@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 function verifyLoggedIn(request, response, next) {
     if(!request.headers.authorization) {
-        response.status(401).send("you are not logged in!");
+        response.status(401).json({msg:"you are not logged in!"});
         return;
     }
 

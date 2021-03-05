@@ -11,6 +11,7 @@ export class DialogData {
     src: string;
     innerTitle: string;
     callBackDialog: any;
+    dynamicObject:unknown;
     close() {
         this.show = false;
     }

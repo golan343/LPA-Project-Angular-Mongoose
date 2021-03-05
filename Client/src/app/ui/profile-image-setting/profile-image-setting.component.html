@@ -1,0 +1,21 @@
+<div class="flex">
+    <div class="cube-right">
+      <aside class="round-button"  (click)="triggerUplaod()">
+        <span>{{btntext}}</span> <i class="plus-icon"></i>
+        <input type="file" (change)="fileUploadEvent($event)" #inputFile id="inputFile" >
+      </aside>
+    
+      <aside class="file-info" *ngIf="fileName"><span>file Name: </span>
+          {{fileName}}
+      </aside>
+      <aside class="round-button" (click)="saveUserImage()" *ngIf="fileName">
+         save 
+      </aside>
+    </div>
+    <div class="cube-left">
+      <aside class="upload-button">
+        <i class="plus-icon"></i>
+        <canvas #imgCanvas id="imgCanvas" ></canvas>
+      </aside>
+    </div>
+</div>

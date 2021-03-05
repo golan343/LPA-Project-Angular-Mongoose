@@ -20,6 +20,9 @@ const BidSchema = mongoose.Schema({
     date: {
         required: [true,  "is missing."],
         type: String
+    },
+    isWinner:{
+        type:Boolean
     }
 }, { 
     versionKey: false,
@@ -34,7 +37,7 @@ BidSchema.virtual("auction", {
     justOne: true
 });
 BidSchema.virtual("user", {
-    ref: "User",
+    ref: "User._id",
     localField: "userId",
     foreignField: "_id",
     justOne: true

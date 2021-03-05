@@ -1,5 +1,9 @@
 import { userItem } from '../dashboard/model/user-item';
 
+export interface UserImageRespone{
+  userId:string;
+  base64StringImg:string;
+}
 export class UserModel {
   constructor() {}
   isAdmin: boolean;
@@ -8,15 +12,18 @@ export class UserModel {
   password?: string;
   firstName?: string;
   lastName?: string;
+  profileName?: string;
   country?: string;
   city?: string;
   street?: string;
-  postcode?: string;
+  postalCode?: string;
   birthDate?: string;
   roleId: string;
   token?: string;
   phone?: string;
-  img?: string;
+  settlement?: string;
+  sectorNumber: number;
+  state?:string;
   loginDate?: string;
   registrationDate?: string;
   public toUserItem(): userItem {
@@ -37,8 +44,6 @@ export class UserModel {
 }
 
 export class errorModel extends UserModel {
-  email: string;
-  password: string;
   bid: string;
   validatePassword(passText) {
     if (!passText) {

@@ -6,6 +6,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./switch-button.component.css']
 })
 export class SwitchButtonComponent implements OnInit {
+  @Input()
   left = false;
   @Input()
   leftText = '';

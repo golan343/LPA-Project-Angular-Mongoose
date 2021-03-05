@@ -25,7 +25,12 @@ export class AuctionModel extends Auction {
         public winnerYoutubeId?: string,
         public bidPattern?: string,
 
-    ) { super(); }
+    ) { super();
+    if(!this.bidPattern){
+        debugger;
+        this.bidPattern = "0.5";
+    }
+    }
     createdBy: string;
 }
 

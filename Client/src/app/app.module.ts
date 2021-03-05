@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 // import { FlexLayoutModule } from '@angular/flex-layout';
 // import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SiteLayoutModule } from './site-layout/site-layout.module';
-import { CookieService } from 'ngx-cookie-service';
+//import { CookieService } from 'ngx-cookie-service';
 
 // import {
 //   RecaptchaModule,
@@ -58,9 +58,7 @@ import { ResetComponent } from './site-layout/components/reset/reset.component';
     FormsModule
   ],
   providers: [
-    CookieService,
     // { provide: RECAPTCHA_SETTINGS, useValue: globalSettings },
-    // { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpLoadingInterceptor,

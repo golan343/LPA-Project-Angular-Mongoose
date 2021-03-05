@@ -29,7 +29,7 @@ export class MainDashboardComponent implements OnInit {
     this.user = this.account.getUser();
     this.title = `hello ${this.user.firstName} ${this.user.lastName}`;
     this.adminService.getUserImage(this.user._id).subscribe((result) => {
-      this.userImage = result.img;
+      this.userImage = result.base64StringImg;
     });
     this.adminService.errorSubject.subscribe((err) => {
       this.errorMessgae = err;
@@ -42,7 +42,6 @@ export class MainDashboardComponent implements OnInit {
     window.history.pushState('forward', null, null);
     const popstateEvent = fromEvent(window,'popstate')
     popstateEvent.subscribe((e) => {
-      debugger;
       let lastModule = this.routerStateArray.pop();
       console.log(lastModule);
       this.modelNum = lastModule;

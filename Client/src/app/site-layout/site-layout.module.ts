@@ -29,6 +29,8 @@ import { MainlayoutComponent } from './mainlayout/mainlayout.component';
 import { PageComponent } from './components/page/page.component';
 // import { UserInfoComponent } from './components/user-info/user-info.component';
 import { BounchStairsComponent } from './components/bounch-stairs/bounch-stairs.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { SaleItemComponent } from './components/sale-item/sale-item.component';
 
 
 
@@ -52,6 +54,8 @@ import { BounchStairsComponent } from './components/bounch-stairs/bounch-stairs.
     PageComponent,
     // UserInfoComponent,
     BounchStairsComponent,
+    UserProfileComponent,
+    SaleItemComponent,
   ],
   imports: [
     AppRoutingModule,

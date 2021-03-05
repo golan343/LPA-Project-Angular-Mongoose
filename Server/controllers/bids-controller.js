@@ -34,7 +34,7 @@ router.get('/:id', async (request, response) => {
 });
 
 //add bid - /api/bid
-router.post('/', verifyLogin, async (request, response) => {
+router.post('/',  async (request, response) => {
     try{
         const bid = new Bid(request.body);
         

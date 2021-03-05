@@ -6,6 +6,7 @@ import { AuctionModel } from './../../../models/auction-model';
 import { AuctionsService } from './../../../services/auctions.service';
 import { BaseUrl, environment } from 'src/environments/environment';
 import { BidsService } from './../../../services/bids.service'
+import { DialogData } from 'src/app/ui/model/dialog-data';
 
 @Component({
   selector: 'app-closed',
@@ -41,7 +42,7 @@ export class ClosedComponent implements OnInit, OnDestroy {
   public showAuction(_id: string): void {
     this.router.navigate(['/auction/', _id]);
   }
-
+ 
 
 }
 

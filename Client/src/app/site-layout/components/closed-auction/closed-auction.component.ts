@@ -10,6 +10,7 @@ import { AuctionsService } from './../../../services/auctions.service';
 import { BidsService } from './../../../services/bids.service';
 import { DialogService } from './../../../ui/dialog.service';
 import { environment } from './../../../../environments/environment';
+import { DialogData } from 'src/app/ui/model/dialog-data';
 
 @Component({
   selector: 'app-closed-auction',
@@ -60,4 +61,12 @@ export class ClosedAuctionComponent implements OnInit, OnDestroy {
     });
   }
 
+  showMovie() {
+    const dialogMovie = new DialogData('video');
+    dialogMovie.show = true;
+    dialogMovie.wide = true;
+    dialogMovie.src = 'https://www.youtube.com/embed/' + this.auction.youtubeId;
+    this.dialogService.subjectType.next(dialogMovie);
+  }
 }
+
