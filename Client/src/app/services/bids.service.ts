@@ -1,11 +1,11 @@
 
+import { reqHeader } from './config-header';
 import { BaseUrl } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BidModel } from '../models/bid-model';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-
 
 
 @Injectable({
@@ -32,7 +32,7 @@ export class BidsService {
     }));
   }
   public addBid(bid: BidModel): Observable<any> {
-    return this.http.post<BidModel>(`${BaseUrl}api/bids`, bid);
+    return this.http.post<BidModel>(`${BaseUrl}api/bids`, bid ,{ headers: reqHeader} );
   }
 
 

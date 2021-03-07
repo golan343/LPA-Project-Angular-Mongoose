@@ -33,13 +33,16 @@ async function deleteBidAsync(_id) {
   return Bid.deleteOne({ _id }).exec();
 }
 function getAllBidsIncludingSpecificAuctionAsync(auctionId) {
+
   return Bid.find({ auctionId })
    // .populate("auctionId")
   //  .populate("userId")
     .exec();
+
 }
 
 module.exports = {
+
   getAllBidsAsync,
   getOneBidAsync,
   addBidAsync,
@@ -47,3 +50,4 @@ module.exports = {
   deleteBidAsync,
   getAllBidsIncludingSpecificAuctionAsync,
 };
+

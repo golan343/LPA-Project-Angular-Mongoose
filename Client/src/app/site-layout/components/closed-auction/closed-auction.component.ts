@@ -60,6 +60,7 @@ export class ClosedAuctionComponent implements OnInit, OnDestroy {
       }
     });
   }
+
   showMovie() {
     const dialogMovie = new DialogData('video');
     dialogMovie.show = true;
@@ -68,3 +69,4 @@ export class ClosedAuctionComponent implements OnInit, OnDestroy {
     this.dialogService.subjectType.next(dialogMovie);
   }
 }
+

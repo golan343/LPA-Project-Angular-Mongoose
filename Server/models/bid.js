@@ -13,6 +13,7 @@ const BidSchema = mongoose.Schema({
         required: [true,  "is missing."]
     },
     offer: {
+        index: true,
         required: [true,  "is missing."],
         type: String
     },

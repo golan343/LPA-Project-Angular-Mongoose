@@ -59,11 +59,17 @@ const UserSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Role"
     },
+
+    unique: {
+        type: Boolean
+    },
+
     postalCode:{
         type:String
     },
     profileName:{
         type:String
+
     },
 
     token: { type:String },
