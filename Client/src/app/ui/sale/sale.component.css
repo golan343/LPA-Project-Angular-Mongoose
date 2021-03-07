@@ -1,0 +1,60 @@
+.image {
+  min-width: 300px;
+  min-height: 250px;
+  width: 100%;
+  border-radius: 10px;
+  background-position: center;
+  background-size: 100% auto;
+}
+.flex {
+  align-items: stretch;
+}
+.half {
+  width: 50%;
+}
+.wrap {
+  background-color: #fff;
+  padding: 2%;
+  min-height: 78vh;
+  box-shadow: 2px 2px 1px 1px #233;
+  text-align: left;
+  border-radius: 10px;
+}
+h3 {
+  margin: 1% 0px;
+}
+h4 {
+  margin: 1% 0;
+}
+.bids {
+  margin-top: 2%;
+  padding: 2%;
+  box-shadow: 0px 0px 15px 1px rgb(197, 195, 195);
+  border-radius: 10px;
+  border: 0.2px solid #168bf3;
+  border-radius: 10px;
+}
+bids h3,
+bids ul {
+  width: 60%;
+  margin: 1% auto;
+  display: block;
+}
+li {
+  display: flex;
+  justify-content: space-between;
+  padding: 2%;
+  border: 0.2px solid #888;
+  border-radius: 10px;
+}
+.col {
+  margin-bottom: 10%;
+}
+.col h3 {
+  font-size: 1.4rem;
+}
+.col  span {
+  padding: 2%;
+  background-color: #888;
+}
+

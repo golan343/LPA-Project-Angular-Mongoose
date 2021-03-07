@@ -17,6 +17,7 @@ export class AccountGuard implements CanActivate {
     if(isLogedIn){
       return true;
     }
+    this.router.navigate(['']);
     return false;
 
   }

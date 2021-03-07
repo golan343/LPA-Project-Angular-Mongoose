@@ -9,7 +9,7 @@ import { LoaderService } from 'src/app/services/loader.service';
   styleUrls: ['./global-loader.component.css', './../loader.component.css']
 })
 export class GlobalLoaderComponent implements OnInit, OnDestroy {
-  show = true;
+  show = false;
   private subscription: Subscription;
   constructor(private loaderService: LoaderService) { }
   ngOnInit() {

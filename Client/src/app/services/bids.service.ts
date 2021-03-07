@@ -1,5 +1,5 @@
 
-import { BaseUrl, environment } from './../../environments/environment';
+import { BaseUrl } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BidModel } from '../models/bid-model';
@@ -39,9 +39,8 @@ export class BidsService {
   public getAllBids(): Promise<BidModel[] | any> {
     return this.http.get<BidModel[]>(`${BaseUrl}api/bids`)
       .toPromise().then(bids => {
-        this.subjectBidList.next(bids);
-        // const action: Action = { type: ActionType.GetAllBids, payload: bids };
-        // store.dispatch(action);
+  
+      
       }).catch((err) => { console.log(err); });
   }
 

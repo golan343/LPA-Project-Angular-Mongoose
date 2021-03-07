@@ -2,10 +2,7 @@ import { BaseUrl } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuctionModel } from '../models/auction-model';
-//import { BidsService } from './bids.service';
 import { Observable, Subject } from 'rxjs';
-import { BidModel } from '../models/bid-model';
-import { map } from 'rxjs/internal/operators/map';
 
 @Injectable({
   providedIn: 'root'

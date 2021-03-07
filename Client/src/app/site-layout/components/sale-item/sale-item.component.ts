@@ -27,6 +27,7 @@ export class SaleItemComponent implements OnInit {
   showSaleInfo(){
     const dialg = new DialogData('sale');
     dialg.dynamicObject = {... this.auction};
+    dialg.wide = true;
     this.dialogService.subjectType.next(dialg);
   }
 
