@@ -1,5 +1,5 @@
 export class Auction {
-    constructor(){
+    constructor() {
     }
     bidPrice: string;
     bidsCount: number;
@@ -24,12 +24,16 @@ export class AuctionModel extends Auction {
         public winPrice?: string,
         public winnerYoutubeId?: string,
         public bidPattern?: string,
+        public bidsRemains?: number,
 
-    ) { super();
-    if(!this.bidPattern){
-        debugger;
-        this.bidPattern = "0.5";
-    }
+    ) {
+        super();
+        if (!this.bidPattern) {
+            this.bidPattern = "0.5";
+        }
+        console.log(Number(this.bidsCount) , Number(this.maxOffer));
+        if (Number(this.bidsCount) && Number(this.maxOffer))
+            this.bidsRemains = Number(this.bidsCount) - Number(this.maxOffer)
     }
     createdBy: string;
 }

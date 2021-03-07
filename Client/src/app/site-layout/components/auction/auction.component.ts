@@ -2,7 +2,7 @@ import { BidsService } from './../../../services/bids.service';
 import { AuctionBidData, BidModel } from './../../../models/bid-model';
 import { environment } from './../../../../environments/environment';
 
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuctionModel } from './../../../models/auction-model';
 import { AuctionsService } from './../../../services/auctions.service';
@@ -10,6 +10,7 @@ import { DialogData } from './../../../ui/model/dialog-data';
 import { DialogService } from './../../../ui/dialog.service';
 import { errorModel, validationConstrains } from './../../../models/user-model';
 import { AccountService } from './../../../services/account.service';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-auction',
@@ -17,7 +18,9 @@ import { AccountService } from './../../../services/account.service';
   styleUrls: ['./auction.component.css'],
   //changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AuctionComponent implements OnInit {
+export class AuctionComponent implements OnInit, OnDestroy {
+  auctionObservable$ = new Observable<AuctionModel>();
+  auctionSubscriber: Subscription;
   auction: AuctionModel;
   Maxbid: BidModel;
   Minbid: BidModel;
@@ -37,26 +40,31 @@ export class AuctionComponent implements OnInit {
     private bidService: BidsService,
     private dialogService: DialogService
   ) { }
+  ngOnDestroy(): void {
+    if(this.auctionSubscriber)
+    this.auctionSubscriber.unsubscribe();
+  }
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.params.id;
-    this.auctionService.getAuction(id).subscribe((auctions) => {
-      this.auction =  {
-          ...auctions,
-          imageFileName: environment.devUrl + 'uploads/' + auctions.imageFileName,
-          bidPattern: auctions.bidPattern || "0.5"
-        };
-      
-      this.price = parseFloat(this.auction.price);
-      this.bid = new BidModel();
-      this.bid.offer = this.auction.bidPrice;
-    });
+    this.auctionObservable$ =  this.auctionService.getAuction(id);
+  
     this.bidService.getAllBidsIncludingAuction(id);
     this.bidService.subjectBidsInAuction.subscribe((bids) => {
       this.bids = bids;
-      if (bids && bids.length > 1) {
-        this.bidAuctionGraphData = new AuctionBidData(bids);
-      }
+      this.auctionSubscriber = this.auctionObservable$.subscribe((auctions) => {
+        this.auction =  {
+            ...auctions,
+            imageFileName: environment.devUrl + 'uploads/' + auctions.imageFileName,
+            bidPattern: auctions.bidPattern || "0.5",
+            bidsRemains: Number(auctions.maxOffer) - Number(auctions.bidsCount)
+          };
+        
+        this.price = parseFloat(this.auction.price);
+        this.bid = new BidModel();
+        this.bid.offer = this.auction.bidPrice;
+      })
+     
     });
   }
   getBids() {

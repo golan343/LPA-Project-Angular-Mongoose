@@ -278,12 +278,21 @@ button {
   left: 8px;
 }
 .paging {
-  width: 50%;
+
   padding: 2%;
   margin: 0 auto;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+}
+.paging{
+  display: inline-block;
+  width:auto;
+}
+.paging.left{
+  left:-4%;
+  top:40%;
+}
+.paging.right{
+  right:-4%;
+  top:40%;
 }
 .pen-icon::after{
   content: "\f044";
@@ -618,7 +627,6 @@ button {
 }
 .two-third{
   width: 60%;
-  flex-flow: row wrap;
 }
 .third{
   width: 30%;

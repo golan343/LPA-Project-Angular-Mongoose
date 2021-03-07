@@ -90,7 +90,6 @@ export class UserInfoComponent implements OnDestroy, OnInit {
 
   }
   setFileUploadError($event) {
-    console.log($event);
     this.fileErrorMsg = $event;
   }
   saveChanges() {
