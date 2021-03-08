@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, ViewChild, EventEmitter, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewChild, EventEmitter, ChangeDetectionStrategy, OnChanges, SimpleChanges, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 
 
 @Component({
@@ -7,9 +7,19 @@ import { Component, Input, OnInit, Output, ViewChild, EventEmitter, ChangeDetect
   styleUrls: ['./profile-image-setting.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProfileImageSettingComponent implements OnInit, OnChanges {
+export class ProfileImageSettingComponent implements AfterViewInit , OnInit, OnChanges {
 
-  constructor() { }
+  constructor(private cdr:ChangeDetectorRef) { }
+  ngAfterViewInit(): void {
+    if (this.imgBase64) {
+
+      this.btntext = "Change Icon";
+      this.setImageOnCanvas();
+
+    } else {
+      this.btntext = "Add New";
+    }
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.imgBase64.currentValue) {
@@ -18,6 +28,7 @@ export class ProfileImageSettingComponent implements OnInit, OnChanges {
     } else {
       this.btntext = "Add New";
     }
+    this.cdr.detectChanges();
   }
   btntext: string;
   @Input()
@@ -30,21 +41,17 @@ export class ProfileImageSettingComponent implements OnInit, OnChanges {
   @ViewChild('inputFile') fileUpload: any;
   @ViewChild('imgCanvas') imgCanvas: any;
   ngOnInit(): void {
-    if (this.imgBase64) {
-
-      this.btntext = "Change Icon";
-      this.setImageOnCanvas();
-    } else {
-      this.btntext = "Add New";
-    }
+  
   }
   setImageOnCanvas() {
-    const context = this.imgCanvas.nativeElement.getContext('2d');
-    const img = new Image();
-    img.onload = (e) => {
-      context.drawImage(img, 0, 0);
-    };
-    img.src = this.imgBase64;
+    if(this.imgCanvas){
+      const context = this.imgCanvas.nativeElement.getContext('2d');
+      const img = new Image();
+      img.onload = (e) => {
+        context.drawImage(img, 0, 0);
+      };
+      img.src = this.imgBase64;
+    } 
   }
   fileUploadEvent($event) {
     const files = $event.target.files as FileList;

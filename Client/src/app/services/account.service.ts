@@ -25,8 +25,11 @@ export class AccountService {
     this.isLogin = !this.helper.isTokenExpired(token);
     this.user = this.getUser();
     this.user.isAdmin = this.user.roleId ? this.checkIsAdmin(this.user.roleId) : false;
-    this.isLoginSubject.next(this.isLogin)
-    this.getUserIcon();
+    if(!this.user.isAdmin){
+      this.isLoginSubject.next(this.isLogin)
+      this.getUserIcon();
+    }
+    
   }
   public getToken(): string {
     return sessionStorage.getItem('token');
@@ -40,21 +43,22 @@ export class AccountService {
     return JSON.parse(user) as UserModel;
   }
 
- async getUserIcon():Promise<UserImageRespone> {
+  async getUserIcon(): Promise<UserImageRespone> {
     const base64StringImg = sessionStorage.getItem('userImage');
     if (!base64StringImg && this.user._id) {
       const ImageRespone = await this.http
-      .get<UserImageRespone>(environment.BaseUrl + 'api/auth/userImage/' + this.user._id)
-      .pipe(tap(result => {
-        if (result)
-          sessionStorage.setItem('userImage', result.base64StringImg);
-          this.currentUserIconSubject.next(result.base64StringImg);
-      })).toPromise();
+        .get<UserImageRespone>(environment.BaseUrl + 'api/auth/userImage/' + this.user._id)
+        .pipe(tap(result => {
+          if (result) {
+            sessionStorage.setItem('userImage', result.base64StringImg);
+            this.currentUserIconSubject.next(result.base64StringImg);
+          }
+        })).toPromise();
       return ImageRespone;
 
     }
-    
-    const result = { userId:this.user._id, base64StringImg } as UserImageRespone;
+
+    const result = { userId: this.user._id, base64StringImg } as UserImageRespone;
     this.currentUserIconSubject.next(result.base64StringImg);
     return result;
   }
@@ -62,7 +66,7 @@ export class AccountService {
     return this.http.post<any>(environment.BaseUrl + 'api/auth/setUserImage', {
       id,
       img,
-    }).pipe(tap(res=>{
+    }).pipe(tap(res => {
       console.log(res);
       sessionStorage.setItem('userImage', img);
       this.currentUserIconSubject.next(img);
@@ -80,7 +84,7 @@ export class AccountService {
   login(user: UserModel): Observable<{ user: UserModel, token: string }> {
     return this.http.post<{ user: UserModel, token: string }>(`${BaseUrl}api/auth/login`, user);
   }
-  setLoginUser(user: UserModel, token:string) {
+  setLoginUser(user: UserModel, token: string) {
     sessionStorage.setItem('token', token);
     sessionStorage.setItem('user', JSON.stringify(user));
     this.isUserLoggedIn();
@@ -96,8 +100,8 @@ export class AccountService {
       .toPromise();
   }
 
-  public addUser(user: UserModel): Observable<{ addedUser:UserModel, token:string }> {
-    return this.http.post<{ addedUser:UserModel, token:string }>(`${BaseUrl}api/auth/register`, user);
+  public addUser(user: UserModel): Observable<{ addedUser: UserModel, token: string }> {
+    return this.http.post<{ addedUser: UserModel, token: string }>(`${BaseUrl}api/auth/register`, user);
   }
 
   public resetPassword(email: string): Observable<any> {

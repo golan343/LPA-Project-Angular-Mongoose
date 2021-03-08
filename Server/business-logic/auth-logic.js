@@ -43,10 +43,15 @@ function adminUpdateUser(user, callback) {
         lastName: user.lastName,
         country: user.country,
         city: user.city,
-        email: user.email,
+        // email: user.email,
         phone: user.phone,
         birthDay: new Date(user.birthDay),
-        street: user.street
+        street: user.street,
+        state:user.state,
+        settlement: user.settlement,
+        sectorNumber: user.sectorNumber,
+        postalCode:user.postalCode,
+        profileName: user.profileName
       },
     },
     { useFindAndModify: false }

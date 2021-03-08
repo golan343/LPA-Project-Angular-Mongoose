@@ -113,6 +113,14 @@ header nav .user {
 .logout-icon {
   font-size: 2rem;
 }
+.bubble{
+  visibility: hidden;
+  height: 0px;
+}
+.show .bubble{
+  visibility: visible;
+  height: auto;
+}
 .error-top {
   position: fixed;
   top: 0px;

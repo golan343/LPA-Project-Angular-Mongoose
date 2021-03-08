@@ -27,10 +27,11 @@ export class MainDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.account.getUser();
-    this.title = `hello ${this.user.firstName} ${this.user.lastName}`;
-    this.adminService.getUserImage(this.user._id).subscribe((result) => {
-      this.userImage = result.base64StringImg;
-    });
+    this.title = ` ${this.user.firstName} ${this.user.lastName}`;
+     this.adminService.getUserImage(this.user._id).subscribe((result) => {
+       if(result.base64StringImg)
+          this.userImage = result.base64StringImg;
+     });
     this.adminService.errorSubject.subscribe((err) => {
       this.errorMessgae = err;
       setTimeout(this.clearError.bind(this), 10000);

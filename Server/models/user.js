@@ -63,7 +63,9 @@ const UserSchema = mongoose.Schema({
     unique: {
         type: Boolean
     },
-
+    state:{
+        type:String
+    },
     postalCode:{
         type:String
     },

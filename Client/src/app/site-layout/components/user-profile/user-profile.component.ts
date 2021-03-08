@@ -32,7 +32,6 @@ export class UserProfileComponent implements OnInit {
       this.winningAuctions = AuctionsList.filter(item => item.isWinner)
       return AuctionsList;
     })).subscribe(result => {
-      console.log(result);
       this.UserAuctions = result;
       this.paging = new Pagination(6, result.length);
       this.cdr.detectChanges();

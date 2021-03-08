@@ -11,25 +11,6 @@ import { Subscription } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserInfoComponent implements OnDestroy, OnInit {
-  imgSubscriber = new Subscription();
-  constructor(private account: AccountService, private dialog: DialogService, private cdr: ChangeDetectorRef) {
-    this.user = this.account.getUser();
-  }
-  ngOnInit(): void {
- 
-      this.imgSubscriber = this.account.currentUserIconSubject.subscribe(base64StringImg => {
-        if (base64StringImg) {
-          this.cdr.detectChanges();
-          this.imgBase64image = base64StringImg;
-        }
-      },
-        err => {
-          console.log(err);
-          this.error.email = JSON.stringify(err);
-        });
-  }
-
-
   @Input()
   user: UserModel;
   old: string;
@@ -42,10 +23,30 @@ export class UserInfoComponent implements OnDestroy, OnInit {
   error = new errorModel();
   @ViewChild('inputFile') fileUpload: any;
   @ViewChild('imgCanvas') imgCanvas: any;
+  imgSubscriber = new Subscription();
+  constructor(private account: AccountService, private dialog: DialogService, private cdr: ChangeDetectorRef) {
+    this.user = this.account.getUser();
+  }
+  ngOnInit(): void {
+
+    this.imgSubscriber = this.account.currentUserIconSubject.subscribe(base64StringImg => {
+      if (base64StringImg) {
+        this.imgBase64image = base64StringImg;
+        this.cdr.detectChanges();
+      }
+    },
+      err => {
+        console.log(err);
+        this.error.email = JSON.stringify(err);
+      });
+  }
 
   ngAfterViewInit(): void {
-   
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
   }
+
+
   ngOnDestroy(): void {
     this.imgSubscriber.unsubscribe();
   }
@@ -97,19 +98,42 @@ export class UserInfoComponent implements OnDestroy, OnInit {
       , new validationConstrains({ prop: 'lastName', content: this.user.lastName, isReqire: true, errorMsg: 'Last Name is missing' })
       , new validationConstrains({ prop: 'country', content: this.user.country, isReqire: true, errorMsg: 'country Name is missing' })
       , new validationConstrains({ prop: 'city', content: this.user.city, isReqire: true, errorMsg: 'city Name is missing' })
-      , new validationConstrains({ prop: 'street', content: this.user.street, isReqire: true, errorMsg: 'street Name is missing' })];
-    const vliatedArray = ValidationRequiArray.map(item => this.error.validate(item));
-    console.log(vliatedArray);
-    return;
-    this.account.editUser(this.user).subscribe(result => {
-      // this.admin.errorSubject.next('The user has been updated successfuly!');
-    },
-      err => {
-        console.log(err);
+      , new validationConstrains({ prop: 'street', content: this.user.street, isReqire: true, errorMsg: 'street Name is missing' }), new validationConstrains({
+        prop: 'email',
+        content: this.user.email,
+        isReqire: true,
+        errorMsg: 'Email  is missing',
+        pattarn: /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/g,
+        pattarnErrorMsg: 'Email must be valid example@example.com'
+      })];
 
-        // this.admin.errorSubject.next('The user was not change!' + JSON.stringify(err));
-      }
-    )
+    const validatedArray = ValidationRequiArray.map(item => {
+      const err = this.error.validate(item);
+      return { validate: err, message: this.error[item.prop] };
+    }).every(res => res);
+    this.cdr.detectChanges();
+    if (validatedArray) {
+      this.account.editUser(this.user).subscribe(result => {
+        console.log(result);
+        sessionStorage.setItem('user', JSON.stringify(result));
+        const dialog = new DialogData();
+        dialog.show = true;
+        dialog.innerTitle = 'The change was saved successfully';
+        dialog.text = 'user'
+        this.dialog.subjectType.next(dialog);
+
+      },
+        err => {
+          console.log(err);
+          const dialog = new DialogData();
+          dialog.innerTitle = 'Error was thrown The change was not saved!';
+          dialog.text = JSON.stringify(err);
+          this.dialog.subjectType.next(dialog);
+
+        }
+      );
+    }
+
   }
 
 
