@@ -17,6 +17,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { ErrorBubbleComponent } from './error-bubble/error-bubble.component';
 import { ProfileImageSettingComponent } from './profile-image-setting/profile-image-setting.component';
 import { ImageCanvasComponent } from './image-canvas/image-canvas.component';
+import { SaleComponent } from './sale/sale.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ImageCanvasComponent } from './image-canvas/image-canvas.component';
     ErrorBubbleComponent,
     ProfileImageSettingComponent,
     ImageCanvasComponent,
+    SaleComponent,
   ],
   imports: [CommonModule, FormsModule, UtilsModule],
   exports: [DialogComponent,

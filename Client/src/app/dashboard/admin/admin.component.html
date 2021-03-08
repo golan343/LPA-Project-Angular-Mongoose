@@ -79,7 +79,12 @@
                   <input type="text" [(ngModel)]="user.phone" />
                 </div>
               </div>
-              <div class="flex">
+              <app-profile-image-setting
+              [imgBase64]="imgBase64image"
+              (ErrorEvent)="setFileUploadError($event)"
+              (setImageEvent)="saveUserImage($event)"
+            ></app-profile-image-setting>
+              <!-- <div class="flex">
                <canvas class="canvasWrap" id="imgCanvas" #imgCanvas ></canvas>
                   <div class="cube-right">
                     <aside class="round-button" *ngIf="!fileUploasService?.imgBase64" (click)="triggerUplaod()">
@@ -97,7 +102,7 @@
                   <div class="cube-left">
                     <aside class="upload-button" *ngIf="!fileUploasService?.imgBase64"><i class="plus-icon"></i></aside>
                   </div>
-            </div>
+            </div> -->
             <div class="flex">
                 <div class="input-container">
                   <button  (click)="saveChanges()">

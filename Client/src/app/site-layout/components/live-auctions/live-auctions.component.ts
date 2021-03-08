@@ -29,7 +29,8 @@ export class LiveAuctionsComponent implements OnInit, OnDestroy {
       return auctions.map(auc => {
         return {
           ...auc,
-          imageFileName: environment.devUrl + 'uploads/' + auc.imageFileName
+          imageFileName: environment.devUrl + 'uploads/' + auc.imageFileName,
+          bidsRemains:Number(auc.maxOffer) - Number(auc.bidsCount)
         }
       }).filter(auc => auc.status);
     }))

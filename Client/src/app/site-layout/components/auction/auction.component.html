@@ -28,7 +28,7 @@
                 <app-bounch-stairs *ngIf="auction?.bidPattern" [bidBounce]="auction?.bidPattern"></app-bounch-stairs>
                 <div class="remaining-offers">
                     <h3><span>Remaining Offers</span></h3>
-                    <h3><i>{{auction?.totalBids - auction?.bidsCount}}</i></h3>
+                    <h3><i>{{auction?.bidsRemains}}</i></h3>
                 </div>
             </div>
 

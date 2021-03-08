@@ -18,6 +18,7 @@ export class AdminService {
   errorSubject = new BehaviorSubject<string>('');
   componentNumberSubject = new Subject<number>();
   AuctionsSubject = new Subject<Auction[]>();
+ currentUserIconSubject = new BehaviorSubject<string>('');
   constructor(private http: HttpClient) {}
 
   getAllUsers(): Observable<userItem[]> {
@@ -77,7 +78,11 @@ export class AdminService {
     return this.http.post<any>(environment.BaseUrl + 'api/auth/setUserImage', {
       id,
       img,
-    });
+    }).pipe(tap(res=>{
+      console.log(res);
+      sessionStorage.setItem('userImage', img);
+      this.currentUserIconSubject.next(img);
+    }));;
   }
   getUserImage(id: string): Observable<{ userId: string; base64StringImg: string }> {
     return this.http

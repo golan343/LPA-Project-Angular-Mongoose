@@ -23,7 +23,7 @@ export class AdminComponent implements OnInit, AfterViewInit, OnDestroy {
   showCalendar = false;
   @ViewChild('inputFile') fileUpload: any;
   @ViewChild('imgCanvas') canvasWrap: ElementRef;
-  roles:any;
+  roles: any;
   defaultColDef = {
     resizable: true
   };
@@ -53,6 +53,9 @@ export class AdminComponent implements OnInit, AfterViewInit, OnDestroy {
   rowData: userItem[];
   users: userItem[];
   @ViewChild('agGrid') agGrid: AgGridAngular;
+  imageFromData: string;
+  fileErrorMsg: string;
+  imgBase64image: string;
   constructor(private admins: AdminService, private dialogLocalsService: DialogService, public fileUploasService: UploadService) { }
   ngOnDestroy(): void {
     this.userSubscriber.unsubscribe();
@@ -121,9 +124,31 @@ export class AdminComponent implements OnInit, AfterViewInit, OnDestroy {
     setTimeout(() => {
       this.showCalendar = false;
     }, 2000);
-
   }
 
+  saveUserImage($event) {
+    if ($event) {
+      const shrinkedImgBase64 = $event;
+
+      this.admins.saveUserImage(this.user._id, shrinkedImgBase64).subscribe(
+        (result) => {
+          this.imageFromData = shrinkedImgBase64;
+          sessionStorage.setItem('userImage', shrinkedImgBase64);
+          this.admins.currentUserIconSubject.next(shrinkedImgBase64);
+          console.log(result);
+          this.admins.errorSubject.next(result.msg);
+        },
+        (err) => {
+          console.log(err);
+          this.admins.errorSubject.next(err.msg);
+        }
+      );
+    }
+
+  }
+  setFileUploadError($event) {
+    this.fileErrorMsg = $event;
+  }
   showCalendarEvent() {
     this.showCalendar = true;
   }
@@ -213,7 +238,7 @@ export class AdminComponent implements OnInit, AfterViewInit, OnDestroy {
   saveChanges() {
     const userMaped: UserModel = this.user as UserModel;
     const requests = [];
-   
+
     requests.push(this.admins.editUser(userMaped));
     if (this.fileUploasService.imageFromData) {
       requests.push(this.admins.saveUserImage(this.user._id, this.fileUploasService.imgBase64));

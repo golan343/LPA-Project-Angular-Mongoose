@@ -94,9 +94,10 @@ h1 {
   padding: 2%;
   border-radius: 5px;
 }
-.down > .flex {
+.down  .flex {
   justify-content: space-evenly;
   align-items: flex-start;
+  flex-flow: row wrap;
 }
 .wins {
   justify-content: space-between;
@@ -118,3 +119,4 @@ h1 {
 .wins p i {
   margin: 0 1% 0 0;
 }
+

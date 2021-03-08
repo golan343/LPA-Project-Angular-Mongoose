@@ -59,8 +59,18 @@
     </section>
     <section class="down">
         <div class="flex">
-            <aside class="two-third flex">
-                <app-sale-item *ngFor="let item of UserAuctions" [auction]="item"></app-sale-item>
+            <aside class="two-third  relative">
+                <div class="paging right absolute" *ngIf="paging?.show && paging?.showRight">
+                    <div class="next" title="next" (click)="paging.next()"></div>
+                </div>
+                <div class="flex">
+                    <app-sale-item *ngFor="let item of UserAuctions  | slice: paging?.start : paging?.end " [auction]="item"></app-sale-item>
+                </div>
+              
+                    <div class="paging left absolute" *ngIf="paging?.show && paging?.showLeft ">
+                        <div class="prev" title="prev" (click)="paging.prev()"></div>
+                    </div>
+
             </aside>
             <aside class="third cube white">
                 <h2>Winning On Auctions</h2>

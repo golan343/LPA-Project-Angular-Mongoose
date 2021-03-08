@@ -40,7 +40,7 @@ export class HttpLoadingInterceptor implements HttpInterceptor {
     // }
 
     ///preloader
-    this.loader.show();
+  //  this.loader.show();
     return next
       .handle(request)
       .pipe(tap(this.preloaderChaeck.bind(this)))
@@ -48,16 +48,11 @@ export class HttpLoadingInterceptor implements HttpInterceptor {
   }
   preloaderChaeck($event: HttpEvent<any>) {
     if (!$event.type) {
-      this.counter++;
+      console.log($event);
       this.loader.show();
     }
     if ($event instanceof HttpResponse) {
-      this.counter--;
-      if (this.counter <= 0) {
-        //setTimeout(() => {
           this.loader.hide();
-      //  }, 1000);
-      }
     }
   }
   preloaderShutDown(err) {

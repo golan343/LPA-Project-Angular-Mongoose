@@ -28,7 +28,7 @@ export class MainlayoutComponent implements OnInit {
         this.colorScriber.unsubscribe();
   }
   ngOnInit(): void {
-    this.bidsService.getAllBids();
+    //this.bidsService.getAllBids();
     this.subscribeMenu = this.mobile.showMenuTrigger.subscribe(show => {
       this.showMenu = show;
     });
