@@ -2,6 +2,7 @@ const express = require('express');
 const bidsLogic = require('../business-logic/bids-logic');
 const Bid = require('../models/bid');
 const userLogic = require('../business-logic/auth-logic');
+const auctionLogic = require('../business-logic/auction-logic');
 const verifyLogin = require('../middleware/verify-logged-in');
 
 const router = express.Router();
@@ -37,6 +38,13 @@ router.get('/:id', async (request, response) => {
 router.post('/',  async (request, response) => {
     try{
         const bid = new Bid(request.body);
+        const auction = await auctionLogic.getOneAuctionAsync(bid.auctionId);
+        const offer = +bid.offer;
+        const maxOffer = auction.maxOffer;
+        const minOffer = auction.minOffer;
+        if(offer > maxOffer | offer < minOffer) {
+            return response.status(400).send({error: 'Offer not valid!'});
+        }
         
         //validate bid
         const error = await bid.validate();
@@ -115,7 +123,7 @@ router.delete('/:id', verifyLogin, async(request,response) => {
     catch(err){
         response.status(500).send( { error: err });
     }
-})
+});
 
 router.get('/join/bids-in-auction/:auctionId', async (request, response) => {  
     try{
@@ -173,18 +181,12 @@ router.get('/join/top10/:auctionId', async (request, response) => {
         
         const info = uniqueArr.slice(0, 10);
         for(const item of info) {
-            // console.log(item);
             const user = {
                 _id: item.userId,
                 unique: true
             }
            await userLogic.updateAsync(user);
         }
-
-        // console.log(info);
-
-
-        
 
         response.status(200).json();
         return;
