@@ -12,7 +12,7 @@
         </datalist>
       </aside>
       <aside class="relative"><i (click)="openNewAuction()" class="fa plus-icon pointer"></i></aside>
-      <aside><i class="fa pen-icon pointer"></i></aside>
+      <!-- <aside><i class="fa pen-icon pointer"></i></aside> -->
       <aside><i (click)="deleteSelected()" class="delete-icon pointer"></i></aside>
       <aside><i class="movie-icon pointer fa"></i></aside>
       <aside class=" relative">
@@ -20,7 +20,7 @@
       </aside>
       <aside class="relative right-bar"><i (click)="sendtoArcaiv()" class="arcive-icon pointer"></i></aside>
       <aside>
-        <app-switch-button class="pointer"
+        <app-switch-button  class="pointer"
           [rightText]="'LIVE'"
           [leftText]="'CLOSE'"
           (observeToggleEvent)="filterAliveOrClose($event)"
@@ -99,7 +99,7 @@
   </div>
   <div class="flex">
     <div class="input-container">
-      <label> Offer price</label>
+      <label> bid price</label>
       <input
         type="number"
         placeholder="Offer price"
@@ -107,7 +107,7 @@
       />
     </div>
     <div class="input-container">
-      <label>Product value</label>
+      <label>Product price</label>
       <input
         type="number"
         placeholder="Product value"
@@ -118,11 +118,29 @@
     <!-- 'name','startDate','endDate','price','description','minOffer','bidPrice','totalBids', 'bidCount' -->
     <div class="flex">
       <div class="input-container">
-        <label>Minimum bid</label>
+        <label>Minimum Offers</label>
         <input
           type="number"
           placeholder="Minimum bid"
           [(ngModel)]="editAuction.minOffer"
+        />
+      </div>
+      <div class="input-container">
+        <label>Maximum Offers</label>
+        <input
+          type="number"
+          placeholder="Maximum bid"
+          [(ngModel)]="editAuction.maxOffer"
+        />
+      </div>
+    </div>
+    <div class="flex">
+      <div class="input-container">
+        <label> bid Pattern</label>
+        <input
+          type="number"
+          placeholder="bids pattern"
+          [(ngModel)]="editAuction.bidPattern"
         />
       </div>
       <div class="input-container">
@@ -145,6 +163,7 @@
       </div>
       <div class="input-container">
         <app-switch-button
+        [left]="editAuction?.status"
         [rightText]="'LIVE'"
         [leftText]="'CLOSE'"
         (observeToggleEvent)="setStatus($event)"

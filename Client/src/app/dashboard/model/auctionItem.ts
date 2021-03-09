@@ -21,10 +21,15 @@ export class auctionItem {
         this.startDate = UtilMethd.getInputDateValue(this.startDate);
        
     }
-    selected:boolean;
+    createdDate:Date;
+    winPrice:number;
+    avgRating:string;
+    ruleId:string;
+    createdBy:string;
+    
+    selected?:boolean;
     bidPrice: string;
     bidsCount: number;
-    createdDate: Date;
     description: string;
     endDate: string;
     imageFileName: string;
@@ -34,7 +39,7 @@ export class auctionItem {
     price: string;
     startDate: string;
     status: boolean;
-    totalBids: number;
+    totalBid: number;
     youtubeId: string;
     previousImage:string;
     isActive:boolean;

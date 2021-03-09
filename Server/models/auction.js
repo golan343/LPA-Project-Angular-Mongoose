@@ -6,7 +6,7 @@ const AuctionSchema = mongoose.Schema({
         type: String
     },
     winPrice: {
-        type: String
+        type: Number
     },
     youtubeId: {
         type: String
@@ -25,7 +25,6 @@ const AuctionSchema = mongoose.Schema({
     },
     price: {
         type: String
-
     },
     description: {
         type: String
@@ -38,11 +37,9 @@ const AuctionSchema = mongoose.Schema({
     },
     minOffer: {
         type: Number
-
     },
     maxOffer: {
         type: Number
-
     },
     totalBids: {
         type: Number
@@ -68,10 +65,10 @@ const AuctionSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Site"
     },
-    ruleId:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Rule"
-    }
+    // ruleId:{
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "Rule"
+    // }
     
 }, { 
     versionKey: false,
@@ -79,12 +76,12 @@ const AuctionSchema = mongoose.Schema({
     id: false
 });
 
-AuctionSchema.virtual("rule", {
-    ref: "Rule",
-    localField: "ruleId",
-    foreignField: "_id",
-    justOne: true
-});
+// AuctionSchema.virtual("rule", {
+//     ref: "Rule",
+//     localField: "ruleId",
+//     foreignField: "_id",
+//     justOne: true
+// });
 AuctionSchema.virtual("site", {
     ref: "Site",
     localField: "siteId",

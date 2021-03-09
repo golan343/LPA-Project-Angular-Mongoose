@@ -96,20 +96,31 @@ export class AdminService {
         })
       );
   }
-  addNewAuction(auction: auctionItem): Observable<{
+  addNewAuction(auction: AuctionModel): Observable<{
     n: 1;
     ok: 1;
   }> {
+    const sessionUser = sessionStorage.getItem('user');
+    if(sessionUser){
+      const user = JSON.parse(sessionUser) as UserModel;
+      auction.createdBy = user._id;
+    }
+    
     return this.http.post<{
       n: 1;
       ok: 1;
     }>(`${environment.BaseUrl}api/auctions`, { ...auction })
   }
   updateAuction(
-    auction: auctionItem
+    auction: AuctionModel
   ): Observable<{
     msg: string
   }> {
+    const sessionUser = sessionStorage.getItem('user');
+    if(sessionUser){
+      const user = JSON.parse(sessionUser) as UserModel;
+      auction.createdBy = user._id;
+    }
     return this.http.patch<{
       msg: string
     }>(`${environment.BaseUrl}api/auctions/${auction._id}`, auction);

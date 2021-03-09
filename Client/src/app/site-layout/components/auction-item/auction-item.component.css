@@ -23,8 +23,20 @@
     height: 2px;
     background-color: #000;
   }
+  .top h2{
+    width: 50%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+  }
   .top h4 {
     margin-top: 0.7%;
+    width: 50%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
   }
   .lastAuction img {
     position: absolute;

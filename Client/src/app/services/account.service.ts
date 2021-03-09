@@ -25,8 +25,9 @@ export class AccountService {
     this.isLogin = !this.helper.isTokenExpired(token);
     this.user = this.getUser();
     this.user.isAdmin = this.user.roleId ? this.checkIsAdmin(this.user.roleId) : false;
+    this.isLoginSubject.next(this.isLogin)
     if(!this.user.isAdmin){
-      this.isLoginSubject.next(this.isLogin)
+      
       this.getUserIcon();
     }
     

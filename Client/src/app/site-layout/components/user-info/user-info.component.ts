@@ -118,8 +118,9 @@ export class UserInfoComponent implements OnDestroy, OnInit {
         sessionStorage.setItem('user', JSON.stringify(result));
         const dialog = new DialogData();
         dialog.show = true;
+        dialog.title = 'Message';
         dialog.innerTitle = 'The change was saved successfully';
-        dialog.text = 'user'
+        dialog.text = '';
         this.dialog.subjectType.next(dialog);
 
       },

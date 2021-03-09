@@ -140,7 +140,7 @@ router.patch('/:_id', async (request, response) => {
             response.status(400).send( { error: error });
             return;
         }
-        console.log(request.body);
+       
         if(request.body.previousImage){
             /// remove previous auction image file
             fs.unlink('./uploads/'+request.body.previousImage,function(err, fr){

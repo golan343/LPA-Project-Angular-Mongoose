@@ -47,7 +47,7 @@ export class ClosedAuctionComponent implements OnInit, OnDestroy {
     this.auctionService.getAuction(id).subscribe(auctions => {
       this.auction =  {
         ...auctions,
-        imageFileName: environment.devUrl + 'uploads/' + auctions.imageFileName,
+        imageFileName: environment.BaseUrl + 'uploads/' + auctions.imageFileName,
       };
       this.price = parseFloat(this.auction.price);
     });
