@@ -20,7 +20,8 @@ export class MainDashboardComponent implements OnInit {
     private account: AccountService,
     private adminService: AdminService
   ) {
-    this.modelNum = 3;
+    const nodeNum = sessionStorage.getItem('page');
+    this.modelNum = parseInt(nodeNum) || 3;
     this.routerStateArray = new Array<number>();
     this.routerStateArray.push(1);
   }
@@ -54,6 +55,7 @@ export class MainDashboardComponent implements OnInit {
   setModel(modelNumber: number) {
     this.modelNum = modelNumber;
     this.routerStateArray.push(modelNumber);
+    sessionStorage.setItem('page',modelNumber+'');
   }
   logout() {
     this.account.logout();

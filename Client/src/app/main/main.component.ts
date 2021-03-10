@@ -8,13 +8,19 @@ import { AccountService } from '../services/account.service';
 })
 export class MainComponent implements OnInit {
   isAdmin: boolean;
+  isOnline:boolean;
   constructor(private auth: AccountService) {
   }
   ngOnInit(): void {
-    this.auth.isUserLoggedIn();
-    this.auth.isLoginSubject.subscribe(res => {
-      this.isAdmin = this.auth.user ? this.auth.user.isAdmin : false;
-    })
+    this.isOnline = window.navigator.onLine;
+    if(this.isOnline){
+      this.auth.isUserLoggedIn();
+      this.auth.isLoginSubject.subscribe(res => {
+        this.isAdmin = this.auth.user ? this.auth.user.isAdmin : false;
+      })
+    }
+    
+    
 
   }
 

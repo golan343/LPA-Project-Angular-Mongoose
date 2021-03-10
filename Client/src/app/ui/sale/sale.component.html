@@ -1,9 +1,9 @@
 <div class="wrap">
-  <h3>Running bids:</h3>
+  
 
   <div class="flex">
-    <div class="half">
-     
+    <div class="half padding">
+      <h3>Running bids:</h3>
       <div  class="poiner cursor" (click)="directToAuction(details._id)"
         class="image"
         [style.backgroundImage]="'url(' + details?.imageFileName + ')'"
@@ -30,9 +30,9 @@
             <h3>Description: <span>{{details.description}}</span></h3>
             <p></p>
         </div>
-        <div class="remaining">
+        <div class="remaining col">
             <h3>Remaining offers:</h3>
-            <div class="tube"></div>
+            <div class="tube">{{details?.bidsRemains}}</div>
         </div>
     </div>
   </div>

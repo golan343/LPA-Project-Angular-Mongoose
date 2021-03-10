@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,11 +9,14 @@ import { Router } from '@angular/router';
 export class SaleComponent implements OnInit {
   @Input()
   details:any;
+  @Output()
+  closeEvent = new EventEmitter();
   constructor(private router:Router) { }
 
   ngOnInit(): void {
   }
   directToAuction(id){
+    this.closeEvent.next();
     this.router.navigate(['/auction/'+this.details._id])
   }
 }

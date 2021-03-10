@@ -36,6 +36,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { CommonModule } from '@angular/common';
 import { NumberPipe } from './pipes/number.pipe';
 import { ResetComponent } from './site-layout/components/reset/reset.component';
+import { CharacterComponent } from './character/character.component';
 
 // const globalSettings: RecaptchaSettings = {
 //   siteKey: '6LeFTeoZAAAAAOm4L0qfozbCzOYa3kzs_3zeCgUY',
@@ -48,6 +49,7 @@ import { ResetComponent } from './site-layout/components/reset/reset.component';
     MainComponent,
     NumberPipe,
     ResetComponent,
+    CharacterComponent,
   ],
   imports: [
     BrowserModule,

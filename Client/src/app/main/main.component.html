@@ -1,2 +1,7 @@
-<app-mainlayout *ngIf="!isAdmin"></app-mainlayout>
-<app-main-dashboard *ngIf="isAdmin"></app-main-dashboard>
+<div *ngIf="isOnline">
+    <app-mainlayout *ngIf="!isAdmin"></app-mainlayout>
+    <app-main-dashboard *ngIf="isAdmin"></app-main-dashboard>
+</div>
+<div class="wrap" *ngIf="!isOnline">
+    <app-character></app-character>
+</div>
