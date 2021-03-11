@@ -4,6 +4,7 @@ const Bid = require('../models/bid');
 const userLogic = require('../business-logic/auth-logic');
 const auctionLogic = require('../business-logic/auction-logic');
 const verifyLogin = require('../middleware/verify-logged-in');
+const fetch = require('node-fetch');
 
 const router = express.Router();
 
@@ -42,6 +43,8 @@ router.post('/',  async (request, response) => {
         const offer = +bid.offer;
         const maxOffer = auction.maxOffer;
         const minOffer = auction.minOffer;
+
+        //check if offer valid to max and min offer
         if(offer > maxOffer | offer < minOffer) {
             return response.status(400).send({error: 'Offer not valid!'});
         }
@@ -154,9 +157,10 @@ router.get('/join/top10/:auctionId', async (request, response) => {
         if(!bidsArr){
             return;
         }
-        const uniqueArr = [];
+        const infoArr = [];
         const filteredObj = {};
         const users = [];
+        
 
         
         for(let item of bidsArr) {
@@ -172,22 +176,44 @@ router.get('/join/top10/:auctionId', async (request, response) => {
                     "offer" : filteredObj[prop][0].offer,
                     "userId" : filteredObj[prop][0].userId
                 }
-                uniqueArr.push(obj);
+                infoArr.push(obj);
             }
         }
-        uniqueArr.sort((a, b)=> { 
+        infoArr.sort((a, b)=> { 
             return a.offer - b.offer
         });
-        
-        const info = uniqueArr.slice(0, 10);
-        for(const item of info) {
-            const user = {
-                _id: item.userId,
-                unique: true
-            }
-           await userLogic.updateAsync(user);
-        }
+        const outBidedArr = infoArr.slice(10);
+        const uniqueArr = infoArr.slice(0, 10);
 
+        //--------------------------------
+        // console.log(infoArr);
+        // console.log("--------------");
+        // console.log(uniqueArr);
+        // console.log("--------------");
+        // console.log(outBidedArr);
+        const filteredUsers = await userLogic.getManyUsers(users);
+
+        //send sms to uniqueArr
+        for(const item of uniqueArr){
+            
+            const user = await filteredUsers.find(user => `${user._id}` === `${item.userId}`);
+            console.log(user.phone);
+            
+            
+            // let todo = {
+        //     "body": "blabla",
+        //     "to": "+972545658994"
+        // }
+
+        // fetch('http://localhost:3000/api/sms/sendSMS', {
+        //     method: "POST", 
+        //     body : JSON.stringify(todo), 
+        //     headers: {'Content-Type': 'application/json'},
+        // });
+            
+            
+        }
+        
         response.status(200).json();
         return;
 

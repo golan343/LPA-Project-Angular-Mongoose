@@ -124,6 +124,10 @@ function sortUsersDescending(query) {
   return User.find({}).sort( `-${query}` ).exec();
 }
 
+function getManyUsers(array){
+  return User.find({_id: {$in: array}}).exec();
+}
+
 module.exports = {
   registerAsync,
   loginAsync,
@@ -142,5 +146,6 @@ module.exports = {
   searchUserByPhoneNumber,
   sortUsersAscending,
   sortUsersDescending,
-  updateNewPassAsync
+  updateNewPassAsync,
+  getManyUsers
 };

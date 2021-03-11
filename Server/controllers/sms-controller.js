@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 
-router.get('/sendSMS', (request, response) => {
+router.post('/sendSMS', (request, response) => {
     try{
         const sms = request.body;
         const accountSid = "AC8cc097a21b9a77da75494450472f2689";
