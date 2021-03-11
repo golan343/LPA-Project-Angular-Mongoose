@@ -10,29 +10,28 @@
       <i class="excel-icon pointer" (click)="UsersToCsv()"></i>
     </aside>
     <aside class="relative right-bar">
-      <i  class="arcive-icon pointer"></i>
+      <i class="arcive-icon pointer"></i>
+    </aside>
+    <aside class="relative">
+      <span class="search-icon fa pointer"></span>
+      <input type="text" (keyup)="filterUser($event)" placeholder="find User" />
     </aside>
     <aside class="relative">
       <span class="search-icon fa pointer"></span>
       <input
+        [(ngModel)]="lastloged"
         type="text"
-        (keyup)="filterUser($event)"
-        placeholder="find User"
+        placeholder="filter last Loged"
+        (focus)="showCalendarEvent()"
       />
+      <app-calendar
+        (triggerdategap)="setInput($event)"
+        [show]="showCalendar"
+      ></app-calendar>
     </aside>
-    <aside class="relative">
-        <span class="search-icon fa pointer"></span>
-        <input
-            [(ngModel)]="lastloged"
-          type="text"
-          placeholder="filter last Loged"
-          (focus)='showCalendarEvent()'
-        />
-        <app-calendar (triggerdategap)="setInput($event)" [show]="showCalendar" ></app-calendar>
-      </aside>
   </nav>
- <ag-grid-angular
-  *ngIf="rowData"
+  <ag-grid-angular
+    *ngIf="rowData"
     #agGrid
     class="ag-theme-alpine"
     [rowData]="rowData"
@@ -41,113 +40,99 @@
   >
   </ag-grid-angular>
 </div>
-<div class="edit-auction" [ngClass]="{show: show}">
-    <aside class="absolute close" (click)="close()">
-      <i class="close-icon fa"></i>
-    </aside>
-    <div class="col white round-border l-padding">
-        <h3 class="center">Edit User {{user?.firstName}} {{user?.lastName}}</h3>
-        <div class="form">
-            <div class="flex">
-                <div class="input-container">
-                  <label>First Name</label>
-                  <input type="text" [(ngModel)]="user.firstName" />
-                </div>
-                <div class="input-container">
-                  <label>Last Name</label>
-                  <input type="email" [(ngModel)]="user.lastName" />
-                </div>
-              </div>
-              <div class="flex">
-                <div class="input-container">
-                  <label>Country</label>
-                  <input type="text" [(ngModel)]="user.country" />
-                </div>
-                <div class="input-container"></div>
-                <div class="input-container">
-                  <label>City</label>
-                  <input type="text" [(ngModel)]="user.city" />
-                </div>
-              </div>
-              <div class="flex">
-                <div class="input-container">
-                  <label>E-Mail</label>
-                  <input type="email" [(ngModel)]="user.email" />
-                </div>
-                <div class="input-container">
-                  <label>Mobile number</label>
-                  <input type="text" [(ngModel)]="user.phone" />
-                </div>
-              </div>
-              <app-profile-image-setting
-              [imgBase64]="imgBase64image"
-              (ErrorEvent)="setFileUploadError($event)"
-              (setImageEvent)="saveUserImage($event)"
-            ></app-profile-image-setting>
-              <!-- <div class="flex">
-               <canvas class="canvasWrap" id="imgCanvas" #imgCanvas ></canvas>
-                  <div class="cube-right">
-                    <aside class="round-button" *ngIf="!fileUploasService?.imgBase64" (click)="triggerUplaod()">
-                      Add image <i class="plus-icon"></i>
-                      <input type="file" (change)="fileUploasService.fileUploadEvent($event)" #inputFile id="inputFile" >
-                    </aside>
-                    <aside class="round-button" *ngIf="!fileUploasService?.imgBase64" (click)="triggerUplaod()">
-                        change image <i class="plus-icon"></i>
-                        <input type="file" (change)="fileUploasService.fileUploadEvent($event)" #inputFile id="inputFile" >
-                      </aside>
-                    <aside class="file-info" *ngIf="fileUploasService?.imgBase64"><span>file Name: </span>
-                        {{fileUploasService.fileName}}
-                    </aside>
-                  </div>
-                  <div class="cube-left">
-                    <aside class="upload-button" *ngIf="!fileUploasService?.imgBase64"><i class="plus-icon"></i></aside>
-                  </div>
-            </div> -->
-            <div class="flex">
-                <div class="input-container">
-                  <button  (click)="saveChanges()">
-                      Save
-                      <i class="edit-user fa"></i>
-                  </button>
-                </div>
-                </div>
-        </div>
-          <div class="input-container">
-            <label>City</label>
-            <input type="text" [(ngModel)]="user.city" />
-          </div>
-          
-        </div>
-        
-        <div class="flex">
-          <div class="input-container">
-            <label>Street</label>
-            <input type="text" [(ngModel)]="user.street" />
-          </div>
-          
-          <div class="input-container">
-            <label>Mobile number</label>
-            <input type="text" [(ngModel)]="user.phone" />
-          </div>
-        </div>
-        <div class="flex">
-          <div class="input-container">
-            <label>E-Mail</label>
-            <input type="email" [(ngModel)]="user.email" />
-          </div>
-          <div class="input-container">
-            <label>Role</label>
-            <select name="" id="">
-              <option value="" *ngFor="let role of roles">{{role.name}}</option>
-            </select>
-            <!-- <input type="email" [(ngModel)]="user.email" /> -->
-          </div>
-        </div>
-        <div class="flex">
+<div class="edit-auction" [ngClass]="{ show: show }">
+  <aside class="absolute close" (click)="close()">
+    <i class="close-icon fa"></i>
+  </aside>
+  <div class="col white round-border l-padding">
+    <h3 class="center">Edit User {{ user?.firstName }} {{ user?.lastName }}</h3>
+    <div class="form">
+      <div class="flex">
         <div class="input-container">
-          <aside class="btn" (click)="saveChanges()">
-              <i class="edit-user fa"></i>
-            </aside>
+          <label>First Name</label>
+          <input type="text" [(ngModel)]="user.firstName" />
         </div>
+        <div class="input-container">
+          <label>Last Name</label>
+          <input type="email" [(ngModel)]="user.lastName" />
         </div>
       </div>
+      <div class="flex">
+        <div class="input-container">
+          <label>Country</label>
+          <input type="text" [(ngModel)]="user.country" />
+        </div>
+        <div class="input-container"></div>
+        <div class="input-container">
+          <label>City</label>
+          <input type="text" [(ngModel)]="user.city" />
+        </div>
+      </div>
+      <div class="flex">
+        <div class="input-container">
+          <label>E-Mail</label>
+          <input type="email" [(ngModel)]="user.email" />
+        </div>
+        <div class="input-container">
+          <label>Mobile number</label>
+          <input type="text" [(ngModel)]="user.phone" />
+        </div>
+      </div>
+      <app-profile-image-setting
+        [imgBase64]="imgBase64image"
+        (ErrorEvent)="setFileUploadError($event)"
+        (setImageEvent)="saveUserImage($event)"
+      ></app-profile-image-setting>
+      <div class="flex">
+        <div class="input-container">
+          <label>Street</label>
+          <input type="text" [(ngModel)]="user.street" />
+        </div>
+        <div class="input-container">
+          <label>City</label>
+          <input type="text" [(ngModel)]="user.city" />
+        </div>
+      </div>
+
+      <div class="flex">
+        <div class="input-container">
+          <label>country</label>
+          <input type="text" [(ngModel)]="user.country" />
+        </div>
+        <div class="input-container">
+          <label>State </label>
+          <input type="text" [(ngModel)]="user.state" />
+        </div>
+      </div>
+      <div class="flex">
+        <div class="input-container">
+          <label>Settlement</label>
+          <input type="text" [(ngModel)]="user.settlement" />
+        </div>
+        <div class="input-container">
+          <label>Postal Code </label>
+          <input type="text" [(ngModel)]="user.postalCode" />
+        </div>
+      </div>
+      <div class="flex">
+        <div class="input-container">
+          <label>Sector Number</label>
+          <input type="email" [(ngModel)]="user.sectorNumber" />
+        </div>
+        <div class="input-container">
+          <label>Role</label>
+          <select name="" id="">
+            <option value="" *ngFor="let role of roles">{{ role.name }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="flex">
+        <div class="input-container">
+          <aside class="btn" (click)="saveChanges()">
+            <i class="edit-user fa"></i>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

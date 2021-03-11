@@ -95,7 +95,7 @@ nav {
   }
   .edit-auction.show{
     min-width: 430px;
-    top: 20%;
+    top: 1%;
     right: 33%;
     padding: 2%;
     visibility: visible;
