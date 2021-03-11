@@ -1,6 +1,9 @@
+import { UtilMethd } from "../dashboard/model/auctionItem";
+
 export class Auction {
     constructor() {
     }
+    _id: string;
     bidPrice: string;
     bidsCount: number;
     createdDate: Date;
@@ -14,24 +17,29 @@ export class Auction {
     startDate: string;
     status: boolean;
     totalBids: number;
-    _id: string;
     youtubeId: string;
+    winPrice:number;
+    avgRating:string;
+    ruleId:string;
+    createdBy:string;
+    siteId?: string;
+    previousImage: string;
 }
 export class AuctionModel extends Auction {
-    public constructor(
-        public siteId?: string,
-        public ruleId?: string,
-        public winPrice?: string,
-        public winnerYoutubeId?: string,
-        public bidPattern?: string,
-        public bidsRemains?: number,
-
-    ) {
+    bidsRemains: number;
+    bidPattern: any;
+    selected: boolean;
+    public constructor(auction?:Auction) {
         super();
+        for(let prop in auction){
+            this[prop] = auction[prop]
+        }
+        this.endDate = UtilMethd.getInputDateValue(this.endDate);
+        this.startDate = UtilMethd.getInputDateValue(this.startDate);
+        this.selected = false;
         if (!this.bidPattern) {
             this.bidPattern = "0.5";
         }
-        console.log(Number(this.bidsCount) , Number(this.maxOffer));
         if (Number(this.bidsCount) && Number(this.maxOffer))
             this.bidsRemains = Number(this.bidsCount) - Number(this.maxOffer)
     }

@@ -18,8 +18,8 @@ export class AdminService {
   errorSubject = new BehaviorSubject<string>('');
   componentNumberSubject = new Subject<number>();
   AuctionsSubject = new Subject<Auction[]>();
- currentUserIconSubject = new BehaviorSubject<string>('');
-  constructor(private http: HttpClient) {}
+  currentUserIconSubject = new BehaviorSubject<string>('');
+  constructor(private http: HttpClient) { }
 
   getAllUsers(): Observable<userItem[]> {
     return this.http.get<any>(environment.BaseUrl + 'api/auth/usersList').pipe(
@@ -78,7 +78,7 @@ export class AdminService {
     return this.http.post<any>(environment.BaseUrl + 'api/auth/setUserImage', {
       id,
       img,
-    }).pipe(tap(res=>{
+    }).pipe(tap(res => {
       console.log(res);
       sessionStorage.setItem('userImage', img);
       this.currentUserIconSubject.next(img);
@@ -91,22 +91,38 @@ export class AdminService {
       )
       .pipe(
         tap((result) => {
-          sessionStorage.setItem('userImage', result.base64StringImg);
+          if (result.base64StringImg)
+            sessionStorage.setItem('userImage', result.base64StringImg);
         })
       );
   }
-  addNewAuction(auction:auctionItem):Observable<{ n: 1;
-    ok: 1;}>{
-    return  this.http.post<{ n: 1;
-      ok: 1;}>(`${environment.BaseUrl}api/auctions`,{...auction})
+  addNewAuction(auction: AuctionModel): Observable<{
+    n: 1;
+    ok: 1;
+  }> {
+    const sessionUser = sessionStorage.getItem('user');
+    if(sessionUser){
+      const user = JSON.parse(sessionUser) as UserModel;
+      auction.createdBy = user._id;
+    }
+    
+    return this.http.post<{
+      n: 1;
+      ok: 1;
+    }>(`${environment.BaseUrl}api/auctions`, { ...auction })
   }
   updateAuction(
-    auction: auctionItem
+    auction: AuctionModel
   ): Observable<{
-    msg:string
+    msg: string
   }> {
+    const sessionUser = sessionStorage.getItem('user');
+    if(sessionUser){
+      const user = JSON.parse(sessionUser) as UserModel;
+      auction.createdBy = user._id;
+    }
     return this.http.patch<{
-      msg:string
+      msg: string
     }>(`${environment.BaseUrl}api/auctions/${auction._id}`, auction);
   }
   deleteAuction(
@@ -114,17 +130,17 @@ export class AdminService {
   ): Observable<any> {
     return this.http.delete<any>(`${environment.BaseUrl}api/auctions/${auctionId}`);
   }
-  uploadImage(formData:FormData):Observable<any>{
-    return this.http.post(environment.BaseUrl+'api/upload-image',formData,{ responseType: 'text' })
+  uploadImage(formData: FormData): Observable<any> {
+    return this.http.post(environment.BaseUrl + 'api/upload-image', formData, { responseType: 'text' })
   }
-  AuctiontoArcaiv(id:string):Observable<{n:number,ok:string}>{
-    return this.http.put<{n:number,ok:string}>(environment.BaseUrl+'api/auctions/setarcive/'+id,{id});
+  AuctiontoArcaiv(id: string): Observable<{ n: number, ok: string }> {
+    return this.http.put<{ n: number, ok: string }>(environment.BaseUrl + 'api/auctions/setarcive/' + id, { id });
   }
-  pageUpdate(p:pageModel):Observable<any>{
-    return this.http.put<any>(environment.BaseUrl+'api/page',{urlName:p.urlName,title:p.title,content:p.content});
+  pageUpdate(p: pageModel): Observable<any> {
+    return this.http.put<any>(environment.BaseUrl + 'api/page', { urlName: p.urlName, title: p.title, content: p.content });
   }
 
-  getAllRoles():Observable<any> {
+  getAllRoles(): Observable<any> {
     return this.http.get(`${environment.BaseUrl}api/role`);
   }
 }

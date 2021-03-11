@@ -56,16 +56,19 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.auction$ = this.auctionService.getLastAuction();
     this.auction$.subscribe(auctionsResult => {
-      const aliveAuctions = auctionsResult.filter(auc=> auc.status);
-      const Last = aliveAuctions[0];
-      Last.imageFileName = environment.devUrl + 'uploads/' + Last.imageFileName;
-      this.auction = Last;
+      const aliveAuctions = auctionsResult.map(auc => {
+        return {
+          ...auc,
+          imageFileName: environment.devUrl + 'uploads/' + auc.imageFileName,
+          bidsRemains: Number(auc.maxOffer) - Number(auc.bidsCount)
+        }
+      });
+      this.auction = aliveAuctions[0];
     });
   }
   sendEmail() {
 
   }
-
   public login(): void {
     const dialog = new DialogData("Login");
     dialog.title = 'User Login';

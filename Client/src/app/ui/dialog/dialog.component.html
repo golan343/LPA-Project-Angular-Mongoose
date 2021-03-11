@@ -19,7 +19,7 @@
                 <app-forgot-pass></app-forgot-pass>
             </ng-template>
             <ng-template [ngSwitchCase]="'sale'">
-                <app-sale [details]="dialogData.dynamicObject" ></app-sale>
+                <app-sale (closeEvent)="close()" [details]="dialogData.dynamicObject" ></app-sale>
             </ng-template>
             <ng-template ngSwitchDefault>
                 <div class="dialog-model">

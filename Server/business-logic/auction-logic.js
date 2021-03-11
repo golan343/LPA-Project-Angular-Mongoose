@@ -15,15 +15,15 @@ function getAllAuction(callback) {
 }
 // get all closed auctions
 function getAllClosedAuctionsAsync() {
-  return Auction.find({ status: false, isActive: false }).exec();
+  return Auction.find({ status: false, isActive: true }).exec();
 }
 // get all closed auctions
 function getLastAuctionAsync() {
-  return Auction.find().sort({ _id: -1 }).limit(1);
+  return Auction.find({  status: true, isActive: true }).limit(1);
 }
 // get all opened auctions
 function getAllOpenedAuctionsAsync() {
-  return Auction.find({ status: true, isActive: false }).exec();
+  return Auction.find({ status: true, isActive: true }).exec();
 }
 
 // get one auction by id
@@ -38,9 +38,14 @@ function getOneAuctionAsync(_id) {
 
 //add new auction
 
-async function addAuctionAsync(auction) {
+async function addAuctionAsync(arg) {
   try {
-    const auction = new Auction(auction);
+    arg.bidPattern = arg.bidPattern || 0.5;
+    arg.bidsCount = 0;
+    arg.isActive = true;
+    arg.createdDate = new Date();
+    const auction = new Auction(arg);
+    
     //validate auction
     const error = await auction.validate();
     if (error) {
@@ -48,7 +53,7 @@ async function addAuctionAsync(auction) {
     }
     return auction.save();
   } catch (e) {
-    throw e;
+    throw new Error('error tring to add new auction '+JSON.stringify(e));
   }
 }
 
@@ -61,7 +66,14 @@ async function updateAuctionAsync(auction) {
 //delete auction by id
 
 async function deleteAuctionAsync(_id) {
-  if (ObjectId.isValid(_id)) return Auction.deleteOne({ _id }).exec();
+  if (ObjectId.isValid(_id)) {
+    let bidDelRes = {};
+    let auctionDelRes = await  Auction.deleteOne({ _id }).exec();
+    if(auctionDelRes.deletedCount>0){
+      bidDelRes = await Bid.deleteMany({auctionId:_id}).exec();
+    }
+    return {bidDelRes,auctionDelRes};
+  }
   return new Promise((reject) => {
     return reject();
   });

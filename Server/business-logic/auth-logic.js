@@ -30,10 +30,12 @@ async function updateNewPassAsync(user) {
   const info = await User.findOneAndUpdate({token: user.token, expiredToken: {$gt: Date.now()} }, update).exec();
   return info ? user : null;
 }
+
 async function deleteUser(id) {
   const result = await User.find({ _id: id }).deleteOne().exec();
   return result;
 }
+
 function adminUpdateUser(user, callback) {
   User.findByIdAndUpdate(
     { _id: user._id },
@@ -43,29 +45,21 @@ function adminUpdateUser(user, callback) {
         lastName: user.lastName,
         country: user.country,
         city: user.city,
-        email: user.email,
+        // email: user.email,
         phone: user.phone,
         birthDay: new Date(user.birthDay),
-        street: user.street
+        street: user.street,
+        state:user.state,
+        settlement: user.settlement,
+        sectorNumber: user.sectorNumber,
+        postalCode:user.postalCode,
+        profileName: user.profileName
       },
     },
     { useFindAndModify: false }
   ).exec(callback);
 }
-// function getUserImage(id,callback){
-//   User.findOne({_id:id}).select('img').exec(callback);
-// }
-// function saveUserImage(id,imgBase64,callback){
-//   User.findByIdAndUpdate(
-//     { _id: id },
-//     {
-//       $set: {
-//         img:imgBase64 
-//       },
-//     },
-//     { useFindAndModify: false }
-//   ).exec(callback);
-// }
+ 
 function findUserById(userId, callback) {
   User.find({ _id: userId }, callback);
 }

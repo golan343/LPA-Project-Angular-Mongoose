@@ -1,11 +1,9 @@
-import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { _ } from 'ag-grid-community';
 import { forkJoin } from 'rxjs';
-import { Auction } from 'src/app/models/auction-model';
+import {  AuctionModel } from 'src/app/models/auction-model';
 import { AdminService } from '../services/admin.service';
 import {fileUtils} from './../../models/fileUtils';
-import {auctionItem} from './../model/auctionItem';
+
 
 @Component({
   selector: 'app-auctions',
@@ -14,19 +12,19 @@ import {auctionItem} from './../model/auctionItem';
 })
 export class AuctionsComponent implements OnInit {
 
-  auctions:auctionItem[];
-  AllAuctions:auctionItem[];
-  selectedAuctions:auctionItem[];
+  auctions:AuctionModel[];
+  AllAuctions:AuctionModel[];
+  selectedAuctions:AuctionModel[];
   search = '';
   aliveOrClose = false;
-  editAuction:auctionItem;
+  editAuction:AuctionModel;
   showEditAuction: boolean;
   formData:FormData;
   fileUtil:fileUtils;
   addNewFlag:boolean;
   constructor(private admin: AdminService) { 
-    this.editAuction = new auctionItem();
-    this.selectedAuctions = new Array<auctionItem>();
+    this.editAuction = new AuctionModel();
+    this.selectedAuctions = new Array<AuctionModel>();
     this.showEditAuction = false;
     this.fileUtil = new fileUtils();
     this.addNewFlag = false;
@@ -38,7 +36,7 @@ export class AuctionsComponent implements OnInit {
   }
   init(){
     this.admin.getAllAuction().subscribe(Auctions=>{
-      this.AllAuctions = Auctions.map(a=> new auctionItem(a));
+      this.AllAuctions = Auctions.map(a=> new AuctionModel(a));
       this.auctions = this.AllAuctions.filter(item => { return item.status !== this.aliveOrClose });;
     });
   }
@@ -70,7 +68,7 @@ export class AuctionsComponent implements OnInit {
     window.open(base64EncodeAuctions);
   }
 
-  editItem(auction:auctionItem){
+  editItem(auction:AuctionModel){
     this.editAuction = auction;
     this.showEditAuction = true;
   }
@@ -100,7 +98,7 @@ export class AuctionsComponent implements OnInit {
   }
 
   openNewAuction(){
-    this.editAuction = new auctionItem();
+    this.editAuction = new AuctionModel();
     this.addNewFlag = true;
   }
 
@@ -130,7 +128,7 @@ export class AuctionsComponent implements OnInit {
     }
   }
 
-  selectItem(item:auctionItem){
+  selectItem(item:AuctionModel){
     item.selected = !item.selected;
     if(item.selected){
       this.selectedAuctions.push(item);
@@ -161,6 +159,7 @@ export class AuctionsComponent implements OnInit {
   }
   saveNewAuction(){
     if(this.editAuction.name && this.editAuction.endDate){
+      
       this.admin.addNewAuction(this.editAuction).subscribe(res=>{
         console.log(res);
         this.admin.errorSubject.next(JSON.stringify(res));

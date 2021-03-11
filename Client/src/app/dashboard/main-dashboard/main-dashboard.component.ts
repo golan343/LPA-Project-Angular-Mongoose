@@ -20,17 +20,19 @@ export class MainDashboardComponent implements OnInit {
     private account: AccountService,
     private adminService: AdminService
   ) {
-    this.modelNum = 3;
+    const nodeNum = sessionStorage.getItem('page');
+    this.modelNum = parseInt(nodeNum) || 3;
     this.routerStateArray = new Array<number>();
     this.routerStateArray.push(1);
   }
 
   ngOnInit(): void {
     this.user = this.account.getUser();
-    this.title = `hello ${this.user.firstName} ${this.user.lastName}`;
-    this.adminService.getUserImage(this.user._id).subscribe((result) => {
-      this.userImage = result.base64StringImg;
-    });
+    this.title = ` ${this.user.firstName} ${this.user.lastName}`;
+     this.adminService.getUserImage(this.user._id).subscribe((result) => {
+       if(result.base64StringImg)
+          this.userImage = result.base64StringImg;
+     });
     this.adminService.errorSubject.subscribe((err) => {
       this.errorMessgae = err;
       setTimeout(this.clearError.bind(this), 10000);
@@ -53,6 +55,7 @@ export class MainDashboardComponent implements OnInit {
   setModel(modelNumber: number) {
     this.modelNum = modelNumber;
     this.routerStateArray.push(modelNumber);
+    sessionStorage.setItem('page',modelNumber+'');
   }
   logout() {
     this.account.logout();

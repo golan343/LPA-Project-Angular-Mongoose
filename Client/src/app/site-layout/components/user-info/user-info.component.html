@@ -1,43 +1,47 @@
 <div class="container">
   <div class="col white round-border l-padding">
     <h2>User info</h2>
-
     <div class="flex">
-      <div class="input-container">
+      <div class="input-container relative">
         <label>First Name</label>
-        <app-error-bubble></app-error-bubble>
+        <app-error-bubble [errorMsg]="error.firstName"></app-error-bubble>
         <input type="text" [(ngModel)]="user.firstName" />
       </div>
-      <div class="input-container">
+      <div class="input-container relative">
         <label>Last Name</label>
-        <input type="email" [(ngModel)]="user.lastName" />
+        <app-error-bubble [errorMsg]="error.lastName"></app-error-bubble>
+        <input type="text" [(ngModel)]="user.lastName" />
       </div>
-      <div class="input-container">
+      <div class="input-container relative">
         <label>Mobile number</label>
+        <app-error-bubble [errorMsg]="error.phone"></app-error-bubble>
         <input type="text" [(ngModel)]="user.phone" />
       </div>
     </div>
     <div class="flex">
-      <div class="input-container">
+      <div class="input-container relative">
         <label>E-Mail</label>
+        <app-error-bubble [errorMsg]="error.email"></app-error-bubble>
         <input type="email" [(ngModel)]="user.email" />
       </div>
-      <div class="input-container">
+      <div class="input-container relative">
         <label>Profile Name</label>
         <input type="text" [(ngModel)]="user.profileName" />
       </div>
-      <div class="input-container">
+      <div class="input-container relative">
         <label>Country</label>
+        <app-error-bubble [errorMsg]="error.country"></app-error-bubble>
         <input type="text" [(ngModel)]="user.country" />
       </div>
     </div>
     <div class="flex">
-      <div class="input-container">
+      <div class="input-container relative">
         <label>State</label>
         <input type="text" [(ngModel)]="user.state" />
       </div>
-      <div class="input-container">
+      <div class="input-container relative">
         <label>City</label>
+        <app-error-bubble [errorMsg]="error.city"></app-error-bubble>
         <input type="text" [(ngModel)]="user.city" />
       </div>
       <div class="input-container">
@@ -46,6 +50,11 @@
       </div>
     </div>
     <div class="flex">
+      <div class="input-container relative">
+        <label>Street</label>
+        <app-error-bubble [errorMsg]="error.street"></app-error-bubble>
+        <input type="text" [(ngModel)]="user.street" />
+      </div>
       <div class="input-container">
         <label>Postal code</label>
         <input type="text" [(ngModel)]="user.postalCode" />
@@ -54,13 +63,15 @@
         <label>Sector Number</label>
         <input type="text" [(ngModel)]="user.sectorNumber" />
       </div>
-      <div class="input-container">
+      
+      </div>
+      <div class="right">
         <button class="" (click)="saveChanges()">
           Save
           <i class="edit-user fa"></i>
         </button>
-      </div>
     </div>
+    <div class="both"></div>
   </div>
   <div class="col mr-t">
     <div class="flex">

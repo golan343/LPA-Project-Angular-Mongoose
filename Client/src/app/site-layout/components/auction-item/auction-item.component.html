@@ -1,8 +1,8 @@
 <div class="lastAuction relative" [ngStyle]="{'background-image': 'url('+auction?.imageFileName+')'}">
     <!-- <img [hidden]="!auction" id="img" #img [class]="{ fadein: auction }" [src]="auction?.imageFileName" [alt]="auction?.name" /> -->
     <div class="top both relative">
-        <h2 class="left">{{ auction?.name }}</h2>
-        <h4 class="right">{{ auction?.description }}</h4>
+        <h2 class="left" title="{{auction?.name}}">{{ auction?.name }}</h2>
+        <h4 class="right" title="{{auction?.description}}">{{ auction?.description }}</h4>
   </div>
 
   <div [ngSwitch]="auction?.status">
