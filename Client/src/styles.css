@@ -95,7 +95,7 @@ header {
 .full {
   width: 100%;
 }
-input, textarea {
+input, textarea, select {
   text-indent: 5px;
   font-size: 1.1em;
   margin: 0 0 10px;
