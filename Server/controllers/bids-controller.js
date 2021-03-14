@@ -213,6 +213,7 @@ router.get('/join/top10/:auctionId', async (request, response) => {
             
             
         }
+        
         console.log("=========================");
         //send sms to outBidedArr
         for(const item of outBidedArr){
