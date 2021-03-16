@@ -60,7 +60,7 @@ const UserSchema = mongoose.Schema({
         ref: "Role"
     },
 
-    unique: {
+    notification: {
         type: Boolean
     },
     state:{
