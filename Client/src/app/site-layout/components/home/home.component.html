@@ -32,7 +32,7 @@
 
                 </div>
                 <div class="padding">
-                    <button (click)="goToRules()"> View auction rules </button>
+                    <button (click)="goToRules()"> Reversed Auctions Rules </button>
                 </div>
                 <div class="strip">
                 </div>
@@ -73,8 +73,7 @@
     <section #fifth class="fwh-slide section-place-my-bid ">
         <div class="mainContent center">
             <button *ngIf="!accountService.isLogin" (click)="login()"> i want to place a bid!</button>
-            <button *ngIf="accountService.isLogin" (click)="router.navigateByUrl('/live')"> i want to place a
-                bid!</button>
+            <button *ngIf="accountService.isLogin" (click)="router.navigateByUrl('/live')"> Bid on reversed auction</button>
         </div>
     </section>
 </div>

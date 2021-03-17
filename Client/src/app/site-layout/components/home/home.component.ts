@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public goToRules(): void {
-    this.router.navigateByUrl('/rules');
+    this.router.navigateByUrl('/page/HowItWorks');
   }
   ngOnInit() {
     this.auction$ = this.auctionService.getLastAuction();
