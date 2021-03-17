@@ -117,7 +117,7 @@ canvas {
   height: 100px;
 }
 app-check-box {
-  display: inline-flex;
+  display: inline-block;
   width: 40%;
   justify-content: center;
   align-items: center;

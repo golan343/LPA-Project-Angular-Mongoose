@@ -1,7 +1,7 @@
 <div class="container">
   <div class=" register">
     <h1 class="mr-b">LAP Registration</h1>
-    <h2 class="mr-b">personal details</h2>
+    <h2 class="mr-b">{{title}}</h2>
     <section class="step">
       <div [ngSwitch]="currentStep">
         <ng-template [ngSwitchCase]="'1'">
@@ -145,12 +145,16 @@
           <div class="current">
             <div class="mr-b wrap-email relative">
               <label for="phone">Phone *</label>
+              <div class="inline-block">
+                <app-phones-code></app-phones-code>
+              </div>
+              
               <input
                 type="text"
                 [(ngModel)]="user.phone"
                 (focus)="error.clear('phone')"
-                name="city"
-                id="city"
+                name="phone"
+                id="phone"
               />
               <span *ngIf="error.phone" class="error">{{ error.phone }}</span>
             </div>
@@ -184,9 +188,18 @@
         </ng-template>
         <ng-template [ngSwitchCase]="'4'">
           <div class="current">
-            <!-- <re-captcha (resolved)="resolved($event)" class="g-recaptcha" name="captcha" required
-              siteKey="6LcOuyYTAAAAAHTjFuqhA52fmfJ_j5iFk5PsfXaU">
-            </re-captcha> -->
+              <div class="content">
+                <div class="txt">
+                  <p *ngFor="let item of approvalContant">{{item}}</p>
+                </div>
+                <div class="l-padding relative">
+                  <span *ngIf="error.isApproved" class="error">{{ error.isApproved }}</span>
+                  <div  class="check-box">
+                    <app-check-box (triggerChange)="checkIsApproved($event)" [checked]="isapproved"></app-check-box><span> Approve this Terms and Policy</span>
+                  </div>
+                </div>
+               
+              </div>
           </div>
         </ng-template>
         <ng-template [ngSwitchCase]="'5'">

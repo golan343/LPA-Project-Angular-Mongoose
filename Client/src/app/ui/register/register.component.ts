@@ -3,13 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { errorModel, UserModel, validationConstrains } from 'src/app/models/user-model';
 import { DialogService } from '../dialog.service';
 import { DialogData } from '../model/dialog-data';
+import { PageService } from 'src/app/services/page.service';
+import { forkJoin } from 'rxjs';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  providers: [
-
-  ]
 })
 export class RegisterComponent implements OnInit {
 
@@ -18,17 +17,29 @@ export class RegisterComponent implements OnInit {
   error = new errorModel();
   errorMsg = '';
   currentStep = 1;
-  steps = 3;
+  steps = 4;
   backBtn = 'Back';
   nextBtn = 'Next Step';
+  approvalContant = Array<string>();
+  isapproved = false;
   public today = new Date();
   public minAge = new Date(this.today.getFullYear() - 18, this.today.getMonth(), this.today.getDate());
+  title = 'User initial Details';
   constructor(
     private accountService: AccountService,
-    private dialog: DialogService
+    private dialog: DialogService,
+    private pageService: PageService,
   ) { }
   ngOnInit(): void {
-    
+    const listOfCall = [this.pageService.getPage('Terms'), this.pageService.getPage('policy')];
+    forkJoin(listOfCall).subscribe(result => {
+      console.log(result);
+      const bdarr = result.map(page => { return page.content; });
+      console.log(bdarr);
+      bdarr.map(arr => {
+        this.approvalContant = [...this.approvalContant, ...arr];
+      })
+    });
   }
   public register() {
 
@@ -38,13 +49,13 @@ export class RegisterComponent implements OnInit {
     this.accountService.addUser(this.user).subscribe(result => {
       const d = new DialogData('');
       d.show = true;
-      d.title = 'success message';
+      d.title = 'Congratulations !!';
       d.innerTitle = 'you have sign in successfully!';
-      d.text = 'start to take a bid today.'
+      d.text = 'we are please to have you registration complete'
       this.dialog.method();
       this.dialog.subjectType.next(d);
-      this.accountService.setLoginUser(result.addedUser,result.token)
-    },err => {
+      this.accountService.setLoginUser(result.addedUser, result.token)
+    }, err => {
       if (err.error) {
         if (err.error.errors) {
           for (let prop in err.error.errors) {
@@ -76,14 +87,18 @@ export class RegisterComponent implements OnInit {
         this.currentStep += 1;
       }
     }
-    if (this.currentStep > this.steps) {
+    if (this.currentStep > this.steps && this.isapproved) {
       this.register();
     }
 
     if (this.currentStep == this.steps) {
       this.nextBtn = 'Sign Me Up';
     }
+  }
 
+  checkIsApproved($event) {
+    this.error = new errorModel();
+    this.isapproved = !this.isapproved;
   }
   validate(): boolean {
 
@@ -117,6 +132,13 @@ export class RegisterComponent implements OnInit {
         });
         const constrainsbirthDate = new validationConstrains({ prop: 'birthDate', content: this.user.birthDate, isReqire: true, errorMsg: 'birth Date Name is missing' });
         return this.error.validate(constrainsEmail) && this.error.validate(constrainsbirthDate);
+      }
+      case 4: {
+        if(!this.isapproved){
+          const constrainsbirthDate = new validationConstrains({ prop: 'isApproved', isReqire: true, errorMsg: 'You have to approve the terms and policy' });
+         // this.error["isApproved"] = "Please Approve the Terms";
+          return this.error.validate(constrainsbirthDate);
+        }
       }
 
     }

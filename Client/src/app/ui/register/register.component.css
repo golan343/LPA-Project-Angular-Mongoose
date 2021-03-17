@@ -1,7 +1,7 @@
 .container {
   background-color: #808080;
   padding: 2% 0;
-  max-height: 70vh;
+  max-height: 85vh;
   overflow-y: scroll;
 }
 .register {
@@ -38,5 +38,13 @@
 .register .wrap-email {
   overflow: visible;
 }
-
+.register .content{
+  width:70%;
+  text-align: left;
+  margin:2% auto;
+}
+.txt{
+  padding: 2%;
+  background-color: #fff;
+}
 

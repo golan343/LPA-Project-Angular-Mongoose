@@ -16,7 +16,6 @@ const UserSchema = mongoose.Schema({
         type: String,
         required: [true, "is missing."],
     },
-
     firstName: {
         type: String,
         index: true,
@@ -28,7 +27,6 @@ const UserSchema = mongoose.Schema({
         required: [true, "is missing"],
         minlength: [3, "must be minimum 3 charts"]
     },
-
     city: {
         type: String,
         index: true,
@@ -48,7 +46,6 @@ const UserSchema = mongoose.Schema({
     },
     phone: {
         type: String,
-        // required:[true,'phone is obligated']
     },
     birthDate: {
         type: Date,
@@ -59,7 +56,6 @@ const UserSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Role"
     },
-
     unique: {
         type: Boolean
     },
@@ -71,15 +67,16 @@ const UserSchema = mongoose.Schema({
     },
     profileName:{
         type:String
-
     },
-
-    token: { type:String },
-    expiredToken: { type: Number},
+    token: { 
+        type:String
+    },
+    expiredToken: { 
+        type: Number
+    },
     sectorNumber:{
         type:Number,
     },
-    
     loginDate: {
         index: true,
         type: Date
@@ -120,9 +117,6 @@ UserSchema.virtual("user", {
     justOne: true
 });
 
-
 const User = mongoose.model("User", UserSchema, "users");
 
-
 module.exports = User;
-

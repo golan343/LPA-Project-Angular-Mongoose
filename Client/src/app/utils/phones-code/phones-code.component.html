@@ -1,0 +1,6 @@
+<div class="datalist">
+    <input type="text" list="list"  placeholder="phone code" />
+        <datalist id="list">
+          <option *ngFor="let code of codes">{{code.dial_code}}</option>
+        </datalist>
+</div>

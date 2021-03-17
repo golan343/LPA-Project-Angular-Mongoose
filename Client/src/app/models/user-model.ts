@@ -45,6 +45,7 @@ export class UserModel {
 
 export class errorModel extends UserModel {
   bid: string;
+  legalApproval:boolean;
   validatePassword(passText) {
     if (!passText) {
       this.password = 'Missing Password';
@@ -105,6 +106,7 @@ export class validationConstrains {
     this.pattarnErrorMsg = args.pattarnErrorMsg;
     this.callMethod = args.callMethod || null;
     this.methodMsg = args.methodMsg;
+    this.isApproved = args.isApproved;
   }
   isRequire: boolean;
   prop: string;
@@ -114,4 +116,5 @@ export class validationConstrains {
   pattarnErrorMsg: string;
   callMethod: any;
   methodMsg: string;
+  isApproved:boolean;
 }
