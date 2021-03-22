@@ -1,11 +1,11 @@
 import { userItem } from '../dashboard/model/user-item';
 
-export interface UserImageRespone{
-  userId:string;
-  base64StringImg:string;
+export interface UserImageRespone {
+  userId: string;
+  base64StringImg: string;
 }
 export class UserModel {
-  constructor() {}
+  constructor() { }
   isAdmin: boolean;
   _id?: string;
   email?: string;
@@ -21,9 +21,10 @@ export class UserModel {
   roleId: string;
   token?: string;
   phone?: string;
+  phoneCode: string;
   settlement?: string;
   sectorNumber: number;
-  state?:string;
+  state?: string;
   loginDate?: string;
   registrationDate?: string;
   public toUserItem(): userItem {
@@ -38,13 +39,14 @@ export class UserModel {
       street: this.street,
       token: this.token,
       phone: this.phone,
-      loginDate:this.loginDate
+      loginDate: this.loginDate
     };
   }
 }
 
 export class errorModel extends UserModel {
   bid: string;
+  legalApproval: boolean;
   validatePassword(passText) {
     if (!passText) {
       this.password = 'Missing Password';
@@ -90,7 +92,7 @@ export class errorModel extends UserModel {
     this[constrain.prop] = '';
     return true;
   }
-  clear(val: string) {
+  clear(val?: string) {
     this[val] = '';
   }
 }
@@ -105,6 +107,7 @@ export class validationConstrains {
     this.pattarnErrorMsg = args.pattarnErrorMsg;
     this.callMethod = args.callMethod || null;
     this.methodMsg = args.methodMsg;
+    this.isApproved = args.isApproved;
   }
   isRequire: boolean;
   prop: string;
@@ -114,4 +117,5 @@ export class validationConstrains {
   pattarnErrorMsg: string;
   callMethod: any;
   methodMsg: string;
+  isApproved: boolean;
 }

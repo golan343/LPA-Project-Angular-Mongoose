@@ -1,0 +1,57 @@
+.datalist {
+    display: inline-block;
+    max-width: 100px;
+    border: 1px solids;
+}
+
+.datalist datalist option {
+    font-size: .8rem;
+    font-weight: 200;
+}
+
+label {
+    text-align: left;
+    min-width: 22%;
+    flex-grow: unset;
+    margin-left: 3%;
+}
+
+input {
+    font-size: 1.1rem;
+    background: rgb(204 204 204 / 45%);
+    padding: 3px;
+}
+
+.selection-tube input {
+    width: 100px;
+}
+
+.selection-tube aside,
+.selection-tube option {
+    text-align: right;
+    box-shadow: 0 -1px 0 0 #ccc;
+    cursor: pointer;
+}
+
+.selection-tube aside:hover,
+.selection-tube option:hover,
+.selection-tube option.hover {
+    background: #049cc3;
+    color: #fff
+}
+
+.selection-tube aside span,
+.selection-tube option {
+    font-size: .8em;
+}
+
+.selection-tube span.tringle-select {
+    top: 12px;
+    left: 7px;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 5px solid rgba(0, 0, 0, 0);
+    border-right: 5px solid rgba(0, 0, 0, 0);
+    border-top: 5px solid #00a8d3
+}

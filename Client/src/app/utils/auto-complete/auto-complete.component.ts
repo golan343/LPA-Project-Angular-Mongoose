@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, HostListener, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Observable } from 'rxjs';
-import { autoComplete } from '../autoComplete';
+import { autoComplete } from '../model/autoComplete';
 import { UtilsService } from './../utils.service';
-import { County } from './../autoComplete'
+import { County } from '../model/autoComplete'
 @Component({
   selector: 'app-auto-complete',
   templateUrl: './auto-complete.component.html',

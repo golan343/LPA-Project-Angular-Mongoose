@@ -1,26 +1,19 @@
 <div *ngIf="auction" class="auctionPage">
     <div class="mainContent center">
-        <h1 *ngIf="!auction.status">Closed Auction</h1>
-        <h1 *ngIf="auction.status">Live Auction</h1>
-        <h2>Place your bid and get a chance to win in one of our cars</h2>
+        <h1 *ngIf="!auction.status">Closed Reserved Auction</h1>>
+        <h2>check out our pervious closed reserved auction and winners</h2>
         <div class="bg">
             <div class="auction relative" [style.backgroundImage]="'url('+auction.imageFileName+')'">
-                <h4 class="both"><span class="left">{{auction.name}}</span><span
-                        class="right">{{auction.description}}</span></h4>
+                <h4 class="both"><span class="left">{{auction.name}}</span><span class="right">{{auction.description}}</span></h4>
 
-                <p *ngIf="auction.status" class="valueAuction"><span><b>Price</b></span>: <span>{{price |
-                        currency}}</span> </p>
+                <!-- <p *ngIf="auction.status" class="valueAuction"><span><b>Price</b></span>: <span>{{price |
+                        currency}}</span> </p> -->
             </div>
             <div class="flex padding-top space">
-                <div class="placeBid" *ngIf="auction.status">
-
-                    <label> Offer cost: </label>
-                    <input type="text" data-type="currency" required pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$"
-                        (change)="setAmount($event)" [value]="bid.offer || 0">
-                    <div class="overflow relative">
-                        <aside class="right plus " (click)="addBid()"></aside>
-                        <button type="button" (click)="addBid()"> Place my bid </button>
-                    </div>
+                <app-bounch-stairs *ngIf="auction?.bidPattern" [bidBounce]="auction?.bidPattern"></app-bounch-stairs>
+                <div class="remaining-offers">
+                    <h3><span>total Tickets</span></h3>
+                    <h3><i>{{bids?.length}}</i></h3>
                 </div>
             </div>
 
@@ -57,47 +50,47 @@
                         <div class="cube-body-half">
                             <p>{{auction.description}}</p>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="productVideo">
+                <div class="flex">
+
+                    <div class="  half">
+                        <div class="flex cube">
+                            <div class=" full ">
+                                <h3>Closed date</h3>
+                                <div class="cube-body-half">
+                                    <h4><span class="calendar-icon mr-r"></span>{{auction.endDate | date: 'MM/dd/yyyy'}}
+                                    </h4>
+                                </div>
+                            </div>
+
                         </div>
-                        </div>
-                        </div>
-                        <div class="productVideo">
+                        <div class=" full mr-t cube">
                             <div class="flex">
-                        
-                                <div class="  half">
-                                    <div class="flex cube">
-                                        <div class=" full ">
-                                            <h3>Closed date</h3>
-                                            <div class="cube-body-half">
-                                                <h4><span class="calendar-icon mr-r"></span>{{auction.endDate | date: 'MM/dd/yyyy'}}
-                                                </h4>
-                                            </div>
-                                        </div>
-                        
-                                    </div>
-                                    <div class=" full mr-t cube">
-                                        <div class="flex">
-                                            <div class=" relative full-half">
-                                                <h3>Most common bid</h3>
-                                                <div class="cube-body-half border-right">
-                                                    <div class="maxOffers">
-                                                        <p>{{bidAuctionGraphData?.mostCommon | currency}}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="  full-half">
-                                                <h3>Most highest bid</h3>
-                                                <div class="cube-body-half">
-                                                    <div class="maxBid">
-                                                        <p>{{bidAuctionGraphData?.highest | currency}}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                <div class=" relative full-half">
+                                    <h3>Most common bid</h3>
+                                    <div class="cube-body-half border-right">
+                                        <div class="maxOffers">
+                                            <p>{{bidAuctionGraphData?.mostCommon | currency}}</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="cube half ">
-                                    <div class="full">
-                                        <h3>Winner- <span>{{bidAuctionGraphData?.winner.userId.firstName}}</span></h3>
+                                <div class="  full-half">
+                                    <h3>Most highest bid</h3>
+                                    <div class="cube-body-half">
+                                        <div class="maxBid">
+                                            <p>{{bidAuctionGraphData?.highest | currency}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cube half ">
+                        <div class="full">
+                            <h3>Winner- <span>{{bidAuctionGraphData?.winner.userId.firstName}}</span></h3>
                             <div class="cube-body">
                                 <div (click)="showMovie()" class="productVideoLink"></div>
                             </div>
@@ -113,20 +106,19 @@
                             <div class="paging right absolute" *ngIf="paging?.show && paging?.showRight">
                                 <div class="next" title="next" (click)="paging.next()"></div>
                             </div>
-                            <div class="white-back"
-                                *ngFor="let item of bidAuctionGraphData?.filteredObjectsArray | slice: paging.start : paging.end ">
+                            <div class="white-back" *ngFor="let item of bidAuctionGraphData?.filteredObjectsArray | slice: paging.start : paging.end ">
                                 <div class="val"><b>{{item.val | currency}}</b></div>
                                 <div class="graph-row">
-                                    
+
                                     <div *ngIf="!item.item?.winner" class="prograss" [style.width]="item.relation+'%'"></div>
                                     <div *ngIf="item.item?.winner" class="winner"><span>winner !</span></div>
                                 </div>
                                 <div class="length">{{item.length}}</div>
-                                </div>
-                                <div class="paging left absolute" *ngIf="paging?.show && paging?.showLeft ">
-                                    <div class="prev" title="prev" (click)="paging.prev()"></div>
-                                </div>
-                                </div>
+                            </div>
+                            <div class="paging left absolute" *ngIf="paging?.show && paging?.showLeft ">
+                                <div class="prev" title="prev" (click)="paging.prev()"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

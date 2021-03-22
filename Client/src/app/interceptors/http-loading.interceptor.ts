@@ -22,25 +22,7 @@ export class HttpLoadingInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    ///jwt
 
-    // if (this.accountService.isLogin) {
-    //   const token = sessionStorage.getItem('token');
-    //   if(token){
-    //    request = request.clone({
-    //       headers: request.headers
-    //         .set('Content-Type', 'application/json')
-    //         .set(
-    //           'Authorization',
-    //           'Bearer' + token
-    //         )
-    //     });
-    //   }
-      
-    // }
-
-    ///preloader
-  //  this.loader.show();
     return next
       .handle(request)
       .pipe(tap(this.preloaderChaeck.bind(this)))

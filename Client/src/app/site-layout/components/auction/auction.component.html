@@ -1,6 +1,6 @@
 <div class="auctionPage">
     <div class="mainContent center">
-        <h1>Live Auction</h1>
+        <h1>Live Reserved Auction</h1>
         <h2>Place your bid and get a chance to win in one of our cars</h2>
         <div class="bg">
             <div class="auction relative" [style.backgroundImage]="'url('+auction?.imageFileName+')'">
@@ -10,7 +10,9 @@
             <div class="flex padding-top space">
                 <div class="placeBid relative" *ngIf="auction?.status">
                     <span *ngIf="error?.bid" class="error">{{error?.bid}}</span>
-                    <label> Your bid: </label>
+
+                    <label> Your Bid: </label>
+
                     <div class="suggests padding" *ngIf="suggests">
                         <h5>Suggestions</h5>
                         <span class="cursor" (click)="chooseTop()">{{suggests.up}}</span>
@@ -20,13 +22,15 @@
                     <div class="overflow relative l-padding">
                         <button type="button" (click)="addBid()"> Buy Ticket </button>
                     </div>
-               
+
                     <div class="overflow relative l-padding">
-                        <button type="button" (click)="randomSuggestions()">Random Bid</button>
+
+                        <button type="button" (click)="randomSuggestions()"> Random Bid</button>
                     </div>
                 </div>
                 <app-bounch-stairs *ngIf="auction?.bidPattern" [bidBounce]="auction?.bidPattern"></app-bounch-stairs>
-                <div class="remaining-offers">
+                <div class="remaining-Tickets">
+
                     <h3><span>Remaining Tickets</span></h3>
                     <h3><i>{{auction?.bidsRemains}}</i></h3>
                 </div>
@@ -59,8 +63,8 @@
                     <div class="cube third">
                         <h3>Maximum Tickets</h3>
                         <div class="cube-body">
-                            <div class="maxOffers">
-                                <p>{{auction?.totalBids}}</p>
+                            <div class="maxTickets">
+                                <p>{{auction?.maxOffer}}</p>
                             </div>
                         </div>
                     </div>
@@ -82,7 +86,7 @@
                     </div>
                 </div>
             </div>
-            </div>
         </div>
-        </div>
-        <app-global-loader></app-global-loader>
+    </div>
+</div>
+<app-global-loader></app-global-loader>

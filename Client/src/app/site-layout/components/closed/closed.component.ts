@@ -31,7 +31,7 @@ export class ClosedComponent implements OnInit, OnDestroy {
       this.auctions = auctions.map(auc => {
         return {
           ...auc,
-          imageFileName: environment.BaseUrl + 'uploads/' + auc.imageFileName
+          imageFileName: environment.devUrl + 'uploads/' + auc.imageFileName
         }
       }).filter(auc => !auc.status);
     })).subscribe(data => {

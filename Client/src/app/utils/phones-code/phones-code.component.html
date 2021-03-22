@@ -1,0 +1,7 @@
+<div class="selection-tube">
+    <input type="text" list="list" (change)="inputChangeEvent($event)" placeholder="Phone Code" />
+    <datalist id="list">
+          <option   *ngFor="let code of codes"> <span>{{code.name}}</span> - <span>{{code.dial_code}}</span></option>
+    </datalist>
+
+</div>

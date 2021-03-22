@@ -1,13 +1,15 @@
 <div *ngIf="auctions" class="live">
+
     <h1>Closed Reversed Auctions</h1>
     <h4>Check out our previous closed reversed auction and winners</h4>
+
     <div class="auctions">
-            <section class="firstSection ">
-                <div *ngFor="let auction of auctions" class="mainContent">
-                    <app-auction-item [auction]="auction"></app-auction-item>
+        <section class="firstSection ">
+            <div *ngFor="let auction of auctions" class="mainContent">
+                <app-auction-item [auction]="auction"></app-auction-item>
             </div>
-            </section>
-        </div>
-    
+        </section>
     </div>
-    <app-global-loader></app-global-loader>
+
+</div>
+<app-global-loader></app-global-loader>

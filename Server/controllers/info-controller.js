@@ -3,9 +3,21 @@ const info = require('./../models/info');
 const router = express.Router();
 
 router.get('/countries', async (req, res) => {
+    try{
+        const infoOb = new info()
+        res.json(infoOb.getCounries())
+    }catch{
+        throw new Error('phoneCode json file not found');
+    }
+
+});
+router.get('/phones-code', async (req, res) => {
+    try{
+        const infoOb = new info()
+        res.json(infoOb.getPhoneCode())
+    }catch{
+        throw new Error('phoneCode json file not found');
+    }
     
-    const infoOb = new info()
-    console.log(infoOb);
-    res.json(infoOb.getCounries())
 });
 module.exports = router;
