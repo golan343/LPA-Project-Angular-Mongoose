@@ -1,50 +1,92 @@
 .container {
-  background-color: #808080;
-  padding: 2% 0;
-  max-height: 85vh;
-  overflow-y: scroll;
-}
-.register {
-  min-width: 230px;
-  margin: 2% auto 2% auto;
-}
-.register h1,
-.register h2 {
-  display: block;
-}
-.register * {
-  color: #000;
-}
-.register .error {
-  color: #fff;
-  top: -100%;
-  width: auto;
-}
-.register .flex {
-  margin: 0 auto;
-  justify-content: space-between;
-  align-items: center;
-  width: 89%;
-}
-.register .input-container {
-  text-align: left;
-}
-.register .input-container label {
-  display: block;
-}
-.register .step .first {
-  height: 30vh;
-}
-.register .wrap-email {
-  overflow: visible;
-}
-.register .content{
-  width:70%;
-  text-align: left;
-  margin:2% auto;
-}
-.txt{
-  padding: 2%;
-  background-color: #fff;
+    background-color: #808080;
+    padding: 2% 0;
+    max-height: 85vh;
+    overflow-y: scroll;
 }
 
+.register {
+    min-width: 230px;
+    margin: 2% auto 2% auto;
+}
+
+.register h1,
+.register h2 {
+    display: block;
+}
+
+.register * {
+    color: #000;
+}
+
+.register .error {
+    color: #fff;
+    top: -100%;
+    width: auto;
+}
+
+.register .flex {
+    margin: 0 auto;
+    justify-content: space-between;
+    align-items: center;
+    width: 89%;
+}
+
+.register .input-container {
+    text-align: left;
+}
+
+.register .input-container label {
+    display: block;
+}
+
+.register .step .first {
+    height: 30vh;
+}
+
+.register .wrap-email {
+    overflow: visible;
+    justify-content: stretch;
+}
+
+.register .wrap-email label {
+    text-align: left;
+    min-width: 22%;
+    flex-grow: unset;
+    margin-left: 3%;
+}
+
+.register .wrap-email input {
+    font-size: 1.1rem;
+    background: rgb(204 204 204 / 45%);
+    padding: 3px;
+}
+
+.register .content {
+    width: 70%;
+    text-align: left;
+    margin: 2% auto;
+}
+
+.txt {
+    padding: 2%;
+    background-color: #fff;
+}
+
+.register .phone .error {
+    top: -40px;
+}
+
+input::placeholder,
+input::-webkit-input-placeholder,
+::-moz-placeholder,
+:-ms-input-placeholder,
+:-ms-input-placeholder {
+    font-size: .8rem;
+    font-weight: 100;
+    color: #808080;
+}
+
+.wrap-email input {
+    flex-grow: unset;
+}

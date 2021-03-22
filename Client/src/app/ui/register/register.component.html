@@ -1,218 +1,129 @@
 <div class="container">
-  <div class=" register">
-    <h1 class="mr-b">LAP Registration</h1>
-    <h2 class="mr-b">{{title}}</h2>
-    <section class="step">
-      <div [ngSwitch]="currentStep">
-        <ng-template [ngSwitchCase]="'1'">
-          <div class="current first relative">
-            <span class="error" *ngIf="errorMsg">errorMsg</span>
-            <div class="mr-b wrap-email relative">
-              <label for="firstName"> First Name *</label>
-              <input
-                type="text"
-                [(ngModel)]="user.firstName"
-                (focus)="error.clear('firstName')"
-                name="firstName"
-                id="firstName"
-              />
-              <span *ngIf="error.firstName" class="error">{{
+    <div class=" register">
+        <h1 class="mr-b">LAP Registration</h1>
+        <h2 class="mr-b">{{title}}</h2>
+        <section class="step">
+            <div [ngSwitch]="currentStep">
+                <ng-template [ngSwitchCase]="'1'">
+                    <div class="current first relative">
+                        <span class="error" *ngIf="errorMsg">errorMsg</span>
+                        <div class="mr-b wrap-email relative">
+                            <label for="firstName"> First Name *</label>
+                            <input type="text" placeholder="first Name" [(ngModel)]="user.firstName" (focus)="error.clear('firstName')" name="First Name" id="firstName" />
+                            <span *ngIf="error.firstName" class="error">{{
                 error.firstName
               }}</span>
-            </div>
-            <div class="mr-b wrap-email relative">
-              <label for="lastName">Last Name *</label>
-              <input
-                type="text"
-                [(ngModel)]="user.lastName"
-                (focus)="error.clear('lastName')"
-                name="lastName"
-                id="lastName"
-              />
-              <span *ngIf="error.lastName" class="error">{{
+                        </div>
+                        <div class="mr-b wrap-email relative">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" [(ngModel)]="user.lastName" (focus)="error.clear('lastName')" placeholder="Last Name" name="lastName" id="lastName" />
+                            <span *ngIf="error.lastName" class="error">{{
                 error.lastName
               }}</span>
-            </div>
-            <div class="mr-b wrap-email relative">
-              <label for="profileName">Profile Name</label>
-              <input
-                type="text"
-                [(ngModel)]="user.profileName"
-                (focus)="error.clear()"
-                name="profileName"
-                id="profileName"
-              />
-            </div>
-            <div class="mr-b wrap-email relative">
-              <label for="password">Password *</label>
-              <input
-                type="password"
-                [(ngModel)]="user.password"
-                (focus)="error.clear('password')"
-                name="password"
-                id="password"
-              />
-              <span *ngIf="error.password" class="error">{{
+                        </div>
+                        <div class="mr-b wrap-email relative">
+                            <label for="profileName">Profile Name</label>
+                            <input type="text" [(ngModel)]="user.profileName" (focus)="error.clear()" name="profileName" placeholder="Profile Name" id="profileName" />
+                        </div>
+                        <div class="mr-b wrap-email relative">
+                            <label for="password">Password *</label>
+                            <input type="password" [(ngModel)]="user.password" (focus)="error.clear('password')" name="password" placeholder="Password" id="password" />
+                            <span *ngIf="error.password" class="error">{{
                 error.password
               }}</span>
-            </div>
-          </div>
-        </ng-template>
-        <ng-template [ngSwitchCase]="'2'">
-          <div>
-            <div class="mr-b wrap-email relative">
-              <label for="country">country *</label>
-              <input
-                type="text"
-                [(ngModel)]="user.country"
-                (focus)="error.clear('country')"
-                name="country"
-                id="country"
-              />
-              <app-auto-complete
-                [value]="user.country"
-                (hasbeenSelected)="selectCountry($event)"
-              ></app-auto-complete>
-              <span *ngIf="error.country" class="error">{{
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template [ngSwitchCase]="'2'">
+                    <div>
+                        <div class="mr-b wrap-email relative">
+                            <label for="country">country *</label>
+                            <input type="text" [(ngModel)]="user.country" (focus)="error.clear('country')" name="country" id="country" placeholder="Country Name" />
+                            <app-auto-complete [value]="user.country" (hasbeenSelected)="selectCountry($event)"></app-auto-complete>
+                            <span *ngIf="error.country" class="error">{{
                 error.country
               }}</span>
-            </div>
-          </div>
-          <div class="mr-b wrap-email relative">
-            <label for="city">city *</label>
-            <input
-              type="text"
-              [(ngModel)]="user.city"
-              (focus)="error.clear('city')"
-              name="city"
-              id="city"
-            />
-            <span *ngIf="error.city" class="error">{{ error.city }}</span>
-          </div>
-          <div class="mr-b wrap-email relative">
-            <label for="state">State</label>
-            <input
-              type="text"
-              [(ngModel)]="user.state"
-              (focus)="error.clear()"
-              name="state"
-              id="state"
-            />
-          </div>
-          <div class="mr-b wrap-email relative">
-            <label for="settlement">Settlement</label>
-            <input
-              type="text"
-              [(ngModel)]="user.settlement"
-              (focus)="error.clear()"
-              name="settlement"
-              id="settlement"
-            />
-          </div>
-          <div class="mr-b wrap-email relative">
-            <label for="street">street</label>
-            <input
-              type="text"
-              [(ngModel)]="user.street"
-              (focus)="error.clear()"
-              name="street"
-              id="street"
-            />
-            <span *ngIf="error.street" class="error">{{ error.street }}</span>
-          </div>
-          <div class="mr-b wrap-email relative">
-            <label for="sectorNumber">sectorNumber</label>
-            <input
-              type="number"
-              [(ngModel)]="user.sectorNumber"
-              (focus)="error.clear()"
-              name="sectorNumber"
-              id="sectorNumber"
-            />
-          </div>
-          <div class="mr-b wrap-email relative">
-            <label for="postCode">postCode</label>
-            <input
-              type="text"
-              [(ngModel)]="user.postCode"
-              (focus)="error.clear()"
-              name="postCode"
-              id="postCode"
-            />
-          </div>
-        </ng-template>
-        <ng-template [ngSwitchCase]="'3'">
-          <div class="current">
-            <div class="mr-b wrap-email relative">
-              <label for="phone">Phone *</label>
-              <div class="inline-block">
-                <app-phones-code></app-phones-code>
-              </div>
-              
-              <input
-                type="text"
-                [(ngModel)]="user.phone"
-                (focus)="error.clear('phone')"
-                name="phone"
-                id="phone"
-              />
-              <span *ngIf="error.phone" class="error">{{ error.phone }}</span>
-            </div>
-            <div class="mr-b wrap-email relative">
-              <label for="email">email *</label>
-              <input
-                type="email"
-                [(ngModel)]="user.email"
-                (focus)="error.clear('email')"
-                name="email"
-                id="email"
-              />
-              <span *ngIf="error.email" class="error">{{ error.email }}</span>
-            </div>
-            <div class="mr-b wrap-email relative">
-              <label for="birthDate">birth Date *</label>
-              <input
-                type="date"
-                [(ngModel)]="user.birthDate"
-                dateTemplate
-                (focus)="error.clear('birthDate')"
-                name="birthDate"
-                id="birthDate"
-                max="{{ minAge | date: 'yyyy-MM-dd' }}"
-              />
-              <span *ngIf="error.birthDate" class="error">{{
+                        </div>
+                    </div>
+                    <div class="mr-b wrap-email relative">
+                        <label for="city">city *</label>
+                        <input type="text" [(ngModel)]="user.city" (focus)="error.clear('city')" name="city" id="city" placeholder="City Name" />
+                        <span *ngIf="error.city" class="error">{{ error.city }}</span>
+                    </div>
+                    <div class="mr-b wrap-email relative">
+                        <label for="state">State</label>
+                        <input type="text" [(ngModel)]="user.state" (focus)="error.clear()" name="state" id="state" placeholder="State Name" />
+                    </div>
+                    <div class="mr-b wrap-email relative">
+                        <label for="settlement">Settlement</label>
+                        <input type="text" [(ngModel)]="user.settlement" (focus)="error.clear()" name="settlement" id="settlement" placeholder="Settlement Name" />
+                    </div>
+                    <div class="mr-b wrap-email relative">
+                        <label for="street">street</label>
+                        <input type="text" [(ngModel)]="user.street" (focus)="error.clear()" name="street" id="street" placeholder="Street Name" />
+                        <span *ngIf="error.street" class="error">{{ error.street }}</span>
+                    </div>
+                    <div class="mr-b wrap-email relative">
+                        <label for="sectorNumber">sectorNumber</label>
+                        <input type="number" [(ngModel)]="user.sectorNumber" (focus)="error.clear()" name="sectorNumber" id="sectorNumber" placeholder="Sector Name" />
+                    </div>
+                    <div class="mr-b wrap-email relative">
+                        <label for="postCode">postCode</label>
+                        <input type="number" [(ngModel)]="user.postCode" (focus)="error.clear()" name="postCode" id="postCode" placeholder="Postal code" />
+                    </div>
+                </ng-template>
+                <ng-template [ngSwitchCase]="'3'">
+                    <div class="current">
+                        <div class="mr-b wrap-email relative">
+                            <label for="phone">Phone *</label>
+                            <div class="relative phone">
+                                <app-phones-code (EventPassValue)="setPhoneCode($event)"></app-phones-code>
+                                <span *ngIf="error.phoneCode" class="error">{{ error.phoneCode }}</span>
+                            </div>
+                            <input type="tel" [(ngModel)]="user.phone" (focus)="error.clear('phone')" name="phone" id="phone" placeholder="Phone Number" />
+                            <span *ngIf="error.phone" class="error">{{ error.phone }}</span>
+                        </div>
+                        <div class="mr-b wrap-email relative">
+                            <label for="email">email *</label>
+                            <input type="email" [(ngModel)]="user.email" (focus)="error.clear('email')" name="email" id="email" placeholder="Email" />
+                            <span *ngIf="error.email" class="error">{{ error.email }}</span>
+                        </div>
+                        <div class="mr-b wrap-email relative">
+                            <label for="birthDate">birth Date *</label>
+                            <input type="date" [(ngModel)]="user.birthDate" dateTemplate (focus)="error.clear('birthDate')" name="birthDate" id="birthDate" max="{{ minAge | date: 'yyyy-MM-dd' }}" />
+                            <span *ngIf="error.birthDate" class="error">{{
                 error.birthDate
               }}</span>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template [ngSwitchCase]="'4'">
+                    <div class="current">
+                        <div class="content">
+                            <div class="txt">
+                                <p *ngFor="let item of approvalContant">{{item}}</p>
+                            </div>
+                            <div class="l-padding relative">
+                                <span *ngIf="error.isApproved" class="error">{{ error.isApproved }}</span>
+                                <div class="check-box">
+                                    <app-check-box (triggerChange)="checkIsApproved($event)" [checked]="isapproved"></app-check-box><span> Approve this Terms and Policy</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template [ngSwitchCase]="'5'">
+                    <div>Five</div>
+                </ng-template>
+                <ng-template ngSwitchDefault>
+                    <div>This is default</div>
+                </ng-template>
             </div>
-          </div>
-        </ng-template>
-        <ng-template [ngSwitchCase]="'4'">
-          <div class="current">
-              <div class="content">
-                <div class="txt">
-                  <p *ngFor="let item of approvalContant">{{item}}</p>
-                </div>
-                <div class="l-padding relative">
-                  <span *ngIf="error.isApproved" class="error">{{ error.isApproved }}</span>
-                  <div  class="check-box">
-                    <app-check-box (triggerChange)="checkIsApproved($event)" [checked]="isapproved"></app-check-box><span> Approve this Terms and Policy</span>
-                  </div>
-                </div>
-               
-              </div>
-          </div>
-        </ng-template>
-        <ng-template [ngSwitchCase]="'5'">
-          <div>Five</div>
-        </ng-template>
-        <ng-template ngSwitchDefault>
-          <div>This is default</div>
-        </ng-template>
-      </div>
-      <div class="btn-wrap flex">
-        <button type="button" (click)="back()">{{ backBtn }}</button>
-        <button type="button" (click)="next()">{{ nextBtn }}</button>
-      </div>
-    </section>
-  </div>
+            <div class="btn-wrap flex">
+                <button type="button" (click)="back()">{{ backBtn }}</button>
+                <button type="button" (click)="next()">{{ nextBtn }}</button>
+            </div>
+        </section>
+    </div>
 </div>

@@ -5,7 +5,7 @@ const UserSchema = mongoose.Schema({
     email: {
         type: String,
         unique: true,
-        required: [true,  "is missing."],
+        required: [true, "is missing."],
         trim: true,
         validate: {
             validator: value => /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(value),
@@ -31,7 +31,7 @@ const UserSchema = mongoose.Schema({
         type: String,
         index: true,
         required: [true, "city is missing"]
-    } ,
+    },
     street: {
         type: String,
         required: [true, "street details is missing"]
@@ -47,35 +47,39 @@ const UserSchema = mongoose.Schema({
     phone: {
         type: String,
     },
+    phoneCode: {
+        type: String,
+        required: [true, "phone code is missing"]
+    },
     birthDate: {
         type: Date,
         index: true,
         required: [true, 'birth day is missing']
     },
-    roleId:{
+    roleId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Role"
     },
     unique: {
         type: Boolean
     },
-    state:{
-        type:String
+    state: {
+        type: String
     },
-    postalCode:{
-        type:String
+    postalCode: {
+        type: String
     },
-    profileName:{
-        type:String
+    profileName: {
+        type: String
     },
-    token: { 
-        type:String
+    token: {
+        type: String
     },
-    expiredToken: { 
+    expiredToken: {
         type: Number
     },
-    sectorNumber:{
-        type:Number,
+    sectorNumber: {
+        type: Number,
     },
     loginDate: {
         index: true,
@@ -97,7 +101,7 @@ const UserSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "CreatedBy"
     }
-}, { 
+}, {
     versionKey: false,
     toJSON: { virtuals: true },
     id: false

@@ -4,99 +4,119 @@
     margin: 5% auto;
     width: 1000px;
     height: 600px;
-    animation: fadeIn 6s linear ;
+    animation: fadeIn 6s linear;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-  }
-  
+}
+
 .top {
     z-index: 2;
-    background: rgba(256,256,256,.4);
+    background: rgba(256, 256, 256, .4);
     padding: 2%;
-  }
-  .top:after{
+}
+
+.top:after {
     content: "";
-   
     display: block;
     margin: 2% auto 0 auto;
     height: 2px;
     background-color: #000;
-  }
-  .top h2{
+}
+
+.top h2 {
     width: 50%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: left;
-  }
-  .top h4 {
+}
+
+.top h4 {
     margin-top: 0.7%;
     width: 50%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: left;
-  }
-  .lastAuction img {
+}
+
+.lastAuction img {
     position: absolute;
     left: 0;
     top: 0;
     z-index: 0;
     height: 100%;
     width: 100%;
-  }
-  .my-bid {
+}
+
+.my-bid {
     text-align: left;
     margin: 6px 0 0 0;
     z-index: 2;
     padding: 0 2% 2% 2%;
-    background: rgba(256,256,256,.4);
+    background: rgba(256, 256, 256, .4);
     width: 28%;
-  }
-  .my-bid  span {
+}
+
+.my-bid span {
     font-size: 1.6rem;
-  }
-  .my-bid  i{color:green;font-size: 1.4rem;}
-  .my-bid  small{font-size: 1.4rem;}
-  .my-bid h4 {
+}
+
+.my-bid i {
+    color: green;
+    font-size: 1.4rem;
+}
+
+.my-bid small {
+    font-size: 1.4rem;
+}
+
+.my-bid h4 {
     margin: 1% 0;
     z-index: 2;
-  }
-  .my-bid .inline-block.fadding-white.mr-l{
+}
+
+.my-bid .inline-block.fadding-white.mr-l {
     padding: 2px;
-  }
-  .my-bid  b {
+}
+
+.my-bid b {
     color: #000;
     font-size: 2rem;
     direction: rtl;
     background-color: rgba(256, 255, 255, 1);
-  }
-  .datesDiv {
+}
+
+.datesDiv {
     position: absolute;
     bottom: 4%;
     right: 5%;
     font-weight: bold;
-    background: rgba(256,256,256,.4);
+    background: rgba(256, 256, 256, .4);
     width: 29%;
     padding: 1% 0;
-  }
-  .datesDiv > p {
+}
+
+.datesDiv>p {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-  }
-  .datesDiv > p b {
+}
+
+.datesDiv>p b {
     font-size: 1.5rem;
     margin-left: 2%;
     color: #000;
     padding: 1% 2%;
-  }
-  .datesDiv > p> span{
+}
+
+.datesDiv>p>span {
     font-size: 1.5rem;
-  }
-  .sold-auction{
+}
+
+.sold-auction {
     position: absolute;
     left: 0;
     right: 0%;
@@ -105,8 +125,9 @@
     perspective-origin: center;
     -webkit-perspective: 400px;
     -webkit-perspective-origin: center;
-  }
-.sold-auction h2{
+}
+
+.sold-auction h2 {
     font-size: 6rem;
     opacity: .4;
     transform: rotateZ(-17deg);
@@ -114,23 +135,22 @@
     display: inline-block;
     border-bottom: 2px solid;
     box-shadow: 0px 2px 0px -1px;
-
 }
-  @media only screen and (max-width: 1245px) {
+
+@media only screen and (max-width: 1245px) {
     .lastAuction {
-      width: 100%;
-      padding: 0px;
+        width: 100%;
+        padding: 0px;
     }
-  }
-  @media only screen and (max-width: 880px) {
-    .lastAuction {
-      height: auto;
-    }
+}
+
+@media only screen and (max-width: 880px) {
+    .lastAuction {}
     .lastAuction img {
-      height: auto;
-      position: static;
+        height: auto;
+        position: static;
     }
-    .top{
+    .top {
         position: absolute;
         width: 80%;
         top: 5%;
@@ -142,26 +162,33 @@
         top: 11%;
         left: 10%;
         width: 40%;
-      }
-      .my-bid h4 {
+    }
+    .my-bid h4 {
         margin-bottom: 5%;
-      }
-      .datesDiv {
+    }
+    .datesDiv {
         display: flex;
         bottom: 37%;
         left: 5%;
         justify-content: space-between;
-      }
-      .datesDiv p,
-      .datesDiv p b {
+    }
+    .datesDiv p,
+    .datesDiv p b {
         font-size: 1rem;
-      }
-      .firstSection .secondHeader h2 {
+    }
+    .firstSection .secondHeader h2 {
         font-size: 4rem;
         position: static;
-      }
+    }
 }
+
 @media only screen and (max-width: 450px) {
-    .my-bid {position: static; color:#fff; width: 100%;}
-    .datesDiv {color:#fff;}
+    .my-bid {
+        position: static;
+        color: #fff;
+        width: 100%;
+    }
+    .datesDiv {
+        color: #fff;
+    }
 }

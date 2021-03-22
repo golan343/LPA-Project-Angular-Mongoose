@@ -33,9 +33,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     const listOfCall = [this.pageService.getPage('Terms'), this.pageService.getPage('policy')];
     forkJoin(listOfCall).subscribe(result => {
-      console.log(result);
       const bdarr = result.map(page => { return page.content; });
-      console.log(bdarr);
       bdarr.map(arr => {
         this.approvalContant = [...this.approvalContant, ...arr];
       })
@@ -95,7 +93,10 @@ export class RegisterComponent implements OnInit {
       this.nextBtn = 'Sign Me Up';
     }
   }
-
+  setPhoneCode($event) {
+    this.user.phoneCode = $event;
+    this.error.clear('phoneCode');
+  }
   checkIsApproved($event) {
     this.error = new errorModel();
     this.isapproved = !this.isapproved;
@@ -122,6 +123,8 @@ export class RegisterComponent implements OnInit {
         return this.error.validate(constrainsCountry) && this.error.validate(constrainsCity) && this.error.validate(constrainsStreet);
       }
       case 3: {
+        const constrainsphoneCode = new validationConstrains({ prop: 'phoneCode', content: this.user.phoneCode, isReqire: true, errorMsg: 'phone Code is missing' });
+        const constrainsphone = new validationConstrains({ prop: 'phone', content: this.user.phone, isReqire: true, errorMsg: 'phone  is missing' });
         const constrainsEmail = new validationConstrains({
           prop: 'email',
           content: this.user.email,
@@ -130,13 +133,12 @@ export class RegisterComponent implements OnInit {
           pattarn: /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/g,
           pattarnErrorMsg: 'Email must be valid example@example.com'
         });
-        const constrainsbirthDate = new validationConstrains({ prop: 'birthDate', content: this.user.birthDate, isReqire: true, errorMsg: 'birth Date Name is missing' });
-        return this.error.validate(constrainsEmail) && this.error.validate(constrainsbirthDate);
+        const constrainsbirthDate = new validationConstrains({ prop: 'birthDate', content: this.user.birthDate, isReqire: true, errorMsg: 'birth Date is missing' });
+        return this.error.validate(constrainsphoneCode) && this.error.validate(constrainsphone) && this.error.validate(constrainsEmail) && this.error.validate(constrainsbirthDate);
       }
       case 4: {
-        if(!this.isapproved){
+        if (!this.isapproved) {
           const constrainsbirthDate = new validationConstrains({ prop: 'isApproved', isReqire: true, errorMsg: 'You have to approve the terms and policy' });
-         // this.error["isApproved"] = "Please Approve the Terms";
           return this.error.validate(constrainsbirthDate);
         }
       }
