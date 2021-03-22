@@ -22,6 +22,7 @@ import {UserProfileComponent} from './components/user-profile/user-profile.compo
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'page/:name', component: PageComponent },
+  {path:'how-it-work',component:HowItsWorkComponent},
   { path: 'about', component: AboutUsComponent },
   { path: 'contact', component: ContactUsComponent },
   { path: 'auction/:id', component: AuctionComponent },
