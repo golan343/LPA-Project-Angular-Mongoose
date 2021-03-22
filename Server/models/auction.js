@@ -29,6 +29,9 @@ const AuctionSchema = mongoose.Schema({
     description: {
         type: String
     },
+    titleDescription: {
+        type: String
+    },
     status: {
         type: Boolean
     },
