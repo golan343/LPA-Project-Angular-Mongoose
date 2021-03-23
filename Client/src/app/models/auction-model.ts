@@ -40,8 +40,8 @@ export class AuctionModel extends Auction {
         if (!this.bidPattern) {
             this.bidPattern = "0.5";
         }
-        if (Number(this.bidsCount) && Number(this.maxOffer))
-            this.bidsRemains = Number(this.bidsCount) - Number(this.maxOffer)
+        if (Number(this.bidsCount) && Number(this.totalBids))
+            this.bidsRemains = Number(this.totalBids) - Number(this.bidsCount)
     }
     createdBy: string;
 }
