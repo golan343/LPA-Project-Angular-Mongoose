@@ -10,7 +10,9 @@
             <div class="flex padding-top space">
                 <div class="placeBid relative" *ngIf="auction?.status">
                     <span *ngIf="error?.bid" class="error">{{error?.bid}}</span>
+
                     <label> Your Bid: </label>
+
                     <div class="suggests padding" *ngIf="suggests">
                         <h5>Suggestions</h5>
                         <span class="cursor" (click)="chooseTop()">{{suggests.up}}</span>
@@ -22,11 +24,13 @@
                     </div>
 
                     <div class="overflow relative l-padding">
+
                         <button type="button" (click)="randomSuggestions()"> Random Bid</button>
                     </div>
                 </div>
                 <app-bounch-stairs *ngIf="auction?.bidPattern" [bidBounce]="auction?.bidPattern"></app-bounch-stairs>
                 <div class="remaining-Tickets">
+
                     <h3><span>Remaining Tickets</span></h3>
                     <h3><i>{{auction?.bidsRemains}}</i></h3>
                 </div>

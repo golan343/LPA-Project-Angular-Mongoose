@@ -57,13 +57,13 @@ export class AuctionComponent implements OnInit, OnDestroy {
             ...auctions,
             imageFileName: environment.devUrl + 'uploads/' + auctions.imageFileName,
             bidPattern: auctions.bidPattern || "0.5",
-            bidsRemains: Number(auctions.maxOffer) - Number(auctions.bidsCount)
+            bidsRemains: Number(auctions.totalBids) - Number(auctions.bidsCount)
           };
         
         this.price = parseFloat(this.auction.price);
         this.bid = new BidModel();
         this.bid.offer = this.auction.bidPrice;
-      })
+      });
      
     });
   }

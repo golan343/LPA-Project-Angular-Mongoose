@@ -10,10 +10,10 @@
       <div>
         <h4 class="inline-block"><span>Remaining offers </span></h4>
         <div *ngIf="homeFlag" class="inline-block fadding-white mr-l">
-        <small>{{ auction?.bidsRemains }}</small><span>/</span><i>{{ auction?.bidsCount}}</i>
+        <span><i>{{ auction?.bidsCount}}</i>/</span><small>{{ auction?.totalBids }}</small>
         </div>
         <div *ngIf="!homeFlag" class="inline-block fadding-white mr-l">
-        <i>{{ auction?.bidsRemains}}</i>
+        <i>{{ auction?.totalBids - auction?.bidsCount}}</i>
         </div>
       </div>
     <button class="auctionBtn" (click)="showAuction(auction._id)">

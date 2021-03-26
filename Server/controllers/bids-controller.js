@@ -214,6 +214,28 @@ router.get('/join/top10/:auctionId', async (request, response) => {
             
         }
         
+        console.log("=========================");
+        //send sms to outBidedArr
+        for(const item of outBidedArr){
+            
+            const user = await filteredUsers.find(user => `${user._id}` === `${item.userId}`);
+            console.log(user.phone);
+            
+            
+            // let todo = {
+        //     "body": "blabla",
+        //     "to": "+972545658994"
+        // }
+
+        // fetch('http://localhost:3000/api/sms/sendSMS', {
+        //     method: "POST", 
+        //     body : JSON.stringify(todo), 
+        //     headers: {'Content-Type': 'application/json'},
+        // });
+            
+            
+        }
+        
         response.status(200).json();
         return;
 
