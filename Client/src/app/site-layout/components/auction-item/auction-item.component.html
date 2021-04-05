@@ -22,7 +22,7 @@
     </div>
     <div *ngSwitchCase="true" class="datesDiv relative">
         <p>
-            <span>Offer price:</span><b>{{ auction?.bidPrice | currency }}</b>
+            <span>Cost per offer:</span><b>{{ auction?.bidPrice | currency }}</b>
         </p>
     </div>
     <div *ngSwitchDefault>
@@ -42,7 +42,7 @@
     </div>
     <div class="datesDiv relative">
         <p class="right">
-        <span>Winning price :</span><b>{{ auction?.bidPrice | currency }}</b>
+        <span>Winning offer :</span><b>{{ auction?.bidPrice | currency }}</b>
         </p>
       </div>
     </div>

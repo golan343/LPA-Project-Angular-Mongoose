@@ -57,7 +57,7 @@
         <div class="mainContent center">
             <h3>Last Winner: the winner moment</h3>
             <div class="winnerVideo">
-                <iframe width="100%" height="315" src="https://www.youtube.com/embed/66-lgGHa_DA" frameborder="0"
+                <iframe width="100%" height="450" src="https://www.youtube.com/embed/66-lgGHa_DA" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
             </div>
@@ -72,7 +72,7 @@
 
     <section #fifth class="fwh-slide section-place-my-bid ">
         <div class="mainContent center">
-            <button *ngIf="!accountService.isLogin" (click)="login()"> i want to place a bid!</button>
+            <button *ngIf="!accountService.isLogin" (click)="login()"> Bid on reversed auction </button>
             <button *ngIf="accountService.isLogin" (click)="router.navigateByUrl('/live')"> Bid on reversed auction</button>
         </div>
     </section>

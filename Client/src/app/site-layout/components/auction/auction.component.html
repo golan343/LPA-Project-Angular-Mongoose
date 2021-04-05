@@ -5,13 +5,13 @@
         <div class="bg">
             <div class="auction relative" [style.backgroundImage]="'url('+auction?.imageFileName+')'">
                 <h4 class="both"><span class="left">{{auction?.name}}</span><span class="right">{{auction?.description}}</span></h4>
-                <p *ngIf="auction?.status" class="valueAuction"><span><b>Price</b></span>: <span>{{price | currency}}</span> </p>
+                <p *ngIf="auction?.status" class="valueAuction"><span><b> Retail value</b></span>: <span>{{price | currency}}</span> </p>
             </div>
             <div class="flex padding-top space">
                 <div class="placeBid relative" *ngIf="auction?.status">
                     <span *ngIf="error?.bid" class="error">{{error?.bid}}</span>
 
-                    <label> Your Bid: </label>
+                    <label> Your Offer: </label>
 
                     <div class="suggests padding" *ngIf="suggests">
                         <h5>Suggestions</h5>
@@ -20,18 +20,18 @@
                     </div>
                     <input type="text" (keydown)="preventValue($event)" (keyup)="calcValue.call(this,[$event,auction.bidPattern])" (change)="setAmount($event)" [value]="bid?.offer || 0" />
                     <div class="overflow relative l-padding">
-                        <button type="button" (click)="addBid()"> Buy Ticket </button>
+                        <button type="button" (click)="addBid()"> Submit an offer </button>
                     </div>
 
                     <div class="overflow relative l-padding">
 
-                        <button type="button" (click)="randomSuggestions()"> Random Bid</button>
+                        <button type="button" (click)="randomSuggestions()"> Random Offer</button>
                     </div>
                 </div>
                 <app-bounch-stairs *ngIf="auction?.bidPattern" [bidBounce]="auction?.bidPattern"></app-bounch-stairs>
                 <div class="remaining-Tickets">
 
-                    <h3><span>Remaining Tickets</span></h3>
+                    <h3><span>Remaining Offers</span></h3>
                     <h3><i>{{auction?.bidsRemains}}</i></h3>
                 </div>
             </div>
@@ -74,6 +74,14 @@
                         <div class="cube half">
                             <h3>Product's Video</h3>
                             <div class="cube-body">
+                                <iframe 
+                                width="200" 
+                                height="315" 
+                                src={{youtubeLink}} 
+                                title="YouTube video player" frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen></iframe>
+                                <iframe src={{youtubeLink}} frameborder="0"></iframe>
                                 <div (click)="showMovie()" class="productVideoLink"></div>
                             </div>
                         </div>

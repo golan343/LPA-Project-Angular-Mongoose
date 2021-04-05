@@ -414,7 +414,7 @@ app-bounch-stairs {
 .productVideoLink {
     width: 150px;
     height: 150px;
-    background: url("/assets/images/youtube-logo.jpg");
+    /* background: url("/assets/images/youtube-logo.jpg"); */
     background-position: center;
     background-size: 100%;
     margin: auto;

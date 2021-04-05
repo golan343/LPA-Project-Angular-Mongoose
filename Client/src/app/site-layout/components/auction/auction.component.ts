@@ -29,6 +29,7 @@ export class AuctionComponent implements OnInit, OnDestroy {
   setDataPoints = [];
   price: number;
   bidsRange = new Array<string>();
+  youtubeLink;
   //bidAuctionGraphData: AuctionBidData;
   error: errorModel;
   bidAuctionGraphData: AuctionBidData;
@@ -59,13 +60,18 @@ export class AuctionComponent implements OnInit, OnDestroy {
             bidPattern: auctions.bidPattern || "0.5",
             bidsRemains: Number(auctions.totalBids) - Number(auctions.bidsCount)
           };
-        
+        console.log(this.auction.bidsRemains);
         this.price = parseFloat(this.auction.price);
         this.bid = new BidModel();
         this.bid.offer = this.auction.bidPrice;
       });
      
     });
+
+    if(this.auction){
+      this.youtubeLink = 'https://www.youtube.com/embed/' + this.auction.youtubeId;
+      console.log(this.youtubeLink);
+    }
   }
   getBids() {
     const id = this.activatedRoute.snapshot.params.id;
@@ -159,7 +165,7 @@ export class AuctionComponent implements OnInit, OnDestroy {
     while (bidPattern / decimal < 1) { decimal /= 10; counter++; }
     if (`${price}`.includes('.')) {
       if (`${price}`.split('.')[1].length > counter) {
-        this.error.bid = 'This Value has to be divded to ' + bidPattern;
+        this.error.bid = 'This Value has to be divided to ' + bidPattern;
         return false;
       }
     }
