@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
 mongoose.set('useFindAndModify', false);
+
 function connectAsync() {
     return new Promise((resolve, reject) => {
         // const connStr = config.mongodb.connectionString;
-        const connStr =
+        const connStr = process.env.DB_CON ||
             "mongodb://lpa-app-demo-db:Hw7tw06fcf4C6P3e6oz4YYy442atzvdyFjVioocDd1nDOVlyHcOjVAwR4Cz16BIni14N2V7oOH38FQ0CflO7Lg==@lpa-app-demo-db.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@lpa-app-demo-db@";
         const options = {
             useNewUrlParser: true,
@@ -21,7 +22,7 @@ function connectAsync() {
     });
 }
 // Connect to the database:
-(async () => {
+(async() => {
     try {
         const db = await connectAsync();
         console.log(

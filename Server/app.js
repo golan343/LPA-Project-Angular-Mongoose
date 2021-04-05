@@ -1,8 +1,7 @@
 // global.config = require(process.env.NODE_ENV ? "./config-prod" : "./config-dev");
 if (process.env.PORT) {
     global.config = require("./config-prod");
-}
-else {
+} else {
     global.config = require("./config-dev");
 }
 
@@ -10,6 +9,7 @@ const express = require('express');
 const server = express();
 const cors = require('cors');
 const path = require('path');
+require('dotenv').config();
 const authController = require('./controllers/auth-controller');
 const auctionController = require('./controllers/auction-controller');
 const bidsController = require('./controllers/bids-controller');
@@ -32,9 +32,9 @@ const rateLimit = require("express-rate-limit");
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
     max: 100 // limit each IP to 100 requests per windowMs
-  });
-  
-  //  apply to all requests
+});
+
+//  apply to all requests
 server.use(limiter);
 server.use(expressSession({
     name: "CaptchaSession",
