@@ -34,6 +34,7 @@ export class AuctionModel extends Auction {
         for(let prop in auction){
             this[prop] = auction[prop]
         }
+        this.status = auction?.status ?? false;
         this.endDate = UtilMethd.getInputDateValue(this.endDate);
         this.startDate = UtilMethd.getInputDateValue(this.startDate);
         this.selected = false;

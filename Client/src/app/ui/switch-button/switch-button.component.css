@@ -1,20 +1,22 @@
 .switch {
-  border: 0.2px solid rgb(191 220 235);
-  display: inline-flex;
-  border-radius: 5px;
-  overflow: hidden;
-  cursor: pointer;
+    border: 0.2px solid rgb(191 220 235);
+    display: inline-flex;
+    border-radius: 5px;
+    overflow: hidden;
+    cursor: pointer;
 }
+
 .switch div {
-  flex: 1;
-  padding: 2px 4px;
+    flex: 1;
+    padding: 2px 4px;
 }
+
 .switch div:first-of-type,
 .switch.left div:last-of-type {
-    background-color: #eaf8ff;
+    background-color: #bbe4ff;
 }
+
 .switch.left div:first-of-type,
 .switch div:last-of-type {
-  
-  background-color: #bbe4ff;
+    background-color: #eaf8ff;
 }
