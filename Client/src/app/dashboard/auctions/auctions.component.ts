@@ -16,7 +16,7 @@ export class AuctionsComponent implements OnInit {
   AllAuctions:AuctionModel[];
   selectedAuctions:AuctionModel[];
   search = '';
-  aliveOrClose = false;
+  aliveOrClose = true;
   editAuction:AuctionModel;
   showEditAuction: boolean;
   formData:FormData;
@@ -37,13 +37,13 @@ export class AuctionsComponent implements OnInit {
   init(){
     this.admin.getAllAuction().subscribe(Auctions=>{
       this.AllAuctions = Auctions.map(a=> new AuctionModel(a));
-      this.auctions = this.AllAuctions.filter(item => { return item.status !== this.aliveOrClose });;
+      this.auctions = this.AllAuctions.filter(item => { return !!item.status == this.aliveOrClose });;
     });
   }
 
   filterAliveOrClose($event) {
     this.aliveOrClose = $event;
-    this.auctions = this.AllAuctions.filter(item=>item.status !== this.aliveOrClose);
+    this.auctions = this.AllAuctions.filter(item=> item.status == this.aliveOrClose);
   }
 
   filterAuction($event:any){
@@ -74,6 +74,7 @@ export class AuctionsComponent implements OnInit {
   }
 
   saveItem(){
+
     this.admin.updateAuction(this.editAuction).subscribe(res=>{
     
       this.admin.uploadImage(this.formData).subscribe(fileRes=>{
@@ -157,6 +158,7 @@ export class AuctionsComponent implements OnInit {
       this.admin.errorSubject.next('No auction was selected');
     }
   }
+
   saveNewAuction(){
     if(this.editAuction.name && this.editAuction.endDate){
       
@@ -176,6 +178,7 @@ export class AuctionsComponent implements OnInit {
       )
     }
   }
+
   sendtoArcaiv(){
     if(this.selectedAuctions.length>0){
       const listOfRequests = this.selectedAuctions.map(item=>{ 

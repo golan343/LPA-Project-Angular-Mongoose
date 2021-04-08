@@ -1,195 +1,140 @@
 <div class="container">
-  <div class="row">
-    <nav class="flex mr-b">
-      <aside><app-flag-select></app-flag-select></aside>
-      <aside class="right-bar datalist">
-        <input type="text" list="list" placeholder="Franchisee Company name" />
-        <datalist id="list">
+    <div class="row">
+        <nav class="flex mr-b">
+            <aside>
+                <app-flag-select></app-flag-select>
+            </aside>
+            <aside class="right-bar datalist">
+                <input type="text" list="list" placeholder="Franchisee Company name" />
+                <datalist id="list">
           <option>Uds</option>
           <option>Ufa</option>
           <option>Sds Laxus</option>
           <option>FaceBook</option>
         </datalist>
-      </aside>
-      <aside class="relative"><i (click)="openNewAuction()" class="fa plus-icon pointer"></i></aside>
-      <!-- <aside><i class="fa pen-icon pointer"></i></aside> -->
-      <aside><i (click)="deleteSelected()" class="delete-icon pointer"></i></aside>
-      <aside><i class="movie-icon pointer fa"></i></aside>
-      <aside class=" relative">
-        <i class="excel-icon pointer" (click)="auctionsToCsv()"></i>
-      </aside>
-      <aside class="relative right-bar"><i (click)="sendtoArcaiv()" class="arcive-icon pointer"></i></aside>
-      <aside>
-        <app-switch-button  class="pointer"
-          [rightText]="'LIVE'"
-          [leftText]="'CLOSE'"
-          (observeToggleEvent)="filterAliveOrClose($event)"
-        ></app-switch-button>
-      </aside>
-      <aside class="relative">
-        <span class="search-icon fa pointer"></span>
-        <input
-          type="text"
-          (keyup)="filterAuction($event)"
-          placeholder="find Auction"
-        />
-      </aside>
-    </nav>
-    <div class="white padding flex justify-center">
-      <div class="cube relative" *ngFor="let item of auctions" [ngClass]="{selected:item.selected}">
-        <aside class="absolute top right pointer" (click)="editItem(item)">
-          <i class="pen-icon"></i>
-        </aside>
-        <aside class="absolute bottom right">
-          <span class="fa" [class]="{ on: item.status, off: !item.status }"></span>
-        </aside>
-        <div class="show-auction pointer" (click)="selectItem(item)" >
-          <h3>{{ item.name }}</h3>
-          <P *ngIf="item.price"><span>price:</span>{{ item.price | number }}</P>
-          <P *ngIf="item.bidPrice"><span>bid price:</span>{{ item.bidPrice | number }}</P>
-          <p title="{{item.description}}">
-            <span>{{ item.description }}</span>
-          </p>
-         
+            </aside>
+            <aside class="relative"><i (click)="openNewAuction()" class="fa plus-icon pointer"></i></aside>
+            <!-- <aside><i class="fa pen-icon pointer"></i></aside> -->
+            <aside><i (click)="deleteSelected()" class="delete-icon pointer"></i></aside>
+            <aside><i class="movie-icon pointer fa"></i></aside>
+            <aside class=" relative">
+                <i class="excel-icon pointer" (click)="auctionsToCsv()"></i>
+            </aside>
+            <aside class="relative right-bar"><i (click)="sendtoArcaiv()" class="arcive-icon pointer"></i></aside>
+            <aside>
+                <app-switch-button class="pointer" [left]="aliveOrClose" [rightText]="'CLOSE'" [leftText]="'LIVE'" (observeToggleEvent)="filterAliveOrClose($event)"></app-switch-button>
+            </aside>
+            <aside class="relative">
+                <span class="search-icon fa pointer"></span>
+                <input type="text" (keyup)="filterAuction($event)" placeholder="find Auction" />
+            </aside>
+        </nav>
+        <div class="white padding flex justify-center">
+            <div class="cube relative" *ngFor="let item of auctions" [ngClass]="{selected:item.selected}">
+                <aside class="absolute top right pointer" (click)="editItem(item)">
+                    <i class="pen-icon"></i>
+                </aside>
+                <aside class="absolute bottom right">
+                    <span class="fa" [class]="{ on: item.status, off: !item.status }"></span>
+                </aside>
+                <div class="show-auction pointer" (click)="selectItem(item)">
+                    <h3>{{ item.name }}</h3>
+                    <P *ngIf="item.price"><span>price:</span>{{ item.price | number }}</P>
+                    <P *ngIf="item.bidPrice"><span>bid price:</span>{{ item.bidPrice | number }}</P>
+                    <p title="{{item.description}}">
+                        <span>{{ item.description }}</span>
+                    </p>
+
+                </div>
+
+            </div>
         </div>
-      
-      </div>
     </div>
-  </div>
 </div>
 <div class="edit-auction" *ngIf="showEditAuction || addNewFlag">
-  <aside class="absolute close" (click)="closeItem()">
-    <i class="close-icon fa"></i>
-  </aside>
-  <h3>Edit Product</h3>
-  <div class="flex">
-    <div class="input-container">
-      <label>Product name</label>
-      <input
-        type="text"
-        placeholder="Product name"
-        [(ngModel)]="editAuction.name"
-      />
+    <aside class="absolute close" (click)="closeItem()">
+        <i class="close-icon fa"></i>
+    </aside>
+    <h3>Edit Product</h3>
+    <div class="flex">
+        <div class="input-container">
+            <label>Product name</label>
+            <input type="text" placeholder="Product name" [(ngModel)]="editAuction.name" />
+        </div>
+        <div class="input-container">
+            <label>Product description</label>
+            <textarea placeholder="Product description" [(ngModel)]="editAuction.description"></textarea>
+        </div>
     </div>
-    <div class="input-container">
-      <label>Product description</label>
-      <textarea
-        placeholder="Product description"
-        [(ngModel)]="editAuction.description"
-      ></textarea>
+    <div class="flex">
+        <div class="input-container">
+            <label> Start date</label>
+            <input type="date" placeholder="Start date" [(ngModel)]="editAuction.startDate" />
+        </div>
+        <div class="input-container">
+            <label> End date</label>
+            <input type="date" placeholder=" End date" [(ngModel)]="editAuction.endDate" />
+        </div>
     </div>
-  </div>
-  <div class="flex">
-    <div class="input-container">
-      <label> Start date</label>
-      <input
-        type="date"
-        placeholder="Start date"
-        [(ngModel)]="editAuction.startDate"
-      />
+    <div class="flex">
+        <div class="input-container">
+            <label> bid price</label>
+            <input type="number" placeholder="Offer price" [(ngModel)]="editAuction.bidPrice" />
+        </div>
+        <div class="input-container">
+            <label>Product price</label>
+            <input type="number" placeholder="Product value" [(ngModel)]="editAuction.price" />
+        </div>
     </div>
-    <div class="input-container">
-      <label> End date</label>
-      <input
-        type="date"
-        placeholder=" End date"
-        [(ngModel)]="editAuction.endDate"
-      />
-    </div>
-  </div>
-  <div class="flex">
-    <div class="input-container">
-      <label> bid price</label>
-      <input
-        type="number"
-        placeholder="Offer price"
-        [(ngModel)]="editAuction.bidPrice"
-      />
-    </div>
-    <div class="input-container">
-      <label>Product price</label>
-      <input
-        type="number"
-        placeholder="Product value"
-        [(ngModel)]="editAuction.price"
-      />
-    </div>
-  </div>
     <!-- 'name','startDate','endDate','price','description','minOffer','bidPrice','totalBids', 'bidCount' -->
     <div class="flex">
-      <div class="input-container">
-        <label>Minimum Offers</label>
-        <input
-          type="number"
-          placeholder="Minimum bid"
-          [(ngModel)]="editAuction.minOffer"
-        />
-      </div>
-      <div class="input-container">
-        <label>Maximum Offers</label>
-        <input
-          type="number"
-          placeholder="Maximum bid"
-          [(ngModel)]="editAuction.maxOffer"
-        />
-      </div>
+        <div class="input-container">
+            <label>Minimum Offers</label>
+            <input type="number" placeholder="Minimum bid" [(ngModel)]="editAuction.minOffer" />
+        </div>
+        <div class="input-container">
+            <label>Maximum Offers</label>
+            <input type="number" placeholder="Maximum bid" [(ngModel)]="editAuction.maxOffer" />
+        </div>
     </div>
     <div class="flex">
-      <div class="input-container">
-        <label> bid Pattern</label>
+        <div class="input-container">
+            <label> bid Pattern</label>
+            <input type="number" placeholder="bids pattern" [(ngModel)]="editAuction.bidPattern" />
+        </div>
+        <!-- <div class="input-container">
+        <label>Bid </label>
         <input
           type="number"
-          placeholder="bids pattern"
-          [(ngModel)]="editAuction.bidPattern"
-        />
-      </div>
-      <div class="input-container">
-        <label>Maximum bid</label>
-        <input
-          type="number"
-          placeholder="Maximum bid"
+          placeholder="Bid Count"
           [(ngModel)]="editAuction.bidCount"
         />
-      </div>
+      </div> -->
     </div>
     <div class="flex">
-      <div class="input-container">
-        <label>Product's Youtube link</label>
-        <input
-          type="text"
-          placeholder="Product's Youtube link"
-          [(ngModel)]="editAuction.youtubeId"
-        />
-      </div>
-      <div class="input-container">
-        <app-switch-button
-        [left]="editAuction?.status"
-        [rightText]="'LIVE'"
-        [leftText]="'CLOSE'"
-        (observeToggleEvent)="setStatus($event)"
-      [checked]="editAuction.status"
-      ></app-switch-button>
-      </div>
+        <div class="input-container">
+            <label>Product's Youtube link</label>
+            <input type="text" placeholder="Product's Youtube link" [(ngModel)]="editAuction.youtubeId" />
+        </div>
+        <div class="input-container">
+            <app-switch-button [left]="editAuction?.status" [rightText]="'LIVE'" [leftText]="'CLOSE'" (observeToggleEvent)="setStatus($event)" [checked]="editAuction.status"></app-switch-button>
+        </div>
     </div>
     <div class="flex">
-      <div class="input-container">
-        <label> Product image</label>
-        <span *ngIf="editAuction.imageFileName">{{editAuction.imageFileName}}</span>
-        <input
-          type="file"
-          placeholder=" Product image file"
-          (change)="fileUploadEvent($event)"
-        />
-      </div>
+        <div class="input-container">
+            <label> Product image</label>
+            <span *ngIf="editAuction.imageFileName">{{editAuction.imageFileName}}</span>
+            <input type="file" placeholder=" Product image file" (change)="fileUploadEvent($event)" />
+        </div>
     </div>
     <div class="flex">
-    <button (click)="saveItem()" *ngIf="!addNewFlag">
+        <button (click)="saveItem()" *ngIf="!addNewFlag">
       Save
       <i class="save-icon fa"></i>
     </button>
-    <button (click)="saveNewAuction()" *ngIf="addNewFlag">
+        <button (click)="saveNewAuction()" *ngIf="addNewFlag">
       Add Auction
       <i class="save-icon fa"></i>
     </button>
-  </div>
+    </div>
 </div>

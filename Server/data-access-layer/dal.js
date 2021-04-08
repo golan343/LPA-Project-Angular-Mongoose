@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
 mongoose.set('useFindAndModify', false);
+
 function connectAsync() {
     return new Promise((resolve, reject) => {
         // const connStr = config.mongodb.connectionString;
-        const connStr =
+        const connStr = process.env.DB_CON ||
             "mongodb://lpaAdmin:testingPass@52.14.215.164/test";
         const options = {
             useNewUrlParser: true,
@@ -21,7 +22,7 @@ function connectAsync() {
     });
 }
 // Connect to the database:
-(async () => {
+(async() => {
     try {
         const db = await connectAsync();
         console.log(

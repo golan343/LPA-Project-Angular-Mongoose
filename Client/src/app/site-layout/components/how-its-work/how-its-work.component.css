@@ -1,18 +1,274 @@
-div {
-    margin-top: 50px;
-    text-align: center;
-}
-
 h1 {
     color: white;
     margin-top: 0;
-    font-size: 50px;
+    font-size: 4rem;
     font-weight: bolder;
     text-shadow: 1px 1px;
 }
 
-.videoPage {
+* {
+    color: #fff;
+    font-size: 1.52rem;
+}
+
+h1 {
+    margin-bottom: 3%;
+}
+
+h2 {
+    margin-bottom: 2%;
+}
+
+h3 {
+    margin-bottom: 1%;
+}
+
+.col-flex {
     margin: 0;
     background: #0E1119;
     height: auto;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.arrows {
+    width: 200px;
+    height: 100px;
+    position: relative;
+    margin: 1% auto;
+}
+
+.cube-center {
+    text-align: center;
+    width: 50%;
+    margin: 2% auto;
+}
+
+.arrows:after {
+    content: "";
+    width: 101px;
+    height: 2px;
+    display: block;
+    background-color: #fff;
+    transform: rotateZ( 20deg) translate(20px, 42px);
+    box-shadow: 4px 11px 1px 0px #fff;
+}
+
+.arrows:before {
+    content: "";
+    width: 100px;
+    height: 2px;
+    display: block;
+    background-color: #fff;
+    transform: rotateZ( -23deg) translate(73px, 81px);
+    box-shadow: -4px 11px 0px 0px #fff;
+}
+
+.col-flex>div {
+    width: 70%;
+    margin: 2% auto;
+}
+
+.flex.wrap {
+    flex-flow: row wrap;
+}
+
+.flex {
+    align-items: center;
+    justify-content: stretch;
+}
+
+.flex .cube {
+    width: 27%;
+    padding: 3%;
+}
+
+.col-flex>div svg {
+    margin: 0 auto;
+}
+
+.text-lines {
+    width: 30%;
+    height: 2px;
+    top: 24%;
+    left: 17%;
+    z-index: 2;
+    position: absolute;
+    overflow: hidden;
+    box-shadow: 0px 7px 0px 0px rgb(4 187 187), 0px 16px 0px 0px rgb(4 187 187), 0px 23px 0px 0px rgb(4 187 187);
+    background: #7cccd0;
+}
+
+.border-vertical {
+    height: 10%;
+    width: 2px;
+    top: 12%;
+    left: 58%;
+    position: absolute;
+    background: #7cccd0;
+    box-shadow: 0px 8px 0px 0px rgb(4 187 187), 0px 16px 0px 0px rgb(4 187 187), 0px 24px 0px 0px rgb(4 187 187), 0px 32px 0px 0px rgb(4 187 187);
+}
+
+.icon {
+    width: 100px;
+    height: 100px;
+}
+
+.half-circle {
+    width: 100%;
+    height: 20px;
+    top: 34%;
+    z-index: 2;
+    position: absolute;
+    overflow: hidden;
+}
+
+.half-circle::after {
+    content: "";
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    border: 1px solid rgb(4, 187, 187);
+    right: -8px;
+    border-radius: 50%;
+    background: #0e1119;
+}
+
+.half-circle::before {
+    content: "";
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    border: 1px solid rgb(4, 187, 187);
+    left: -8px;
+    border-radius: 50%;
+    background: #0e1119;
+}
+
+.ticket-frame {
+    width: 100px;
+    height: 47px;
+    margin: 3% auto;
+    position: relative;
+}
+
+.ticket {
+    border: 2px solid rgb(4, 187, 187);
+    border-radius: 3px;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    box-sizing: border-box;
+}
+
+.ticket-frame::before {
+    content: "";
+    position: absolute;
+    height: 10px;
+    width: 94%;
+    display: block;
+    border-top: 2px solid #7cccd0;
+    border-right: 2px solid #7cccd0;
+    transform: rotateZ( -7deg) translate(2px, -8px);
+    z-index: 0;
+}
+
+.flag-wrap {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    box-sizing: content-box;
+}
+
+.flag-wrap:after {
+    height: 100%;
+    width: 4px;
+    border-radius: 20px;
+    content: "";
+    background-color: #7cccd0;
+    display: block;
+}
+
+.flag-wrap div {
+    position: absolute;
+    width: 50%;
+    height: 20%;
+}
+
+.flag-sheet-right-top {
+    right: 0;
+    top: 0px;
+    border-right: 2px solid #7cccd0;
+    border-top: 2px solid #7cccd0;
+    border-radius: 20px 0 0 0;
+}
+
+.flag-sheet-left-top {
+    left: 0;
+    top: 0px;
+    border-top: 2px solid #7cccd0;
+    border-radius: 20px 0 0 0;
+}
+
+.flag-sheet-right-bottom {
+    right: 0;
+    bottom: 0px;
+    border-right: 2px solid #7cccd0;
+    border-top: 2px solid #7cccd0;
+    border-radius: 0 0 20px 0;
+}
+
+.flag-sheet-left-bottom {
+    left: 0;
+    bottom: 0px;
+    border-top: 2px solid #7cccd0;
+    border-radius: 0 20px 0 0;
+}
+
+.align-top {
+    justify-content: flex-start;
+}
+
+.border {
+    border: 1px solid #7cccd0;
+}
+
+.half {
+    width: 41%;
+    min-height: 150px;
+}
+
+.half h3 {
+    margin-bottom: 5%;
+}
+
+.white-box {
+    width: 50px;
+    height: 50px;
+}
+
+.white-box:nth-of-type(2n) {
+    background-color: #fff;
+}
+
+@media only screen and (max-width: 1245px) {}
+
+@media only screen and (max-width: 880px) {
+    .col-flex>div.mr-b {
+        width: 100%;
+    }
+    .col-flex div.mr-b:first-of-type svg {
+        width: 100%;
+        height: 100%;
+    }
+    .flex.wrap {
+        display: block;
+    }
+    .flex.wrap .cube,
+    .half {
+        width: 50%;
+        margin: 2% auto;
+    }
 }

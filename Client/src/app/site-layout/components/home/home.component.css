@@ -1,292 +1,286 @@
 .fadein {
-  animation: fadeIn 3s cubic-bezier(0.38, 0.38, 1, 1);
+    animation: fadeIn 3s cubic-bezier(0.38, 0.38, 1, 1);
 }
+
+
 /* desktop resolution */
 
 h2,
 h4 {
-  padding: 0;
-  margin: 0px;
+    padding: 0;
+    margin: 0px;
 }
 
 .home {
-  width: 100%;
-}
-section {
-  width: 100%;
+    width: 100%;
 }
 
+section {
+    width: 100%;
+}
 
 .firstSection .secondHeader h2 {
-  color: white;
-  margin-top: 0;
-  font-size: 4rem;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  display: inline-block;
-  top: 8rem;
-  position: absolute;
+    color: white;
+    margin-top: 0;
+    font-size: 4rem;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: inline-block;
+    top: 8rem;
+    position: absolute;
     left: 0;
     right: 0;
-  animation: fadeIn 10s linear;
+    animation: fadeIn 10s linear;
 }
+
 .firstSection .secondHeader h1 {
-  color: rgba(255, 255, 255, 0.18);
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  margin-top: 0px;
-  font-size: 1000%;
-  animation: fadeIn 6s linear;
-  position: relative;
+    color: rgba(255, 255, 255, 0.18);
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-top: 0px;
+    font-size: 1000%;
+    animation: fadeIn 6s linear;
+    position: relative;
 }
 
-
-
-.firstSection > .lastAuction > h2 {
-  padding-top: 15px;
-  font-size: 50px;
-  margin-bottom: 10px;
+.firstSection>.lastAuction>h2 {
+    padding-top: 15px;
+    font-size: 50px;
+    margin-bottom: 10px;
 }
-.firstSection > .lastAuction > .auctionBtn {
-  color: black;
-  background: #d4f1f4;
-  border-radius: 43px;
-  right: 34%;
+
+.firstSection>.lastAuction>.auctionBtn {
+    color: black;
+    background: #d4f1f4;
+    border-radius: 43px;
+    right: 34%;
 }
 
 .section-how-its-work {
-  grid-column: span 12;
-  position: relative;
-  background-color: #2a2f33;
-  color: white;
-  height: auto;
-  box-sizing: border-box;
-  margin: 0px;
-  margin-bottom: 0;
-  padding-bottom: 3%;
+    grid-column: span 12;
+    position: relative;
+    background-color: #2a2f33;
+    color: white;
+    height: auto;
+    box-sizing: border-box;
+    margin: 0px;
+    margin-bottom: 0;
+    padding-bottom: 3%;
 }
 
 .mainContent h3 {
-  font-size: 2rem;
-  margin: 0 0 1% 0;
-  color: #000;
-}
-.fwh-slide.section-how-its-work > .mainContent {
-  text-align: center;
-}
-.fwh-slide.section-how-its-work > .how-its-work {
-  margin: 0px;
+    font-size: 2rem;
+    margin: 0 0 1% 0;
+    color: #000;
 }
 
-.fwh-slide.section-how-its-work > .mainContent > .how-its-work > h1 {
-  opacity: 0.18;
-  margin: 0;
-  font-size: 1000%;
+.fwh-slide.section-how-its-work>.mainContent {
+    text-align: center;
 }
 
-.fwh-slide.section-how-its-work
-  > .mainContent
-  > .how-its-work
-  > .how-its-work-details {
-  text-align: center;
-  display: flex;
-  width: 70%;
-  margin: 0 auto;
+.fwh-slide.section-how-its-work>.how-its-work {
+    margin: 0px;
 }
-.how-its-work-details > .col {
-  text-align: center;
+
+.fwh-slide.section-how-its-work>.mainContent>.how-its-work>h1 {
+    opacity: 0.18;
+    margin: 0;
+    font-size: 1000%;
 }
-.how-its-work-details > .col > p {
-  font-size: 2rem;
-  font-weight: 100;
+
+.fwh-slide.section-how-its-work>.mainContent>.how-its-work>.how-its-work-details {
+    text-align: center;
+    display: flex;
+    width: 70%;
+    margin: 0 auto;
 }
+
+.how-its-work-details>.col {
+    text-align: center;
+}
+
+.how-its-work-details>.col>p {
+    font-size: 2rem;
+    font-weight: 100;
+}
+
 .circle {
-  background: #d4f1f4;
-  border-radius: 50%;
-  display: inline-block;
-  width: 102px;
-  height: 102px;
-  box-sizing: border-box;
-  position: relative;
+    background: #d4f1f4;
+    border-radius: 50%;
+    display: inline-block;
+    width: 102px;
+    height: 102px;
+    box-sizing: border-box;
+    position: relative;
 }
 
-.circle > span {
-  font-size: 2rem;
-  text-align: center;
-  color: black;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 32%;
+.circle>span {
+    font-size: 2rem;
+    text-align: center;
+    color: black;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 32%;
 }
 
 .arrow {
-  font-size: 100px;
-  line-height: 88%;
+    font-size: 4rem;
+    line-height: 88%;
 }
 
-.fwh-slide.section-how-its-work
-  > .mainContent
-  > .how-its-work
-  > .paragraph
-  > p:nth-of-type(1) {
-  font-size: 45px;
-  line-height: 37px;
-  text-align: center;
-  letter-spacing: 0.04em;
-  font-style: normal;
-  width: 250px;
-  height: 185px;
+.fwh-slide.section-how-its-work>.mainContent>.how-its-work>.paragraph>p:nth-of-type(1) {
+    font-size: 45px;
+    line-height: 37px;
+    text-align: center;
+    letter-spacing: 0.04em;
+    font-style: normal;
+    width: 250px;
+    height: 185px;
 }
-.fwh-slide.section-how-its-work
-  > .mainContent
-  > .how-its-work
-  > .paragraph
-  > p:nth-of-type(2) {
-  font-size: 45px;
-  line-height: 37px;
-  text-align: center;
-  letter-spacing: 0.04em;
-  font-style: normal;
-  width: 250px;
-  height: 185px;
-  position: relative;
-  left: 120px;
+
+.fwh-slide.section-how-its-work>.mainContent>.how-its-work>.paragraph>p:nth-of-type(2) {
+    font-size: 45px;
+    line-height: 37px;
+    text-align: center;
+    letter-spacing: 0.04em;
+    font-style: normal;
+    width: 250px;
+    height: 185px;
+    position: relative;
+    left: 120px;
 }
-.fwh-slide.section-how-its-work
-  > .mainContent
-  > .how-its-work
-  > .paragraph
-  > p:nth-of-type(3) {
-  font-size: 45px;
-  line-height: 37px;
-  text-align: center;
-  letter-spacing: 0.04em;
-  font-style: normal;
-  width: 250px;
-  height: 185px;
-  position: relative;
-  left: 300px;
+
+.fwh-slide.section-how-its-work>.mainContent>.how-its-work>.paragraph>p:nth-of-type(3) {
+    font-size: 45px;
+    line-height: 37px;
+    text-align: center;
+    letter-spacing: 0.04em;
+    font-style: normal;
+    width: 250px;
+    height: 185px;
+    position: relative;
+    left: 300px;
 }
-.fwh-slide.section-how-its-work > .mainContent > .how-its-work > .paragraph {
-  position: relative;
-  text-align: center;
-  display: inline-flex;
-  bottom: 90px;
-  margin-bottom: 10px;
+
+.fwh-slide.section-how-its-work>.mainContent>.how-its-work>.paragraph {
+    position: relative;
+    text-align: center;
+    display: inline-flex;
+    bottom: 90px;
+    margin-bottom: 10px;
 }
 
 .rulesBtn {
-  background: #d4f1f4;
-  width: 20%;
-  border-radius: 70px;
-  filter: drop-shadow(5px 7px 4px rgba(0, 0, 0, 0.5));
-  margin: 0px;
-  position: relative;
-  top: 120px;
-  right: 380px;
+    background: #d4f1f4;
+    width: 20%;
+    border-radius: 70px;
+    filter: drop-shadow(5px 7px 4px rgba(0, 0, 0, 0.5));
+    margin: 0px;
+    position: relative;
+    top: 120px;
+    right: 380px;
 }
 
 .fwh-slide.section-about-new-auction {
-  background: #a4b5c5;
-  text-align: center;
-  margin: 0;
-  padding: 3% 0px;
+    background: #a4b5c5;
+    text-align: center;
+    margin: 0;
+    padding: 3% 0px;
 }
 
-.fwh-slide.section-about-new-auction > .mainContent > * {
-  color: #000000;
+.fwh-slide.section-about-new-auction>.mainContent>* {
+    color: #000000;
 }
-.fwh-slide.section-about-new-auction > .mainContent > h2 {
-  font-size: 48px;
-  /* font-weight: 400; */
 
+.fwh-slide.section-about-new-auction>.mainContent>h2 {
+    font-size: 48px;
+    /* font-weight: 400; */
 }
 
 .fwh-slide.section-white {
-  padding: 0;
-  background: white;
-  color: black;
+    padding: 0;
+    background: white;
+    color: black;
 }
-.fwh-slide.section-white > h3 {
-  text-align: center;
+
+.fwh-slide.section-white>h3 {
+    text-align: center;
 }
+
 .winnerVideo {
-  margin: 2% auto;
-  width: 80%;
-  height: 40%;
-  background: #c4c4c4;
+    margin: 2% auto;
+    width: 80%;
+    height: 40%;
+    background: #c4c4c4;
 }
 
 agm-map {
-  position: relative;
-  height: 300px;
-  overflow: hidden;
-  margin: 0 auto;
-  display: block;
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+    margin: 0 auto;
+    display: block;
 }
 
 .fwh-slide.section-place-my-bid {
-  grid-column: span 12;
-  padding-top: 40px;
-  background: #0e1119;
-  text-align: center;
-}
-
-.fwh-slide.section-place-my-bid > p {
-  color: white;
-}
-@media only screen and (max-width: 1245px) {
-  .lastAuction {
-    width: 100%;
-    padding: 0px;
-  }
-}
-@media only screen and (max-width: 880px) {
-  .firstSection .secondHeader h2{
-    position: static;
-  }
-  .lastAuction {
-    height: auto;
-  }
-  .lastAuction img {
-    height: auto;
-    position: static;
-  }
-  .firstSection .secondHeader {
-    height: auto;
-  }
-  .firstSection .secondHeader h1 {
-    font-size: 6rem;
-    position: static;
-  }
-
-  .fwh-slide.section-how-its-work
-    > .mainContent
-    > .how-its-work
-    > .how-its-work-details {
+    grid-column: span 12;
+    padding-top: 40px;
+    background: #0e1119;
     text-align: center;
-    width: 100%;
-    flex-direction: column;
-    margin: 0 auto;
-  }
-  .how-its-work-details {
-    perspective: 200vh;
-  }
+}
 
-  .how-its-work-details > .col > p {
-    width: 80%;
-    margin: 0 auto;
-  }
-  .arrow-long-right {
-    top: 0;
-    width: 2px;
-    height: 48px;
-    margin: 6% auto;
-  }
-  .arrow-long-right::after {
-    transform: rotate(135deg);
-    right: -5px;
-    bottom: 1px;
-  }
+.fwh-slide.section-place-my-bid>p {
+    color: white;
 }
-@media only screen and (max-width: 580px) {
+
+@media only screen and (max-width: 1245px) {
+    .lastAuction {
+        width: 100%;
+        padding: 0px;
+    }
 }
+
+@media only screen and (max-width: 880px) {
+    .firstSection .secondHeader h2 {
+        position: static;
+    }
+    .lastAuction {
+        height: auto;
+    }
+    .lastAuction img {
+        height: auto;
+        position: static;
+    }
+    .firstSection .secondHeader {
+        height: auto;
+    }
+    .firstSection .secondHeader h1 {
+        font-size: 6rem;
+        position: static;
+    }
+    .fwh-slide.section-how-its-work>.mainContent>.how-its-work>.how-its-work-details {
+        text-align: center;
+        width: 100%;
+        flex-direction: column;
+        margin: 0 auto;
+    }
+    .how-its-work-details {
+        perspective: 200vh;
+    }
+    .how-its-work-details>.col>p {
+        width: 80%;
+        margin: 0 auto;
+    }
+    .arrow-long-right {
+        top: 0;
+        width: 2px;
+        height: 48px;
+        margin: 6% auto;
+    }
+    .arrow-long-right::after {
+        transform: rotate(135deg);
+        right: -5px;
+        bottom: 1px;
+    }
+}
+
+@media only screen and (max-width: 580px) {}

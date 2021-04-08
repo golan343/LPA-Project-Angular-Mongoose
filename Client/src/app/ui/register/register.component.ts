@@ -105,7 +105,12 @@ export class RegisterComponent implements OnInit {
 
     switch (this.currentStep) {
       case 1: {
-        const constrainsFirst = new validationConstrains({ prop: 'firstName', content: this.user.firstName, isReqire: true, errorMsg: 'first Name is missing' });
+        const constrainsFirst = new validationConstrains({ prop: 'firstName',
+         content: this.user.firstName, isReqire: true, 
+         pattern:/^[A-z0-9]{3,}/g,
+         pattarnErrorMsg: 'First nme has to contain at least three letters',
+         errorMsg: 'first Name is missing'
+         });
         const constrainsLast = new validationConstrains({ prop: 'lastName', content: this.user.lastName, isReqire: true, errorMsg: 'Last Name is missing' });
         const constrainsPassword = new validationConstrains({
           prop: 'password', content: this.user.password, isReqire: true,
